@@ -18,6 +18,8 @@ import com.arch.entity.SysUsers;
  */
 public class UserDTO extends SysUsers   implements UserDetails, CredentialsContainer{
 
+	private static final long serialVersionUID = 1L;
+
 	private String loginName;
 
 	private Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
