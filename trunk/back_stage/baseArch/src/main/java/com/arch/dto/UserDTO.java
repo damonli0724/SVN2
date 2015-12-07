@@ -21,45 +21,44 @@ public class UserDTO extends SysUsers   implements UserDetails, CredentialsConta
 	private String loginName;
 
 	private Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
-	
-	
-	@Override
+
 	public void eraseCredentials() {
 		
 	}
 
+	public Collection<GrantedAuthority> getAuthorities() {
+		return this.authorities;
+	}
 
-	@Override
 	public String getPassword() {
 		return super.getPassword();
 	}
 
-	@Override
-	public String getUsername() { //获取密码
-		return super.getName();
+	public String getUsername() {
+		return super.getUsername();
 	}
 
-	@Override
-	public boolean isAccountNonExpired() {//
+	public boolean isAccountNonExpired() {
+		// TODO Auto-generated method stub
 		return super.isAccountNonExpired();
 	}
 
-	@Override
-	public boolean isAccountNonLocked() { //是否被锁
+	public boolean isAccountNonLocked() {
+		// TODO Auto-generated method stub
 		return super.isAccountNonLocked();
 	}
 
-	@Override
 	public boolean isCredentialsNonExpired() {
+		// TODO Auto-generated method stub
 		return super.isCredentialsNonExpired();
 	}
 
-	@Override
-	public boolean isEnabled() {//是否有效
+	public boolean isEnabled() {
+		// TODO Auto-generated method stub
 		return super.isEnabled();
 	}
 
-	public String getLoginName() {//获取登陆名称 
+	public String getLoginName() {
 		return loginName;
 	}
 
@@ -67,14 +66,10 @@ public class UserDTO extends SysUsers   implements UserDetails, CredentialsConta
 		this.loginName = loginName;
 	}
 
-	public void setAuthorities(Collection<GrantedAuthority> authorities) { 
+	public void setAuthorities(Collection<GrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
-
-	@Override
-	public Collection<GrantedAuthority> getAuthorities() { //获取权限列表
-		return authorities;
-	}
 	
+
 	
 }
