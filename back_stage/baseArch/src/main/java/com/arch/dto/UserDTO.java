@@ -37,7 +37,7 @@ public class UserDTO extends SysUsers   implements UserDetails, CredentialsConta
 	}
 
 	public String getUsername() {
-		return super.getUsername();
+		return super.getName();
 	}
 
 	public boolean isAccountNonExpired() {
