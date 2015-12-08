@@ -12,7 +12,7 @@
 
 
 <sec:authorize ifAllGranted="ROLE_ADMIN">
-admin 页面,其他权限是看不到的哦
+admin 页面,其他权限是看不到的哦 xxxx
 </sec:authorize>
 
 <%-- 
