@@ -4,42 +4,53 @@
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
-	<!-- 登录界面不使用权限过滤 和403页面-->
-	<http security="none" pattern="/login*"></http>
-	<http security="none" pattern="/403" ></http>
-	<http security="none" pattern="/timeout"> </http>
-	
-	<http >
+	<!-- 登录界面不使用权限过滤 和403页面 -->
+	<http security="none" pattern="/login*"/>
+	<http security="none" pattern="/403"/>
+	<http security="none" pattern="/timeout"/>
+
+	<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
+	<http pattern="/**/*.jpg" security="none" />
+	<http pattern="/**/*.png" security="none" />
+	<http pattern="/**/*.gif" security="none" />
+	<http pattern="/**/*.css" security="none" />
+	<http pattern="/**/*.js" security="none" />
+
+
+	<http>
 		<http-basic />
 		<!-- 定义没有权限访问页面 -->
 		<access-denied-handler error-page="/403" />
-		
+
 		<!-- 访问url需要的权限 -->
 		<intercept-url pattern="/**" access="ROLE_ADMIN" />
-		
+
 		<!-- 登录界面 -->
-		<form-login login-page="/login" default-target-url="/index" always-use-default-target="true"  />
-		
+		<form-login login-page="/login" default-target-url="/index"
+			always-use-default-target="true" />
+
 		<!-- 退出登陆 清除缓存 -->
-		<logout logout-url="/loginout" logout-success-url="/login"  invalidate-session="true" delete-cookies="JSESSIONID"/>
-		
+		<logout logout-url="/loginout" logout-success-url="/login"
+			invalidate-session="true" delete-cookies="JSESSIONID" />
+
 		<!-- 记住我 -->
-		<remember-me  data-source-ref="dataSource" />
+		<remember-me data-source-ref="dataSource" />
 		<!-- <csrf /> -->
-		
+
 		<!-- session管理 过期跳转页面 -->
-		<session-management   invalid-session-url="/timeout">
+		<session-management invalid-session-url="/timeout">
 			<concurrency-control max-sessions="1" />
 		</session-management>
 	</http>
-	
-	
 
-		<!-- 定义返回错误信息 -->
-		<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-			<beans:property name="basename" value="classpath:security/error-mesaage"/>
-			
-		</beans:bean>
+
+
+	<!-- 定义返回错误信息 -->
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:security/error-mesaage" />
+
+	</beans:bean>
 
 
 
@@ -47,16 +58,17 @@
 	<beans:bean id="userDetailService" class="com.arch.service.security.UserDetailService"></beans:bean>
 
 	<!-- 自定义权限管理，使用自己的user-service -->
-	<authentication-manager erase-credentials="false">	
+	<authentication-manager erase-credentials="false">
 		<authentication-provider user-service-ref="userDetailService">
-			<password-encoder   hash="md5" />	
+			<password-encoder hash="md5" />
 		</authentication-provider>
 	</authentication-manager>
 
 	<!-- CSRF protection. Here we only include the CsrfFilter instead of all 
 		of Spring Security. See http://docs.spring.io/spring-security/site/docs/3.2.x/reference/htmlsingle/#csrf 
 		for more information on Spring Security's CSRF protection -->
-	<beans:bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter">
+	<beans:bean id="csrfFilter"
+		class="org.springframework.security.web.csrf.CsrfFilter">
 		<beans:constructor-arg>
 			<beans:bean
 				class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" />
