@@ -38,7 +38,7 @@
 
 		<!-- 退出登陆 清除缓存 -->
 		<logout logout-url="/loginout" logout-success-url="/login"
-			invalidate-session="true" delete-cookies="JSESSIONID" />
+			invalidate-session="true"  delete-cookies="JSESSIONID" />
 
 		<!-- 记住我 -->
 		<remember-me data-source-ref="dataSource" />
