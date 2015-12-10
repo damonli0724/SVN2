@@ -19,16 +19,22 @@ public class ValidateCodeUsernamePasswordAuthenticationFilter extends UsernamePa
 	 */
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request,HttpServletResponse response) throws AuthenticationException {
+		
 		String requestCaptcha = request.getParameter("code");  
 		String sessionCaptcha = (String)request.getSession().getAttribute("randomStr"); 
 		//当前台输入的验证码为空，或者session中的验证码不等于前台输入的验证码
+		
+		
+		System.err.println("当前验证码"+requestCaptcha+"=======>"+"系统验证码"+sessionCaptcha);
 		if (StringUtils.isEmpty(requestCaptcha)) {  
-			throw new  AuthenticationServiceException("validateCode.isEmpty");
+			throw new  AuthenticationServiceException("验证码为空");
 		}
 		
 		if (!sessionCaptcha.equalsIgnoreCase(requestCaptcha)) {
-			throw new  AuthenticationServiceException("validateCode.notEquals");
+			throw new  AuthenticationServiceException("验证码不正确");
 		}
+		
+		
 		return super.attemptAuthentication(request, response);
 	}
 

@@ -8,6 +8,10 @@
 	<http security="none" pattern="/login*"/>
 	<http security="none" pattern="/403"/>
 	<http security="none" pattern="/timeout"/>
+	<http security="none" pattern="/login/randomCode"/>
+	
+	
+
 
 	<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
 	<http pattern="/**/*.jpg" security="none" />
@@ -17,17 +21,20 @@
 	<http pattern="/**/*.js" security="none" />
 
 
-	<http>
+	<http >
 		<http-basic />
 		<!-- 定义没有权限访问页面 -->
 		<access-denied-handler error-page="/403" />
 
 		<!-- 访问url需要的权限 -->
 		<intercept-url pattern="/**" access="ROLE_ADMIN" />
-
-		<!-- 登录界面 -->
-		<form-login login-page="/login" default-target-url="/index"
-			always-use-default-target="true" />
+	
+		   <!-- 设置登录过滤器 -->
+  		<custom-filter before="FORM_LOGIN_FILTER" ref="validateCodeAuthenticationFilter" />
+	
+		<!-- 表单登陆 -->
+		<form-login login-page="/login" default-target-url="/index" always-use-default-target="true" />
+			
 
 		<!-- 退出登陆 清除缓存 -->
 		<logout logout-url="/loginout" logout-success-url="/login"
@@ -44,13 +51,12 @@
 	</http>
 
 
-
 	<!-- 定义返回错误信息 -->
 	<beans:bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<beans:property name="basename" value="classpath:security/error-mesaage" />
-
 	</beans:bean>
+
 
 
 
@@ -58,7 +64,7 @@
 	<beans:bean id="userDetailService" class="com.arch.service.security.UserDetailService"></beans:bean>
 
 	<!-- 自定义权限管理，使用自己的user-service -->
-	<authentication-manager erase-credentials="false">
+	<authentication-manager erase-credentials="false" alias="authenticationManager">
 		<authentication-provider user-service-ref="userDetailService">
 			<password-encoder hash="md5" />
 		</authentication-provider>
@@ -78,4 +84,28 @@
 		tags or Thymeleaf. -->
 	<beans:bean id="requestDataValueProcessor"
 		class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" />
+		
+		
+		<!-- 验证码过滤器 -->
+ <beans:bean id="validateCodeAuthenticationFilter" class="com.arch.filter.ValidateCodeUsernamePasswordAuthenticationFilter">
+  <beans:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"></beans:property>
+  <beans:property name="authenticationFailureHandler"  ref="simpleUrlAuthenticationFailureHandler"></beans:property>
+  <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+ </beans:bean>
+		
+		
+		 <!-- 登录成功 -->
+ <beans:bean id="loginLogAuthenticationSuccessHandler"
+  class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+  <beans:property name="defaultTargetUrl" value="/index"></beans:property>
+ </beans:bean>
+
+
+ <!-- 登录失败 -->
+ <beans:bean id="simpleUrlAuthenticationFailureHandler"
+  class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+  <beans:property name="defaultFailureUrl" value="/login"></beans:property>
+ </beans:bean>
+  
+		
 </beans:beans> 

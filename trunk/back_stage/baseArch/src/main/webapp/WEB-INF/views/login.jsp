@@ -12,7 +12,7 @@
 <link href="${cssBasePath}/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="${cssBasePath}/H-ui.login.css" rel="stylesheet" type="text/css" />
 <link href="${cssBasePath}/style.css" rel="stylesheet" type="text/css" />
-<link href="${libBasePath}/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
+<%-- <link href="${libBasePath}/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" /> --%>
 
 <title>后台登录 - H-ui.admin v2.3</title>
 <meta name="keywords" content="H-ui.admin v2.3,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
@@ -24,22 +24,23 @@
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="j_spring_security_check" method="post">
+    	<div style="text-align:center"><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /></div>
       <div class="row cl">
-        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60d;</i></label>
+        <label class="form-label col-3"></label>
         <div class="formControls col-8">
           <input id="" name="j_username" type="text" placeholder="账户" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
-        <label class="form-label col-3"><i class="Hui-iconfont">&#xe60e;</i></label>
+        <label class="form-label col-3"></label>
         <div class="formControls col-8">
           <input id="" name="j_password" type="password" placeholder="密码" class="input-text size-L">
         </div>
       </div>
       <div class="row cl">
         <div class="formControls col-8 col-offset-3">
-          <input class="input-text size-L" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="验证码:" style="width:150px;">
-          <img src="images/VerifyCode.aspx.png"> <a id="kanbuq" href="javascript:;">看不清，换一张</a> </div>
+          <input class="input-text size-L" name="code" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="" style="width:150px;">
+          <img src="${contextPath}/login/randomCode"> <a id="code"  onclick="javascript:void(0)" href="#">看不清，换一张</a> </div>
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
@@ -70,6 +71,18 @@ var _hmt = _hmt || [];
 })();
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+$(function(){
+	$("#code").bind("click",function (){
+			var $context = $("#globe_context_id").val();
+			
+			$.get($context+"/login/randomCode",function(data){
+				window.location.reload(); //刷新页面
+			});
+	})
+	
+});
 </script>
 </body>
 </html>

@@ -123,9 +123,10 @@ public class SecurityController {
 			String userName = securityContextImpl.getAuthentication().getName();
 			map.addAttribute("userName", userName);
 		}
-
+		
 		return View._403;
 	}
+	
 
 	@RequestMapping(value = Url.RANDORM_CODE)
 	public void getRandomCode(HttpServletResponse response,HttpServletRequest request) {
