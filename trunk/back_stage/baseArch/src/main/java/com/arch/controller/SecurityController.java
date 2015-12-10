@@ -100,11 +100,6 @@ public class SecurityController {
 	public String loginOut(HttpServletRequest request) {
 		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request
 				.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
-		// 登录名
-		String userName = securityContextImpl.getAuthentication().getName();
-
-		logger.debug("=====================" + userName
-				+ "==退出登陆====================");
 		return View.LOGIN;
 	};
 
