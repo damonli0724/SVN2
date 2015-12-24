@@ -40,7 +40,7 @@
       <div class="row cl">
         <div class="formControls col-8 col-offset-3">
           <input class="input-text size-L" name="code" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="" style="width:150px;">
-          <img src="${contextPath}/login/randomCode"> <a id="code"  onclick="javascript:void(0)" href="#">看不清，换一张</a> </div>
+          <img id="codeImg" src="${contextPath}/login/randomCode"> <a id="code"  onclick="javascript:void(0)" href="#">看不清，换一张</a> </div>
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
@@ -74,7 +74,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </script>
 <script type="text/javascript">
 $(function(){
-	$("#code").bind("click",function (){
+	$("#code","#codeImg").bind("click",function (){
 			var $context = $("#globe_context_id").val();
 			
 			$.get($context+"/login/randomCode",function(data){
