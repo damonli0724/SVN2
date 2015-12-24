@@ -12,7 +12,6 @@
 <link href="${cssBasePath}/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="${cssBasePath}/H-ui.login.css" rel="stylesheet" type="text/css" />
 <link href="${cssBasePath}/style.css" rel="stylesheet" type="text/css" />
-<%-- <link href="${libBasePath}/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" /> --%>
 
 <title>后台登录 - H-ui.admin v2.3</title>
 <meta name="keywords" content="H-ui.admin v2.3,H-ui网站后台模版,后台模版下载,后台管理系统模版,HTML后台模版下载">
@@ -74,14 +73,13 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 </script>
 <script type="text/javascript">
 $(function(){
-	$("#code","#codeImg").bind("click",function (){
-			var $context = $("#globe_context_id").val();
-			
-			$.get($context+"/login/randomCode",function(data){
-				window.location.reload(); //刷新页面
-			});
-	})
+	 var $context = $("#globe_context_id").val();
+	$("#codeImg").bind("click",changeImg);
+	$("#code").bind("click",changeImg);
 	
+	function changeImg(){
+		 $("#codeImg").attr("src",$context+"/login/randomCode");
+	}
 });
 </script>
 </body>

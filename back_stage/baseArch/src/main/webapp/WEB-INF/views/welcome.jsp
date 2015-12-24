@@ -14,7 +14,7 @@
 <div class="pd-20" style="padding-top:20px;">
   <p class="f-20 text-success">欢迎登陆我的系统 <span class="f-14">v2.3</span>！</p>
   <p>登录次数：18 </p>
-  <p>上次登录IP：222.35.131.79.1  上次登录时间：2014-6-14 11:19:55</p>
+  <p>上次登录IP：<div id="ip"></div>  上次登录时间：2014-6-14 11:19:55</p>
   <table class="table table-border table-bordered table-bg">
     <thead>
       <tr>
@@ -176,18 +176,8 @@
 </div>
 <footer class="footer">
 </footer>
-<script type="text/javascript" src="${jsBashPath}/jquery.min.js"></script>
-<script type="text/javascript" src="${jsBashPath}/H-ui.js"></script>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "//hm.baidu.com/hm.js?080836300300be57b7f34f4b3e97d911";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
-</script>
+<script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script>
+<script type="text/javascript" src="${jsBasePath}/H-ui.js"></script>
+
 </body>
 </html>
