@@ -24,10 +24,7 @@
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 
-	<!-- 开启session监听，后一个人登陆进来，前一个session失效 -->
-	<listener>
-    <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
-    </listener>
+	
 
 
 
@@ -44,6 +41,10 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 
+<!-- 开启session监听，后一个人登陆进来，前一个session失效 -->
+	<listener>
+    <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+    </listener>
 
 	<!-- 防止crsf 攻击 -->
 	<!-- <filter>
