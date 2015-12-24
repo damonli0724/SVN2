@@ -153,5 +153,12 @@ public class SecurityController {
 			}
 
 	}
+	
+	@RequestMapping(value = Url.TURN_WELCOME, method=RequestMethod.GET)
+	public String turnToWelcomPage(){
+		System.err.println("fdsfsfdsfdsfsf");
+		return View.WELCOME_VIEW;
+	}
+	
 
 }
