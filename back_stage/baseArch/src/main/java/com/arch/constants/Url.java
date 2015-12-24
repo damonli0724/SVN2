@@ -13,4 +13,5 @@ public interface Url {
 	public static final String TIME_OUT_URL = "timeout";  //session失效
 	//==============================================================
 	public static final String RANDORM_CODE = "login/randomCode";//获取随机验证码
+	public static final String  TURN_WELCOME = "welcome";
 }

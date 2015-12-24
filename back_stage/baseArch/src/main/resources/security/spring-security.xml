@@ -8,7 +8,7 @@
 	<http security="none" pattern="/login*"/>
 	<http security="none" pattern="/403"/>
 	<http security="none" pattern="/timeout"/>
-	<http security="none" pattern="/login/randomCode"/>
+	<http security="none" pattern="/login/*"/>
 	
 	
 

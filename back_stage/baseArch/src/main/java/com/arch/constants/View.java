@@ -15,4 +15,5 @@ public interface View {
 	public static final String LOGIN = "/login"; // 登陆页面
 	public static final String TIME_OUT_VIEW = "/security/timeout";  //session过期页面
 	//=========================================================================
+	public static final String WELCOME_VIEW = "/welcome";
 }
