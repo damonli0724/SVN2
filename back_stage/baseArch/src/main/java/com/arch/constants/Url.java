@@ -14,4 +14,10 @@ public interface Url {
 	//==============================================================
 	public static final String RANDORM_CODE = "login/randomCode";//获取随机验证码
 	public static final String  TURN_WELCOME = "welcome";
+	
+	
+	//管理员管理 - 管理员列表
+	public static final String ADMIN_LIST_PAGE = "admin/list/page";//管理员列表页面
+	public static final String ADMIN_LIST_DATA = "admin/list/page/data";//管理员列表页面
+	
 }

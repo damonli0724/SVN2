@@ -126,7 +126,7 @@
 				<ul>
 					<li><a _href="admin-role.html" href="javascript:void(0)">角色管理</a></li>
 					<li><a _href="admin-permission.html" href="javascript:void(0)">权限管理</a></li>
-					<li><a _href="admin-list.html" href="javascript:void(0)">管理员列表</a></li>
+					<li><a _href="admin/list/page" href="javascript:void(0)">管理员列表</a></li>
 				</ul>
 			</dd>
 		</dl>

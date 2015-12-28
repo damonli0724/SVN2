@@ -14,6 +14,10 @@ package com.arch.constants;
 public interface Constants {
 	//获取spring security 上下文
 	public static final String SPRING_SECURITY_CONTEXT="SPRING_SECURITY_CONTEXT";
+	public static final String R_STATUS_SUCCESS="1"; //状态 成功
+	public static final String R_STATUS_FAILTURE="0"; //状态失败
+	
+	
 	
 
 	
