@@ -16,4 +16,8 @@ public interface View {
 	public static final String TIME_OUT_VIEW = "/security/timeout";  //session过期页面
 	//=========================================================================
 	public static final String WELCOME_VIEW = "/welcome";
+	
+	
+	// =============================管理员管理-管理员列表===================================
+	public static final String ADMIN_LIST_VIEW ="/admin/admin-list";
 }
