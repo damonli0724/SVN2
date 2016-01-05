@@ -6,9 +6,10 @@ package com.arch.dto;
  */
 public class BaseResultDTO <T> {
 
-	private String message;
-	private String status;
-	private T result;
+	private String message;//信息
+	private String status; //装填
+	private T result;   //结果对象
+	private Integer count;  //总数
 	/**
 	 * @return the message
 	 */
@@ -39,4 +40,11 @@ public class BaseResultDTO <T> {
 	public void setResult(T result) {
 		this.result = result;
 	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	
 }

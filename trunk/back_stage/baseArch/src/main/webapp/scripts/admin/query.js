@@ -5,19 +5,27 @@
 var PAGE_SIZE = 10; 
 var dataList = $('#J_DataList');
 var noDataMsg = $('#J_NoDataMsg'); 
+var submitButton = $("#searchBtn");
+var form =$("#searchForm");
 var searchCondition = null;
+
 $(function(){
 
 	load(1,PAGE_SIZE); //加载数据
-	
+	submitButton.bind("click", {curPageNo : 1, pageSize : PAGE_SIZE}, dataSearch);
 })
 
+//表单搜索
+function dataSearch(dataObj){
+		searchCondition = form.serialize();
+		load(dataObj.data.curPageNo, dataObj.data.pageSize) ;
+}
 
 function load(curPageNo, pageSize) {
         dataList.show();
 		noDataMsg.hide();
 		var queryUrl = $("#globe_context_id").val()+"/admin/list/page/data"; // 查询数据url
-//		queryUrl = queryUrl + '?' + 'startPage=' + curPageNo + '&pageSize=' + pageSize;
+		queryUrl = queryUrl + '?' + 'startPage=' + curPageNo + '&pageSize=' + pageSize;
 		$.ajax(queryUrl, {
 			type : 'GET',
 			dataType : 'json',
@@ -33,7 +41,7 @@ function load(curPageNo, pageSize) {
 		        	max_page:20,
 		        	page_string:'当前第{current_page}页,共{max_page}页',
 		        	paged: function(page) {
-		        		
+		        		alert("====")
 		        	}	
 				});
 		        

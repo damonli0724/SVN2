@@ -1,5 +1,8 @@
 package com.arch.mapper.securtity;
 
+import java.util.List;
+
+import com.arch.cmd.admin.AdminListQueryCmd;
 import com.arch.entity.SysUsers;
 
 
@@ -20,6 +23,19 @@ public interface UserMapper {
 	 * @return
 	 */
 	public SysUsers selectSysUserByName(String userName);
+
+
+	/**
+	 * 查询用户列表
+	 * @param cmd
+	 * @return SysUsers
+	 */
+	public List<SysUsers> queryUsers(AdminListQueryCmd cmd);
+
+
+	public Integer queryUsersCount(AdminListQueryCmd cmd);
+
+
 
 
 
