@@ -1,37 +1,76 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.arch.mapper.securtity.UserMapper">
-<!--     <select id="countAll" resultType="int">  查询表中记录总数
-        select count(*) c from tb_user;
-    </select>
-    
-    <insert id="insert" parameterType="com.arch.domain.UserInfoVo">    向数据库中插入用户
-        insert into tb_user(id,username,password) values(#{id},#{username},#{password})
-    </insert> -->
-    <!-- 
-    <update id="update" parameterType="com.arch.domain.UserInfoVo">     更新库中的用户
-        update tb_user set username=#{username},password=#{password} where username=#{username}
-    </update>
-    
-    <delete id="delete" parameterType="String">    删除用户
-        delete from tb_user where username=#{username}
-    </delete>
-    
-    <select id="findByUserName" parameterType="String" resultType="com.arch.domain.UserInfoVo"> 根据用户名查找用户
-        select * from tb_user where username=#{username}
-    </select> -->
-    
     <select id="getUsersCount" resultType="int">
     	select count(*) from SYS_USERS
     </select>
     
-    
+    <!-- 根据登录名查询用户 -->
     <select id="selectSysUserByName" parameterType="String" resultType="com.arch.entity.SysUsers">
-    	select 
-    	USER_ID userId ,USER_NAME username,NAME name,PASSWORD password,DT_CREATE  dtCreate ,LAST_LOGIN lastLogin,DEADLINE deadline,LOGIN_IP loginIp, V_QZJGID VQzjgid 
-		,V_QZJGMC VQzjgmc ,DEP_ID depId,DEP_NAME depName , ENABLED enabled  , ACCOUNT_NON_EXPIRED accountNonExpired , ACCOUNT_NON_LOCKED accountNonLocked ,CREDENTIALS_NON_EXPIRED credentialsNonExpired
-		FROM SYS_USERS
+    SELECT 
+    	USER_ID userId ,
+    	USER_NAME username,
+    	NAME name,
+    	PASSWORD password,
+    	DT_CREATE  dtCreate ,
+    	LAST_LOGIN lastLogin,
+    	DEADLINE deadline,
+    	LOGIN_IP loginIp, 
+    	V_QZJGID VQzjgid,
+    	V_QZJGMC VQzjgmc,
+    	DEP_ID depId,
+    	DEP_NAME depName , 
+    	ENABLED enabled  , 
+    	ACCOUNT_NON_EXPIRED accountNonExpired , 
+    	ACCOUNT_NON_LOCKED accountNonLocked ,
+    	CREDENTIALS_NON_EXPIRED credentialsNonExpired
+	FROM SYS_USERS
 		WHERE NAME=#{value}
     </select>
     
+    
+    <sql id="queryUsersConditions">
+    	<if test="loginName !=null and loginName !=''">
+    		AND NAME LIKE  '%${loginName}%'
+    	</if>
+    	<if test="beginDate !=null and beginDate !=''">
+    		AND DT_CREATE > #{beginDate}
+    	</if>
+    	<if test="endDate !=null and endDate !=''">
+    		AND #{endDate} >  DT_CREATE 
+    	</if>
+    </sql>
+    <!-- 查询所有用户 -->
+    <select id="queryUsers"  parameterType="com.arch.cmd.admin.AdminListQueryCmd"  resultType="com.arch.entity.SysUsers">
+		SELECT 
+    	USER_ID userId ,
+    	USER_NAME username,
+    	NAME name,
+    	PASSWORD password,
+    	DT_CREATE  dtCreate ,
+    	LAST_LOGIN lastLogin,
+    	DEADLINE deadline,
+    	LOGIN_IP loginIp, 
+    	V_QZJGID VQzjgid,
+    	V_QZJGMC VQzjgmc,
+    	DEP_ID depId,
+    	DEP_NAME depName , 
+    	ENABLED enabled  , 
+    	ACCOUNT_NON_EXPIRED accountNonExpired , 
+    	ACCOUNT_NON_LOCKED accountNonLocked ,
+    	CREDENTIALS_NON_EXPIRED credentialsNonExpired
+	FROM SYS_USERS
+		WHERE 1=1
+		<include refid="queryUsersConditions"/>
+    </select>
+    
+    
+      <!-- 查询所有用户总数 -->
+    <select id="queryUsersCount"  parameterType="com.arch.cmd.admin.AdminListQueryCmd"  resultType="int">
+		SELECT 
+    	COUNT(USER_ID)
+		FROM SYS_USERS
+		WHERE 1=1
+		<include refid="queryUsersConditions"/>
+    </select>
 </mapper> 
