@@ -17,6 +17,8 @@ import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.stereotype.Service;
+
+
 /**
  * 核心的InterceptorStatusToken token = super.beforeInvocation(fi);会调用我们定义的accessDecisionManager:decide(Object object)和securityMetadataSource
  
@@ -39,41 +41,48 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MySecurityFilter extends AbstractSecurityInterceptor implements Filter {
-	//与applicationContext-security.xml里的myFilter的属性securityMetadataSource对应，
-	//其他的两个组件，已经在AbstractSecurityInterceptor定义
+	// 与applicationContext-security.xml里的myFilter的属性securityMetadataSource对应，
+	// 其他的两个组件，已经在AbstractSecurityInterceptor定义
 	@Autowired
 	private MySecurityMetadataSource securityMetadataSource;
 	@Autowired
 	private MyAccessDecisionManager accessDecisionManager;
 	@Autowired
-	private AuthenticationManager myAuthenticationManager; 
-	
+	private AuthenticationManager myAuthenticationManager;
+
+	/**
+	 * <p>初始化我的过滤器(用于加载权限和资源等操作)</p>
+	 * <custom-filter ref="mySecurityFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
+	 *  FILTER_SECURITY_INTERCEPTOR 是SS的核心过滤器，在这个之前执行我的过滤器
+	 * 
+	 * 
+	 * 
+	 */
 	@PostConstruct
-	public void init(){
-//		System.err.println(" ---------------  MySecurityFilter init--------------- ");
+	public void init() {
+		// System.err.println(" ---------------  MySecurityFilter init--------------- ");
 		super.setAuthenticationManager(myAuthenticationManager);
 		super.setAccessDecisionManager(accessDecisionManager);
 	}
-	
+
 	@Override
 	public SecurityMetadataSource obtainSecurityMetadataSource() {
 		return this.securityMetadataSource;
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		FilterInvocation fi = new FilterInvocation(request, response, chain);
 		invoke(fi);
 	}
-	
+
 	private void invoke(FilterInvocation fi) throws IOException, ServletException {
 		// object为FilterInvocation对象
-                  //super.beforeInvocation(fi);源码
-		//1.获取请求资源的权限
-		//执行Collection<ConfigAttribute> attributes = SecurityMetadataSource.getAttributes(object);
-		//2.是否拥有权限
-		//this.accessDecisionManager.decide(authenticated, object, attributes);
-//		System.err.println(" ---------------  MySecurityFilter invoke--------------- ");
+		// super.beforeInvocation(fi);源码
+		// 1.获取请求资源的权限
+		// 执行Collection<ConfigAttribute> attributes = SecurityMetadataSource.getAttributes(object);
+		// 2.是否拥有权限
+		// this.accessDecisionManager.decide(authenticated, object, attributes);
+		// System.err.println(" ---------------  MySecurityFilter invoke--------------- ");
 		InterceptorStatusToken token = super.beforeInvocation(fi);
 		try {
 			fi.getChain().doFilter(fi.getRequest(), fi.getResponse());
@@ -84,14 +93,14 @@ public class MySecurityFilter extends AbstractSecurityInterceptor implements Fil
 
 	public void init(FilterConfig arg0) throws ServletException {
 	}
-	
+
 	public void destroy() {
-		
+
 	}
 
 	@Override
 	public Class<? extends Object> getSecureObjectClass() {
-		//下面的MyAccessDecisionManager的supports方面必须放回true,否则会提醒类型错误
+		// 下面的MyAccessDecisionManager的supports方面必须放回true,否则会提醒类型错误
 		return FilterInvocation.class;
 	}
 }
