@@ -19,6 +19,7 @@ import com.lanyuan.entity.UserLoginList;
 import com.lanyuan.service.UserLoginListService;
 import com.lanyuan.util.Common;
 
+
 /**
  * 这个类主要是用户登录验证
  * 
@@ -26,8 +27,7 @@ import com.lanyuan.util.Common;
  * @Email: mmm333zzz520@163.com
  * @version 1.0v
  */
-public class MyAuthenticationFilter extends
-		UsernamePasswordAuthenticationFilter {
+public class MyAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private static final String USERNAME = "username";
 	private static final String PASSWORD = "password";
 	/**
@@ -42,7 +42,7 @@ public class MyAuthenticationFilter extends
 	private UserDao userDao;
 	@Autowired
 	private UserLoginListService userLoginListService;
-	
+
 	/**
 	 * 自定义表单参数的name属性，默认是 j_username 和 j_password
 	 * 定义登录成功和失败的跳转地址
@@ -51,7 +51,7 @@ public class MyAuthenticationFilter extends
 	 * @date 2013-12-5 下午7:02:32
 	 */
 	public void init() {
-//		System.err.println(" ---------------  MyAuthenticationFilter init--------------- ");
+		// System.err.println(" ---------------  MyAuthenticationFilter init--------------- ");
 		this.setUsernameParameter(USERNAME);
 		this.setPasswordParameter(PASSWORD);
 		// 验证成功，跳转的页面
@@ -66,31 +66,25 @@ public class MyAuthenticationFilter extends
 	}
 
 	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request,
-			HttpServletResponse response) throws AuthenticationException {
-//		System.err.println(" ---------------  MyAuthenticationFilter attemptAuthentication--------------- ");
-		
+	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
+		// System.err.println(" ---------------  MyAuthenticationFilter attemptAuthentication--------------- ");
+
 		if (!request.getMethod().equals("POST")) {
-			throw new AuthenticationServiceException(
-					"Authentication method not supported: "
-							+ request.getMethod());
+			throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
 		}
 
 		String username = obtainUsername(request).trim();
 		String password = obtainPassword(request).trim();
-		// System.out.println(">>>>>>>>>>000<<<<<<<<<< username is " +
-		// username);
+
 		if (Common.isEmpty(username) || Common.isEmpty(password)) {
-			BadCredentialsException exception = new BadCredentialsException(
-					"用户名或密码不能为空！");// 在界面输出自定义的信息！！
+			BadCredentialsException exception = new BadCredentialsException("用户名或密码不能为空！");// 在界面输出自定义的信息！！
 			throw exception;
 		}
 
 		// 验证用户账号与密码是否正确
 		User users = this.userDao.querySingleUser(username);
 		if (users == null || !users.getUserPassword().equals(password)) {
-			BadCredentialsException exception = new BadCredentialsException(
-					"用户名或密码不匹配！");// 在界面输出自定义的信息！！
+			BadCredentialsException exception = new BadCredentialsException("用户名或密码不匹配！");// 在界面输出自定义的信息！！
 			// request.setAttribute(WebAttributes.AUTHENTICATION_EXCEPTION,
 			// exception);
 			throw exception;
@@ -100,13 +94,11 @@ public class MyAuthenticationFilter extends
 		// 记录登录信息
 		UserLoginList userLoginList = new UserLoginList();
 		userLoginList.setUserId(users.getUserId());
-		System.out.println("userId----" + users.getUserId() + "---ip--"
-				+ Common.toIpAddr(request));
+		System.out.println("userId----" + users.getUserId() + "---ip--" + Common.toIpAddr(request));
 		userLoginList.setLoginIp(Common.toIpAddr(request));
 		userLoginListService.add(userLoginList);
 		// 实现 Authentication
-		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-				username, password);
+		UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(username, password);
 		// 允许子类设置详细属性
 		setDetails(request, authRequest);
 
