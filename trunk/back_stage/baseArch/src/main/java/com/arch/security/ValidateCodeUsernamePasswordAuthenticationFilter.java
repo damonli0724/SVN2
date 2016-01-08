@@ -1,4 +1,4 @@
-package com.arch.filter;
+package com.arch.security;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

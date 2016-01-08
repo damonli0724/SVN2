@@ -86,7 +86,7 @@
 		
 		
 		<!-- 验证码过滤器 -->
- <beans:bean id="validateCodeAuthenticationFilter" class="com.arch.filter.ValidateCodeUsernamePasswordAuthenticationFilter">
+ <beans:bean id="validateCodeAuthenticationFilter" class="com.arch.security.ValidateCodeUsernamePasswordAuthenticationFilter">
   <beans:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"></beans:property>
   <beans:property name="authenticationFailureHandler"  ref="simpleUrlAuthenticationFailureHandler"></beans:property>
   <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>

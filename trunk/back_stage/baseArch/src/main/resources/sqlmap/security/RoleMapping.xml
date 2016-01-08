@@ -3,11 +3,17 @@
 <mapper namespace="com.arch.mapper.securtity.RoleMapper">
 
     
+    <!-- 根据用户查询用户的角色 -->
     <select id="selectRolesByUserId" parameterType="String" resultType="com.arch.entity.SysRoles">
-    SELECT roles.ROLE_ID roleId,roles.ROLE_NAME roleName,roles.ROLE_DESC roleDesc,roles.ENABLE enable,roles.ISSYS isSys,roles.MODULE_ID moduleId 
+    SELECT 
+		roles.ROLE_ID roleId,
+		roles.ROLE_NAME roleName,
+		roles.ROLE_DESC roleDesc,
+		roles.ENABLE enable,
+		roles.ROLE_KEY roleKey
 	FROM SYS_USERS_ROLES sur 
-	LEFT JOIN  SYS_ROLES roles on roles.ROLE_ID = sur.ROLE_ID
-	LEFT JOIN  SYS_USERS users on users.USER_ID  = sur.USER_ID
+		LEFT JOIN  SYS_ROLES roles on roles.ROLE_ID = sur.ROLE_ID
+		LEFT JOIN  SYS_USERS users on users.USER_ID  = sur.USER_ID
 	WHERE users.USER_ID = #{value}
     </select>
     
