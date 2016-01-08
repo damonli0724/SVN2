@@ -30,4 +30,14 @@ public class UserService {
 		return userMapper.queryUsersCount(cmd);
 	}
 
+	/**
+	 * <p>根据登录名查询用户</p>
+	 * @param username
+	 * @return
+	 * @author lkd
+	 */
+	public SysUsers selectSysUserByName(String username) {
+		return userMapper.selectSysUserByName(username);
+	}
+
 }
