@@ -8,7 +8,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
@@ -19,17 +25,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.arch.constants.Constants;
 import com.arch.constants.Url;
 import com.arch.constants.View;
+import com.arch.entity.SysUsers;
 import com.arch.service.other.UserService;
+import com.arch.utils.CommonUtils;
 import com.arch.utils.VerifyCodeUtils;
 
 
 @Controller
-public class SecurityController {
+public class BackGroundController {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
 	@Autowired
 	private UserService userService;
+
+	@Autowired
+	private AuthenticationManager myAuthenticationManager;
 
 	/**
 	 * 跳转首页
@@ -69,14 +80,58 @@ public class SecurityController {
 
 	/**
 	 * 跳转登陆页面
-	 * 
 	 * @param request
 	 * @return
 	 */
 	@RequestMapping(value = Url.LOGIN, method = RequestMethod.GET)
 	public String login(HttpServletRequest request) {
-
+		// 重新登录时销毁该用户的Session
+		Object o = request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
+		if (null != o) {
+			request.getSession().removeAttribute(Constants.SPRING_SECURITY_CONTEXT);
+		}
 		return View.LOGIN;
+	}
+
+	/**
+	 * 验证用户账号密码
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value = Url.LOGIN_CHECK, method = RequestMethod.POST)
+	public String loginCheck(HttpServletRequest request, String username, String password) {
+		try {
+			if (!request.getMethod().equals("POST")) {
+				request.setAttribute("error", "不支持POST方法提交！");
+			}
+			if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
+				request.setAttribute("error", "用户名或密码不能为空！");
+				return View.LOGIN;
+			}
+			// 验证用户账号与密码是否正确
+			SysUsers user = userService.selectSysUserByName(username);
+
+			if (user == null || !user.getPassword().equals(password)) {
+				request.setAttribute("error", "用户或密码不正确！");
+				return View.LOGIN;
+			}
+			Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+			SecurityContext securityContext = SecurityContextHolder.getContext();
+			securityContext.setAuthentication(authentication);
+			HttpSession session = request.getSession(true);
+			session.setAttribute(Constants.SPRING_SECURITY_CONTEXT, securityContext);
+			// 当验证都通过后，把用户信息放在session里
+			request.getSession().setAttribute("userSession", user);
+			// // 记录登录信息
+			// UserLoginList userLoginList = new UserLoginList();
+			// userLoginList.setUserId(users.getUserId());
+			// userLoginList.setLoginIp(Common.toIpAddr(request));
+			// userLoginListService.add(userLoginList);
+		} catch (AuthenticationException ae) {
+			request.setAttribute("error", "登录异常，请联系管理员！");
+			return View.LOGIN;
+		}
+		return View.INDEX;
 	}
 
 	/**
@@ -88,7 +143,6 @@ public class SecurityController {
 	 */
 	@RequestMapping(value = Url.LOING_OUT, method = RequestMethod.GET)
 	public String loginOut(HttpServletRequest request) {
-		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
 		return View.LOGIN;
 	};
 

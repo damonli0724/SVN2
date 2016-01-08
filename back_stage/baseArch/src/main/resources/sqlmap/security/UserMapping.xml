@@ -27,8 +27,6 @@
 	FROM SYS_USERS
 		WHERE NAME=#{value}
     </select>
-    
-    
     <sql id="queryUsersConditions">
     	<if test="loginName !=null and loginName !=''">
     		AND NAME LIKE  '%${loginName}%'
@@ -40,6 +38,8 @@
     		AND #{endDate} >  DT_CREATE 
     	</if>
     </sql>
+    
+    
     <!-- 查询所有用户 -->
     <select id="queryUsers"  parameterType="com.arch.cmd.admin.AdminListQueryCmd"  resultType="com.arch.entity.SysUsers">
 		SELECT 
