@@ -17,16 +17,6 @@ public class UserService {
 	private UserMapper userMapper;
 
 	/**
-	 * <p>c</p>
-	 * @return
-	 * @author lkd
-	 * 
-	 */
-	public int getUsersCount() {
-		return userMapper.getUsersCount();
-	}
-
-	/**
 	 * <p>查询用户总数</p>
 	 * @return
 	 * @author lkd

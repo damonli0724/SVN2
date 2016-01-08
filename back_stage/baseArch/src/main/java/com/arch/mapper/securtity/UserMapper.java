@@ -6,16 +6,7 @@ import com.arch.cmd.admin.AdminListQueryCmd;
 import com.arch.entity.SysUsers;
 
 
-
 public interface UserMapper {
-
-	/**
-	 * <p>TODO</p>
-	 * @return
-	 * @author lkd
-	 */
-	public int getUsersCount();
-
 
 	/**
 	 * 根据登陆名  查询用户
@@ -24,7 +15,6 @@ public interface UserMapper {
 	 */
 	public SysUsers selectSysUserByName(String userName);
 
-
 	/**
 	 * 查询用户列表
 	 * @param cmd
@@ -32,11 +22,6 @@ public interface UserMapper {
 	 */
 	public List<SysUsers> queryUsers(AdminListQueryCmd cmd);
 
-
 	public Integer queryUsersCount(AdminListQueryCmd cmd);
-
-
-
-
 
 }
