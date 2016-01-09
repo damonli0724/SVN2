@@ -23,7 +23,7 @@
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="${contextPath}/background/check" method="POST">
-    	<div style="text-align:center"><c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" /></div>
+    	<div style="text-align:center"><c:out value="${message}" /></div>
       <div class="row cl">
         <label class="form-label col-3"></label>
         <div class="formControls col-8">
@@ -39,7 +39,7 @@
       <div class="row cl">
         <div class="formControls col-8 col-offset-3">
           <input class="input-text size-L" name="code" type="text" placeholder="验证码" onblur="if(this.value==''){this.value='验证码:'}" onclick="if(this.value=='验证码:'){this.value='';}" value="" style="width:150px;">
-          <img id="codeImg" src="${contextPath}/login/randomCode"> <a id="code"  onclick="javascript:void(0)" href="#">看不清，换一张</a> </div>
+          <img id="codeImg" src="${contextPath}/background/randomCode"> <a id="code"  onclick="javascript:void(0)" href="#">看不清，换一张</a> </div>
       </div>
       <div class="row">
         <div class="formControls col-8 col-offset-3">
@@ -76,7 +76,7 @@ $(function(){
 	 var $context = $("#globe_context_id").val();
 	$("#codeImg,#code").bind("click",changeImg);
 	function changeImg(){
-		 $("#codeImg").attr("src",$context+"/login/randomCode");
+		 $("#codeImg").attr("src",$context+"/background/randomCode");
 	}
 });
 </script>

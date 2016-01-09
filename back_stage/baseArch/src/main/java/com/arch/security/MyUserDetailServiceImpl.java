@@ -76,10 +76,8 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
 		List<SysResources> resources = resourcesMapper.getResourcesByUserId(userId);
 		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
 		for (SysResources res : resources) {
-			// 用户可以访问的资源名称（或者说用户所拥有的权限） 注意：必须"ROLE_"开头,资源(主菜单，子菜单，按钮)
-			// 关联代码：applicationContext-security.xml
-			// 关联代码： MySecurityMetadataSource#loadResourceDefine
-			authSet.add(new SimpleGrantedAuthority("ROLE_" + res.getResKey()));
+			if (res==null)continue;
+			authSet.add(new SimpleGrantedAuthority("ROLE"+res.getResKey()));
 		}
 		return authSet;
 	}
