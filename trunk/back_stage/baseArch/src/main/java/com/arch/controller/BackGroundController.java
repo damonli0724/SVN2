@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextImpl;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,7 +32,12 @@ import com.arch.service.other.UserService;
 import com.arch.utils.CommonUtils;
 import com.arch.utils.VerifyCodeUtils;
 
-
+/**
+ * 该跳转层功能:
+ * 1.用户登陆，退出登陆，403页面，获取验证码页面
+ * @author lkd
+ *
+ */
 @Controller
 public class BackGroundController {
 
@@ -51,29 +58,29 @@ public class BackGroundController {
 	@RequestMapping(value = Url.INDEX, method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap map) {
 
-		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
-		// 登录名
-		System.out.println("登陆名-->:" + securityContextImpl.getAuthentication().getName());
-		// 登录密码，未加密的
-		System.out.println("登录密码，未加密的-->" + securityContextImpl.getAuthentication().getCredentials());
-
-		WebAuthenticationDetails details = (WebAuthenticationDetails) securityContextImpl.getAuthentication().getDetails();
-		// 获得访问地址
-		System.out.println("RemoteAddress" + details.getRemoteAddress());
-		// 获得sessionid
-		System.out.println("SessionId-->" + details.getSessionId());
-		// 获得当前用户所拥有的权限
-		List<GrantedAuthority> authorities = (List<GrantedAuthority>) securityContextImpl.getAuthentication().getAuthorities();
-
-		String ip = request.getLocalAddr();
-
-		for (GrantedAuthority grantedAuthority : authorities) {
-			System.out.println("Authority-->" + grantedAuthority.getAuthority());
-		}
-
-		map.addAttribute("ip", ip);
-
-		logger.info("=======================log日志登陆首页=============================");
+//		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
+//		// 登录名
+//		System.out.println("登陆名-->:" + securityContextImpl.getAuthentication().getName());
+//		// 登录密码，未加密的
+//		System.out.println("登录密码，未加密的-->" + securityContextImpl.getAuthentication().getCredentials());
+//
+//		WebAuthenticationDetails details = (WebAuthenticationDetails) securityContextImpl.getAuthentication().getDetails();
+//		// 获得访问地址
+//		System.out.println("RemoteAddress" + details.getRemoteAddress());
+//		// 获得sessionid
+//		System.out.println("SessionId-->" + details.getSessionId());
+//		// 获得当前用户所拥有的权限
+//		List<GrantedAuthority> authorities = (List<GrantedAuthority>) securityContextImpl.getAuthentication().getAuthorities();
+//
+//		String ip = request.getLocalAddr();
+//
+//		for (GrantedAuthority grantedAuthority : authorities) {
+//			System.out.println("Authority-->" + grantedAuthority.getAuthority());
+//		}
+//
+//		map.addAttribute("ip", ip);
+//
+//		logger.info("=======================log日志登陆首页=============================");
 
 		return View.INDEX;
 	}
@@ -100,38 +107,60 @@ public class BackGroundController {
 	 */
 	@RequestMapping(value = Url.LOGIN_CHECK, method = RequestMethod.POST)
 	public String loginCheck(HttpServletRequest request, String username, String password) {
-		try {
-			if (!request.getMethod().equals("POST")) {
-				request.setAttribute("error", "不支持POST方法提交！");
-			}
-			if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
-				request.setAttribute("error", "用户名或密码不能为空！");
-				return View.LOGIN;
-			}
-			// 验证用户账号与密码是否正确
-			SysUsers user = userService.selectSysUserByName(username);
+			try {
+				//账号密码验证码 校验
+				checkUserNameAndPasswordAndCode(request,username,password);
+				// 验证用户账号与密码是否正确
+				SysUsers user = userService.selectSysUserByName(username);
 
-			if (user == null || !user.getPassword().equals(password)) {
-				request.setAttribute("error", "用户或密码不正确！");
+				if (user == null || !user.getPassword().equals(password)) {
+					throw new  AuthenticationServiceException("用户名或者密码不正确");
+				}
+				Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+				SecurityContext securityContext = SecurityContextHolder.getContext();
+				securityContext.setAuthentication(authentication);
+				HttpSession session = request.getSession(true);
+				session.setAttribute(Constants.SPRING_SECURITY_CONTEXT, securityContext);
+				// 当验证都通过后，把用户信息放在session里
+				request.getSession().setAttribute("userSession", user);
+			
+			} catch (AuthenticationServiceException e) {
+				request.setAttribute("message", e.getMessage());
 				return View.LOGIN;
-			}
-			Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-			SecurityContext securityContext = SecurityContextHolder.getContext();
-			securityContext.setAuthentication(authentication);
-			HttpSession session = request.getSession(true);
-			session.setAttribute(Constants.SPRING_SECURITY_CONTEXT, securityContext);
-			// 当验证都通过后，把用户信息放在session里
-			request.getSession().setAttribute("userSession", user);
-			// // 记录登录信息
-			// UserLoginList userLoginList = new UserLoginList();
-			// userLoginList.setUserId(users.getUserId());
-			// userLoginList.setLoginIp(Common.toIpAddr(request));
-			// userLoginListService.add(userLoginList);
-		} catch (AuthenticationException ae) {
-			request.setAttribute("error", "登录异常，请联系管理员！");
-			return View.LOGIN;
+			}	
+			
+			
+	
+			return View.INDEX;
+	}
+	
+	/**
+	 * 校验用户名，密码，验证码
+	 * @param request
+	 * @param username
+	 * @param password
+	 */
+	private void checkUserNameAndPasswordAndCode(HttpServletRequest request,
+			String username, String password) {
+		
+		String requestCaptcha = request.getParameter("code");  
+		String sessionCaptcha = (String)request.getSession().getAttribute("randomStr"); 
+		
+		if (!request.getMethod().equals("POST")) {
+			throw new  AuthenticationServiceException("网络异常，请稍后再试!");
 		}
-		return View.INDEX;
+		
+		if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
+			throw new  AuthenticationServiceException("用户名或者密码不能为空");
+		}
+		
+		if (StringUtils.isEmpty(requestCaptcha)||StringUtils.isEmpty(sessionCaptcha)) {  
+			throw new  AuthenticationServiceException("验证码不能为空");
+		}
+		
+		if (!sessionCaptcha.equalsIgnoreCase(requestCaptcha)) {
+			throw new  AuthenticationServiceException("验证码不正确");
+		}
 	}
 
 	/**

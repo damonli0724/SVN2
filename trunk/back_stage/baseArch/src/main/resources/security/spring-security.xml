@@ -5,19 +5,19 @@
            http://www.springframework.org/schema/security
            http://www.springframework.org/schema/security/spring-security.xsd">
 	<!-- 登录界面不使用权限过滤 和403页面 -->
-	<http security="none" pattern="/background/login*"/>
+	<http security="none" pattern="/background/randomCode"/>
 	<http security="none" pattern="/background/403"/>
 	<http security="none" pattern="/background/timeout"/>
-	<http security="none" pattern="/background/login/*"/>
+	<http security="none" pattern="/background/login"/>
 	<http security="none" pattern="/background/check"/>
 	
 
 	<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
-	<http pattern="/**/*.jpg" security="none" />
-	<http pattern="/**/*.png" security="none" />
-	<http pattern="/**/*.gif" security="none" />
-	<http pattern="/**/*.css" security="none" />
-	<http pattern="/**/*.js" security="none" />
+	<http pattern="/**/**/*.jpg" security="none" />
+	<http pattern="/**/**/*.png" security="none" />
+	<http pattern="/**/**/*.gif" security="none" />
+	<http pattern="/**/**/*.css" security="none" />
+	<http pattern="/**/**/*.js" security="none" />
 
 
 	<http auto-config="false"  use-expressions="true" entry-point-ref="myAuthenticationEntryPoint" >
