@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>archgroup</groupId>
-	<artifactId>archbase</artifactId>
+	<groupId>saltedfishgroup</groupId>
+	<artifactId>saltedfishbase</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>archbase Maven Webapp</name>
+	<name>saltedfishbase Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<repositories>
 		<repository>
@@ -225,6 +225,6 @@
 			
 			
 		</plugins>
-		<finalName>archbase</finalName>
+		<finalName>saltedfishbase</finalName>
 	</build>
 </project>
