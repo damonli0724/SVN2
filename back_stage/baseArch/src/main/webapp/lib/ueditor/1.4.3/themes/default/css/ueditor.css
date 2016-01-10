@@ -659,7 +659,7 @@ div.edui-box {
     background-position: -400px -20px;
 }
 
-.edui-default  .edui-for-searchreplace .edui-icon {
+.edui-default  .edui-for-sesaltedfishreplace .edui-icon {
     background-position: -520px -20px;
 }
 
@@ -1419,8 +1419,8 @@ div.edui-box {
     overflow: hidden;
 }
 
-/*searchreplace-dialog*/
-.edui-default .edui-for-searchreplace .edui-dialog-content {
+/*sesaltedfishreplace-dialog*/
+.edui-default .edui-for-sesaltedfishreplace .edui-dialog-content {
     width: 400px;
     height: 220px;
 }

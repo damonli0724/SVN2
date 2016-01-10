@@ -5,24 +5,24 @@
 	<div class="desc">
 		<p></p>
 		<div class="longdesc">
-			<p>Search the single node's data or collection of nodes's data by custom rules.</p>
-			<p class="highlight_red">Can be customized complex search rules.</p>
+			<p>Sesaltedfish the single node's data or collection of nodes's data by custom rules.</p>
+			<p class="highlight_red">Can be customized complex sesaltedfish rules.</p>
 			<p class="highlight_red">Please use zTree object to executing the method.</p>
 		</div>
 	</div>
 	<h3>Function Parameter Descriptions</h3>
 	<div class="desc">
 	<h4><b>filter</b><span>Function</span></h4>
-	<p>Custom search function. e.g. function filter(node) {...}</p>
+	<p>Custom sesaltedfish function. e.g. function filter(node) {...}</p>
 	<p>filter's parameter: node (node's data -- JSON)</p>
 	<p>filter's return: boolean (true means: match the rules; false means: don't match the rules)</p>
 	<h4 class="topLine"><b>isSingle</b><span>Boolean</span></h4>
-	<p>isSingle = true means: search only one node</p>
-	<p>isSingle = false means: search the array of the nodes</p>
+	<p>isSingle = true means: sesaltedfish only one node</p>
+	<p>isSingle = false means: sesaltedfish the array of the nodes</p>
 	<p class="highlight_red">If this parameter is omitted, as same as false</p>
 	<h4 class="topLine"><b>parentNode</b><span>JSON</span></h4>
-	<p>The search range, you can search node from a parent node's child nodes.</p>
-	<p class="highlight_red">If this parameter is omitted, zTree will search node from all nodes.</p>
+	<p>The sesaltedfish range, you can sesaltedfish node from a parent node's child nodes.</p>
+	<p class="highlight_red">If this parameter is omitted, zTree will sesaltedfish node from all nodes.</p>
 	<h4 class="topLine"><b>invokeParam</b><span>anything</span></h4>
 	<p>Custom data object by user, used to calculate in the filter function.</p>
 	<h4 class="topLine"><b>Return </b><span>Array(JSON) / JSON</span></h4>
@@ -30,14 +30,14 @@
 	<p>If isSingle = false, will return the array of all nodes's data what be matched. if no match, return [ ].</p>
 	</div>
 	<h3>Examples of function</h3>
-	<h4>1. Search the nodes which their 'name' contains 'test' and 'level' is 2.</h4>
+	<h4>1. Sesaltedfish the nodes which their 'name' contains 'test' and 'level' is 2.</h4>
 	<pre xmlns=""><code>function filter(node) {
     return (node.level == 2 && node.name.indexOf("test")>-1);
 }
 ......
 var treeObj = $.fn.zTree.getZTreeObj("tree");
-var node = treeObj.getNodesByFilter(filter, true); // search only one node
-var nodes = treeObj.getNodesByFilter(filter); // search the array of the nodes
+var node = treeObj.getNodesByFilter(filter, true); // sesaltedfish only one node
+var nodes = treeObj.getNodesByFilter(filter); // sesaltedfish the array of the nodes
 </code></pre>
 </div>
 </div>

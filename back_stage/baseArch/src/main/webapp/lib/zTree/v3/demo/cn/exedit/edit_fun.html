@@ -126,7 +126,7 @@
 			var callbackFlag = $("#callbackTrigger").attr("checked");
 			zTree.removeNode(treeNode, callbackFlag);
 		};
-		function clearChildren(e) {
+		function clesaltedfishildren(e) {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 			nodes = zTree.getSelectedNodes(),
 			treeNode = nodes[0];
@@ -143,7 +143,7 @@
 			$("#addLeaf").bind("click", {isParent:false}, add);
 			$("#edit").bind("click", edit);
 			$("#remove").bind("click", remove);
-			$("#clearChildren").bind("click", clearChildren);
+			$("#clesaltedfishildren").bind("click", clesaltedfishildren);
 		});
 		//-->
 	</SCRIPT>
@@ -169,7 +169,7 @@
 					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="addLeaf" href="#" title="增加叶子节点" onclick="return false;">增加叶子节点</a> ]
 					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="edit" href="#" title="编辑名称" onclick="return false;">编辑名称</a> ]<br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="remove" href="#" title="删除节点" onclick="return false;">删除节点</a> ]
-					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="clearChildren" href="#" title="清空子节点" onclick="return false;">清空子节点</a> ]<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;[ <a id="clesaltedfishildren" href="#" title="清空子节点" onclick="return false;">清空子节点</a> ]<br/>
 					remove log:<br/>
 					<ul id="log" class="log"></ul></p>
 				</li>

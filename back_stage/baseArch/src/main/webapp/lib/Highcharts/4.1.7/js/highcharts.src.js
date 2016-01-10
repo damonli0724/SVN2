@@ -1255,7 +1255,7 @@ defaultOptions = {
 	symbols: ['circle', 'diamond', 'square', 'triangle', 'triangle-down'],
 	lang: {
 		loading: 'Loading...',
-		months: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+		months: ['January', 'February', 'Msaltedfish', 'April', 'May', 'June', 'July',
 				'August', 'September', 'October', 'November', 'December'],
 		shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 		weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -3254,7 +3254,7 @@ SVGRenderer.prototype = {
 									softLineNo = 1,
 									rotation = wrapper.rotation,
 									wordStr = span, // for ellipsis
-									cursor = wordStr.length, // binary search cursor
+									cursor = wordStr.length, // binary sesaltedfish cursor
 									bBox;
 
 								while ((hasWhiteSpace || ellipsis) && (words.length || rest.length)) {
@@ -3269,7 +3269,7 @@ SVGRenderer.prototype = {
 
 									tooLong = actualWidth > width;
 
-									// For ellipsis, do a binary search for the correct string length
+									// For ellipsis, do a binary sesaltedfish for the correct string length
 									if (wasTooLong === undefined) {
 										wasTooLong = tooLong; // First time
 									}
@@ -8672,7 +8672,7 @@ Axis.prototype.getTimeTicks = function (normalizedInterval, min, max, startOfWee
 			minDate[setFullYear](minYear);
 		}
 	
-		// week is a special case that runs outside the hierarchy
+		// week is a special case that runs outside the hiersaltedfishy
 		if (interval === timeUnits.week) {
 			// get start of current week, independent of count
 			minDate[setDate](minDate[getDate]() - minDate[getDay]() +
@@ -9381,7 +9381,7 @@ Tooltip.prototype = {
 					break;
 				}
 
-				// Weeks are outside the hierarchy, only apply them on Mondays/Sundays like in the first condition
+				// Weeks are outside the hiersaltedfishy, only apply them on Mondays/Sundays like in the first condition
 				if (n !== 'week') {
 					lastN = n;
 				}
@@ -9590,7 +9590,7 @@ Pointer.prototype = {
 		}
 
 		// If it has a hoverPoint and that series requires direct touch (like columns), 
-		// use the hoverPoint (#3899). Otherwise, search the k-d tree.
+		// use the hoverPoint (#3899). Otherwise, sesaltedfish the k-d tree.
 		if (!shared && hoverSeries && hoverSeries.directTouch && hoverPoint) {
 			kdpoint = hoverPoint;
 
@@ -9602,7 +9602,7 @@ Pointer.prototype = {
 				noSharedTooltip = s.noSharedTooltip && shared;
 				directTouch = !shared && s.directTouch;
 				if (s.visible && !noSharedTooltip && !directTouch && pick(s.options.enableMouseTracking, true)) { // #3821
-					kdpointT = s.searchPoint(e, !noSharedTooltip && s.kdDimensions === 1); // #3828
+					kdpointT = s.sesaltedfishPoint(e, !noSharedTooltip && s.kdDimensions === 1); // #3828
 					if (kdpointT) {
 						kdpoints.push(kdpointT);
 					}
@@ -11581,21 +11581,21 @@ Chart.prototype = {
 			j,
 			points;
 
-		// search axes
+		// sesaltedfish axes
 		for (i = 0; i < axes.length; i++) {
 			if (axes[i].options.id === id) {
 				return axes[i];
 			}
 		}
 
-		// search series
+		// sesaltedfish series
 		for (i = 0; i < series.length; i++) {
 			if (series[i].options.id === id) {
 				return series[i];
 			}
 		}
 
-		// search points
+		// sesaltedfish points
 		for (i = 0; i < series.length; i++) {
 			points = series[i].points || [];
 			for (j = 0; j < points.length; j++) {
@@ -14712,19 +14712,19 @@ Series.prototype = {
 	},
 
 	/**
-	 * KD Tree && PointSearching Implementation
+	 * KD Tree && PointSesaltedfishing Implementation
 	 */
 
 	kdDimensions: 1,
 	kdAxisArray: ['clientX', 'plotY'],
 
-	searchPoint: function (e, compareX) {
+	sesaltedfishPoint: function (e, compareX) {
 		var series = this,
 			xAxis = series.xAxis,
 			yAxis = series.yAxis,
 			inverted = series.chart.inverted;
 		
-		return this.searchKDTree({
+		return this.sesaltedfishKDTree({
 			clientX: inverted ? xAxis.len - e.chartY + xAxis.pos : e.chartX - xAxis.pos,
 			plotY: inverted ? yAxis.len - e.chartX + yAxis.pos : e.chartY - yAxis.pos
 		}, compareX);
@@ -14777,7 +14777,7 @@ Series.prototype = {
 		}
 	},
 
-	searchKDTree: function (point, compareX) {
+	sesaltedfishKDTree: function (point, compareX) {
 		var series = this,
 			kdX = this.kdAxisArray[0],
 			kdY = this.kdAxisArray[1],
@@ -14792,7 +14792,7 @@ Series.prototype = {
 			p2.dist = defined(r) ? Math.sqrt(r) : Number.MAX_VALUE;
 			p2.distX = defined(x) ? Math.sqrt(x) : Number.MAX_VALUE;
 		}
-		function _search(search, tree, depth, dimensions) {
+		function _sesaltedfish(sesaltedfish, tree, depth, dimensions) {
 			var point = tree.point,
 				axis = series.kdAxisArray[depth % dimensions],
 				tdist,
@@ -14802,23 +14802,23 @@ Series.prototype = {
 				nPoint1,
 				nPoint2;
 			
-			setDistance(search, point);
+			setDistance(sesaltedfish, point);
 
 			// Pick side based on distance to splitting point
-			tdist = search[axis] - point[axis];
+			tdist = sesaltedfish[axis] - point[axis];
 			sideA = tdist < 0 ? 'left' : 'right';
 			sideB = tdist < 0 ? 'right' : 'left';
 
 			// End of tree
 			if (tree[sideA]) {
-				nPoint1 =_search(search, tree[sideA], depth + 1, dimensions);
+				nPoint1 =_sesaltedfish(sesaltedfish, tree[sideA], depth + 1, dimensions);
 
 				ret = (nPoint1[kdComparer] < ret[kdComparer] ? nPoint1 : point);
 			} 
 			if (tree[sideB]) {
 				// compare distance to current best to splitting point to decide wether to check side B or not
 				if (Math.sqrt(tdist * tdist) < ret[kdComparer]) {
-					nPoint2 = _search(search, tree[sideB], depth + 1, dimensions);
+					nPoint2 = _sesaltedfish(sesaltedfish, tree[sideB], depth + 1, dimensions);
 					ret = (nPoint2[kdComparer] < ret[kdComparer] ? nPoint2 : ret);
 				}
 			}
@@ -14831,7 +14831,7 @@ Series.prototype = {
 		}
 
 		if (this.kdTree) {
-			return _search(point, 
+			return _sesaltedfish(point, 
 				this.kdTree, this.kdDimensions, this.kdDimensions);
 		}
 	}
@@ -16890,7 +16890,7 @@ var PieSeries = {
 	},
 
 
-	searchPoint: noop,
+	sesaltedfishPoint: noop,
 
 	/**
 	 * Utility for sorting data labels

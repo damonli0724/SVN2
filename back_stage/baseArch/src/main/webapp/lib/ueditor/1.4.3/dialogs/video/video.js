@@ -78,8 +78,8 @@
                 case "video":
                     return insertSingle();
                     break;
-                case "videoSearch":
-                    return insertSearch("searchList");
+                case "videoSesaltedfish":
+                    return insertSesaltedfish("sesaltedfishList");
                     break;
                 case "upload":
                     return insertUpload();
@@ -132,7 +132,7 @@
      * 将元素id下的所有代表视频的图片插入编辑器中
      * @param id
      */
-    function insertSearch(id){
+    function insertSesaltedfish(id){
         var imgs = domUtils.getElementsByTagName($G(id),"img"),
             videoObjs=[];
         for(var i=0,img; img=imgs[i++];){

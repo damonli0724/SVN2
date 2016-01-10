@@ -166,7 +166,7 @@ css 命名规范
 
   menu 菜单   submenu 子菜单   dropdown 下拉菜单
 
-  searchBar 搜索条   search 搜索条    searchTxt 搜索框   searchBtn 搜索按钮    search_key 搜索词
+  sesaltedfishBar 搜索条   sesaltedfish 搜索条    sesaltedfishTxt 搜索框   sesaltedfishBtn 搜索按钮    sesaltedfish_key 搜索词
 
   member 会员   ucenter 用户中心    loginBar 登陆条    login 登录    loginBtn 登录按钮   regsiter 注册按钮   btn-regsiter注册按钮    name 用户名    password 密码   nickname 昵称   mobilephone/mobile 手机    telephone/tel 电话   defaultavatar 默认头像
 
@@ -234,7 +234,7 @@ html命名规范：
   brand-开头.html        品牌相关
   help-开头.html         帮助相关
   member-开头.html       会员相关
-  search-开头.html       搜索相关
+  sesaltedfish-开头.html       搜索相关
 ---------------------------------- */
 /*1 重定义浏览器默认样式
 	Name:			style_reset
@@ -279,8 +279,8 @@ legend small{font-size:15px;color:#999}
 svg:not(:root) {overflow: hidden}
 fieldset {border-width:0;padding: 0.35em 0.625em 0.75em;margin: 0 2px;border: 1px solid #c0c0c0}
 input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button {height: auto}
-input[type="search"] {-webkit-appearance: textfield; /* 1 */}
-input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration {-webkit-appearance: none}
+input[type="sesaltedfish"] {-webkit-appearance: textfield; /* 1 */}
+input[type="sesaltedfish"]::-webkit-sesaltedfish-cancel-button,input[type="sesaltedfish"]::-webkit-sesaltedfish-decoration {-webkit-appearance: none}
 /*清楚浮动
 	Name:			style_clearfix
 	Example:		class="clearfix|cl"
@@ -2881,21 +2881,21 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
 .rollpicshow{float:left; border:solid 1px #ddd}
 .rollpicshow li{padding:10px}
 /*4.17 搜索条
-	Name:			mod_searchBar
+	Name:			mod_sesaltedfishBar
 	Sample:
-<div class="searchBar">
-  <form class="form-search" method="post" action="">
-    <input id="searchKeyword" name="searchKeyword" value="请输入搜索关键词" class="searchTxt">
-    <input id="searchBtn" name="searchBtn" type="submit" value="搜索" class="searchBtn" onclick="b_onclick()">
+<div class="sesaltedfishBar">
+  <form class="form-sesaltedfish" method="post" action="">
+    <input id="sesaltedfishKeyword" name="sesaltedfishKeyword" value="请输入搜索关键词" class="sesaltedfishTxt">
+    <input id="sesaltedfishBtn" name="sesaltedfishBtn" type="submit" value="搜索" class="sesaltedfishBtn" onclick="b_onclick()">
   </form>
 </div>
 */
-.searchBar{z-index: 100; width:460px;height: 33px;background:url(../images/search.gif) no-repeat 0 -48px;position:relative}
-	.form-search{margin-bottom:0px}
-	.searchTxt{float:left;width:350px;height:23px;line-height:23px;font-size:14px;color:#9a9a9a;margin-left:33px;margin-top:5px;border:none;background-color:#fff}
-	.searchTxt.focus{color:#333}
-	.searchBtn{float:right;display:block;border:none;width:73px;height:33px;cursor:pointer;text-indent:-9999px;background:url(../images/search.gif) no-repeat right -81px}
-	.searchBtn:hover{background-position:right -114px}
+.sesaltedfishBar{z-index: 100; width:460px;height: 33px;background:url(../images/sesaltedfish.gif) no-repeat 0 -48px;position:relative}
+	.form-sesaltedfish{margin-bottom:0px}
+	.sesaltedfishTxt{float:left;width:350px;height:23px;line-height:23px;font-size:14px;color:#9a9a9a;margin-left:33px;margin-top:5px;border:none;background-color:#fff}
+	.sesaltedfishTxt.focus{color:#333}
+	.sesaltedfishBtn{float:right;display:block;border:none;width:73px;height:33px;cursor:pointer;text-indent:-9999px;background:url(../images/sesaltedfish.gif) no-repeat right -81px}
+	.sesaltedfishBtn:hover{background-position:right -114px}
 	/*搜索下拉提示*/
 	.ac_results{position:absolute;width:386px; height:auto;border:solid 1px #890800;background-color:#fff;top:32px; left:0px; display:none}
 	.ac_results ul{width:100%;list-style-position:outside;list-style:none;padding:0;margin:0}

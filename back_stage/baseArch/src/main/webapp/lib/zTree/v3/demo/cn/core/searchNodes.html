@@ -54,9 +54,9 @@
 		var lastValue = "", nodeList = [], fontCss = {};
 		function clickRadio(e) {
 			lastValue = "";
-			searchNode(e);
+			sesaltedfishNode(e);
 		}
-		function searchNode(e) {
+		function sesaltedfishNode(e) {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			if (!$("#getNodesByFilter").attr("checked")) {
 				var value = $.trim(key.get(0).value);
@@ -117,8 +117,8 @@
 			key = $("#key");
 			key.bind("focus", focusKey)
 			.bind("blur", blurKey)
-			.bind("propertychange", searchNode)
-			.bind("input", searchNode);
+			.bind("propertychange", sesaltedfishNode)
+			.bind("input", sesaltedfishNode);
 			$("#name").bind("change", clickRadio);
 			$("#level").bind("change", clickRadio);
 			$("#id").bind("change", clickRadio);
@@ -133,7 +133,7 @@
 
 <BODY>
 <h1>根据参数查找节点</h1>
-<h6>[ 文件路径: core/searchNodes.html ]</h6>
+<h6>[ 文件路径: core/sesaltedfishNodes.html ]</h6>
 <div class="content_wrap">
 	<div class="zTreeDemoBackground left">
 		<ul id="treeDemo" class="ztree"></ul>

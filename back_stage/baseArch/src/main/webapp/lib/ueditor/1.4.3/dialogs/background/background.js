@@ -134,7 +134,7 @@
             var a = document.createElement('a');
             a.href = url;
             browser.ie && (a.href = a.href);
-            url = browser.ie ? a.href:(a.protocol + '//' + a.host + a.pathname + a.search + a.hash);
+            url = browser.ie ? a.href:(a.protocol + '//' + a.host + a.pathname + a.sesaltedfish + a.hash);
         }
 
         if(url || url === '') {

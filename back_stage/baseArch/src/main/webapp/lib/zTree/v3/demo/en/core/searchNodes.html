@@ -26,16 +26,16 @@
 		};
 
 		var zNodes =[
-			{ id:1, pId:0, name:"search node demo 1", t:"id=1", open:true},
-			{ id:11, pId:1, name:"can search 'name'", t:"id=11"},
-			{ id:12, pId:1, name:"can search 'level'", t:"id=12"},
-			{ id:13, pId:1, name:"can search 'id'", t:"id=13"},
-			{ id:14, pId:1, name:"can search other attr", t:"id=14"},
-			{ id:2, pId:0, name:"search node demo 2", t:"id=2", open:true},
-			{ id:21, pId:2, name:"can search single node", t:"id=21"},
-			{ id:22, pId:2, name:"can search nodes array", t:"id=22"},
-			{ id:23, pId:2, name:"search me", t:"id=23"},
-			{ id:3, pId:0, name:"search node demo 3", t:"id=3", open:true },
+			{ id:1, pId:0, name:"sesaltedfish node demo 1", t:"id=1", open:true},
+			{ id:11, pId:1, name:"can sesaltedfish 'name'", t:"id=11"},
+			{ id:12, pId:1, name:"can sesaltedfish 'level'", t:"id=12"},
+			{ id:13, pId:1, name:"can sesaltedfish 'id'", t:"id=13"},
+			{ id:14, pId:1, name:"can sesaltedfish other attr", t:"id=14"},
+			{ id:2, pId:0, name:"sesaltedfish node demo 2", t:"id=2", open:true},
+			{ id:21, pId:2, name:"can sesaltedfish single node", t:"id=21"},
+			{ id:22, pId:2, name:"can sesaltedfish nodes array", t:"id=22"},
+			{ id:23, pId:2, name:"sesaltedfish me", t:"id=23"},
+			{ id:3, pId:0, name:"sesaltedfish node demo 3", t:"id=3", open:true },
 			{ id:31, pId:3, name:"My id is : 31", t:"id=31"},
 			{ id:32, pId:31, name:"My id is : 32", t:"id=32"},
 			{ id:33, pId:32, name:"My id is : 33", t:"id=33"}
@@ -54,9 +54,9 @@
 		var lastValue = "", nodeList = [], fontCss = {};
 		function clickRadio(e) {
 			lastValue = "";
-			searchNode(e);
+			sesaltedfishNode(e);
 		}
-		function searchNode(e) {
+		function sesaltedfishNode(e) {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo");
 			if (!$("#getNodesByFilter").attr("checked")) {
 				var value = $.trim(key.get(0).value);
@@ -117,8 +117,8 @@
 			key = $("#key");
 			key.bind("focus", focusKey)
 			.bind("blur", blurKey)
-			.bind("propertychange", searchNode)
-			.bind("input", searchNode);
+			.bind("propertychange", sesaltedfishNode)
+			.bind("input", sesaltedfishNode);
 			$("#name").bind("change", clickRadio);
 			$("#level").bind("change", clickRadio);
 			$("#id").bind("change", clickRadio);
@@ -132,8 +132,8 @@
 </HEAD>
 
 <BODY>
-<h1>Search Nodes</h1>
-<h6>[ File Path: core/searchNodes.html ]</h6>
+<h1>Sesaltedfish Nodes</h1>
+<h6>[ File Path: core/sesaltedfishNodes.html ]</h6>
 <div class="content_wrap">
 	<div class="zTreeDemoBackground left">
 		<ul id="treeDemo" class="ztree"></ul>
@@ -143,7 +143,7 @@
 			<li class="title"><h2>1, Explanation of getNodeByParam / getNodesByParam / getNodesByParamFuzzy</h2>
 				<ul class="list">
 				<li class="highlight_red">How to use ’zTreeObj.getNodeByParam / getNodesByParam / getNodesByParamFuzzy / getNodeByTId‘ method,  please see the API documentation.</li>
-				<li><p>Try to search: <br/>
+				<li><p>Try to sesaltedfish: <br/>
 						attribute( value ): <input type="text" id="key" value="" class="empty" /><br/>
 						attribute( key ): <input type="radio" id="name" name="keyType" class="radio first" checked /><span>name (string)</span><br/>
 						<input type="radio" id="level" name="keyType" class="radio" style="margin-left:68px;" /><span>level (number) ... root node's level is 0</span><br/>

@@ -5,19 +5,19 @@
 var PAGE_SIZE = 10; 
 var dataList = $('#J_DataList');
 var noDataMsg = $('#J_NoDataMsg'); 
-var submitButton = $("#searchBtn");
-var form =$("#searchForm");
-var searchCondition = null;
+var submitButton = $("#sesaltedfishBtn");
+var form =$("#sesaltedfishForm");
+var sesaltedfishCondition = null;
 
 $(function(){
 
 	load(1,PAGE_SIZE); //加载数据
-	submitButton.bind("click", {curPageNo : 1, pageSize : PAGE_SIZE}, dataSearch);
+	submitButton.bind("click", {curPageNo : 1, pageSize : PAGE_SIZE}, dataSesaltedfish);
 })
 
 //表单搜索
-function dataSearch(dataObj){
-		searchCondition = form.serialize();
+function dataSesaltedfish(dataObj){
+		sesaltedfishCondition = form.serialize();
 		load(dataObj.data.curPageNo, dataObj.data.pageSize) ;
 }
 
@@ -29,7 +29,7 @@ function load(curPageNo, pageSize) {
 		$.ajax(queryUrl, {
 			type : 'GET',
 			dataType : 'json',
-			data : searchCondition 
+			data : sesaltedfishCondition 
 		}).done(function(response) {
 			if (response && response.result  && response.result.length) {
 

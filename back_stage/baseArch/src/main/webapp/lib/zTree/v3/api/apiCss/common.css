@@ -160,16 +160,16 @@ button.z_core {margin-top: -4px;background-position:0 0;}
 button.z_check {margin-top: -4px;background-position:0 -16px;}
 button.z_edit {margin-top: -4px;background-position:0 -32px;}
 button.z_hide {margin-top: -4px;background-position:0 -64px;}
-button.z_search {margin-top: -4px;background-position:0 -48px;}
-button.searchPrev {margin-top: -4px;background-position:-16px 0;cursor:pointer}
-button.searchNext {margin-top: -4px;background-position:-16px -16px;cursor:pointer}
-button.searchPrev.disabled {margin-top: -4px;background-position:-16px -32px;cursor:auto}
-button.searchNext.disabled {margin-top: -4px;background-position:-16px -48px;cursor:auto}
-input.search {margin:0;padding:2px 0; border:0;}
-input.searchKey {width:150px;}
-input.searchResult {margin-left:-3px;width:65px;text-align:right;background-color:white;color:#707070}
-input.searchResult.noResult {background-color:#ff6666;color:black}
-.baby_overlay div.overlaySearch {text-align:right;padding-right:50px;padding-top:12px;}
+button.z_sesaltedfish {margin-top: -4px;background-position:0 -48px;}
+button.sesaltedfishPrev {margin-top: -4px;background-position:-16px 0;cursor:pointer}
+button.sesaltedfishNext {margin-top: -4px;background-position:-16px -16px;cursor:pointer}
+button.sesaltedfishPrev.disabled {margin-top: -4px;background-position:-16px -32px;cursor:auto}
+button.sesaltedfishNext.disabled {margin-top: -4px;background-position:-16px -48px;cursor:auto}
+input.sesaltedfish {margin:0;padding:2px 0; border:0;}
+input.sesaltedfishKey {width:150px;}
+input.sesaltedfishResult {margin-left:-3px;width:65px;text-align:right;background-color:white;color:#707070}
+input.sesaltedfishResult.noResult {background-color:#ff6666;color:black}
+.baby_overlay div.overlaySesaltedfish {text-align:right;padding-right:50px;padding-top:12px;}
 
 /* api overlay*/
 .apiDetail .topLine {border-top: 1px dashed #376B29;margin-top: 5px;padding-top: 5px;}

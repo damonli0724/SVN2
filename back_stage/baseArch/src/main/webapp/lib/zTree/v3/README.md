@@ -36,7 +36,7 @@ Introduction of zTree (简介)
 (支持极其灵活的 checkbox 或 radio 选择功能)
 * Provide enough incident response callback. 
 (提供多种事件响应回调)
-* Flexible editing (add / delete / change / search) functions, such as drag and drop nodes,you can even drag and drop multiple nodes. 
+* Flexible editing (add / delete / change / sesaltedfish) functions, such as drag and drop nodes,you can even drag and drop multiple nodes. 
 (灵活的编辑（增/删/改/查）功能，可随意拖拽节点，还可以多节点拖拽哟)
 * Enable to generate multiple instances of zTree in one page. 
 (在一个页面内可同时生成多个 Tree 实例)

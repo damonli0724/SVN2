@@ -8,19 +8,19 @@ function Music() {
     Music.prototype = {
         total:70,
         pageSize:10,
-        dataUrl:"http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.search.common",
+        dataUrl:"http://tingapi.ting.baidu.com/v1/restserver/ting?method=baidu.ting.sesaltedfish.common",
         playerUrl:"http://box.baidu.com/widget/flash/bdspacesong.swf",
 
         init:function () {
             var me = this;
-            domUtils.on($G("J_searchName"), "keyup", function (event) {
+            domUtils.on($G("J_sesaltedfishName"), "keyup", function (event) {
                 var e = window.event || event;
                 if (e.keyCode == 13) {
-                    me.dosearch();
+                    me.dosesaltedfish();
                 }
             });
-            domUtils.on($G("J_searchBtn"), "click", function () {
-                me.dosearch();
+            domUtils.on($G("J_sesaltedfishBtn"), "click", function () {
+                me.dosesaltedfish();
             });
         },
         callback:function (data) {
@@ -30,10 +30,10 @@ function Music() {
                 $G('J_resultBar').innerHTML = me._renderTemplate(data.song_list);
             }, 300);
         },
-        dosearch:function () {
+        dosesaltedfish:function () {
             var me = this;
             selectedItem = null;
-            var key = $G('J_searchName').value;
+            var key = $G('J_sesaltedfishName').value;
             if (utils.trim(key) == "")return false;
             key = encodeURIComponent(key);
             me._sent(key);

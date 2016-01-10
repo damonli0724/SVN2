@@ -53,8 +53,8 @@ function switchTab( tabParentId ) {
         }
     }
 }
-$G('searchtab').onmousedown = function(){
-    $G('search-msg').innerHTML = '';
+$G('sesaltedfishtab').onmousedown = function(){
+    $G('sesaltedfish-msg').innerHTML = '';
     $G('replace-msg').innerHTML = ''
 }
 //是否区分大小写
@@ -68,13 +68,13 @@ $G("nextFindBtn").onclick = function (txt, dir, mcase) {
         return false;
     }
     obj = {
-        searchStr:findtxt,
+        sesaltedfishStr:findtxt,
         dir:1,
         casesensitive:getMatchCase("matchCase")
     };
     if (!frCommond(obj)) {
         var bk = editor.selection.getRange().createBookmark();
-        $G('search-msg').innerHTML = lang.getEnd;
+        $G('sesaltedfish-msg').innerHTML = lang.getEnd;
         editor.selection.getRange().moveToBookmark(bk).select();
 
 
@@ -86,7 +86,7 @@ $G("nextReplaceBtn").onclick = function (txt, dir, mcase) {
         return false;
     }
     obj = {
-        searchStr:findtxt,
+        sesaltedfishStr:findtxt,
         dir:1,
         casesensitive:getMatchCase("matchCase1")
     };
@@ -98,12 +98,12 @@ $G("preFindBtn").onclick = function (txt, dir, mcase) {
         return false;
     }
     obj = {
-        searchStr:findtxt,
+        sesaltedfishStr:findtxt,
         dir:-1,
         casesensitive:getMatchCase("matchCase")
     };
     if (!frCommond(obj)) {
-        $G('search-msg').innerHTML = lang.getStart;
+        $G('sesaltedfish-msg').innerHTML = lang.getStart;
     }
 };
 $G("preReplaceBtn").onclick = function (txt, dir, mcase) {
@@ -112,7 +112,7 @@ $G("preReplaceBtn").onclick = function (txt, dir, mcase) {
         return false;
     }
     obj = {
-        searchStr:findtxt,
+        sesaltedfishStr:findtxt,
         dir:-1,
         casesensitive:getMatchCase("matchCase1")
     };
@@ -129,7 +129,7 @@ $G("repalceBtn").onclick = function () {
         return false;
     }
     obj = {
-        searchStr:findtxt,
+        sesaltedfishStr:findtxt,
         dir:1,
         casesensitive:getMatchCase("matchCase1"),
         replaceStr:replacetxt
@@ -147,7 +147,7 @@ $G("repalceAllBtn").onclick = function () {
         return false;
     }
     obj = {
-        searchStr:findtxt,
+        sesaltedfishStr:findtxt,
         casesensitive:getMatchCase("matchCase1"),
         replaceStr:replacetxt,
         all:true
@@ -159,6 +159,6 @@ $G("repalceAllBtn").onclick = function () {
 };
 //执行
 var frCommond = function (obj) {
-    return editor.execCommand("searchreplace", obj);
+    return editor.execCommand("sesaltedfishreplace", obj);
 };
-switchTab("searchtab");
+switchTab("sesaltedfishtab");

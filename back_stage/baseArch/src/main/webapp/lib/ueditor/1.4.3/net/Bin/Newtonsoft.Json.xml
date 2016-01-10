@@ -4498,7 +4498,7 @@
         </member>
         <member name="P:Newtonsoft.Json.JsonTextWriter.Indentation">
             <summary>
-            Gets or sets how many IndentChars to write for each level in the hierarchy when <see cref="T:Newtonsoft.Json.Formatting"/> is set to <c>Formatting.Indented</c>.
+            Gets or sets how many IndentChars to write for each level in the hiersaltedfishy when <see cref="T:Newtonsoft.Json.Formatting"/> is set to <c>Formatting.Indented</c>.
             </summary>
         </member>
         <member name="P:Newtonsoft.Json.JsonTextWriter.QuoteChar">
@@ -6042,7 +6042,7 @@
         <member name="M:Newtonsoft.Json.Linq.JObject.GetValue(System.String,System.StringComparison)">
             <summary>
             Gets the <see cref="T:Newtonsoft.Json.Linq.JToken"/> with the specified property name.
-            The exact property name will be searched for first and if no matching property is found then
+            The exact property name will be sesaltedfished for first and if no matching property is found then
             the <see cref="T:System.StringComparison"/> will be used to match a property.
             </summary>
             <param name="propertyName">Name of the property.</param>
@@ -6052,7 +6052,7 @@
         <member name="M:Newtonsoft.Json.Linq.JObject.TryGetValue(System.String,System.StringComparison,Newtonsoft.Json.Linq.JToken@)">
             <summary>
             Tries to get the <see cref="T:Newtonsoft.Json.Linq.JToken"/> with the specified property name.
-            The exact property name will be searched for first and if no matching property is found then
+            The exact property name will be sesaltedfished for first and if no matching property is found then
             the <see cref="T:System.StringComparison"/> will be used to match a property.
             </summary>
             <param name="propertyName">Name of the property.</param>
@@ -7196,11 +7196,11 @@
             	<c>true</c> if using dynamic code generation; otherwise, <c>false</c>.
             </value>
         </member>
-        <member name="P:Newtonsoft.Json.Serialization.DefaultContractResolver.DefaultMembersSearchFlags">
+        <member name="P:Newtonsoft.Json.Serialization.DefaultContractResolver.DefaultMembersSesaltedfishFlags">
             <summary>
-            Gets or sets the default members search flags.
+            Gets or sets the default members sesaltedfish flags.
             </summary>
-            <value>The default members search flags.</value>
+            <value>The default members sesaltedfish flags.</value>
         </member>
         <member name="P:Newtonsoft.Json.Serialization.DefaultContractResolver.SerializeCompilerGeneratedMembers">
             <summary>
