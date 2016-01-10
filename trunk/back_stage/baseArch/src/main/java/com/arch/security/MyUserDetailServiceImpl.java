@@ -16,11 +16,11 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.arch.dto.UserDTO;
-import com.arch.entity.SysResources;
-import com.arch.entity.SysUsers;
-import com.arch.mapper.securtity.ResourcesMapper;
-import com.arch.mapper.securtity.RoleMapper;
-import com.arch.mapper.securtity.UserMapper;
+import com.arch.entity.security.SysResources;
+import com.arch.entity.security.SysUsers;
+import com.arch.mapper.security.ResourcesMapper;
+import com.arch.mapper.security.RoleMapper;
+import com.arch.mapper.security.UserMapper;
 import com.arch.utils.BeanCopierUtils;
 
 

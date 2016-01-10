@@ -5,7 +5,7 @@
  * Created on: 2015年11月27日 上午10:16:08
  * Copyright © 2013-2014 YYQ All rights reserved.
  ******************************************************************************/
-package com.arch.entity;
+package com.arch.entity.security;
 
 import java.util.Date;
 
@@ -28,10 +28,50 @@ public class SysUsers {
 	private String VQzjgmc;
 	private String depId;
 	private String depName;
+	
+	private String email;
+	private String mobile;
+	private String description;
+	private Integer  sex;
+	
 	private boolean enabled;
 	private boolean accountNonExpired;
 	private boolean accountNonLocked;
 	private boolean credentialsNonExpired;
+	
+	
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getSex() {
+		return sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
+	}
 
 	public String getUserId() {
 		return userId;

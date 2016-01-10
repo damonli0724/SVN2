@@ -20,7 +20,7 @@
 	<http pattern="/**/**/*.js" security="none" />
 
 
-	<http auto-config="false"  use-expressions="true" entry-point-ref="myAuthenticationEntryPoint" >
+	<http auto-config="false"  use-expressions="true" entry-point-ref="myAuthenticationEntryPoint"  >
 		<!-- 定义没有权限访问页面 -->
 		<access-denied-handler error-page="/background/403" />
 

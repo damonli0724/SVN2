@@ -1,8 +1,8 @@
-package com.arch.mapper.securtity;
+package com.arch.mapper.security;
 
 import java.util.List;
 
-import com.arch.entity.SysResources;
+import com.arch.entity.security.SysResources;
 
 
 public interface ResourcesMapper {

@@ -1,9 +1,9 @@
-package com.arch.mapper.securtity;
+package com.arch.mapper.security;
 
 import java.util.List;
 
 import com.arch.cmd.admin.AdminListQueryCmd;
-import com.arch.entity.SysUsers;
+import com.arch.entity.security.SysUsers;
 
 
 public interface UserMapper {
@@ -23,5 +23,7 @@ public interface UserMapper {
 	public List<SysUsers> queryUsers(AdminListQueryCmd cmd);
 
 	public Integer queryUsersCount(AdminListQueryCmd cmd);
+
+	public void addAdminUser(SysUsers sysUser);
 
 }
