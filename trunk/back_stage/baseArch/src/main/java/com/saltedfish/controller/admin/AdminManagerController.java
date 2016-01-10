@@ -78,7 +78,7 @@ public class AdminManagerController {
 	 * 管理员添加
 	 * @return
 	 */
-	@RequestMapping(value = Url.ADMIN_ADD_PAGE, method=RequestMethod.POST)
+	@RequestMapping(value = Url.ADMIN_ADD_DATA, method=RequestMethod.POST)
 	@ResponseBody
 	public BaseResultDTO<String> addAdmin(AdminAddCmd  cmd){
 		BaseResultDTO<String>  result  = new BaseResultDTO<String>();
@@ -88,16 +88,12 @@ public class AdminManagerController {
 				result.setMessage("原始密码和初始密码不正确!");
 				return  result;
 			}
-			
 			userService.addAdminUser(cmd);
-			
-			
 		} catch (Exception e) {
 			logger.debug("============add Admin error :"+e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
-		
-		
-		
+		result.setStatus(Constants.R_STATUS_SUCCESS);
 		return result ;
 	}
 

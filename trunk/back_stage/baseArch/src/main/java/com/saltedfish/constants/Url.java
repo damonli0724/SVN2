@@ -19,7 +19,9 @@ public interface Url {
 
 	// 管理员管理 - 管理员列表
 	public static final String ADMIN_LIST_PAGE = "background/admin/list/page";// 管理员列表页面
-	public static final String ADMIN_LIST_DATA = "background/admin/list/page/data";// 管理员列表页面
+	public static final String ADMIN_LIST_DATA = "background/admin/list/page/data";// 管理员列表页面数据
 	public static final String ADMIN_ADD_PAGE ="background/admin/add/page"; //管理员添加页面
+	public static final String ADMIN_ADD_DATA ="background/admin/add/page/data"; //管理员添加
+	
 
 }

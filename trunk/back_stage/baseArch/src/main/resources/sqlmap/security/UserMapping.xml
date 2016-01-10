@@ -73,4 +73,94 @@
 		WHERE 1=1
 		<include refid="queryUsersConditions"/>
     </select>
+    
+   	 <!-- 添加管理员 -->
+     <insert id="addAdminUser" parameterType="com.saltedfish.entity.security.SysUsers">
+    	insert into SYS_USERS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        USER_NAME,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="mobile != null" >
+        MOBILE,
+      </if>
+      
+       <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="accountNonExpired != null" >
+        ACCOUNT_NON_EXPIRED,
+      </if>
+      <if test="accountNonLocked != null" >
+        ACCOUNT_NON_LOCKED,
+      </if>
+      <if test="credentialsNonExpired != null" >
+        CREDENTIALS_NON_EXPIRED,
+      </if>
+      
+        <if test="description != null" >
+        DESCRIPTION,
+      	</if>
+        <if test="sex != null" >
+        SEX,
+      	</if>
+        <if test="dtCreate != null" >
+        DT_CREATE,
+      	</if>
+      
+      <if test="password !=null">
+      	PASSWORD,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null" >
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      
+      <if test="enabled != null" >
+        #{enabled,jdbcType=INTEGER},
+      </if>
+      <if test="accountNonExpired != null" >
+        #{accountNonExpired,jdbcType=INTEGER},
+      </if>
+      <if test="accountNonLocked != null" >
+        #{accountNonLocked,jdbcType=INTEGER},
+      </if>
+      <if test="credentialsNonExpired != null" >
+        #{credentialsNonExpired,jdbcType=INTEGER},
+      </if>
+      
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="dtCreate != null" >
+        #{dtCreate,jdbcType=INTEGER},
+      </if>
+      <if test="password !=null">
+       #{password,jdbcType=INTEGER},
+      </if>
+      
+    </trim>
+  </insert>
+    
+    
 </mapper> 

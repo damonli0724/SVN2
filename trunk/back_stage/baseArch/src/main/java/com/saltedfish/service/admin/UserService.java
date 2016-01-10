@@ -13,6 +13,7 @@ import com.saltedfish.cmd.admin.AdminAddCmd;
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
 import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.mapper.security.UserMapper;
+import com.saltedfish.utils.MD5Util;
 
 
 @Service
@@ -57,12 +58,12 @@ public class UserService {
 		sysUser.setAccountNonLocked(true);
 		sysUser.setCredentialsNonExpired(true);
 		sysUser.setEnabled(true);
-		sysUser.setDeadline(new Date());
+		
+		
 		sysUser.setDtCreate(new Date());
-		sysUser.setLastLogin(new Date());
 		sysUser.setName(cmd.getName());
 		sysUser.setUsername(cmd.getUserName());
-		sysUser.setPassword(cmd.getConfirmPassword());
+		sysUser.setPassword(MD5Util.MD5(cmd.getConfirmPassword()));
 		sysUser.setEmail(cmd.getEmail());
 		sysUser.setMobile(cmd.getMobile());
 		sysUser.setDescription(cmd.getDescription());
