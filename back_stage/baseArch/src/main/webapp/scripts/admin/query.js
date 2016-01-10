@@ -65,7 +65,7 @@ function load(curPageNo, pageSize) {
 */
 /*管理员-增加*/
 function admin_add(title,url,w,h){
-	layer_show(title,url,w,h);
+	layer_show(title,url,800,600);
 }
 /*管理员-删除*/
 function admin_del(obj,id){

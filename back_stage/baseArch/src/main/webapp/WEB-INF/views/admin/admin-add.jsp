@@ -11,55 +11,63 @@
 
 <body>
 <div class="pd-20">
-	<form action="" method="post" class="form form-horizontal" id="form-admin-add">
+	<form action="${contextPath}/background/admin/add/page/data" method="post" class="form form-horizontal" id="addForm">
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>账号：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" value="" placeholder="" id="name" name="name" datatype="*2-16" nullmsg="用户名不能为空">
+				<input type="text" class="input-text"  placeholder="账号" id="name" name="name" >
 			</div>
-			<div class="col-4"> </div>
 		</div>
+		
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>初始密码：</label>
 			<div class="formControls col-5">
-				<input type="password" placeholder="密码" autocomplete="off" value="" class="input-text" datatype="*6-20" nullmsg="密码不能为空">
+				<input type="password" placeholder="密码" id="originalPassword" name="originalPassword" value="" class="input-text" >
 			</div>
-			<div class="col-4"> </div>
 		</div>
+		
+		
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>确认密码：</label>
 			<div class="formControls col-5">
-				<input type="password" placeholder="确认新密码" autocomplete="off" class="input-text Validform_error" errormsg="您两次输入的新密码不一致！" datatype="*" nullmsg="请再输入一次新密码！" recheck="newpassword" id="newpassword2" name="newpassword2">
+				<input type="password" placeholder="确认新密码" id="confirmPassword" name="confirmPassword" class="input-text Validform_error" >
 			</div>
-			<div class="col-4"> </div>
 		</div>
+		
+		<div class="row cl">
+			<label class="form-label col-3"><span class="c-red">*</span>真实姓名：</label>
+			<div class="formControls col-5">
+				<input type="text" class="input-text" value="" placeholder="" id="userName" name="userName" >
+			</div>
+		</div>
+		
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>性别：</label>
 			<div class="formControls col-5 skin-minimal">
 				<div class="radio-box">
-					<input type="radio" id="sex-1" name="sex" datatype="*" nullmsg="请选择性别！">
+					<input type="radio" id="sex-1" value="1" name="sex">
 					<label for="sex-1">男</label>
 				</div>
 				<div class="radio-box">
-					<input type="radio" id="sex-2" name="sex">
+					<input type="radio" id="sex-2" value="0" name="sex">
 					<label for="sex-2">女</label>
 				</div>
 			</div>
-			<div class="col-4"> </div>
+			 
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>手机：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" value="" placeholder="" id="user-tel" name="user-tel"  datatype="m" nullmsg="手机不能为空">
+				<input type="text" class="input-text" value="" placeholder="" id="user-tel" name="user-tel" >
 			</div>
-			<div class="col-4"> </div>
+			 
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>邮箱：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" placeholder="@" name="email" id="email" datatype="e" nullmsg="请输入邮箱！">
+				<input type="text" class="input-text" placeholder="@" name="email" id="email">
 			</div>
-			<div class="col-4"> </div>
+			 
 		</div>
 		<div class="row cl">
 			<label class="form-label col-3">角色：</label>
@@ -75,27 +83,34 @@
 		<div class="row cl">
 			<label class="form-label col-3">备注：</label>
 			<div class="formControls col-5">
-				<textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" dragonfly="true" onKeyUp="textarealength(this,100)"></textarea>
+				<textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" onKeyUp="textarealength(this,100)"></textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
 			</div>
-			<div class="col-4"> </div>
 		</div>
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
-				<input class="btn btn-primary radius" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				<input class="btn btn-primary radius" id="submitBtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 			</div>
 		</div>
 	</form>
 </div>
-<script type="text/javascript" src="lib/jquery/1.9.1/jquery.min.js"></script> 
-<script type="text/javascript" src="lib/icheck/jquery.icheck.min.js"></script> 
-<script type="text/javascript" src="lib/Validform/5.3.2/Validform.min.js"></script> 
-<script type="text/javascript" src="lib/layer/1.9.3/layer.js"></script> 
-<script type="text/javascript" src="js/H-ui.js"></script> 
-<script type="text/javascript" src="js/H-ui.admin.js"></script> 
+<script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
+<script type="text/javascript" src="${jsBasePath}/validation-proxy.js"></script> 
+<script type="text/javascript" src="${libBasePath}/icheck/jquery.icheck.min.js"></script> 
+<script type="text/javascript" src="${libBasePath}/layer/1.9.3/layer.js"></script> 
+<script type="text/javascript" src="${jsBasePath}/H-ui.js"></script> 
+<script type="text/javascript" src="${jsBasePath}/H-ui.admin.js"></script> 
+
+
 <script type="text/javascript">
 $(function(){
-	$('.skin-minimal input').iCheck({
+	
+	$('#submitBtn').bind("click",function(){
+		$("#form-admin-add").submit();		
+	})
+	
+	$('#submitBtn').bind("click",addAdmin);
+/* 	$('.skin-minimal input').iCheck({
 		checkboxClass: 'icheckbox-blue',
 		radioClass: 'iradio-blue',
 		increaseArea: '20%'
@@ -104,13 +119,58 @@ $(function(){
 	$("#form-admin-add").Validform({
 		tiptype:2,
 		callback:function(form){
+			alert(21312321)
 			form[0].submit();
 			var index = parent.layer.getFrameIndex(window.name);
 			parent.$('.btn-refresh').click();
 			parent.layer.close(index);
 		}
-	});
+	}); */
 });
+
+function addAdmin(){
+	if (validateAddForm()) {
+		$("#form-admin-add").submit();		
+	}
+}
+
+function validateAddForm() {
+	$("#addForm").validate({
+		rules : {
+			name : {
+				required:true,
+			},
+			username : {
+				required : true,
+			},
+			moblie : {
+				required : true,
+			}
+		},
+		messages : {
+			name : {
+				required:"账户不能为空",
+			},
+			username : {
+				required : "真实姓名不能为空",
+			},
+			moblie : {
+				required : "手机号码不能为空",
+			}
+		},
+		errorPlacement : function(error, element) {
+			var p = element.parent();
+			
+			var div ="<div class='col-4'><span class='Validform_checktip Validform_wrong'>"+error.html()+"</span></div>";
+			
+			$(div).appendTo(p); 
+		},
+		validClass : "success",
+		onkeyup : false
+	});
+	return $("#addForm").valid();
+}
+
 </script>
 </body>
 </html>
