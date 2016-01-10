@@ -18,7 +18,7 @@
         </javaTypeResolver> 
        
         <!-- 生成的javaBean -->
-        <javaModelGenerator targetPackage="com.saltedfish.entity"  targetProject="./src/main/java" >
+        <javaModelGenerator targetPackage="com.saltedfish.entity.security"  targetProject="./src/main/java" >
          	<property name="enableSubPackages" value="true"/>  
             <!-- 从数据库返回的值被清理前后的空格  -->  
             <property name="trimStrings" value="true" />  
