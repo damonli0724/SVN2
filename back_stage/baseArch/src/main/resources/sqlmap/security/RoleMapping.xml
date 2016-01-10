@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="com.arch.mapper.securtity.RoleMapper">
+<mapper namespace="com.arch.mapper.security.RoleMapper">
 
     
     <!-- 根据用户查询用户的角色 -->
-    <select id="selectRolesByUserId" parameterType="String" resultType="com.arch.entity.SysRoles">
+    <select id="selectRolesByUserId" parameterType="String" resultType="com.arch.entity.security.SysRoles">
     SELECT 
 		roles.ROLE_ID roleId,
 		roles.ROLE_NAME roleName,

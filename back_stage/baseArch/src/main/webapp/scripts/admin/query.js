@@ -24,7 +24,7 @@ function dataSearch(dataObj){
 function load(curPageNo, pageSize) {
         dataList.show();
 		noDataMsg.hide();
-		var queryUrl = $("#globe_context_id").val()+"/admin/list/page/data"; // 查询数据url
+		var queryUrl = $("#globe_context_id").val()+"/background/admin/list/page/data"; // 查询数据url
 		queryUrl = queryUrl + '?' + 'startPage=' + curPageNo + '&pageSize=' + pageSize;
 		$.ajax(queryUrl, {
 			type : 'GET',

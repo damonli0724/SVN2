@@ -1,4 +1,4 @@
-package com.arch.entity;
+package com.arch.entity.security;
 
 import java.util.HashSet;
 import java.util.Set;

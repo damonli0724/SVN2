@@ -1,9 +1,9 @@
-package com.arch.mapper.securtity;
+package com.arch.mapper.security;
 
 import java.util.List;
 
-import com.arch.entity.SysRoles;
-import com.arch.entity.SysUsers;
+import com.arch.entity.security.SysRoles;
+import com.arch.entity.security.SysUsers;
 
 
 

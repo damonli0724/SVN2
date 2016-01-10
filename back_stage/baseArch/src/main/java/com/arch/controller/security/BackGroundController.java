@@ -1,4 +1,4 @@
-package com.arch.controller;
+package com.arch.controller.security;
 
 import java.util.List;
 
@@ -27,9 +27,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.arch.constants.Constants;
 import com.arch.constants.Url;
 import com.arch.constants.View;
-import com.arch.entity.SysUsers;
-import com.arch.service.other.UserService;
+import com.arch.entity.security.SysUsers;
+import com.arch.service.admin.UserService;
 import com.arch.utils.CommonUtils;
+import com.arch.utils.MD5Util;
 import com.arch.utils.VerifyCodeUtils;
 
 /**
@@ -48,7 +49,7 @@ public class BackGroundController {
 
 	@Autowired
 	private AuthenticationManager myAuthenticationManager;
-
+	
 	/**
 	 * 跳转首页
 	 * 
@@ -113,10 +114,11 @@ public class BackGroundController {
 				// 验证用户账号与密码是否正确
 				SysUsers user = userService.selectSysUserByName(username);
 
-				if (user == null || !user.getPassword().equals(password)) {
+				
+				if (user == null || !user.getPassword().equals(MD5Util.MD5(password))) {
 					throw new  AuthenticationServiceException("用户名或者密码不正确");
 				}
-				Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+				Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, MD5Util.MD5(password)));
 				SecurityContext securityContext = SecurityContextHolder.getContext();
 				securityContext.setAuthentication(authentication);
 				HttpSession session = request.getSession(true);

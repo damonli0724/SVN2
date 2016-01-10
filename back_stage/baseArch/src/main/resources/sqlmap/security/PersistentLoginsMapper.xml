@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.arch.mapper.security.PersistentLoginsMapper" >
+  <resultMap id="BaseResultMap" type="com.arch.entity.PersistentLogins" >
+    <id column="SERIES" property="series" jdbcType="VARCHAR" />
+    <result column="USERNAME" property="username" jdbcType="VARCHAR" />
+    <result column="TOKEN" property="token" jdbcType="VARCHAR" />
+    <result column="LAST_USED" property="lastUsed" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SERIES, USERNAME, TOKEN, LAST_USED
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from persistent_logins
+    where SERIES = #{series,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from persistent_logins
+    where SERIES = #{series,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.arch.entity.PersistentLogins" >
+    insert into persistent_logins (SERIES, USERNAME, TOKEN, 
+      LAST_USED)
+    values (#{series,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, 
+      #{lastUsed,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.arch.entity.PersistentLogins" >
+    insert into persistent_logins
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="series != null" >
+        SERIES,
+      </if>
+      <if test="username != null" >
+        USERNAME,
+      </if>
+      <if test="token != null" >
+        TOKEN,
+      </if>
+      <if test="lastUsed != null" >
+        LAST_USED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="series != null" >
+        #{series,jdbcType=VARCHAR},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUsed != null" >
+        #{lastUsed,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.arch.entity.PersistentLogins" >
+    update persistent_logins
+    <set >
+      <if test="username != null" >
+        USERNAME = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        TOKEN = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="lastUsed != null" >
+        LAST_USED = #{lastUsed,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where SERIES = #{series,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.arch.entity.PersistentLogins" >
+    update persistent_logins
+    set USERNAME = #{username,jdbcType=VARCHAR},
+      TOKEN = #{token,jdbcType=VARCHAR},
+      LAST_USED = #{lastUsed,jdbcType=TIMESTAMP}
+    where SERIES = #{series,jdbcType=VARCHAR}
+  </update>
+</mapper>

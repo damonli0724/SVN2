@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>  
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="com.arch.mapper.securtity.ResourcesMapper">
+<mapper namespace="com.arch.mapper.security.ResourcesMapper">
  
  <!-- 根据用户ID查询用户的权限 -->
- <select id="getResourcesByUserId" parameterType="string" resultType="com.arch.entity.SysResources" >
+ <select id="getResourcesByUserId" parameterType="string" resultType="com.arch.entity.security.SysResources" >
     SELECT 
 		res.RES_ID id,
 		res.RES_NAME name,

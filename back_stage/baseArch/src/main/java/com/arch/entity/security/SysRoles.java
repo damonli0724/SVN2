@@ -1,4 +1,4 @@
-package com.arch.entity;
+package com.arch.entity.security;
 
 public class SysRoles {
 	private String roleId;  //角色ID

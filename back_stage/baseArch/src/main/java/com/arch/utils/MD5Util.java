@@ -39,6 +39,6 @@ public class MD5Util {
     }
     
     public static void main(String[] args) {  
-        System.out.print(MD5Util.MD5("password"));  
+        System.out.print(MD5Util.MD5("admin"));  
     }  
 }  
