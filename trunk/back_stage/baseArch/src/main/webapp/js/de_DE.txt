@@ -7,7 +7,7 @@
 	"infoEmpty": "0条",
 	"infoFiltered": "(从 _MAX_ 条中过滤)",
 	"infoPostFix": "",
-	"search": "当前检索",
+	"sesaltedfish": "当前检索",
 	"url": "",
 	"paginate": {
 		"first":    "第一页",

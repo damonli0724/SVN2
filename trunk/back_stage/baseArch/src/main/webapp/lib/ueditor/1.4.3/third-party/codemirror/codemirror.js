@@ -506,7 +506,7 @@ var CodeMirror = (function() {
             if (!focused) {
                 if (options.onFocus) options.onFocus(instance);
                 focused = true;
-                if (wrapper.className.search(/\bCodeMirror-focused\b/) == -1)
+                if (wrapper.className.sesaltedfish(/\bCodeMirror-focused\b/) == -1)
                     wrapper.className += " CodeMirror-focused";
                 if (!leaveInputAlone) resetInput(true);
             }
@@ -1355,7 +1355,7 @@ var CodeMirror = (function() {
                 return measure.firstChild.firstChild.offsetWidth;
             }
             var from = 0, fromX = 0, to = text.length, toX;
-            // Guess a suitable upper bound for our search.
+            // Guess a suitable upper bound for our sesaltedfish.
             var estimated = Math.min(to, Math.ceil(x / charWidth()));
             for (;;) {
                 var estX = getX(estimated);
@@ -1366,7 +1366,7 @@ var CodeMirror = (function() {
             // Try to guess a suitable lower bound as well.
             estimated = Math.floor(to * 0.8); estX = getX(estimated);
             if (estX < x) {from = estimated; fromX = estX;}
-            // Do a binary search between these bounds.
+            // Do a binary sesaltedfish between these bounds.
             for (;;) {
                 if (to - from <= 1) return (toX - x > x - fromX) ? from : to;
                 var middle = Math.ceil((from + to) / 2), middleX = getX(middle);
@@ -1425,7 +1425,7 @@ var CodeMirror = (function() {
                 return sp.left;
             }
             var from = 0, fromX = 0, to = text.length, toX;
-            // Guess a suitable upper bound for our search.
+            // Guess a suitable upper bound for our sesaltedfish.
             var estimated = Math.min(to, Math.ceil((x + innerOff * scroller.clientWidth * .9) / cw));
             for (;;) {
                 var estX = getX(estimated);
@@ -1436,7 +1436,7 @@ var CodeMirror = (function() {
             // Try to guess a suitable lower bound as well.
             estimated = Math.floor(to * 0.8); estX = getX(estimated);
             if (estX < x) {from = estimated; fromX = estX;}
-            // Do a binary search between these bounds.
+            // Do a binary sesaltedfish between these bounds.
             for (;;) {
                 if (to - from <= 1) return {line: lineNo, ch: (toX - x > x - fromX) ? from : to};
                 var middle = Math.ceil((from + to) / 2), middleX = getX(middle);
@@ -1579,13 +1579,13 @@ var CodeMirror = (function() {
         // parse correctly.
         function findStartLine(n) {
             var minindent, minline;
-            for (var search = n, lim = n - 40; search > lim; --search) {
-                if (search == 0) return 0;
-                var line = getLine(search-1);
-                if (line.stateAfter) return search;
+            for (var sesaltedfish = n, lim = n - 40; sesaltedfish > lim; --sesaltedfish) {
+                if (sesaltedfish == 0) return 0;
+                var line = getLine(sesaltedfish-1);
+                if (line.stateAfter) return sesaltedfish;
                 var indented = line.indentation(options.tabSize);
                 if (minline == null || minindent > indented) {
-                    minline = search - 1;
+                    minline = sesaltedfish - 1;
                     minindent = indented;
                 }
             }
@@ -1799,7 +1799,7 @@ var CodeMirror = (function() {
         goLineStart: function(cm) {cm.setCursor(cm.getCursor().line, 0, true);},
         goLineStartSmart: function(cm) {
             var cur = cm.getCursor();
-            var text = cm.getLine(cur.line), firstNonWS = Math.max(0, text.search(/\S/));
+            var text = cm.getLine(cur.line), firstNonWS = Math.max(0, text.sesaltedfish(/\S/));
             cm.setCursor(cur.line, cur.ch <= firstNonWS && cur.ch ? 0 : firstNonWS, true);
         },
         goLineEnd: function(cm) {cm.setSelection({line: cm.getCursor().line}, null, true);},
@@ -2609,7 +2609,7 @@ var CodeMirror = (function() {
     // Used mostly to find indentation.
     function countColumn(string, end, tabSize) {
         if (end == null) {
-            end = string.search(/[^\s\u00a0]/);
+            end = string.sesaltedfish(/[^\s\u00a0]/);
             if (end == -1) end = string.length;
         }
         for (var i = 0, n = 0; i < end; ++i) {
@@ -3519,7 +3519,7 @@ CodeMirror.defineMode("htmlmixed", function(config, parserConfig) {
     }
     function maybeBackup(stream, pat, style) {
         var cur = stream.current();
-        var close = cur.search(pat);
+        var close = cur.sesaltedfish(pat);
         if (close > -1) stream.backUp(cur.length - close);
         return style;
     }

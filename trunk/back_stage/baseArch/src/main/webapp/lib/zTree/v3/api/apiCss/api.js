@@ -10,15 +10,15 @@ var apiContent = {
 	contentBoxDiv : null,
 	settingDiv : null,
 	functionDiv : null,
-	overlaySearch: null,
-	searchKey: null,
-	searchResultInput: null,
-	searchPrevBtn: null,
-	searchNextBtn: null,
+	overlaySesaltedfish: null,
+	sesaltedfishKey: null,
+	sesaltedfishResultInput: null,
+	sesaltedfishPrevBtn: null,
+	sesaltedfishNextBtn: null,
 	apiCache: {},
 	lastValue: "",
-	searchNodes: [],
-	searchNodesCur: 0,
+	sesaltedfishNodes: [],
+	sesaltedfishNodesCur: 0,
 
 	_init: function() {
 		this.overlayDiv = $("#overlayDiv");
@@ -29,11 +29,11 @@ var apiContent = {
 		this.contentBoxDiv = $("#contentBox");
 		this.settingDiv = $("#api_setting");
 		this.functionDiv = $("#api_function");
-		this.searchKey = $(".searchKey");
-		this.overlaySearch = $(".overlaySearch");
-		this.searchResultInput = $(".searchResult");
-		this.searchPrevBtn = $(".searchPrev");
-		this.searchNextBtn = $(".searchNext");
+		this.sesaltedfishKey = $(".sesaltedfishKey");
+		this.overlaySesaltedfish = $(".overlaySesaltedfish");
+		this.sesaltedfishResultInput = $(".sesaltedfishResult");
+		this.sesaltedfishPrevBtn = $(".sesaltedfishPrev");
+		this.sesaltedfishNextBtn = $(".sesaltedfishNext");
 		var setting = {
 			view: {
 				fontCss: this.getFontCss,
@@ -285,51 +285,51 @@ var apiContent = {
 	bindEvent: function() {
 		$(document).bind("keydown", this.listenKeyDown)
 		this.overlayCloseBtn.bind("click", apiContent.overlayClose);
-		this.searchResultInput.bind("click", function(e) {
+		this.sesaltedfishResultInput.bind("click", function(e) {
 			$(this).prev().get(0).focus();
 			this.blur();
 		}).bind("focus", function(e) {
 			this.blur();
 		});
-		this.searchKey.bind("focus", this.focusKey)
+		this.sesaltedfishKey.bind("focus", this.focusKey)
 			.bind("blur", this.blurKey)
-			.bind("propertychange", this.searchNode)
-			.bind("input", this.searchNode);
-		this.searchPrevBtn.bind("click", this.searchPrev);
-		this.searchNextBtn.bind("click", this.searchNext);
+			.bind("propertychange", this.sesaltedfishNode)
+			.bind("input", this.sesaltedfishNode);
+		this.sesaltedfishPrevBtn.bind("click", this.sesaltedfishPrev);
+		this.sesaltedfishNextBtn.bind("click", this.sesaltedfishNext);
 	},
 	setSameKey: function(value) {
-		apiContent.searchKey.attr("value", value);
+		apiContent.sesaltedfishKey.attr("value", value);
 	},
 	focusKey: function(e) {
-		if (apiContent.searchKey.hasClass("empty")) {
-			apiContent.searchKey.removeClass("empty");
+		if (apiContent.sesaltedfishKey.hasClass("empty")) {
+			apiContent.sesaltedfishKey.removeClass("empty");
 		}
 	},
 	blurKey: function(e) {
 		apiContent.setSameKey(e.target.value);
 		if (e.target.value === "") {
-			apiContent.searchKey.addClass("empty");
+			apiContent.sesaltedfishKey.addClass("empty");
 		}
 	},
 	listenKeyDown: function(e) {
 		if (e.keyCode=="13" && apiContent.overlayDiv.is(":hidden")) {
 			apiContent.openAPI();
 		} else if (e.keyCode=="37") {
-			apiContent.searchPrev();
+			apiContent.sesaltedfishPrev();
 		} else if (e.keyCode=="13" || e.keyCode=="39") {
-			apiContent.searchNext();
+			apiContent.sesaltedfishNext();
 		}
 	},
 	openAPI: function() {
-		if (apiContent.searchNodes.length > 0) {
+		if (apiContent.sesaltedfishNodes.length > 0) {
 			var setting_zTree = $.fn.zTree.getZTreeObj("settingTree"),
 			treenode_zTree = $.fn.zTree.getZTreeObj("treenodeTree"),
 			function_zTree = $.fn.zTree.getZTreeObj("functionTree");
-			if (apiContent.searchNodesCur < 0 || apiContent.searchNodesCur > apiContent.searchNodes.length -1) {
-				apiContent.searchNodesCur = 0;
+			if (apiContent.sesaltedfishNodesCur < 0 || apiContent.sesaltedfishNodesCur > apiContent.sesaltedfishNodes.length -1) {
+				apiContent.sesaltedfishNodesCur = 0;
 			}
-			var node = apiContent.searchNodes[apiContent.searchNodesCur];
+			var node = apiContent.sesaltedfishNodes[apiContent.sesaltedfishNodesCur];
 
 			if (node.tId.indexOf("setting") > -1) {
 				setting_zTree.selectNode(node);
@@ -339,10 +339,10 @@ var apiContent = {
 				function_zTree.selectNode(node);
 			}
 			apiContent.beforeClick(node.tId.substring(0, node.tId.indexOf("_")), node, true);
-			apiContent.searchCur();
+			apiContent.sesaltedfishCur();
 		}
 	},
-	searchNode: function(e) {
+	sesaltedfishNode: function(e) {
 		var setting_zTree = $.fn.zTree.getZTreeObj("settingTree"),
 		treenode_zTree = $.fn.zTree.getZTreeObj("treenodeTree"),
 		function_zTree = $.fn.zTree.getZTreeObj("functionTree");
@@ -350,61 +350,61 @@ var apiContent = {
 		apiContent.curKey = e.target.value;
 		var value = $.trim(apiContent.curKey);
 		apiContent.setSameKey(apiContent.curKey);
-		if (apiContent.searchKey.hasClass("empty")) {
+		if (apiContent.sesaltedfishKey.hasClass("empty")) {
 			value = "";
-			apiContent.searchResultInput.removeClass("noResult").attr("value","");
+			apiContent.sesaltedfishResultInput.removeClass("noResult").attr("value","");
 		}
 		if (apiContent.lastValue === value) return;
 
 		apiContent.updateNodes(false);
 		apiContent.lastValue = value;
 		if (value === "" || value.length < 2) {
-			apiContent.searchNodes = [];
-			apiContent.searchNodesCur = -1;
-			apiContent.searchCur(true);
+			apiContent.sesaltedfishNodes = [];
+			apiContent.sesaltedfishNodesCur = -1;
+			apiContent.sesaltedfishCur(true);
 			return;
 		}
 
-		var settingNodeList = setting_zTree.getNodesByFilter(apiContent.searchFilter);
-		var functionNodeList = function_zTree.getNodesByFilter(apiContent.searchFilter);
-		var treenodeNodeList = treenode_zTree.getNodesByFilter(apiContent.searchFilter);
-		apiContent.searchNodes = settingNodeList.concat(functionNodeList).concat(treenodeNodeList);
-		apiContent.searchNodesCur = -1;
-		apiContent.searchCur();
+		var settingNodeList = setting_zTree.getNodesByFilter(apiContent.sesaltedfishFilter);
+		var functionNodeList = function_zTree.getNodesByFilter(apiContent.sesaltedfishFilter);
+		var treenodeNodeList = treenode_zTree.getNodesByFilter(apiContent.sesaltedfishFilter);
+		apiContent.sesaltedfishNodes = settingNodeList.concat(functionNodeList).concat(treenodeNodeList);
+		apiContent.sesaltedfishNodesCur = -1;
+		apiContent.sesaltedfishCur();
 		apiContent.updateNodes(true);
 	},
-	searchFilter: function(node) {
-		var value = $.trim(apiContent.searchKey.get(0).value).toLowerCase();
+	sesaltedfishFilter: function(node) {
+		var value = $.trim(apiContent.sesaltedfishKey.get(0).value).toLowerCase();
 		return (node.showAPI && node.name.toLowerCase().indexOf(value) > -1);
 	},
-	searchPrev: function(e) {
-		if (apiContent.searchPrevBtn.hasClass("disabled")) return;
-		apiContent.searchNodesCur--;
-		if (apiContent.searchNodesCur < 0 || apiContent.searchNodesCur > apiContent.searchNodes.length -1) {
-			apiContent.searchNodesCur = apiContent.searchNodes.length -1;
+	sesaltedfishPrev: function(e) {
+		if (apiContent.sesaltedfishPrevBtn.hasClass("disabled")) return;
+		apiContent.sesaltedfishNodesCur--;
+		if (apiContent.sesaltedfishNodesCur < 0 || apiContent.sesaltedfishNodesCur > apiContent.sesaltedfishNodes.length -1) {
+			apiContent.sesaltedfishNodesCur = apiContent.sesaltedfishNodes.length -1;
 		}
 		apiContent.openAPI();
 	},
-	searchNext: function(e) {
-		if (apiContent.searchNextBtn.hasClass("disabled")) return;
-		apiContent.searchNodesCur++;
+	sesaltedfishNext: function(e) {
+		if (apiContent.sesaltedfishNextBtn.hasClass("disabled")) return;
+		apiContent.sesaltedfishNodesCur++;
 		apiContent.openAPI();
 	},
-	searchCur: function(init) {
-		var result = apiContent.searchNodes;
+	sesaltedfishCur: function(init) {
+		var result = apiContent.sesaltedfishNodes;
 		if (init) {
-			apiContent.searchResultInput.removeClass("noResult").attr("value","");
+			apiContent.sesaltedfishResultInput.removeClass("noResult").attr("value","");
 		} else if (result.length == 0) {
-			apiContent.searchResultInput.addClass("noResult").attr("value","  [ 0 / 0 ]  ");
+			apiContent.sesaltedfishResultInput.addClass("noResult").attr("value","  [ 0 / 0 ]  ");
 		} else {
-			apiContent.searchResultInput.removeClass("noResult").attr("value"," [ " + (apiContent.searchNodesCur > -1 ? apiContent.searchNodesCur+1 : "?")+ " / " + result.length + " ] ");
+			apiContent.sesaltedfishResultInput.removeClass("noResult").attr("value"," [ " + (apiContent.sesaltedfishNodesCur > -1 ? apiContent.sesaltedfishNodesCur+1 : "?")+ " / " + result.length + " ] ");
 		}
 		if (result.length > 0) {
-			apiContent.searchPrevBtn.removeClass("disabled");
-			apiContent.searchNextBtn.removeClass("disabled");
+			apiContent.sesaltedfishPrevBtn.removeClass("disabled");
+			apiContent.sesaltedfishNextBtn.removeClass("disabled");
 		} else {
-			apiContent.searchPrevBtn.addClass("disabled");
-			apiContent.searchNextBtn.addClass("disabled");
+			apiContent.sesaltedfishPrevBtn.addClass("disabled");
+			apiContent.sesaltedfishNextBtn.addClass("disabled");
 		}
 	},
 	updateNodes: function(highlight) {
@@ -412,8 +412,8 @@ var apiContent = {
 		treenode_zTree = $.fn.zTree.getZTreeObj("treenodeTree"),
 		function_zTree = $.fn.zTree.getZTreeObj("functionTree"),
 		node = null;
-		for( var i=0, l=apiContent.searchNodes.length; i<l; i++) {
-			node = apiContent.searchNodes[i];
+		for( var i=0, l=apiContent.sesaltedfishNodes.length; i<l; i++) {
+			node = apiContent.sesaltedfishNodes[i];
 			if (node.level > 0) {
 				node.highlight = highlight;
 				if (node.tId.indexOf("setting") > -1) {
@@ -480,7 +480,7 @@ var apiContent = {
 	},
 	overlayAutoClose: function(e) {
 		var eId = e.target.id, eRel = e.target.getAttribute("rel"), eClass = e.target.className;
-		if (eId === "overlayDiv" || eId === "overlayDivArrow" || eClass.indexOf("searchPrev") > -1 || eClass.indexOf("searchNext") > -1 || !!eRel) return;
+		if (eId === "overlayDiv" || eId === "overlayDivArrow" || eClass.indexOf("sesaltedfishPrev") > -1 || eClass.indexOf("sesaltedfishNext") > -1 || !!eRel) return;
 		if (!$(e.target).parents("[rel]").length && !$(e.target).parents("#overlayDiv").length) {
 			apiContent.overlayClose();
 		}
@@ -521,7 +521,7 @@ var apiContent = {
 			o.fadeTo("fast", 1);
 		}
 
-		var h = apiContent.tmpDiv.outerHeight({margin:true}) + apiContent.overlaySearch.outerHeight();
+		var h = apiContent.tmpDiv.outerHeight({margin:true}) + apiContent.overlaySesaltedfish.outerHeight();
 		if ((t + h) > wMaxTop) {
 			t = wMaxTop - h;
 		}

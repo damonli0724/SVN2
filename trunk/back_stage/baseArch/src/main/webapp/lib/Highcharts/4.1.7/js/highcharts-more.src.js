@@ -2156,9 +2156,9 @@ Axis.prototype.beforePadding = function () {
 		colProto;
 
 	/**
-	 * Search a k-d tree by the point angle, used for shared tooltips in polar charts
+	 * Sesaltedfish a k-d tree by the point angle, used for shared tooltips in polar charts
 	 */
-	seriesProto.searchPointByAngle = function (e) {
+	seriesProto.sesaltedfishPointByAngle = function (e) {
 		var series = this,
 			chart = series.chart,
 			xAxis = series.xAxis,
@@ -2166,20 +2166,20 @@ Axis.prototype.beforePadding = function () {
 			plotX = e.chartX - center[0] - chart.plotLeft,
 			plotY = e.chartY - center[1] - chart.plotTop;
 
-		return this.searchKDTree({
+		return this.sesaltedfishKDTree({
 			clientX: 180 + (Math.atan2(plotX, plotY) * (-180 / Math.PI))
 		});
 
 	};
 	
 	/**
-	 * Wrap the buildKDTree function so that it searches by angle (clientX) in case of shared tooltip,
+	 * Wrap the buildKDTree function so that it sesaltedfishes by angle (clientX) in case of shared tooltip,
 	 * and by two dimensional distance in case of non-shared.
 	 */
 	wrap(seriesProto, 'buildKDTree', function (proceed) {
 		if (this.chart.polar) {
 			if (this.kdByAngle) {
-				this.searchPoint = this.searchPointByAngle;
+				this.sesaltedfishPoint = this.sesaltedfishPointByAngle;
 			} else {
 				this.kdDimensions = 2;
 			}

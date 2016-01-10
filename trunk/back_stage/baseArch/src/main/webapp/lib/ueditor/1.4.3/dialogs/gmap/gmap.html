@@ -19,7 +19,7 @@
         <tr>
             <td><label for="address"><var id="lang_input_address"></var></label></td>
             <td><input id="address" type="text" /></td>
-            <td><a id="doSearch" href="javascript:void(0)" class="button"><var id="lang_input_search"></var></a></td>
+            <td><a id="doSesaltedfish" href="javascript:void(0)" class="button"><var id="lang_input_sesaltedfish"></var></a></td>
         </tr>
     </table>
     <div id="container" style="width: 100%; height: 340px;margin: 5px auto; border: 1px solid gray;"></div>
@@ -37,7 +37,7 @@
                 map: map,
                 draggable: true
             });
-            function doSearch(){
+            function doSesaltedfish(){
                 var address = document.getElementById('address').value;
                 var geocoder = new google.maps.Geocoder();
                 geocoder.geocode( { 'address': address}, function (results, status) {
@@ -46,16 +46,16 @@
                         map.fitBounds(bounds);
                         marker.setPosition(results[0].geometry.location);
                         marker.setTitle(address);
-                    } else alert(lang.searchError);
+                    } else alert(lang.sesaltedfishError);
                 });
             }
             $G('address').onkeydown = function (evt){
                 evt = evt || event;
                 if (evt.keyCode == 13) {
-                    doSearch();
+                    doSesaltedfish();
                 }
             };
-            $G("doSearch").onclick = doSearch;
+            $G("doSesaltedfish").onclick = doSesaltedfish;
             dialog.onok = function (){
                 var center = map.getCenter();
                 var point = marker.getPosition();
@@ -79,7 +79,7 @@
                 imgcss = img.style.cssText;
             }else{
                 setTimeout(function(){
-                    doSearch();
+                    doSesaltedfish();
                 },30)
             }
     });

@@ -8255,7 +8255,7 @@ UE.ajax = function() {
 
         url = url.replace(reg, '\x241' + callbackField + '=' + callbackFnName);
 
-        if (url.search(reg) < 0) {
+        if (url.sesaltedfish(reg) < 0) {
             url += (url.indexOf('?') < 0 ? '?' : '&') + callbackField + '=' + callbackFnName;
         }
 
@@ -13351,7 +13351,7 @@ UE.plugins['insertcode'] = function() {
         redo:1,
         source:1,
         print:1,
-        searchreplace:1,
+        sesaltedfishreplace:1,
         fullscreen:1,
         preview:1,
         insertparagraph:1,
@@ -22774,24 +22774,24 @@ UE.plugins['formatmatch'] = function(){
 
 
 
-// plugins/searchreplace.js
+// plugins/sesaltedfishreplace.js
 ///import core
 ///commands 查找替换
-///commandsName  SearchReplace
+///commandsName  SesaltedfishReplace
 ///commandsTitle  查询替换
-///commandsDialog  dialogs\searchreplace
+///commandsDialog  dialogs\sesaltedfishreplace
 /**
  * @description 查找替换
  * @author zhanyi
  */
 
-UE.plugin.register('searchreplace',function(){
+UE.plugin.register('sesaltedfishreplace',function(){
     var me = this;
 
     var _blockElm = {'table':1,'tbody':1,'tr':1,'ol':1,'ul':1};
 
     function findTextInString(textContent,opt,currentIndex){
-        var str = opt.searchStr;
+        var str = opt.sesaltedfishStr;
         if(opt.dir == -1){
             textContent = textContent.split('').reverse().join('');
             str = str.split('').reverse().join('');
@@ -22802,7 +22802,7 @@ UE.plugin.register('searchreplace',function(){
 
         while(match = reg.exec(textContent)){
             if(match.index >= currentIndex){
-                return opt.dir == -1 ? textContent.length - match.index - opt.searchStr.length : match.index;
+                return opt.dir == -1 ? textContent.length - match.index - opt.sesaltedfishStr.length : match.index;
             }
         }
         return  -1
@@ -22863,13 +22863,13 @@ UE.plugin.register('searchreplace',function(){
         }
     }
 
-    function searchReplace(me,opt){
+    function sesaltedfishReplace(me,opt){
 
         var rng = me.selection.getRange(),
             startBlockNode,
-            searchStr = opt.searchStr,
+            sesaltedfishStr = opt.sesaltedfishStr,
             span = me.document.createElement('span');
-        span.innerHTML = '$$ueditor_searchreplace_key$$';
+        span.innerHTML = '$$ueditor_sesaltedfishreplace_key$$';
 
         rng.shrinkBoundary(true);
 
@@ -22877,7 +22877,7 @@ UE.plugin.register('searchreplace',function(){
         if(!rng.collapsed){
             rng.select();
             var rngText = me.selection.getText();
-            if(new RegExp('^' + opt.searchStr + '$',(opt.casesensitive ? '' : 'i')).test(rngText)){
+            if(new RegExp('^' + opt.sesaltedfishStr + '$',(opt.casesensitive ? '' : 'i')).test(rngText)){
                 if(opt.replaceStr != undefined){
                     replaceText(rng,opt.replaceStr);
                     rng.select();
@@ -22893,13 +22893,13 @@ UE.plugin.register('searchreplace',function(){
         rng.insertNode(span);
         rng.enlargeToBlockElm(true);
         startBlockNode = rng.startContainer;
-        var currentIndex = startBlockNode[browser.ie ? 'innerText' : 'textContent'].indexOf('$$ueditor_searchreplace_key$$');
+        var currentIndex = startBlockNode[browser.ie ? 'innerText' : 'textContent'].indexOf('$$ueditor_sesaltedfishreplace_key$$');
         rng.setStartBefore(span);
         domUtils.remove(span);
         var result = findTextBlockElm(startBlockNode,currentIndex,opt);
         if(result){
-            var rngStart = findNTextInBlockElm(result.node,result.index,searchStr);
-            var rngEnd = findNTextInBlockElm(result.node,result.index + searchStr.length,searchStr);
+            var rngStart = findNTextInBlockElm(result.node,result.index,sesaltedfishStr);
+            var rngEnd = findNTextInBlockElm(result.node,result.index + sesaltedfishStr.length,sesaltedfishStr);
             rng.setStart(rngStart.node,rngStart.index).setEnd(rngEnd.node,rngEnd.index);
 
             if(opt.replaceStr !== undefined){
@@ -22920,7 +22920,7 @@ UE.plugin.register('searchreplace',function(){
     }
     return {
         commands:{
-            'searchreplace':{
+            'sesaltedfishreplace':{
                 execCommand:function(cmdName,opt){
                     utils.extend(opt,{
                         all : false,
@@ -22942,7 +22942,7 @@ UE.plugin.register('searchreplace',function(){
                         if(opt.replaceStr !== undefined){
                             me.fireEvent('saveScene');
                         }
-                        while(searchReplace(this,opt)){
+                        while(sesaltedfishReplace(this,opt)){
                             num++;
                         }
                         if(num){
@@ -22952,7 +22952,7 @@ UE.plugin.register('searchreplace',function(){
                         if(opt.replaceStr !== undefined){
                             me.fireEvent('saveScene');
                         }
-                        if(searchReplace(this,opt)){
+                        if(sesaltedfishReplace(this,opt)){
                             num++
                         }
                         if(num){
@@ -23237,7 +23237,7 @@ UE.plugin.register('snapscreen', function (){
     var snapplugin;
 
     function getLocation(url){
-        var search,
+        var sesaltedfish,
             a = document.createElement('a'),
             params = utils.serializeParam(me.queryCommandValue('serverparam')) || '';
 
@@ -23247,15 +23247,15 @@ UE.plugin.register('snapscreen', function (){
         }
 
 
-        search = a.search;
+        sesaltedfish = a.sesaltedfish;
         if (params) {
-            search = search + (search.indexOf('?') == -1 ? '?':'&')+ params;
-            search = search.replace(/[&]+/ig, '&');
+            sesaltedfish = sesaltedfish + (sesaltedfish.indexOf('?') == -1 ? '?':'&')+ params;
+            sesaltedfish = sesaltedfish.replace(/[&]+/ig, '&');
         }
         return {
             'port': a.port,
             'hostname': a.hostname,
-            'path': a.pathname + search ||  + a.hash
+            'path': a.pathname + sesaltedfish ||  + a.hash
         }
     }
 
@@ -27665,7 +27665,7 @@ UE.ui = baidu.editor.ui = {};
         'insertimage':'~/dialogs/image/image.html',
         'link':'~/dialogs/link/link.html',
         'spechars':'~/dialogs/spechars/spechars.html',
-        'searchreplace':'~/dialogs/searchreplace/searchreplace.html',
+        'sesaltedfishreplace':'~/dialogs/sesaltedfishreplace/sesaltedfishreplace.html',
         'map':'~/dialogs/map/map.html',
         'gmap':'~/dialogs/gmap/gmap.html',
         'insertvideo':'~/dialogs/video/video.html',
@@ -27810,7 +27810,7 @@ UE.ui = baidu.editor.ui = {};
 
 
     var dialogBtns = {
-        noOk:['searchreplace', 'help', 'spechars', 'webapp','preview'],
+        noOk:['sesaltedfishreplace', 'help', 'spechars', 'webapp','preview'],
         ok:['attachment', 'anchor', 'link', 'insertimage', 'map', 'gmap', 'insertframe', 'wordimage',
             'insertvideo', 'insertframe', 'edittip', 'edittable', 'edittd', 'scrawl', 'template', 'music', 'background', 'charts']
     };
@@ -27819,7 +27819,7 @@ UE.ui = baidu.editor.ui = {};
         (function (type, vals) {
             for (var i = 0, ci; ci = vals[i++];) {
                 //todo opera下存在问题
-                if (browser.opera && ci === "searchreplace") {
+                if (browser.opera && ci === "sesaltedfishreplace") {
                     continue;
                 }
                 (function (cmd) {

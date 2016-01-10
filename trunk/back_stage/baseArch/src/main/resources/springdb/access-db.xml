@@ -34,7 +34,7 @@
 	</tx:advice>
 	
 	<aop:config >
-		<aop:pointcut expression="execution(* com.arch.service.*.*(..))" id="service"/>
+		<aop:pointcut expression="execution(* com.saltedfish.service.*.*(..))" id="service"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="service"/>
 	</aop:config>
 	
@@ -51,7 +51,7 @@
 	</bean> -->
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.arch.mapper.*" />
+		<property name="basePackage" value="com.saltedfish.mapper.*" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
 	</bean>
 	
@@ -61,7 +61,7 @@
 	
 	<!-- dao -->
 	<!-- 
-	<bean id="commonDao" class="com.arch.dao.CommonDao">
+	<bean id="commonDao" class="com.saltedfish.dao.CommonDao">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean> -->
 	

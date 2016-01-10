@@ -18,7 +18,7 @@
         </javaTypeResolver> 
        
         <!-- 生成的javaBean -->
-        <javaModelGenerator targetPackage="com.arch.entity"  targetProject="./src/main/java" >
+        <javaModelGenerator targetPackage="com.saltedfish.entity"  targetProject="./src/main/java" >
          	<property name="enableSubPackages" value="true"/>  
             <!-- 从数据库返回的值被清理前后的空格  -->  
             <property name="trimStrings" value="true" />  
@@ -31,7 +31,7 @@
         
         
          <!-- 对应的Mapper接口类文件 -->  
-        <javaClientGenerator targetPackage="com.arch.mapper.security"  targetProject="./src/main/java"  type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.saltedfish.mapper.security"  targetProject="./src/main/java"  type="XMLMAPPER">
         	 <property name="enableSubPackages" value="true"/>  
         </javaClientGenerator>
         

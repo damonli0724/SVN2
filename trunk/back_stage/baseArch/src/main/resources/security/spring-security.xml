@@ -108,7 +108,7 @@
 
 
 	<!-- 自定义user-service -->
-<!-- 	<beans:bean id="userDetailService" class="com.arch.service.security.UserDetailService"></beans:bean> -->
+<!-- 	<beans:bean id="userDetailService" class="com.saltedfish.service.security.UserDetailService"></beans:bean> -->
 
 	<!-- 自定义权限管理，使用自己的user-service -->
 	<!-- <authentication-manager erase-credentials="false" alias="authenticationManager">
@@ -134,7 +134,7 @@
 		
 		
 		<!-- 验证码过滤器 -->
- <!-- <beans:bean id="validateCodeAuthenticationFilter" class="com.arch.security.ValidateCodeUsernamePasswordAuthenticationFilter">
+ <!-- <beans:bean id="validateCodeAuthenticationFilter" class="com.saltedfish.security.ValidateCodeUsernamePasswordAuthenticationFilter">
   <beans:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"></beans:property>
   <beans:property name="authenticationFailureHandler"  ref="simpleUrlAuthenticationFailureHandler"></beans:property>
   <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>

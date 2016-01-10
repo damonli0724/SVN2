@@ -6046,7 +6046,7 @@
                     ctx.drawImage( img, 0, 0 );
                     data = ctx.getImageData( 0, 0, 1, ih ).data;
     
-                    // search image edge pixel position in case
+                    // sesaltedfish image edge pixel position in case
                     // it is squashed vertically.
                     while ( py > sy ) {
                         alpha = data[ (py - 1) * 4 + 3 ];

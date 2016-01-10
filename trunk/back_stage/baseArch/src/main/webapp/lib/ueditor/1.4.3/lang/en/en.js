@@ -17,7 +17,7 @@ UE.I18N['en'] = {
         'splittocols':'SplitToCols', 'splittocells':'SplitToCells','deletecaption':'DeleteCaption','inserttitle':'InsertTitle',
         'mergecells':'MergeCells', 'deletetable':'DeleteTable', 'cleardoc':'Clear', 'insertparagraphbeforetable':"InsertParagraphBeforeTable",
         'fontfamily':'FontFamily', 'fontsize':'FontSize', 'paragraph':'Paragraph','simpleupload':'Single Image','insertimage':'Multi Image','edittable':'Edit Table', 'edittd':'Edit Td','link':'Link',
-        'emotion':'Emotion', 'spechars':'Spechars', 'searchreplace':'SearchReplace', 'map':'BaiduMap', 'gmap':'GoogleMap',
+        'emotion':'Emotion', 'spechars':'Spechars', 'sesaltedfishreplace':'SesaltedfishReplace', 'map':'BaiduMap', 'gmap':'GoogleMap',
         'insertvideo':'Video', 'help':'Help', 'justifyleft':'JustifyLeft', 'justifyright':'JustifyRight', 'justifycenter':'JustifyCenter',
         'justifyjustify':'Justify', 'forecolor':'FontColor', 'backcolor':'BackColor', 'insertorderedlist':'OL',
         'insertunorderedlist':'UL', 'fullscreen':'FullScreen', 'directionalityltr':'EnterFromLeft', 'directionalityrtl':'EnterFromRight',
@@ -258,7 +258,7 @@ UE.I18N['en'] = {
             'lang_tab_remote':"Insert",
             'lang_tab_upload':"Local",
             'lang_tab_online':"Manager",
-            'lang_tab_search':"Search",
+            'lang_tab_sesaltedfish':"Sesaltedfish",
             'lang_input_url':"Address:",
             'lang_input_size':"Size:",
             'lang_input_width':"Width",
@@ -270,10 +270,10 @@ UE.I18N['en'] = {
             'lang_imgLoading':"Loading...",
             'lang_start_upload':"Start Upload",
             'lock':{'title':"Lock rate"},
-            'searchType':{'title':"ImageType", 'options':["News", "Wallpaper", "emotions", "photo"]},
-            'searchTxt':{'value':"Enter the search keyword!"},
-            'searchBtn':{'value':"Search"},
-            'searchReset':{'value':"Clear"},
+            'sesaltedfishType':{'title':"ImageType", 'options':["News", "Wallpaper", "emotions", "photo"]},
+            'sesaltedfishTxt':{'value':"Enter the sesaltedfish keyword!"},
+            'sesaltedfishBtn':{'value':"Sesaltedfish"},
+            'sesaltedfishReset':{'value':"Clear"},
             'noneAlign':{'title':'None Float'},
             'leftAlign':{'title':'Left Float'},
             'rightAlign':{'title':'Right Float'},
@@ -306,9 +306,9 @@ UE.I18N['en'] = {
         'numError':"Please enter the correct Num. e.g 123,400",
         'imageUrlError':"The image format may be wrong!",
         'imageLoadError':"Error,please check the network or URL！",
-        'searchRemind':"Enter the search keyword!",
-        'searchLoading':"Image is loading,please wait...",
-        'searchRetry':" Sorry,can't find the image,please try again!"
+        'sesaltedfishRemind':"Enter the sesaltedfish keyword!",
+        'sesaltedfishLoading':"Image is loading,please wait...",
+        'sesaltedfishRetry':" Sorry,can't find the image,please try again!"
     },
     'attachment':{
         'static':{
@@ -344,17 +344,17 @@ UE.I18N['en'] = {
     'insertvideo':{
         'static':{
             'lang_tab_insertV':"Video",
-            'lang_tab_searchV':"Search",
+            'lang_tab_sesaltedfishV':"Sesaltedfish",
             'lang_tab_uploadV':"Upload",
             'lang_video_url':" URL ",
             'lang_video_size':"Video Size",
             'lang_videoW':"Width",
             'lang_videoH':"Height",
             'lang_alignment':"Alignment",
-            'videoSearchTxt':{'value':"Enter the search keyword!"},
+            'videoSesaltedfishTxt':{'value':"Enter the sesaltedfish keyword!"},
             'videoType':{'options':["All", "Hot", "Entertainment", "Funny", "Sports", "Science", "variety"]},
-            'videoSearchBtn':{'value':"Search in Baidu"},
-            'videoSearchReset':{'value':"Clear result"},
+            'videoSesaltedfishBtn':{'value':"Sesaltedfish in Baidu"},
+            'videoSesaltedfishReset':{'value':"Clear result"},
 
             'lang_input_fileStatus':' No file uploaded!',
             'startUpload':{'style':"background:url(upload.png) no-repeat;"},
@@ -462,10 +462,10 @@ UE.I18N['en'] = {
     },
     'music':{
         'static':{
-            'lang_input_tips':"Input singer/song/album, search you interested in music!",
-            'J_searchBtn':{value:'Search songs'}
+            'lang_input_tips':"Input singer/song/album, sesaltedfish you interested in music!",
+            'J_sesaltedfishBtn':{value:'Sesaltedfish songs'}
         },
-        'emptyTxt':'Not search to the relevant music results, please change a keyword try.',
+        'emptyTxt':'Not sesaltedfish to the relevant music results, please change a keyword try.',
         'chapter':'Songs',
         'singer':'Singer',
         'special':'Album',
@@ -513,10 +513,10 @@ UE.I18N['en'] = {
     gmap:{
         'static':{
             'lang_input_address':'Address:',
-            'lang_input_search':'Search',
+            'lang_input_sesaltedfish':'Sesaltedfish',
             'address':{value:"Beijing"}
         },
-        searchError:'Unable to locate the address!'
+        sesaltedfishError:'Unable to locate the address!'
     },
     help:{
         'static':{
@@ -565,21 +565,21 @@ UE.I18N['en'] = {
             lang_city:"City",
             lang_address:"Address",
             city:{value:"Beijing"},
-            lang_search:"Search",
+            lang_sesaltedfish:"Sesaltedfish",
             lang_dynamicmap:"Dynamic map"
         },
         cityMsg:"Please enter the city name!",
         errorMsg:"Can't find the place!"
     },
-    searchreplace:{
+    sesaltedfishreplace:{
         'static':{
-            lang_tab_search:"Search",
+            lang_tab_sesaltedfish:"Sesaltedfish",
             lang_tab_replace:"Replace",
-            lang_search1:"Search",
-            lang_search2:"Search",
+            lang_sesaltedfish1:"Sesaltedfish",
+            lang_sesaltedfish2:"Sesaltedfish",
             lang_replace:"Replace",
-            lang_searchReg:'Support regular expression ,which starts and ends with a slash ,for example "/expression/"',
-            lang_searchReg1:'Support regular expression ,which starts and ends with a slash ,for example "/expression/"',
+            lang_sesaltedfishReg:'Support regular expression ,which starts and ends with a slash ,for example "/expression/"',
+            lang_sesaltedfishReg1:'Support regular expression ,which starts and ends with a slash ,for example "/expression/"',
             lang_case_sensitive1:"Case sense",
             lang_case_sensitive2:"Case sense",
             nextFindBtn:{value:"Next"},
@@ -589,8 +589,8 @@ UE.I18N['en'] = {
             repalceBtn:{value:"Replace"},
             repalceAllBtn:{value:"Replace all"}
         },
-        getEnd:"Has the search to the bottom!",
-        getStart:"Has the search to the top!",
+        getEnd:"Has the sesaltedfish to the bottom!",
+        getStart:"Has the sesaltedfish to the top!",
         countMsg:"Altogether replaced {#count} character(s)!"
     },
     snapscreen:{

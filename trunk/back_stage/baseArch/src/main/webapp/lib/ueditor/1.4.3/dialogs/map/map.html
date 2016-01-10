@@ -24,7 +24,7 @@
             <td><input id="city" type="text" /></td>
             <td><var id="lang_address"></var>:</td>
             <td><input id="address" type="text" value="" /></td>
-            <td><a href="javascript:doSearch()" class="button"><var id="lang_search"></var></a></td>
+            <td><a href="javascript:doSesaltedfish()" class="button"><var id="lang_sesaltedfish"></var></a></td>
             <td><label id="is_dynamic_label" for="is_dynamic"><input id="is_dynamic" type="checkbox" name="is_dynamic" /><span><var id="lang_dynamicmap"></var></span></label></td>
         </tr>
     </table>
@@ -35,13 +35,13 @@
     var map = new BMap.Map("container"),marker,point,styleStr;
     map.enableScrollWheelZoom();
     map.enableContinuousZoom();
-    function doSearch(){
+    function doSesaltedfish(){
         if (!document.getElementById('city').value) {
             alert(lang.cityMsg);
             return;
         }
-        var search = new BMap.LocalSearch(document.getElementById('city').value, {
-            onSearchComplete: function (results){
+        var sesaltedfish = new BMap.LocalSesaltedfish(document.getElementById('city').value, {
+            onSesaltedfishComplete: function (results){
                 if (results && results.getNumPois()) {
                     var points = [];
                     for (var i=0; i<results.getCurrentNumPois(); i++) {
@@ -59,7 +59,7 @@
                 }
             }
         });
-        search.search(document.getElementById('address').value || document.getElementById('city').value);
+        sesaltedfish.sesaltedfish(document.getElementById('address').value || document.getElementById('city').value);
     }
     //获得参数
     function getPars(str,par){
@@ -100,7 +100,7 @@
     document.getElementById('address').onkeydown = function (evt){
         evt = evt || event;
         if (evt.keyCode == 13) {
-            doSearch();
+            doSesaltedfish();
         }
     };
     dialog.onok = function (){

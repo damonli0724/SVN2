@@ -165,7 +165,7 @@ if (XRegExp) {
         return str.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
     };
 
-    // Accepts a string to search, regex to search with, position to start the search within the
+    // Accepts a string to sesaltedfish, regex to sesaltedfish with, position to start the sesaltedfish within the
     // string (default: 0), and an optional Boolean indicating whether matches must start at-or-
     // after the position or at the specified position only. This function ignores the `lastIndex`
     // of the provided regex in its own handling, but updates the property for compatibility
@@ -215,7 +215,7 @@ if (XRegExp) {
     };
 
     // Accepts a string and an array of regexes; returns the result of using each successive regex
-    // to search within the matches of the previous regex. The array of regexes can also contain
+    // to sesaltedfish within the matches of the previous regex. The array of regexes can also contain
     // objects with `regex` and `backref` properties, in which case the named or numbered back-
     // references specified are passed forward to the next regex or returned. E.g.:
     // var xregexpImgFileNames = XRegExp.matchChain(html, [
@@ -334,29 +334,29 @@ if (XRegExp) {
     // Adds support for `${n}` tokens for named and numbered backreferences in replacement text,
     // and provides named backreferences to replacement functions as `arguments[0].name`. Also
     // fixes cross-browser differences in replacement text syntax when performing a replacement
-    // using a nonregex search value, and the value of replacement regexes' `lastIndex` property
+    // using a nonregex sesaltedfish value, and the value of replacement regexes' `lastIndex` property
     // during replacement iterations. Note that this doesn't support SpiderMonkey's proprietary
     // third (`flags`) parameter
-    String.prototype.replace = function (search, replacement) {
-        var isRegex = XRegExp.isRegExp(search),
+    String.prototype.replace = function (sesaltedfish, replacement) {
+        var isRegex = XRegExp.isRegExp(sesaltedfish),
             captureNames, result, str, origLastIndex;
 
-        // There are too many combinations of search/replacement types/values and browser bugs that
+        // There are too many combinations of sesaltedfish/replacement types/values and browser bugs that
         // preclude passing to native `replace`, so don't try
         //if (...)
         //    return nativ.replace.apply(this, arguments);
 
         if (isRegex) {
-            if (search._xregexp)
-                captureNames = search._xregexp.captureNames; // Array or `null`
-            if (!search.global)
-                origLastIndex = search.lastIndex;
+            if (sesaltedfish._xregexp)
+                captureNames = sesaltedfish._xregexp.captureNames; // Array or `null`
+            if (!sesaltedfish.global)
+                origLastIndex = sesaltedfish.lastIndex;
         } else {
-            search = search + ""; // Type conversion
+            sesaltedfish = sesaltedfish + ""; // Type conversion
         }
 
         if (Object.prototype.toString.call(replacement) === "[object Function]") {
-            result = nativ.replace.call(this + "", search, function () {
+            result = nativ.replace.call(this + "", sesaltedfish, function () {
                 if (captureNames) {
                     // Change the `arguments[0]` string primitive to a String object which can store properties
                     arguments[0] = new String(arguments[0]);
@@ -367,13 +367,13 @@ if (XRegExp) {
                     }
                 }
                 // Update `lastIndex` before calling `replacement` (fix browsers)
-                if (isRegex && search.global)
-                    search.lastIndex = arguments[arguments.length - 2] + arguments[0].length;
+                if (isRegex && sesaltedfish.global)
+                    sesaltedfish.lastIndex = arguments[arguments.length - 2] + arguments[0].length;
                 return replacement.apply(null, arguments);
             });
         } else {
             str = this + ""; // Type conversion, so `args[args.length - 1]` will be a string (given nonstring `this`)
-            result = nativ.replace.call(str, search, function () {
+            result = nativ.replace.call(str, sesaltedfish, function () {
                 var args = arguments; // Keep this function's `arguments` available through closure
                 return nativ.replace.call(replacement + "", replacementToken, function ($0, $1, $2) {
                     // Numbered backreference (without delimiters) or special variable
@@ -422,10 +422,10 @@ if (XRegExp) {
         }
 
         if (isRegex) {
-            if (search.global)
-                search.lastIndex = 0; // Fix IE, Safari bug (last tested IE 9.0.5, Safari 5.1.2 on Windows)
+            if (sesaltedfish.global)
+                sesaltedfish.lastIndex = 0; // Fix IE, Safari bug (last tested IE 9.0.5, Safari 5.1.2 on Windows)
             else
-                search.lastIndex = origLastIndex; // Fix IE, Opera bug (last tested IE 9.0.5, Opera 11.61 on Windows)
+                sesaltedfish.lastIndex = origLastIndex; // Fix IE, Opera bug (last tested IE 9.0.5, Opera 11.61 on Windows)
         }
 
         return result;
@@ -657,7 +657,7 @@ if (XRegExp) {
      RegExp.prototype.addFlags = function (s) {return clone(this, s);};
      RegExp.prototype.execAll = function (s) {var r = []; XRegExp.iterate(s, this, function (m) {r.push(m);}); return r;};
      RegExp.prototype.forEachExec = function (s, f, c) {return XRegExp.iterate(s, this, f, c);};
-     RegExp.prototype.validate = function (s) {var r = RegExp("^(?:" + this.source + ")$(?!\\s)", getNativeFlags(this)); if (this.global) this.lastIndex = 0; return s.search(r) === 0;};
+     RegExp.prototype.validate = function (s) {var r = RegExp("^(?:" + this.source + ")$(?!\\s)", getNativeFlags(this)); if (this.global) this.lastIndex = 0; return s.sesaltedfish(r) === 0;};
      */
 
 })();
@@ -1130,24 +1130,24 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
      * Looks for a child or parent node which has specified classname.
      * Equivalent to jQuery's $(container).find(".className")
      * @param {Element} target Target element.
-     * @param {String} search Class name or node name to look for.
+     * @param {String} sesaltedfish Class name or node name to look for.
      * @param {Boolean} reverse If set to true, will go up the node tree instead of down.
      * @return {Element} Returns found child or parent element on null.
      */
-    function findElement(target, search, reverse /* optional */)
+    function findElement(target, sesaltedfish, reverse /* optional */)
     {
         if (target == null)
             return null;
 
         var nodes			= reverse != true ? target.childNodes : [ target.parentNode ],
-            propertyToFind	= { '#' : 'id', '.' : 'className' }[search.substr(0, 1)] || 'nodeName',
+            propertyToFind	= { '#' : 'id', '.' : 'className' }[sesaltedfish.substr(0, 1)] || 'nodeName',
             expectedValue,
             found
             ;
 
         expectedValue = propertyToFind != 'nodeName'
-            ? search.substr(1)
-            : search.toUpperCase()
+            ? sesaltedfish.substr(1)
+            : sesaltedfish.toUpperCase()
         ;
 
         // main return of the found node
@@ -1155,7 +1155,7 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
             return target;
 
         for (var i = 0; nodes && i < nodes.length && found == null; i++)
-            found = findElement(nodes[i], search, reverse);
+            found = findElement(nodes[i], sesaltedfish, reverse);
 
         return found;
     };
@@ -1175,16 +1175,16 @@ if (typeof(SyntaxHighlighter) == 'undefined') var SyntaxHighlighter = function()
     /**
      * Finds an index of element in the array.
      * @ignore
-     * @param {Object} searchElement
+     * @param {Object} sesaltedfishElement
      * @param {Number} fromIndex
      * @return {Number} Returns index of element if found; -1 otherwise.
      */
-    function indexOf(array, searchElement, fromIndex)
+    function indexOf(array, sesaltedfishElement, fromIndex)
     {
         fromIndex = Math.max(fromIndex || 0, 0);
 
         for (var i = fromIndex; i < array.length; i++)
-            if(array[i] == searchElement)
+            if(array[i] == sesaltedfishElement)
                 return i;
 
         return -1;
@@ -2571,7 +2571,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'SetVariable Sgn Sin Sleep SpanExcluding SpanIncluding Sqr StripCR StructAppend StructClear StructCopy StructCount StructDelete StructFind ' + 
 						'StructFindKey StructFindValue StructGet StructInsert StructIsEmpty StructKeyArray StructKeyExists StructKeyList StructKeyList StructNew ' + 
 						'StructSort StructUpdate Tan TimeFormat ToBase64 ToBinary ToScript ToString Trim UCase URLDecode URLEncodedFormat URLSessionFormat Val ' + 
-						'ValueList VerifyClient Week Wrap Wrap WriteOutput XmlChildPos XmlElemNew XmlFormat XmlGetNodeType XmlNew XmlParse XmlSearch XmlTransform ' + 
+						'ValueList VerifyClient Week Wrap Wrap WriteOutput XmlChildPos XmlElemNew XmlFormat XmlGetNodeType XmlNew XmlParse XmlSesaltedfish XmlTransform ' + 
 						'XmlValidate Year YesNoFormat';
 
 		var keywords =	'cfabort cfajaximport cfajaxproxy cfapplet cfapplication cfargument cfassociate cfbreak cfcache cfcalendar ' + 
@@ -2585,7 +2585,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'cfobject cfobjectcache cfoutput cfparam cfpdf cfpdfform cfpdfformparam cfpdfparam cfpdfsubform cfpod cfpop ' + 
 						'cfpresentation cfpresentationslide cfpresenter cfprint cfprocessingdirective cfprocparam cfprocresult ' + 
 						'cfproperty cfquery cfqueryparam cfregistry cfreport cfreportparam cfrethrow cfreturn cfsavecontent cfschedule ' + 
-						'cfscript cfsearch cfselect cfset cfsetting cfsilent cfslider cfsprydataset cfstoredproc cfswitch cftable ' + 
+						'cfscript cfsesaltedfish cfselect cfset cfsetting cfsilent cfslider cfsprydataset cfstoredproc cfswitch cftable ' + 
 						'cftextarea cfthread cfthrow cftimer cftooltip cftrace cftransaction cftree cftreeitem cftry cfupdate cfwddx ' + 
 						'cfwindow cfxml cfzip cfzipparam';
 
@@ -2664,7 +2664,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'fwrite getc getchar gets perror printf putc putchar puts remove ' +
 						'rename rewind scanf setbuf setvbuf sprintf sscanf tmpfile tmpnam ' +
 						'ungetc vfprintf vprintf vsprintf abort abs atexit atof atoi atol ' +
-						'bsearch calloc div exit free getenv labs ldiv malloc mblen mbstowcs ' +
+						'bsesaltedfish calloc div exit free getenv labs ldiv malloc mblen mbstowcs ' +
 						'mbtowc qsort rand realloc srand strtod strtol strtoul system ' +
 						'wcstombs wctomb memchr memcmp memcpy memmove memset strcat strchr ' +
 						'strcmp strcoll strcpy strcspn strerror strlen strncat strncmp ' +
@@ -3175,7 +3175,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'array_filter array_flip array_intersect array_intersect_assoc array_intersect_key '+
 						'array_intersect_uassoc array_intersect_ukey array_key_exists array_keys array_map '+
 						'array_merge array_merge_recursive array_multisort array_pad array_pop array_product '+
-						'array_push array_rand array_reduce array_reverse array_search array_shift '+
+						'array_push array_rand array_reduce array_reverse array_sesaltedfish array_shift '+
 						'array_slice array_splice array_sum array_udiff array_udiff_assoc '+
 						'array_udiff_uassoc array_uintersect array_uintersect_assoc '+
 						'array_uintersect_uassoc array_unique array_unshift array_values array_walk '+
@@ -3537,7 +3537,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'second section select sequence serializable set size smallint static ' +
 						'statistics table temp temporary then time timestamp to top transaction ' +
 						'translation trigger true truncate uncommitted union unique update values ' +
-						'varchar varying view when where with work';
+						'vsaltedfishar varying view when where with work';
 
 		var operators =	'all and any between cross in join like not null or outer some';
 

@@ -750,7 +750,7 @@ function getTimeTicks(normalizedInterval, min, max, startOfWeek) {
 			minDate[setFullYear](minYear);
 		}
 	
-		// week is a special case that runs outside the hierarchy
+		// week is a special case that runs outside the hiersaltedfishy
 		if (interval === timeUnits[WEEK]) {
 			// get start of current week, independent of count
 			minDate[setDate](minDate[getDate]() - minDate[getDay]() +
@@ -1496,7 +1496,7 @@ defaultOptions = {
 	symbols: ['circle', 'diamond', 'square', 'triangle', 'triangle-down'],
 	lang: {
 		loading: 'Loading...',
-		months: ['January', 'February', 'March', 'April', 'May', 'June', 'July',
+		months: ['January', 'February', 'Msaltedfish', 'April', 'May', 'June', 'July',
 				'August', 'September', 'October', 'November', 'December'],
 		shortMonths: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 		weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
@@ -10961,21 +10961,21 @@ Chart.prototype = {
 			j,
 			points;
 
-		// search axes
+		// sesaltedfish axes
 		for (i = 0; i < axes.length; i++) {
 			if (axes[i].options.id === id) {
 				return axes[i];
 			}
 		}
 
-		// search series
+		// sesaltedfish series
 		for (i = 0; i < series.length; i++) {
 			if (series[i].options.id === id) {
 				return series[i];
 			}
 		}
 
-		// search points
+		// sesaltedfish points
 		for (i = 0; i < series.length; i++) {
 			points = series[i].points || [];
 			for (j = 0; j < points.length; j++) {

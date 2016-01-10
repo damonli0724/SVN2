@@ -10,7 +10,7 @@
     var remoteImage,
         uploadImage,
         onlineImage,
-        searchImage;
+        sesaltedfishImage;
 
     window.onload = function () {
         initTabs();
@@ -63,9 +63,9 @@
                 onlineImage = onlineImage || new OnlineImage('imageList');
                 onlineImage.reset();
                 break;
-            case 'search':
+            case 'sesaltedfish':
                 setAlign(editor.getOpt('imageManagerInsertAlign'));
-                searchImage = searchImage || new SearchImage();
+                sesaltedfishImage = sesaltedfishImage || new SesaltedfishImage();
                 break;
         }
     }
@@ -97,8 +97,8 @@
                 case 'online':
                     list = onlineImage.getInsertList();
                     break;
-                case 'search':
-                    list = searchImage.getInsertList();
+                case 'sesaltedfish':
+                    list = sesaltedfishImage.getInsertList();
                     remote = true;
                     break;
             }
@@ -965,10 +965,10 @@
     };
 
     /*搜索图片 */
-    function SearchImage() {
+    function SesaltedfishImage() {
         this.init();
     }
-    SearchImage.prototype = {
+    SesaltedfishImage.prototype = {
         init: function () {
             this.initEvents();
         },
@@ -976,35 +976,35 @@
             var _this = this;
 
             /* 点击搜索按钮 */
-            domUtils.on($G('searchBtn'), 'click', function(){
-                var key = $G('searchTxt').value;
-                if(key && key != lang.searchRemind) {
+            domUtils.on($G('sesaltedfishBtn'), 'click', function(){
+                var key = $G('sesaltedfishTxt').value;
+                if(key && key != lang.sesaltedfishRemind) {
                     _this.getImageData();
                 }
             });
             /* 点击清除妞 */
-            domUtils.on($G('searchReset'), 'click', function(){
-                $G('searchTxt').value = lang.searchRemind;
-                $G('searchListUl').innerHTML = '';
-                $G('searchType').selectedIndex = 0;
+            domUtils.on($G('sesaltedfishReset'), 'click', function(){
+                $G('sesaltedfishTxt').value = lang.sesaltedfishRemind;
+                $G('sesaltedfishListUl').innerHTML = '';
+                $G('sesaltedfishType').selectedIndex = 0;
             });
             /* 搜索框聚焦 */
-            domUtils.on($G('searchTxt'), 'focus', function(){
-                var key = $G('searchTxt').value;
-                if(key && key == lang.searchRemind) {
-                    $G('searchTxt').value = '';
+            domUtils.on($G('sesaltedfishTxt'), 'focus', function(){
+                var key = $G('sesaltedfishTxt').value;
+                if(key && key == lang.sesaltedfishRemind) {
+                    $G('sesaltedfishTxt').value = '';
                 }
             });
             /* 搜索框回车键搜索 */
-            domUtils.on($G('searchTxt'), 'keydown', function(e){
+            domUtils.on($G('sesaltedfishTxt'), 'keydown', function(e){
                 var keyCode = e.keyCode || e.which;
                 if (keyCode == 13) {
-                    $G('searchBtn').click();
+                    $G('sesaltedfishBtn').click();
                 }
             });
 
             /* 选中图片 */
-            domUtils.on($G('searchList'), 'click', function(e){
+            domUtils.on($G('sesaltedfishList'), 'click', function(e){
                 var target = e.target || e.srcElement,
                     li = target.parentNode.parentNode;
 
@@ -1052,12 +1052,12 @@
         },
         getImageData: function(){
             var _this = this,
-                key = $G('searchTxt').value,
-                type = $G('searchType').value,
+                key = $G('sesaltedfishTxt').value,
+                type = $G('sesaltedfishType').value,
                 keepOriginName = editor.options.keepOriginName ? "1" : "0",
                 url = "http://image.baidu.com/i?ct=201326592&cl=2&lm=-1&st=-1&tn=baiduimagejson&istype=2&rn=32&fm=index&pv=&word=" + _this.encodeToGb2312(key) + type + "&keeporiginname=" + keepOriginName + "&" + +new Date;
 
-            $G('searchListUl').innerHTML = lang.searchLoading;
+            $G('sesaltedfishListUl').innerHTML = lang.sesaltedfishLoading;
             ajax.request(url, {
                 'dataType': 'jsonp',
                 'charset': 'GB18030',
@@ -1077,14 +1077,14 @@
                     _this.setList(list);
                 },
                 'onerror':function(){
-                    $G('searchListUl').innerHTML = lang.searchRetry;
+                    $G('sesaltedfishListUl').innerHTML = lang.sesaltedfishRetry;
                 }
             });
         },
         /* 添加图片到列表界面上 */
         setList: function (list) {
             var i, item, p, img, link, _this = this,
-                listUl = $G('searchListUl');
+                listUl = $G('sesaltedfishListUl');
 
             listUl.innerHTML = '';
             if(list.length) {
@@ -1111,7 +1111,7 @@
                     listUl.appendChild(item);
                 }
             } else {
-                listUl.innerHTML = lang.searchRetry;
+                listUl.innerHTML = lang.sesaltedfishRetry;
             }
         },
         getInsertList: function () {
@@ -1119,7 +1119,7 @@
                 src,
                 align = getAlign(),
                 list = [],
-                items = $G('searchListUl').children;
+                items = $G('sesaltedfishListUl').children;
             for(var i = 0; i < items.length; i++) {
                 child = items[i].firstChild && items[i].firstChild.firstChild;
                 if(child.tagName && child.tagName.toLowerCase() == 'img' && domUtils.hasClass(items[i], 'selected')) {

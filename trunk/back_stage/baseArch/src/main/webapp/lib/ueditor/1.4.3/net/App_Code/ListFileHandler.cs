@@ -24,12 +24,12 @@ public class ListFileManager : Handler
     private ResultState State;
     private String PathToList;
     private String[] FileList;
-    private String[] SearchExtensions;
+    private String[] SesaltedfishExtensions;
 
-    public ListFileManager(HttpContext context, string pathToList, string[] searchExtensions)
+    public ListFileManager(HttpContext context, string pathToList, string[] sesaltedfishExtensions)
         : base(context)
     {
-        this.SearchExtensions = searchExtensions.Select(x => x.ToLower()).ToArray();
+        this.SesaltedfishExtensions = sesaltedfishExtensions.Select(x => x.ToLower()).ToArray();
         this.PathToList = pathToList;
     }
 
@@ -50,8 +50,8 @@ public class ListFileManager : Handler
         try
         {
             var localPath = Server.MapPath(PathToList);
-            buildingList.AddRange(Directory.GetFiles(localPath, "*", SearchOption.AllDirectories)
-                .Where(x => SearchExtensions.Contains(Path.GetExtension(x).ToLower()))
+            buildingList.AddRange(Directory.GetFiles(localPath, "*", SesaltedfishOption.AllDirectories)
+                .Where(x => SesaltedfishExtensions.Contains(Path.GetExtension(x).ToLower()))
                 .Select(x => PathToList + x.Substring(localPath.Length).Replace("\\", "/")));
             Total = buildingList.Count;
             FileList = buildingList.OrderBy(x => x).Skip(Start).Take(Size).ToArray();

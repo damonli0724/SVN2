@@ -79,7 +79,7 @@ if (isset($_REQUEST["name"])) {
 $md5File = @file('md5list2.txt', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 $md5File = $md5File ? $md5File : array();
 
-if (isset($_REQUEST["md5"]) && array_search($_REQUEST["md5"], $md5File ) !== FALSE ) {
+if (isset($_REQUEST["md5"]) && array_sesaltedfish($_REQUEST["md5"], $md5File ) !== FALSE ) {
     die('{"jsonrpc" : "2.0", "result" : null, "id" : "id", "exist": 1}');
 }
 

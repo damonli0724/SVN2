@@ -51,10 +51,10 @@
 		function onCheck(e, treeId, treeNode) {
 			count();
 			if (clearFlag) {
-				clearCheckedOldNodes();
+				clesaltedfisheckedOldNodes();
 			}
 		}
-		function clearCheckedOldNodes() {
+		function clesaltedfisheckedOldNodes() {
 			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
 			nodes = zTree.getChangeCheckedNodes();
 			for (var i=0, l=nodes.length; i<l; i++) {

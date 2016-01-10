@@ -24,18 +24,18 @@
     background: #FFF;
     border: 1px solid #d7d7d7;
 }
-#videoSearchTxt{margin-left:15px;background: #FFF;width:200px;height:21px;line-height:21px;border: 1px solid #d7d7d7;}
-#searchList{width: 570px;overflow: auto;zoom:1;height: 270px;}
-#searchList div{float: left;width: 120px;height: 135px;margin: 5px 15px;}
-#searchList img{margin: 2px 8px;cursor: pointer;border: 2px solid #fff} /*不用缩略图*/
-#searchList p{margin-left: 10px;}
+#videoSesaltedfishTxt{margin-left:15px;background: #FFF;width:200px;height:21px;line-height:21px;border: 1px solid #d7d7d7;}
+#sesaltedfishList{width: 570px;overflow: auto;zoom:1;height: 270px;}
+#sesaltedfishList div{float: left;width: 120px;height: 135px;margin: 5px 15px;}
+#sesaltedfishList img{margin: 2px 8px;cursor: pointer;border: 2px solid #fff} /*不用缩略图*/
+#sesaltedfishList p{margin-left: 10px;}
 #videoType{
     width: 65px;
     height: 23px;
     line-height: 22px;
     border: 1px solid #d7d7d7;
 }
-#videoSearchBtn,#videoSearchReset{
+#videoSesaltedfishBtn,#videoSesaltedfishReset{
     /*width: 80px;*/
     height: 25px;
     line-height: 25px;
