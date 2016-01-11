@@ -40,7 +40,6 @@
 </div>
 <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
 <script type="text/javascript" src="${libBasePath}/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script> 
-
 <script type="text/javascript" src="${scriptBasePath}/base/tree.dataLoad.js?r=<%=new Date()%>"></script> 
 </body>
 </html>
