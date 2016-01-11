@@ -1,4 +1,4 @@
-package com.saltedfish.controller.admin;
+package com.saltedfish.controller.security;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,10 +24,10 @@ import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.entity.security.SysUsers;
-import com.saltedfish.service.admin.UserService;
+import com.saltedfish.service.security.UserService;
 
 @Controller
-public class AdminManagerController {
+public class AdminController {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 

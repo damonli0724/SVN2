@@ -13,14 +13,15 @@ public interface View {
 	public static final String INDEX = "/index"; // 首页
 	public static final String _403 = "/security/403";// 没有权限跳转页面
 	public static final String LOGIN = "/login"; // 登陆页面
-	public static final String TIME_OUT_VIEW = "/security/timeout";  //session过期页面
-	//=========================================================================
+	public static final String TIME_OUT_VIEW = "/security/timeout";  // session过期页面
 	public static final String WELCOME_VIEW = "/welcome";
-	
-	
-	// =============================管理员管理-管理员列表===================================
-	public static final String ADMIN_LIST_VIEW ="/admin/admin-list";
-	public static final String ADMIN_ADD_VIEW="/admin/admin-add"; 
-	
-	
+	// =========================================================================
+
+	// =============================管理员管理===================================
+	public static final String ADMIN_LIST_VIEW = "/admin/admin-list";
+	public static final String ADMIN_ADD_VIEW = "/admin/admin-add";
+
+	// =============================角色管理===================================
+	public static final String ROLE_ADD_VIEW = "/role/role-add";
+
 }

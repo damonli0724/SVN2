@@ -28,7 +28,7 @@ import com.saltedfish.constants.Constants;
 import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
 import com.saltedfish.entity.security.SysUsers;
-import com.saltedfish.service.admin.UserService;
+import com.saltedfish.service.security.UserService;
 import com.saltedfish.utils.CommonUtils;
 import com.saltedfish.utils.MD5Util;
 import com.saltedfish.utils.VerifyCodeUtils;
