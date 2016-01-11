@@ -24,9 +24,11 @@ public interface Url {
 
 	// 角色管理
 	public static final String ROLE_ADD_PAGE = "background/role/add/page";  // 角色添加页面
-
+	public static final String ROLE_LIST_PAGE = "background/role/list/page"; //角色列表页面
+	
 	// 资源管理
 	public static final String RESOURCE_ADD_PAGE = "background/resource/add/page";
 	public static final String RESOURCE_TREE_DATA = "background/resource/tree/data";
+	
 
 }
