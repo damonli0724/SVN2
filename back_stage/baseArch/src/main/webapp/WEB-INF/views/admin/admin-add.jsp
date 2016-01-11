@@ -30,7 +30,7 @@
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>确认密码：</label>
 			<div class="formControls col-5">
-				<input type="password" placeholder="确认新密码" id="confirmPassword" name="confirmPassword" class="input-text Validform_error" >
+				<input type="password" placeholder="确认新密码" id="confirmPassword" name="confirmPassword"  class="input-text" >
 			</div>
 		</div>
 		
@@ -72,11 +72,11 @@
 		<div class="row cl">
 			<label class="form-label col-3">角色：</label>
 			<div class="formControls col-5"> <span class="select-box" style="width:150px;">
-				<select class="select" name="admin-role" size="1">
-					<option value="0">超级管理员</option>
-					<option value="1">总编</option>
-					<option value="2">栏目主辑</option>
-					<option value="3">栏目编辑</option>
+				<select class="select" name="roleId" size="1">
+					<c:forEach var="roles" items="${roles}">
+						<option value="${roles.roleId}">${roles.roleName}</option>
+					</c:forEach>
+					
 				</select>
 				</span> </div>
 		</div>
@@ -161,9 +161,9 @@ function validateAddForm() {
 		errorPlacement : function(error, element) {
 			var p = element.parent();
 			
-			var div ="<div class='col-4'><span class='Validform_checktip Validform_wrong'>"+error.html()+"</span></div>";
+		/* 	var div ="<div class='col-4'><span class='Validform_checktip Validform_wrong'>"+error.html()+"</span></div>"; */
 			
-			$(div).appendTo(p); 
+			error.appendTo(p); 
 		},
 		validClass : "success",
 		onkeyup : false

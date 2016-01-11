@@ -17,4 +17,15 @@
 	WHERE users.USER_ID = #{value}
     </select>
     
+    
+    <select id="queryAllRoles" resultType="com.saltedfish.entity.security.SysRoles">
+	    SELECT 
+			roles.ROLE_ID roleId,
+			roles.ROLE_NAME roleName,
+			roles.ROLE_DESC roleDesc,
+			roles.ENABLE enable,
+			roles.ROLE_KEY roleKey
+		FROM SYS_ROLES roles	
+    </select>
+    
 </mapper> 
