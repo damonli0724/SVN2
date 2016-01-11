@@ -24,8 +24,8 @@
 		<!-- 定义没有权限访问页面 -->
 		<access-denied-handler error-page="/background/403" />
 
-		<!-- 访问url需要的权限 -->
-		 <intercept-url pattern="/background/**" access="isAuthenticated()" />
+		<!-- 访问url需要的权限 permitAll -->
+		 <intercept-url pattern="/background/**" access="permitAll" />
 	
 		   <!-- 设置验证码登录过滤器 -->
   	<!-- 	<custom-filter before="FORM_LOGIN_FILTER" ref="validateCodeAuthenticationFilter" /> -->
@@ -42,9 +42,9 @@
 		<!-- <csrf /> -->
 
 		<!-- session管理 过期跳转页面 -->
-		<session-management invalid-session-url="/background/timeout" session-fixation-protection="none">
+		<!-- <session-management invalid-session-url="/background/timeout" session-fixation-protection="none">
 			<concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/>
-		</session-management>
+		</session-management> -->
 	</http>
 
 

@@ -19,4 +19,28 @@
 		LEFT JOIN SYS_RESOURCES res ON res.RES_ID = rr.RES_ID 
 	WHERE u.USER_ID = #{value} 
 	</select>
+	
+	
+	<!-- 加载所有的资源 -->
+	<select id="loadTreeDataAll" resultType="com.saltedfish.dto.security.ResourceJsonDTO">
+		SELECT 
+		res.RES_ID id,
+		res.RES_NAME name,
+		res.RES_PARENT_ID pId,
+		res.RES_TYPE type
+		FROM SYS_RESOURCES res
+	</select>
+	
+	<!-- 根据角色加载权限 -->
+	<select id="loadTreeDataByRoleId"  parameterType="int"  resultType="com.saltedfish.dto.security.ResourceJsonDTO">
+		SELECT 
+			res.RES_ID id,
+			res.RES_NAME name,
+			res.RES_PARENT_ID pId,
+			res.RES_TYPE type
+		FROM SYS_ROLES role 
+			LEFT JOIN SYS_ROLES_RESOURCES rr ON role.ROLE_ID = rr.ROLE_ID 
+			LEFT JOIN SYS_RESOURCES  res ON res.RES_ID  = rr.RES_ID
+		WHERE role.ROLE_ID = #{value}
+	</select>
 </mapper> 

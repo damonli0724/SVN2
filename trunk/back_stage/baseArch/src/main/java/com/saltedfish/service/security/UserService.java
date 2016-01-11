@@ -1,4 +1,4 @@
-package com.saltedfish.service.admin;
+package com.saltedfish.service.security;
 
 import java.util.Date;
 import java.util.List;
