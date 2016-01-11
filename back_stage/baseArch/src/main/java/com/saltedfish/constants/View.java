@@ -23,5 +23,7 @@ public interface View {
 
 	// =============================角色管理===================================
 	public static final String ROLE_ADD_VIEW = "/role/role-add";
+	public static final String ROLE_LIST_VIEW ="/role/role-list";
+	
 
 }
