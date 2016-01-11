@@ -5,7 +5,6 @@
 <link href="${cssBasePath}/H-ui.min.css" rel="stylesheet" type="text/css" />
 <link href="${cssBasePath}/H-ui.admin.css" rel="stylesheet" type="text/css" />
 <link href="${libBasePath}/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
-<link href="${libBasePath}/icheck/icheck.css" rel="stylesheet" type="text/css" />
 <title>添加管理员</title>
 </head>
 
@@ -96,10 +95,8 @@
 </div>
 <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/validation-proxy.js"></script> 
-<script type="text/javascript" src="${libBasePath}/icheck/jquery.icheck.min.js"></script> 
 <script type="text/javascript" src="${libBasePath}/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/H-ui.js"></script> 
-<script type="text/javascript" src="${jsBasePath}/H-ui.admin.js"></script> 
 
 
 <script type="text/javascript">

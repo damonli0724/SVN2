@@ -5,8 +5,6 @@
 <LINK rel="Bookmark" href="${imagesBasePath}/favicon.ico" >
 <LINK rel="Shortcut Icon" href="${imagesBasePath}/favicon.ico" />
 <link href="${cssBasePath}/H-ui.min.css" rel="stylesheet" type="text/css" />
-<link href="${cssBasePath}/H-ui.admin.css" rel="stylesheet" type="text/css" />
-<link href="${skinBasePath}/default/skin.css" rel="stylesheet" type="text/css" id="skin" />
 <link href="${libBasePath}/Hui-iconfont/1.0.1/iconfont.css" rel="stylesheet" type="text/css" />
 <link href="${cssBasePath}/style.css" rel="stylesheet" type="text/css" />
 <link href="${cssBasePath}/jqpagination.css"  rel="stylesheet" type="text/css"/>
