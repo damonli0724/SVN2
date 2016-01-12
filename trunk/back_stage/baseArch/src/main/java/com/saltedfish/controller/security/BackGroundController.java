@@ -118,6 +118,8 @@ public class BackGroundController {
 				if (user == null || !user.getPassword().equals(MD5Util.MD5(password))) {
 					throw new  AuthenticationServiceException("用户名或者密码不正确");
 				}
+				
+				
 				Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, MD5Util.MD5(password)));
 				SecurityContext securityContext = SecurityContextHolder.getContext();
 				securityContext.setAuthentication(authentication);
@@ -126,7 +128,7 @@ public class BackGroundController {
 				// 当验证都通过后，把用户信息放在session里
 				request.getSession().setAttribute("userSession", user);
 			
-			} catch (AuthenticationServiceException e) {
+			} catch (Exception e) {
 				request.setAttribute("message", e.getMessage());
 				return View.LOGIN;
 			}	

@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saltedfish.cmd.admin.AdminAddCmd;
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
+import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.mapper.security.UserMapper;
 import com.saltedfish.utils.MD5Util;
@@ -28,7 +29,7 @@ public class UserService {
 	 * @author lkd
 	 * 
 	 */
-	public List<SysUsers> queryUsers(AdminListQueryCmd cmd) {
+	public List<UserListDTO> queryUsers(AdminListQueryCmd cmd) {
 		return userMapper.queryUsers(cmd);
 	}
 

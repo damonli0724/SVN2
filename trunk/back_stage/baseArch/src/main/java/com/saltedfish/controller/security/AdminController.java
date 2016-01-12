@@ -17,6 +17,7 @@ import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
 import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.dto.BaseResultDTO;
+import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysRoles;
 import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.service.security.RoleService;
@@ -48,10 +49,10 @@ public class AdminController extends BaseController {
 	 */
 	@RequestMapping(value = Url.ADMIN_LIST_DATA, method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResultDTO<Object> adminDataLoad(AdminListQueryCmd cmd, Integer startPage, Integer pageSize) {
+	public BaseResultDTO<List<UserListDTO>> adminDataLoad(AdminListQueryCmd cmd, Integer startPage, Integer pageSize) {
 		logger.info("=====adminDataLoad====" + cmd.toString());
-		BaseResultDTO<Object> result = new BaseResultDTO<Object>();
-		List<SysUsers> user = userService.queryUsers(cmd);
+		BaseResultDTO<List<UserListDTO>> result = new BaseResultDTO<List<UserListDTO>>();
+		List<UserListDTO> user = userService.queryUsers(cmd);
 
 		Integer count = userService.queryUsersCount(cmd);
 		result.setResult(user);

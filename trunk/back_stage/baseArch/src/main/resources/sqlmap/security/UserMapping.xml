@@ -29,40 +29,46 @@
     </select>
     <sql id="queryUsersConditions">
     	<if test="loginName !=null and loginName !=''">
-    		AND NAME LIKE  '%${loginName}%'
+    		AND u.NAME LIKE  '%${loginName}%'
     	</if>
     	<if test="beginDate !=null and beginDate !=''">
-    		AND DT_CREATE > #{beginDate}
+    		AND u.DT_CREATE > #{beginDate}
     	</if>
     	<if test="endDate !=null and endDate !=''">
-    		AND #{endDate} >  DT_CREATE 
+    		AND #{endDate} >  u.DT_CREATE 
     	</if>
     </sql>
     
     
     <!-- 查询所有用户 -->
-    <select id="queryUsers"  parameterType="com.saltedfish.cmd.admin.AdminListQueryCmd"  resultType="com.saltedfish.entity.security.SysUsers">
+    <select id="queryUsers"  parameterType="com.saltedfish.cmd.admin.AdminListQueryCmd"  resultType="com.saltedfish.dto.security.UserListDTO">
 		SELECT 
-    	USER_ID userId ,
-    	USER_NAME username,
-    	NAME name,
-    	PASSWORD password,
-    	DT_CREATE  dtCreate ,
-    	LAST_LOGIN lastLogin,
-    	DEADLINE deadline,
-    	LOGIN_IP loginIp, 
-    	V_QZJGID VQzjgid,
-    	V_QZJGMC VQzjgmc,
-    	DEP_ID depId,
-    	DEP_NAME depName , 
-    	ENABLED enabled  , 
-    	ACCOUNT_NON_EXPIRED accountNonExpired , 
-    	ACCOUNT_NON_LOCKED accountNonLocked ,
-    	CREDENTIALS_NON_EXPIRED credentialsNonExpired
-	FROM SYS_USERS
+	    	u.USER_ID userId ,
+	    	u.USER_NAME username,
+	    	u.NAME name,
+	    	u.PASSWORD password,
+	    	u.DT_CREATE  dtCreate ,
+	    	u.LAST_LOGIN lastLogin,
+	    	u.DEADLINE deadline,
+	    	u.LOGIN_IP loginIp, 
+	    	u.V_QZJGID VQzjgid,
+	    	u.V_QZJGMC VQzjgmc,
+	    	u.DEP_ID depId,
+	    	u.DEP_NAME depName , 
+	    	u.ENABLED enabled  , 
+	    	u.ACCOUNT_NON_EXPIRED accountNonExpired , 
+	    	u.ACCOUNT_NON_LOCKED accountNonLocked ,
+	    	u.CREDENTIALS_NON_EXPIRED credentialsNonExpired,
+	    	u.MOBILE  mobile,
+	    	u.EMAIL   email,
+	    	u.SEX  sex,
+			r.ROLE_NAME  roleName
+		FROM SYS_USERS   u
+			LEFT JOIN SYS_USERS_ROLES ur ON ur.USER_ID = u.USER_ID
+			LEFT JOIN SYS_ROLES  r ON ur.ROLE_ID = r.ROLE_ID
 		WHERE 1=1
 		<include refid="queryUsersConditions"/>
-		ORDER BY DT_CREATE DESC
+		ORDER BY u.DT_CREATE DESC
 		LIMIT #{startPage},#{pageSize}
 		
     </select>
@@ -72,7 +78,7 @@
     <select id="queryUsersCount"  parameterType="com.saltedfish.cmd.admin.AdminListQueryCmd"  resultType="int">
 		SELECT 
     	COUNT(USER_ID)
-		FROM SYS_USERS
+		FROM SYS_USERS u
 		WHERE 1=1
 		<include refid="queryUsersConditions"/>
     </select>
