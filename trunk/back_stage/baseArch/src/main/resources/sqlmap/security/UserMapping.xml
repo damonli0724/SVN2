@@ -62,6 +62,9 @@
 	FROM SYS_USERS
 		WHERE 1=1
 		<include refid="queryUsersConditions"/>
+		ORDER BY DT_CREATE DESC
+		LIMIT #{startPage},#{pageSize}
+		
     </select>
     
     
