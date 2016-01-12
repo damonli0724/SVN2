@@ -9,10 +9,14 @@ var submitButton = $("#searchBtn");
 var form =$("#searchForm");
 var searchCondition = null;
 
+Handlebars.registerHelper('formatTime', _formatTime);   //格式化日期
+Handlebars.registerHelper('formatSex', _formatSex);  //格式化性别
+Handlebars.registerHelper('fromatEnable', _fromatEnable);  //格式化是否禁用
 $(function(){
 
 	load(1,PAGE_SIZE); //加载数据
-	submitButton.bind("click", {curPageNo : 1, pageSize : PAGE_SIZE}, dataSesaltedfish);
+	
+	submitButton.bind("click", {curPageNo : 1, pageSize : PAGE_SIZE}, dataSesaltedfish);//表单搜索
 	
 	
 })
@@ -36,10 +40,12 @@ function load(curPageNo, pageSize) {
 		}).done(function(response) {
 			if (response && response.result  && response.result.length) {
 
-				var template = Handlebars.compile($("#dataListTemplate").html());
+				var template = Handlebars.compile($("#dataListTemplate").html());  //编译模板数据
 		        dataList.html(template(response));
 		        
-		        $('.pagination').jqPagination({
+		        $("#count").text(response.count);   //共有数据
+		        
+		        $('.pagination').jqPagination({   //初始化 分页插件
 		        	current_page:curPageNo,
 		        	max_page:parseInt(response.count/PAGE_SIZE+1),
 		        	page_string:'当前第{current_page}页,共{max_page}页',
@@ -58,6 +64,8 @@ function load(curPageNo, pageSize) {
 //			$("a[name='deleteBtn']").on("click", delData);
 		});
 	};
+	
+	
 /* 
 	参数解释：
 	title	标题
@@ -107,3 +115,38 @@ function admin_start(obj,id){
 		layer.msg('已启用!', {icon: 6,time:1000});
 	});
 }
+
+//格式化时间
+function _formatTime(datetime){
+	if (datetime === null) {
+		return '';
+	}
+	datetime = new Date(datetime);
+	return datetime.getFullYear() + '-' + _fillZero((datetime.getMonth() + 1)) + '-' + _fillZero(datetime.getDate());
+
+}
+//补零
+function _fillZero(data) {
+	if (data < 10) {
+		return "0" + data;
+	}
+	return data;
+}
+
+function _formatSex(data){
+	if(data=='1')return"男";
+	if(data=='0')return"女";
+}
+
+function _fromatEnable(data){   
+	var nbsp = "&nbsp;";
+	var edit ='';
+	if(data==1){
+		edit= $("<span class='label label-success radius'>").html('已启用')
+	}else if(data==0){
+		edit=$("<span class='label label-default radius'>").html('已禁用');
+	}
+	var html=$('<span />').html(edit).append(nbsp).append(nbsp).html();
+	return new Handlebars.SafeString(html); 
+}
+

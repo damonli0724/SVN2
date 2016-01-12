@@ -3,6 +3,7 @@ package com.saltedfish.mapper.security;
 import java.util.List;
 
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
+import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysUsers;
 
 
@@ -20,7 +21,7 @@ public interface UserMapper {
 	 * @param cmd
 	 * @return SysUsers
 	 */
-	public List<SysUsers> queryUsers(AdminListQueryCmd cmd);
+	public List<UserListDTO> queryUsers(AdminListQueryCmd cmd);
 
 	public Integer queryUsersCount(AdminListQueryCmd cmd);
 

@@ -21,11 +21,12 @@
 		-
 		<input type="text" name="endDate" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
 		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="loginName">
-		<button type="submit" class="btn btn-success" id="searchBtn" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		<button type="button" class="btn btn-success" id="searchBtn" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
 	</form>
 	
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"><a href="javascript:;" onclick="datadel()" class="btn btn-danger radius"><i class="Hui-iconfont">&#xe6e2;</i> 批量删除</a> <a href="javascript:;" onclick="admin_add('添加管理员','${contextPath}/background/admin/add/page','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> <span class="r">共有数据：<strong>54</strong> 条</span> </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="javascript:;" onclick="admin_add('添加管理员','${contextPath}/background/admin/add/page','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加管理员</a></span> 
+	<span class="r">共有数据：<strong id="count"></strong> 条</span> </div>
 
 		  <div  class="hide" id="J_DataList"></div>
 		  <div class="nodata hide" id="J_NoDataMsg">
@@ -52,28 +53,26 @@
 				<th scope="col" colspan="9">员工列表</th>
 			</tr>
 			<tr class="text-c">
-				<th width="25"><input type="checkbox" name="" value=""></th>
-				<th width="40">ID</th>
-				<th width="150">登录名</th>
-				<th width="90">手机</th>
-				<th width="150">邮箱</th>
+				<th>登录名</th>
+				<th>手机</th>
+				<th>邮箱</th>
+				<th>性别</th>
 				<th>角色</th>
-				<th width="130">加入时间</th>
-				<th width="100">是否已启用</th>
-				<th width="100">操作</th>
+				<th>加入时间</th>
+				<th>是否已启用</th>
+				<th>操作</th>
 			</tr>
 		</thead>
 		<tbody>
         {{#result}}
        		<tr class="text-c">
-				<td><input type="checkbox" value="1" name=""></td>
-				<td>1</td>
 				<td>{{name}}</td>
-				<td>{{tel}}</td>
-				<td>{{age}}</td>
-				<td>超级管理员</td>
-				<td>2014-6-11 11:11:42</td>
-				<td class="td-status"><span class="label label-success radius">已启用</span></td>
+				<td>{{mobile}}</td>
+				<td>{{email}}</td>
+				<td>{{formatSex sex}}</td>
+				<td>{{roleName}}</td>
+				<td>{{formatTime dtCreate}}</td>
+				<td class="td-status">{{fromatEnable enabled}}</td>
 				<td class="td-manage">
 					<a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用">
 						<i class="Hui-iconfont">&#xe631;</i>
