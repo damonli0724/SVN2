@@ -30,7 +30,7 @@ function onCheck(e,treeId,treeNode){
      nodes=treeObj.getCheckedNodes(true),
      v="";
      for(var i=0;i<nodes.length;i++){    //将选中的Id 传回到数据库中，进行修改(除了根节点0)
-			if(nodes[i].pId==0)continue;
+			if(nodes[i].id==1010)continue;
 			v+=nodes[i].id + ",";
      }
      selectNodeIds = v ;

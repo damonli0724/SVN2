@@ -41,7 +41,7 @@ function load(curPageNo, pageSize) {
 		        	max_page:20,
 		        	page_string:'当前第{current_page}页,共{max_page}页',
 		        	paged: function(page) {
-		        		alert("====")
+//		        		alert("====")
 		        	}	
 				});
 		        
