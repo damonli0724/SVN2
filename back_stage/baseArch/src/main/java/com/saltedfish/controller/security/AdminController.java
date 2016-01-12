@@ -15,6 +15,7 @@ import com.saltedfish.cmd.admin.AdminListQueryCmd;
 import com.saltedfish.constants.Constants;
 import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
+import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.entity.security.SysRoles;
 import com.saltedfish.entity.security.SysUsers;
@@ -23,7 +24,7 @@ import com.saltedfish.service.security.UserService;
 
 
 @Controller
-public class AdminController {
+public class AdminController extends BaseController {
 
 	protected final Logger logger = Logger.getLogger(this.getClass());
 
@@ -47,13 +48,12 @@ public class AdminController {
 	 */
 	@RequestMapping(value = Url.ADMIN_LIST_DATA, method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResultDTO<Object> adminDataLoad(AdminListQueryCmd cmd) {
+	public BaseResultDTO<Object> adminDataLoad(AdminListQueryCmd cmd, Integer startPage, Integer pageSize) {
 		logger.info("=====adminDataLoad====" + cmd.toString());
 		BaseResultDTO<Object> result = new BaseResultDTO<Object>();
 		List<SysUsers> user = userService.queryUsers(cmd);
 
 		Integer count = userService.queryUsersCount(cmd);
-
 		result.setResult(user);
 		result.setCount(count);
 		result.setStatus(Constants.R_STATUS_SUCCESS);
@@ -93,6 +93,10 @@ public class AdminController {
 		}
 		result.setStatus(Constants.R_STATUS_SUCCESS);
 		return result;
+	}
+
+	public static void main(String[] args) {
+		System.err.println(0 / 10 + 1);
 	}
 
 }

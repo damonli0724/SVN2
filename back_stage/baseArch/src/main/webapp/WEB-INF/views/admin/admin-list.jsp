@@ -15,13 +15,13 @@
 <body>
 <nav class="breadcrumb"><i class="Hui-iconfont">&#xe67f;</i> 首页 <span class="c-gray en">&gt;</span> 管理员管理 <span class="c-gray en">&gt;</span> 管理员列表 <a class="btn btn-success radius r mr-20" style="line-height:1.6em;margin-top:3px" href="javascript:location.replace(location.href);" title="刷新" ><i class="Hui-iconfont">&#xe68f;</i></a></nav>
 <div class="pd-20">
-	<form id="sesaltedfishForm" > 
+	<form id="searchForm" > 
 	<div class="text-c"> 日期范围： 
 		<input type="text" name="beginDate" onfocus="WdatePicker({maxDate:'#F{$dp.$D(\'datemax\')||\'%y-%M-%d\'}'})" id="datemin" class="input-text Wdate" style="width:120px;">
 		-
 		<input type="text" name="endDate" onfocus="WdatePicker({minDate:'#F{$dp.$D(\'datemin\')}',maxDate:'%y-%M-%d'})" id="datemax" class="input-text Wdate" style="width:120px;">
 		<input type="text" class="input-text" style="width:250px" placeholder="输入管理员名称" id="" name="loginName">
-		<button type="submit" class="btn btn-success" id="sesaltedfishBtn" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
+		<button type="submit" class="btn btn-success" id="searchBtn" name=""><i class="Hui-iconfont">&#xe665;</i> 搜用户</button>
 	</div>
 	</form>
 	
@@ -94,7 +94,7 @@
 <div class="pagination" style="float:right">
     	<a href="#" class="first" data-action="first">&laquo;</a> 
 		<a href="#" class="previous" data-action="previous">&lsaquo;</a> 
-		<input readonly="readonly" data-max-page="40" type="text"> 
+		<input readonly="readonly" data-max-page="" type="text"> 
 		<a href="#" class="next" data-action="next">&rsaquo;</a> 
 		<a href="#" class="last" data-action="last">&raquo;</a>
 </div>

@@ -5,47 +5,50 @@
 var PAGE_SIZE = 10; 
 var dataList = $('#J_DataList');
 var noDataMsg = $('#J_NoDataMsg'); 
-var submitButton = $("#sesaltedfishBtn");
-var form =$("#sesaltedfishForm");
-var sesaltedfishCondition = null;
+var submitButton = $("#searchBtn");
+var form =$("#searchForm");
+var searchCondition = null;
 
 $(function(){
 
 	load(1,PAGE_SIZE); //加载数据
 	submitButton.bind("click", {curPageNo : 1, pageSize : PAGE_SIZE}, dataSesaltedfish);
+	
+	
 })
 
 //表单搜索
 function dataSesaltedfish(dataObj){
-		sesaltedfishCondition = form.serialize();
-		load(dataObj.data.curPageNo, dataObj.data.pageSize) ;
+		searchCondition = form.serialize();
+     	load(dataObj.data.curPageNo, dataObj.data.pageSize) ;
 }
 
 function load(curPageNo, pageSize) {
         dataList.show();
 		noDataMsg.hide();
+		
 		var queryUrl = $("#globe_context_id").val()+"/background/admin/list/page/data"; // 查询数据url
 		queryUrl = queryUrl + '?' + 'startPage=' + curPageNo + '&pageSize=' + pageSize;
 		$.ajax(queryUrl, {
 			type : 'GET',
 			dataType : 'json',
-			data : sesaltedfishCondition 
+			data : searchCondition 
 		}).done(function(response) {
 			if (response && response.result  && response.result.length) {
 
 				var template = Handlebars.compile($("#dataListTemplate").html());
 		        dataList.html(template(response));
-				
+		        
 		        $('.pagination').jqPagination({
-		        	current_page:1,
-		        	max_page:20,
+		        	current_page:curPageNo,
+		        	max_page:parseInt(response.count/PAGE_SIZE+1),
 		        	page_string:'当前第{current_page}页,共{max_page}页',
 		        	paged: function(page) {
-//		        		alert("====")
+		        		load(page,PAGE_SIZE); //加载数据
 		        	}	
-				});
+		    	});
 		        
-			
+		        
 			} else {
 				dataList.empty().css('height', '40px').hide();
 				noDataMsg.show();
