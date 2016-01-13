@@ -171,5 +171,14 @@
     </trim>
   </insert>
     
+
+	<!-- 修改用户状态 -->    
+    <update id="endOrStartEnable" parameterType="map">
+    	UPDATE SYS_USERS SET ENABLED = #{enabled} WHERE USER_ID=#{userId}
+    </update>
+    
+    <delete id="deleteUserByUserId" parameterType="int">
+    	DELETE FROM SYS_USERS WHERE USER_ID=#{value}
+    </delete>
     
 </mapper> 
