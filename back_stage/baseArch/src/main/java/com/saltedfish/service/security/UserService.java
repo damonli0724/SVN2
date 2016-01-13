@@ -47,20 +47,18 @@ public class UserService {
 		return userMapper.selectSysUserByName(username);
 	}
 
-	
 	/**
 	 * 添加管理员
 	 * @param cmd
 	 */
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
 	public void addAdminUser(AdminAddCmd cmd) {
-		SysUsers  sysUser  = new SysUsers();
+		SysUsers sysUser = new SysUsers();
 		sysUser.setAccountNonExpired(true);
 		sysUser.setAccountNonLocked(true);
 		sysUser.setCredentialsNonExpired(true);
 		sysUser.setEnabled(true);
-		
-		
+
 		sysUser.setDtCreate(new Date());
 		sysUser.setName(cmd.getName());
 		sysUser.setUsername(cmd.getUserName());
@@ -69,9 +67,30 @@ public class UserService {
 		sysUser.setMobile(cmd.getMobile());
 		sysUser.setDescription(cmd.getDescription());
 		sysUser.setSex(cmd.getSex());
-		
+
 		userMapper.addAdminUser(sysUser);
-		
+
+	}
+
+	/**
+	 * <p>修改用户状态</p>
+	 * @param userId
+	 * @param enabled
+	 * @author lkd
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
+	public void endOrStartEnable(Integer userId, Boolean enabled) {
+		userMapper.endOrStartEnable(userId, enabled);
+	}
+
+	/**
+	 * <p>根据用户Id删除用户</p>
+	 * @param userId
+	 * @author lkd
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
+	public void deleteUserByUserId(Integer userId) {
+		userMapper.deleteUserByUserId(userId);
 	}
 
 }

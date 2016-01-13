@@ -19,7 +19,6 @@ import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysRoles;
-import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.service.security.RoleService;
 import com.saltedfish.service.security.UserService;
 
@@ -89,15 +88,47 @@ public class AdminController extends BaseController {
 			}
 			userService.addAdminUser(cmd);
 		} catch (Exception e) {
-			logger.debug("============add Admin error :" + e.getMessage());
+			logger.debug("============添加管理员失败 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
 		result.setStatus(Constants.R_STATUS_SUCCESS);
 		return result;
 	}
 
-	public static void main(String[] args) {
-		System.err.println(0 / 10 + 1);
+	/**
+	 * 管理员是否启动
+	 * @return
+	 */
+	@RequestMapping(value = Url.ADMIN_ENABLED_UPDATE, method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResultDTO<String> endOrStartEnable(Integer userId, Boolean enabled) {
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
+		try {
+			userService.endOrStartEnable(userId, enabled);
+		} catch (Exception e) {
+			logger.debug("============启动或者禁用用户失败 :" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		result.setStatus(Constants.R_STATUS_SUCCESS);
+		return result;
+	}
+
+	/**
+	 * 删除管理员
+	 * @return
+	 */
+	@RequestMapping(value = Url.ADMIN_DELETE, method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResultDTO<String> deleteUser(Integer userId, Boolean enabled) {
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
+		try {
+			userService.deleteUserByUserId(userId);
+		} catch (Exception e) {
+			logger.debug("============启动或者禁用用户失败 :" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		result.setStatus(Constants.R_STATUS_SUCCESS);
+		return result;
 	}
 
 }

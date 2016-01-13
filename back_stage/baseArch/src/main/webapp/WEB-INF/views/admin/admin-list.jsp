@@ -74,14 +74,22 @@
 				<td>{{formatTime dtCreate}}</td>
 				<td class="td-status">{{fromatEnable enabled}}</td>
 				<td class="td-manage">
-					<a style="text-decoration:none" onClick="admin_stop(this,'10001')" href="javascript:;" title="停用">
-						<i class="Hui-iconfont">&#xe631;</i>
-					</a> 
+					
+						{{#if enabled}}
+							<a style="text-decoration:none"  onClick="admin_stop(this,{{userId}})" href="javascript:;" title="禁用">
+								<i class="Hui-iconfont">&#xe631;</i>
+							</a> 
+						{{else}} 
+							<a style="text-decoration:none"  onClick="admin_start(this,{{userId}})" href="javascript:;" title="启用">
+								<i class="Hui-iconfont">&#xe615;</i>
+							</a> 
+						{{/if}}
+					
 					<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a> 
  					
-					<a title="删除" href="javascript:;" onclick="admin_del(this,'1')" class="ml-5" style="text-decoration:none">
+					<a title="删除" href="javascript:;" onclick="admin_del(this,{{userId}})" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
 				</td>
@@ -93,7 +101,7 @@
 <div class="pagination" style="float:right">
     	<a href="#" class="first" data-action="first">&laquo;</a> 
 		<a href="#" class="previous" data-action="previous">&lsaquo;</a> 
-		<input readonly="readonly" data-max-page="" type="text"> 
+		<input id="cruPage" readonly="readonly" data-max-page="" type="text"> 
 		<a href="#" class="next" data-action="next">&rsaquo;</a> 
 		<a href="#" class="last" data-action="last">&raquo;</a>
 </div>

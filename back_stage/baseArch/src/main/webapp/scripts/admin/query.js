@@ -9,16 +9,18 @@ var submitButton = $("#searchBtn");
 var form =$("#searchForm");
 var searchCondition = null;
 
+var endOrStartUrl=$('#globe_context_id').val()+"/background/admin/enabled/update"//修改用户状态Url
+var deleteUserUrl = $('#globe_context_id').val()+"/background/admin/delete"  //删除用户Url
+
 Handlebars.registerHelper('formatTime', _formatTime);   //格式化日期
 Handlebars.registerHelper('formatSex', _formatSex);  //格式化性别
 Handlebars.registerHelper('fromatEnable', _fromatEnable);  //格式化是否禁用
-$(function(){
 
+
+$(function(){
 	load(1,PAGE_SIZE); //加载数据
 	
 	submitButton.bind("click", {curPageNo : 1, pageSize : PAGE_SIZE}, dataSesaltedfish);//表单搜索
-	
-	
 })
 
 //表单搜索
@@ -31,7 +33,7 @@ function load(curPageNo, pageSize) {
         dataList.show();
 		noDataMsg.hide();
 		
-		var queryUrl = $("#globe_context_id").val()+"/background/admin/list/page/data"; // 查询数据url
+		var queryUrl =$("#globe_context_id").val()+"/background/admin/list/page/data"; // 查询数据url
 		queryUrl = queryUrl + '?' + 'startPage=' + curPageNo + '&pageSize=' + pageSize;
 		$.ajax(queryUrl, {
 			type : 'GET',
@@ -59,9 +61,6 @@ function load(curPageNo, pageSize) {
 				dataList.empty().css('height', '40px').hide();
 				noDataMsg.show();
 			}
-			//绑定列表按钮事件处理函数
-//			$("a[name='editBtn']").on("click", showEditForm);
-//			$("a[name='deleteBtn']").on("click", delData);
 		});
 	};
 	
@@ -81,10 +80,22 @@ function admin_add(title,url,w,h){
 /*管理员-删除*/
 function admin_del(obj,id){
 	layer.confirm('确认要删除吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
 		
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!',{icon:1,time:1000});
+		$.ajax({
+			   type: "POST",
+			   url: deleteUserUrl,
+			   data: {userId:id},
+			   success: function(res){
+				   if(res&&res.status==1){
+						layer.msg('已删除!',{icon:1,time:1000});
+						load(1,PAGE_SIZE); 
+				   }else{
+					   layer.msg('网络异常!',{icon: 5,time:1000});
+				   }  
+			   }
+			   });
+		
+	
 	});
 }
 /*管理员-编辑*/
@@ -94,25 +105,43 @@ function admin_edit(title,url,id,w,h){
 /*管理员-停用*/
 function admin_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
-		
-		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已禁用</span>');
-		$(obj).remove();
-		layer.msg('已停用!',{icon: 5,time:1000});
+		$.ajax({
+			   type: "POST",
+			   url: endOrStartUrl,
+			   data: {userId:id,enabled:false},
+			   success: function(res){
+			    if(res&&res.status==1){
+			    	$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_start(this,id)" href="javascript:;" title="启用" style="text-decoration:none"><i class="Hui-iconfont">&#xe615;</i></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-default radius">已禁用</span>');
+					$(obj).remove();
+					layer.msg('已停用!',{icon: 5,time:1000});
+			    }else{
+			    	layer.msg('网络异常!',{icon: 5,time:1000});
+			    }
+			   }
+			});
 	});
 }
 
 /*管理员-启用*/
 function admin_start(obj,id){
 	layer.confirm('确认要启用吗？',function(index){
-		//此处请求后台程序，下方是成功后的前台处理……
+		$.ajax({
+			   type: "POST",
+			   url: endOrStartUrl,
+			   data: {userId:id,enabled:true},
+			   success: function(res){
+			    if(res&&res.status==1){
+					$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
+					$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
+					$(obj).remove();
+					layer.msg('已启用!', {icon: 6,time:1000});
+			    }else{
+			    	layer.msg('网络异常!',{icon: 5,time:1000});
+			    }
+			   }
+			});
 		
-		
-		$(obj).parents("tr").find(".td-manage").prepend('<a onClick="admin_stop(this,id)" href="javascript:;" title="停用" style="text-decoration:none"><i class="Hui-iconfont">&#xe631;</i></a>');
-		$(obj).parents("tr").find(".td-status").html('<span class="label label-success radius">已启用</span>');
-		$(obj).remove();
-		layer.msg('已启用!', {icon: 6,time:1000});
 	});
 }
 
