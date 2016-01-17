@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.saltedfish.cmd.admin.AdminAddCmd;
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysUsers;
@@ -43,5 +44,33 @@ public interface UserMapper {
 	 * @author lkd
 	 */
 	public void deleteUserByUserId(Integer userId);
+
+	/**
+	 * <p>添加用户角色关联关系</p>
+	 * @param userId
+	 * @param roleId
+	 */
+	public void addUserRoleRelation(@Param("userId")String userId, @Param("roleId")String roleId);
+
+	/**
+	 *  根据用户Id 查询用户
+	 * @param userId
+	 * @return
+	 */
+	public UserListDTO queryUsersById(Integer userId);
+
+	/**
+	 * <p>修改数据信息</p>
+	 * @param cmd
+	 */
+	public void updateAdminUser(SysUsers sysUser);
+
+	
+	/**
+	 *  修改用户角色关联关系
+	 * @param userId
+	 * @param roleId
+	 */
+	public void updateUserRoleRelation(@Param("userId")String userId, @Param("roleId")String roleId);
 
 }

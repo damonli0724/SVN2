@@ -84,8 +84,8 @@
 								<i class="Hui-iconfont">&#xe615;</i>
 							</a> 
 						{{/if}}
-					
-					<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','admin-add.html','1','800','500')" class="ml-5" style="text-decoration:none">
+
+					<a title="编辑" href="javascript:;" onclick="admin_edit('管理员编辑','${contextPath}/background/admin/update/page?userId={{userId}}','1','800','500')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a> 
  					

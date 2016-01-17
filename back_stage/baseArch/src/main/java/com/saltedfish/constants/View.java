@@ -20,6 +20,7 @@ public interface View {
 	// =============================管理员管理===================================
 	public static final String ADMIN_LIST_VIEW = "/admin/admin-list";
 	public static final String ADMIN_ADD_VIEW = "/admin/admin-add";
+	public static final String ADMIN_UPDATE_VIEW = "/admin/admin-update";
 
 	// =============================角色管理===================================
 	public static final String ROLE_ADD_VIEW = "/role/role-add";
