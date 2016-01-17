@@ -19,6 +19,7 @@ import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysRoles;
+import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.service.security.RoleService;
 import com.saltedfish.service.security.UserService;
 
@@ -86,7 +87,13 @@ public class AdminController extends BaseController {
 				result.setMessage("原始密码和初始密码不正确!");
 				return result;
 			}
-			userService.addAdminUser(cmd);
+			
+			if (cmd.getUserId()==null) {//添加用户
+				userService.addAdminUser(cmd);
+			}else{
+				userService.updateAdminUser(cmd);
+			}
+			
 		} catch (Exception e) {
 			logger.debug("============添加管理员失败 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
@@ -112,6 +119,21 @@ public class AdminController extends BaseController {
 		result.setStatus(Constants.R_STATUS_SUCCESS);
 		return result;
 	}
+	
+	
+	/**
+	 * 管理员修改页面
+	 * @return
+	 */
+	@RequestMapping(value = Url.ADMIN_UPDATE_PAGE, method = RequestMethod.GET)
+	public String turnToAdminUpdatePage(Integer userId,ModelMap map) {
+		List<SysRoles> roles = roleService.queryAllRoles();
+		map.put("roles", roles);
+		UserListDTO user=userService.queryUsersById(userId);
+		map.put("user", user);
+		return View.ADMIN_UPDATE_VIEW;
+	}
+	
 
 	/**
 	 * 删除管理员

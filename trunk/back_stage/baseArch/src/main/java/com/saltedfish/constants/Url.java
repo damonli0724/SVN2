@@ -23,13 +23,17 @@ public interface Url {
 	public static final String ADMIN_ADD_DATA = "background/admin/add/page/data"; // 管理员添加
 	public static final String ADMIN_ENABLED_UPDATE = "background/admin/enabled/update";  // 管理员禁用/启动
 	public static final String ADMIN_DELETE = "background/admin/delete"; // 删除管理员
+	public static final String ADMIN_UPDATE_PAGE = "background/admin/update/page"; //管理员修改页面
 
 	// 角色管理
 	public static final String ROLE_ADD_PAGE = "background/role/add/page";  // 角色添加页面
 	public static final String ROLE_LIST_PAGE = "background/role/list/page"; // 角色列表页面
+	
+	
 
 	// 资源管理
 	public static final String RESOURCE_ADD_PAGE = "background/resource/add/page";
 	public static final String RESOURCE_TREE_DATA = "background/resource/tree/data";
+
 
 }

@@ -10,6 +10,8 @@ import com.saltedfish.cmd.base.BaseCmd;
  *
  */
 public class AdminAddCmd {
+	
+	private Integer userId;
 	private String userName; //用户姓名
 	private String name; // 账号
 	private String originalPassword;//初始密码
@@ -19,6 +21,14 @@ public class AdminAddCmd {
 	private String  email; // email
 	private String description;//描述
 	private String roleId;  //角色Id
+	
+	
+	public Integer getUserId() {
+		return userId;
+	}
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
 	public String getUserName() {
 		return userName;
 	}

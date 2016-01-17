@@ -55,8 +55,6 @@ function load(curPageNo, pageSize) {
 		        		load(page,PAGE_SIZE); //加载数据
 		        	}	
 		    	});
-		        
-		        
 			} else {
 				dataList.empty().css('height', '40px').hide();
 				noDataMsg.show();
@@ -100,7 +98,7 @@ function admin_del(obj,id){
 }
 /*管理员-编辑*/
 function admin_edit(title,url,id,w,h){
-	layer_show(title,url,w,h);
+	layer_show(title,url,800,600);
 }
 /*管理员-停用*/
 function admin_stop(obj,id){

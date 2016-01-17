@@ -22,6 +22,7 @@ public class UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	
 
 	/**
 	 * <p>查询用户总数</p>
@@ -67,9 +68,10 @@ public class UserService {
 		sysUser.setMobile(cmd.getMobile());
 		sysUser.setDescription(cmd.getDescription());
 		sysUser.setSex(cmd.getSex());
-
+		//添加用户
 		userMapper.addAdminUser(sysUser);
-
+		//添加用户拥有的角色
+ 		userMapper.addUserRoleRelation(sysUser.getUserId(),cmd.getRoleId());
 	}
 
 	/**
@@ -91,6 +93,37 @@ public class UserService {
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
 	public void deleteUserByUserId(Integer userId) {
 		userMapper.deleteUserByUserId(userId);
+	}
+
+	public UserListDTO queryUsersById(Integer userId) {
+		return userMapper.queryUsersById(userId);
+	}
+
+	/**
+	 * <p>修改用户数据</p>
+	 * @param cmd
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
+	public void updateAdminUser(AdminAddCmd cmd) {
+		SysUsers sysUser = new SysUsers();
+		sysUser.setAccountNonExpired(true);
+		sysUser.setAccountNonLocked(true);
+		sysUser.setCredentialsNonExpired(true);
+		sysUser.setEnabled(true);
+
+		sysUser.setName(cmd.getName());
+		sysUser.setUsername(cmd.getUserName());
+		sysUser.setPassword(MD5Util.MD5(cmd.getConfirmPassword()));
+		sysUser.setEmail(cmd.getEmail());
+		sysUser.setMobile(cmd.getMobile());
+		sysUser.setDescription(cmd.getDescription());
+		sysUser.setSex(cmd.getSex());
+		sysUser.setUserId(String.valueOf(cmd.getUserId()));
+		//修改信息
+		userMapper.updateAdminUser(sysUser);
+		//修改用户拥有的角色
+ 		userMapper.updateUserRoleRelation(sysUser.getUserId(),cmd.getRoleId());
+		
 	}
 
 }
