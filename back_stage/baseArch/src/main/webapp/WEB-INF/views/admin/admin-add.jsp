@@ -44,11 +44,11 @@
 			<label class="form-label col-3"><span class="c-red">*</span>性别：</label>
 			<div class="formControls col-5 skin-minimal">
 				<div class="radio-box">
-					<input type="radio" id="sex-1" value="1" name="sex">
+					<input type="radio" id="sex" value="1" name="sex">
 					<label for="sex-1">男</label>
 				</div>
 				<div class="radio-box">
-					<input type="radio" id="sex-2" value="0" name="sex">
+					<input type="radio" id="sex" value="0" name="sex">
 					<label for="sex-2">女</label>
 				</div>
 			</div>
@@ -57,7 +57,7 @@
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>手机：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" value="" placeholder="" id="user-tel" name="mobile" >
+				<input type="text" class="input-text" value="" placeholder="" id="mobile" name="mobile" >
 			</div>
 		</div>
 		<div class="row cl">
@@ -70,7 +70,8 @@
 		<div class="row cl">
 			<label class="form-label col-3">角色：</label>
 			<div class="formControls col-5"> <span class="select-box" style="width:150px;">
-				<select class="select" name="roleId" size="1">
+				<select class="select" name="roleId" id="roleId" size="1">
+					<option value="">==请选择角色==</option>
 					<c:forEach var="roles" items="${roles}">
 						<option value="${roles.roleId}">${roles.roleName}</option>
 					</c:forEach>
@@ -79,15 +80,15 @@
 				</span> </div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-3">备注：</label>
+			<label class="form-label col-3">描述：</label>
 			<div class="formControls col-5">
-				<textarea name="" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" onKeyUp="textarealength(this,100)"></textarea>
+				<textarea name="description" id="description" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" onKeyUp="textarealength(this,100)"></textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
 			</div>
 		</div>
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
-				<input class="btn btn-primary radius" id="submitBtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				<input class="btn btn-primary radius" id="submitBtn" type="button" onclick="javascript:void(0)" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 			</div>
 		</div>
 	</form>
@@ -96,77 +97,148 @@
 <script type="text/javascript" src="${jsBasePath}/validation-proxy.js"></script> 
 <script type="text/javascript" src="${libBasePath}/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/H-ui.js"></script> 
+<script type="text/javascript" src="${scriptBasePath}/base/validate.expand.js"></script> 
+
+
 
 
 <script type="text/javascript">
+var form =$("#addForm");
+var checkUrl = $('#globe_context_id').val()+"/backgrond/admin/check/query"  //判断用户唯一性URL
+var conditions= form.serialize();
+var submitUrl=$('#globe_context_id').val()+"/background/admin/add/page/data"; //添加Url
+
 $(function(){
-	
-	$('#submitBtn').bind("click",function(){
-		$("#form-admin-add").submit();		
-	})
-	
 	$('#submitBtn').bind("click",addAdmin);
-/* 	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
 	
-	$("#form-admin-add").Validform({
-		tiptype:2,
-		callback:function(form){
-			alert(21312321)
-			form[0].submit();
-			var index = parent.layer.getFrameIndex(window.name);
-			parent.$('.btn-refresh').click();
-			parent.layer.close(index);
-		}
-	}); */
+  	jQuery.validator.addMethod("checkPwd", function(value, element) {      
+  		
+         return value==$("#originalPassword").val();       
+    }, "初始密码和确认密码不同");  
+  	
+  	jQuery.validator.addMethod("checkAccountUnique", function(value, element) { 
+  		var  flag = false;
+  		$.ajax({
+  		url: checkUrl,
+  		type:"POST",
+  		data:{loginName:value},
+  		async : false,
+  		success:function(res){
+  			if(res.status==1){
+  				if(res.result==0)flag=true;
+  			}else{
+  			  layer.msg('网络异常!',{icon: 5,time:1000});
+  				 }
+  			}
+  		})
+        return flag;       
+   }, "改账号已存在");  
+  	
+  	
 });
 
 function addAdmin(){
 	if (validateAddForm()) {
-		$("#form-admin-add").submit();		
+		$.ajax({
+	  		url: submitUrl,
+	  		type:"POST",
+	  		data: conditions,
+	  		async : false,
+	  		success:function(res){
+	  			if(res.status==1){
+	  				layer.msg('添加成功!',{icon:1,time:1000});
+	  				refresh();
+	  			}else{
+	  			  layer.msg('网络异常!',{icon: 5,time:1000});
+	  				 }
+	  			}
+	  		})
 	}
 }
 
 function validateAddForm() {
-	$("#addForm").validate({
+	form.validate({
 		rules : {
 			name : {
 				required:true,
+				isAccount:true,
+				checkAccountUnique:true
 			},
-			username : {
+			originalPassword : {
+				required : true,
+				isPwd:true
+			},
+			confirmPassword : {
+				required : true,
+				isPwd:true,
+				checkPwd:true
+			},
+			userName : {
+				required:true,
+			},
+			sex : {
 				required : true,
 			},
-			moblie : {
+			mobile : {
 				required : true,
+				isMobile:true
+			},
+			email:{
+				required:true,
+				isEmail:true
+			},
+			roleId:{
+				required:true,
+			},
+			description:{
+				required:true,
 			}
 		},
 		messages : {
 			name : {
 				required:"账户不能为空",
 			},
-			username : {
-				required : "真实姓名不能为空",
+			originalPassword : {
+				required : "初始密码不能为空",
 			},
-			moblie : {
+			confirmPassword : {
+				required : "确认密码不能为空",
+			},
+			userName : {
+				required:"真实姓名不能为空",
+			},
+			sex : {
+				required :"性别不能为空",
+			},
+			mobile : {
 				required : "手机号码不能为空",
+			},
+			email:{
+				required:"邮箱不能为空",
+			},
+			roleId:{
+				required:"角色不能为空",
+			},
+			description:{
+				required:"描述不能为空",
 			}
 		},
 		errorPlacement : function(error, element) {
-			var p = element.parent();
-			
-		/* 	var div ="<div class='col-4'><span class='Validform_checktip Validform_wrong'>"+error.html()+"</span></div>"; */
-			
+			var p = element.parent().parent();
+			error.addClass("Validform_checktip Validform_wrong");
 			error.appendTo(p); 
 		},
 		validClass : "success",
 		onkeyup : false
 	});
-	return $("#addForm").valid();
+	return form.valid();
 }
 
+function refresh(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.layer.close(index);
+	location=location;
+}
 </script>
 </body>
 </html>

@@ -88,14 +88,14 @@ public class AdminController extends BaseController {
 				return result;
 			}
 			
-			if (cmd.getUserId()==null) {//添加用户
+			if (cmd.getUserId()==null) {//添加用户信息
 				userService.addAdminUser(cmd);
-			}else{
+			}else{   //修改用户信息
 				userService.updateAdminUser(cmd);
 			}
 			
 		} catch (Exception e) {
-			logger.debug("============添加管理员失败 :" + e.getMessage());
+			logger.debug("============》添加或修改管理员失败 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
 		result.setStatus(Constants.R_STATUS_SUCCESS);
@@ -103,7 +103,7 @@ public class AdminController extends BaseController {
 	}
 
 	/**
-	 * 管理员是否启动
+	 * 管理员是否启用
 	 * @return
 	 */
 	@RequestMapping(value = Url.ADMIN_ENABLED_UPDATE, method = RequestMethod.POST)
@@ -113,10 +113,34 @@ public class AdminController extends BaseController {
 		try {
 			userService.endOrStartEnable(userId, enabled);
 		} catch (Exception e) {
-			logger.debug("============启动或者禁用用户失败 :" + e.getMessage());
+			logger.debug("============》启动或者禁用用户失败 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
 		result.setStatus(Constants.R_STATUS_SUCCESS);
+		return result;
+	}
+	
+	
+	/**
+	 * 判断用户唯一(添加用户时)
+	 * @return
+	 */
+	@RequestMapping(value = Url.ADMIN_CHECK_ONLY_ACCOUNT_QUERY, method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResultDTO<Integer> checkAccountUnique(String loginName) {
+		BaseResultDTO<Integer> result = new BaseResultDTO<Integer>();
+		try {
+			AdminListQueryCmd cmd = new AdminListQueryCmd();
+			cmd.setLoginName(loginName);
+			
+			Integer  count = userService.queryUsersCount(cmd);
+			
+			result.setResult(count);
+			result.setStatus(Constants.R_STATUS_SUCCESS);
+		} catch (Exception e) {
+			logger.debug("============》判断用户唯一失败 :" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
 		return result;
 	}
 	
@@ -146,7 +170,7 @@ public class AdminController extends BaseController {
 		try {
 			userService.deleteUserByUserId(userId);
 		} catch (Exception e) {
-			logger.debug("============启动或者禁用用户失败 :" + e.getMessage());
+			logger.debug("============》启动或者禁用用户失败 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
 		result.setStatus(Constants.R_STATUS_SUCCESS);

@@ -59,10 +59,10 @@ public class BackGroundController {
 	public String index(HttpServletRequest request, ModelMap map) {
 
 		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
-		// 登录名
-		System.out.println("登陆名-->:" + securityContextImpl.getAuthentication().getName());
-		// 登录密码，未加密的
-		System.out.println("登录密码，未加密的-->" + securityContextImpl.getAuthentication().getCredentials());
+//		// 登录名
+//		System.out.println("登陆名-->:" + securityContextImpl.getAuthentication().getName());
+//		// 登录密码，未加密的
+//		System.out.println("登录密码，未加密的-->" + securityContextImpl.getAuthentication().getCredentials());
 
 		//
 		// WebAuthenticationDetails details = (WebAuthenticationDetails)
