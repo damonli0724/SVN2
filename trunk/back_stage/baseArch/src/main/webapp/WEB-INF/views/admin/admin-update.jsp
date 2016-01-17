@@ -16,7 +16,7 @@
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span>账号：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text"  placeholder="账号" id="name" name="name" value="${user.name}" >
+				<input type="text" class="input-text"  readonly="readonly" placeholder="账号" id="name" name="name" value="${user.name}" >
 			</div>
 		</div>
 		
@@ -95,7 +95,7 @@
 		<div class="row cl">
 			<label class="form-label col-3">备注：</label>
 			<div class="formControls col-5">
-				<textarea name="description" cols="" rows=""  class="textarea"  placeholder="说点什么...100个字符以内" onKeyUp="textarealength(this,100)">${user.description} 
+				<textarea name="description" id="description" cols="" rows=""  class="textarea"  placeholder="说点什么...100个字符以内" onKeyUp="textarealength(this,100)">${user.description} 
 				</textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">${fn:length(user.description)}</em>/100</p>
 			</div>
