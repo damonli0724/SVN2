@@ -102,7 +102,7 @@
 		</div>
 		<div class="row cl">
 			<div class="col-9 col-offset-3">
-				<input class="btn btn-primary radius" id="submitBtn" type="submit" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
+				<input class="btn btn-primary radius" id="submitBtn" type="button" value="&nbsp;&nbsp;提交&nbsp;&nbsp;">
 			</div>
 		</div>
 	</form>
@@ -111,75 +111,118 @@
 <script type="text/javascript" src="${jsBasePath}/validation-proxy.js"></script> 
 <script type="text/javascript" src="${libBasePath}/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/H-ui.js"></script> 
-
-
+<script type="text/javascript" src="${scriptBasePath}/base/validate.expand.js"></script> 
 <script type="text/javascript">
+
+var context= $('#globe_context_id').val();
+var form =$("#addForm");
+var addUrl = context+"/background/admin/add/page/data"; //添加Url
+
 $(function(){
-	
-	$('#submitBtn').bind("click",function(){
-		$("#form-admin-add").submit();		
-	})
-	
 	$('#submitBtn').bind("click",addAdmin);
-/* 	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	
-	$("#form-admin-add").Validform({
-		tiptype:2,
-		callback:function(form){
-			alert(21312321)
-			form[0].submit();
-			var index = parent.layer.getFrameIndex(window.name);
-			parent.$('.btn-refresh').click();
-			parent.layer.close(index);
-		}
-	}); */
 });
 
 function addAdmin(){
-	if (validateAddForm()) {
-		$("#form-admin-add").submit();		
-	}
+	  if (validateAddForm()) {
+		$.ajax({
+	  		url: addUrl,
+	  		type:"POST",
+	  		data: form.serialize(),
+	  		async : false,
+	  		success:function(res){
+	  			if(res.status==1){
+	  				layer.msg('修改成功!',{icon:1,time:1000});
+	  				closeWindow();  //跳转到列表页面
+	  			}else{
+	  			  layer.msg('网络异常!',{icon: 5,time:1000});
+	  				 }
+	  			}
+	  		})
+	}  
 }
 
 function validateAddForm() {
-	$("#addForm").validate({
+	form.validate({
 		rules : {
 			name : {
 				required:true,
+				isAccount:true
 			},
-			username : {
+			originalPassword : {
+				required : true,
+				isPwd:true
+			},
+			confirmPassword : {
+				required : true,
+				isPwd:true,
+				checkPwd:true
+			},
+			userName : {
+				required:true,
+			},
+			sex : {
 				required : true,
 			},
-			moblie : {
+			mobile : {
 				required : true,
+				isMobile:true
+			},
+			email:{
+				required:true,
+				isEmail:true
+			},
+			roleId:{
+				required:true,
+			},
+			description:{
+				required:true,
 			}
 		},
 		messages : {
 			name : {
 				required:"账户不能为空",
 			},
-			username : {
-				required : "真实姓名不能为空",
+			originalPassword : {
+				required : "初始密码不能为空",
 			},
-			moblie : {
+			confirmPassword : {
+				required : "确认密码不能为空",
+			},
+			userName : {
+				required:"真实姓名不能为空",
+			},
+			sex : {
+				required :"性别不能为空",
+			},
+			mobile : {
 				required : "手机号码不能为空",
+			},
+			email:{
+				required:"邮箱不能为空",
+			},
+			roleId:{
+				required:"角色不能为空",
+			},
+			description:{
+				required:"描述不能为空",
 			}
 		},
 		errorPlacement : function(error, element) {
-			var p = element.parent();
-			
-		/* 	var div ="<div class='col-4'><span class='Validform_checktip Validform_wrong'>"+error.html()+"</span></div>"; */
-			
+			var p = element.parent().parent();
+			error.addClass("Validform_checktip Validform_wrong");
 			error.appendTo(p); 
 		},
 		validClass : "success",
 		onkeyup : false
 	});
-	return $("#addForm").valid();
+	return form.valid();
+
+}
+
+function closeWindow(){
+	var index = parent.layer.getFrameIndex(window.name);
+	parent.location.reload(); //父窗口刷新
+	parent.layer.close(index);//关闭弹窗
 }
 
 </script>

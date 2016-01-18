@@ -41,15 +41,14 @@ function load(curPageNo, pageSize) {
 			data : searchCondition 
 		}).done(function(response) {
 			if (response && response.result  && response.result.length) {
-
+ 
 				var template = Handlebars.compile($("#dataListTemplate").html());  //编译模板数据
 		        dataList.html(template(response));
 		        
 		        $("#count").text(response.count);   //共有数据
-		        
 		        $('.pagination').jqPagination({   //初始化 分页插件
 		        	current_page:curPageNo,
-		        	max_page:parseInt(response.count/PAGE_SIZE+1),
+		        	max_page:parseInt(response.count/PAGE_SIZE+(response.count%10==0?0:1)),
 		        	page_string:'当前第{current_page}页,共{max_page}页',
 		        	paged: function(page) {
 		        		load(page,PAGE_SIZE); //加载数据
