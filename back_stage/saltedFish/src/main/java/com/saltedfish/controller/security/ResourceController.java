@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.saltedfish.cmd.admin.RoleAddCmd;
 import com.saltedfish.constants.Constants;
 import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.dto.security.ResourceJsonDTO;
 import com.saltedfish.service.security.ResourceService;
+import com.saltedfish.service.security.RoleService;
 
 
 @Controller
@@ -24,6 +26,9 @@ public class ResourceController {
 
 	@Autowired
 	private ResourceService resourceService;
+
+	@Autowired
+	private RoleService roleService;
 
 	/**
 	 * 管理员添加页面
@@ -69,8 +74,24 @@ public class ResourceController {
 			result.setResult(allResource);
 			result.setStatus(Constants.R_STATUS_SUCCESS);
 		} catch (Exception e) {
-			logger.debug("============加载权限树数据异常 :" + e.getMessage());
+			logger.debug("-------->加载权限树数据异常 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		return result;
+	}
+
+	@RequestMapping(value = Url.ROLE_ADD_DATA, method = RequestMethod.POST)
+	public BaseResultDTO<String> addRoleData(RoleAddCmd cmd) {
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
+
+		logger.debug("-------->addRoleData 参数为:" + cmd.toString());
+
+		try {
+			roleService.addRole(cmd);
+			result.setResult(Constants.R_STATUS_SUCCESS);
+		} catch (Exception e) {
+			logger.debug("-------->添加角色异常 :" + e.getMessage());
+			result.setResult(Constants.R_STATUS_FAILTURE);
 		}
 		return result;
 	}
