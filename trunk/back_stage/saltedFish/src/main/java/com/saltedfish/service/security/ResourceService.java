@@ -31,7 +31,6 @@ public class ResourceService {
 	 * @author lkd
 	 */
 	public List<ResourceJsonDTO> loadTreeDataByRoleId(Integer roleId) {
-
 		return resourcesMapper.loadTreeDataByRoleId(roleId);
 	}
 
@@ -41,7 +40,6 @@ public class ResourceService {
 	 * @author lkd
 	 */
 	public List<ResourceJsonDTO> loadTreeDataAll() {
-		// TODO Auto-generated method stub
 		return resourcesMapper.loadTreeDataAll();
 	}
 
