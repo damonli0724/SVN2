@@ -7,7 +7,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.saltedfish.cmd.admin.ResListQueryCmd;
 import com.saltedfish.dto.security.ResourceJsonDTO;
+import com.saltedfish.entity.security.SysResources;
 import com.saltedfish.mapper.security.ResourcesMapper;
 
 
@@ -41,6 +43,28 @@ public class ResourceService {
 	 */
 	public List<ResourceJsonDTO> loadTreeDataAll() {
 		return resourcesMapper.loadTreeDataAll();
+	}
+
+	/**
+	 * <p>查询资源列表数据</p>
+	 * @param resName
+	 * @param startPage
+	 * @param pageSize
+	 * @return
+	 * @author lkd
+	 */
+	public List<SysResources> queryResources(ResListQueryCmd cmd) {
+		return resourcesMapper.queryResources(cmd);
+	}
+
+	/**
+	 * <p>资源列表总数</p>
+	 * @param resName
+	 * @return
+	 * @author LKD
+	 */
+	public Integer queryResourcesCount(ResListQueryCmd cmd) {
+		return resourcesMapper.queryResourcesCount(cmd);
 	}
 
 }

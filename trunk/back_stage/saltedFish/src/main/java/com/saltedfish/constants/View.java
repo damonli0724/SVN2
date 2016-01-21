@@ -15,7 +15,6 @@ public interface View {
 	public static final String LOGIN = "/login"; // 登陆页面
 	public static final String TIME_OUT_VIEW = "/security/timeout";  // session过期页面
 	public static final String WELCOME_VIEW = "/welcome";
-	// =========================================================================
 
 	// =============================管理员管理===================================
 	public static final String ADMIN_LIST_VIEW = "/admin/admin-list";
@@ -24,7 +23,10 @@ public interface View {
 
 	// =============================角色管理===================================
 	public static final String ROLE_ADD_VIEW = "/role/role-add";
-	public static final String ROLE_LIST_VIEW ="/role/role-list";
-	
+	public static final String ROLE_LIST_VIEW = "/role/role-list";
+
+	// =============================资源管理===================================
+	public static final String RESOURCE_LIST_VIEW = "/resource/resource-list";
+	public static final String RESOURCE_ADD_VIEW = "/resource/resource-add";
 
 }

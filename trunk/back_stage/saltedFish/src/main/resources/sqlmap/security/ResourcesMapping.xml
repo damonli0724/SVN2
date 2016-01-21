@@ -43,4 +43,37 @@
 			LEFT JOIN SYS_RESOURCES  res ON res.RES_ID  = rr.RES_ID
 		WHERE role.ROLE_ID = #{value}
 	</select>
+	
+	
+	<!-- 查询资源列表顺序 -->
+	<select id="queryResources" resultType="com.saltedfish.dto.security.ResourceListDTO" parameterType="com.saltedfish.cmd.admin.ResListQueryCmd">
+		SELECT 
+			res.RES_ID id,
+			res.RES_NAME name,
+			res.RES_PARENT_ID parentId,
+			res.RES_KEY  resKey,
+			res.RES_URL resUrl,
+			res.RES_LEVEL level,
+			res.RES_DES  description, 
+			ress.RES_NAME pName
+		FROM SYS_RESOURCES res 
+			LEFT JOIN SYS_RESOURCES ress ON res.RES_PARENT_ID  =ress.RES_ID
+			WHERE  1=1 
+			<if test="resName !=null and resName !=''">
+				AND res.RES_NAME like '%${resName}%'
+			</if>
+			limit #{startPage},#{pageSize}
+	</select>
+	
+	<select id="queryResourcesCount"  resultType="int"  parameterType="com.saltedfish.cmd.admin.ResListQueryCmd">
+		SELECT 
+			COUNT(res.RES_ID)
+		FROM SYS_RESOURCES res 
+			LEFT JOIN SYS_RESOURCES ress ON res.RES_PARENT_ID  =ress.RES_ID
+			WHERE  1=1 
+			<if test="resName !=null and resName !=''">
+				AND res.RES_NAME like '%${resName}%'
+			</if>
+	</select>
+	
 </mapper> 

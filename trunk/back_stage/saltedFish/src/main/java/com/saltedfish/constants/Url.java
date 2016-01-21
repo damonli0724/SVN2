@@ -35,4 +35,7 @@ public interface Url {
 	public static final String RESOURCE_ADD_PAGE = "background/resource/add/page";
 	public static final String RESOURCE_TREE_DATA = "background/resource/tree/data";
 
+	public static final String RESOURCE_LIST_PAGE = "background/resource/list/page"; // 资源列表页面
+	public static final String RESOURCE_LIST_DATA = "background/resource/list/page/data";// 资源列表页面数据
+
 }
