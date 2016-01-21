@@ -20,8 +20,6 @@ var setting = {   //Ztree  setting;
 	$(function(){
 		var nodes  =getNodes();
 		tree = $.fn.zTree.init($("#tree"), setting, nodes);  //初始化tree  :加载出json 数据就可以了 
-		
-		$("#addBtn").on("click",add);
 	})
 	
 

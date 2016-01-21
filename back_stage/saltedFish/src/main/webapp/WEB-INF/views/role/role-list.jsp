@@ -51,7 +51,7 @@
 	</table>
 </div>
 <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
-<script type="text/javascript" src="${scriptBasePath}/role/query.js?r=<%=new Date()%>"></script> 
+<script type="text/javascript" src="${scriptBasePath}/role/role-query.js?r=<%=new Date()%>"></script> 
 <script type="text/javascript" src="${libBasePath}/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/H-ui.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/H-ui.admin.js"></script> 

@@ -73,22 +73,7 @@ public class ResourceController {
 		return result;
 	}
 
-	@RequestMapping(value = Url.ROLE_ADD_DATA, method = RequestMethod.POST)
-	public BaseResultDTO<String> addRoleData(RoleAddCmd cmd) {
-		BaseResultDTO<String> result = new BaseResultDTO<String>();
-
-		logger.debug("-------->addRoleData 参数为:" + cmd.toString());
-
-		try {
-			roleService.addRole(cmd);
-			result.setResult(Constants.R_STATUS_SUCCESS);
-		} catch (Exception e) {
-			logger.debug("-------->添加角色异常 :" + e.getMessage());
-			result.setResult(Constants.R_STATUS_FAILTURE);
-		}
-		return result;
-	}
-
+	
 	// ***********************************************************************************************
 	/**
 	 * 权限添加页面

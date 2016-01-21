@@ -19,7 +19,6 @@ public class RoleAddCmd {
 	private String roleName; // 角色名称
 	private String roleDesc; // 角色描述
 	private String resources; // 权限集合 以逗号分隔
-	private String[] res;
 
 	public String getRoleName() {
 		return roleName;
@@ -55,13 +54,6 @@ public class RoleAddCmd {
 		return resources.split(",");
 	}
 
-	public void setRes(String[] res) {
-		this.res = res;
-	}
-
-	@Override
-	public String toString() {
-		return "RoleAddCmd [roleName=" + roleName + ", roleDesc=" + roleDesc + ", resources=" + resources + ", res=" + Arrays.toString(res) + "]";
-	}
+	
 
 }
