@@ -1,6 +1,9 @@
 package com.saltedfish.mapper.security;
 
+import java.util.Arrays;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 
 import com.saltedfish.entity.security.SysRoles;
 
@@ -20,5 +23,16 @@ public interface RoleMapper {
 	 * @author lkd
 	 */
 	public List<SysRoles> queryAllRoles();
-
+	/**
+	 * <p>添加角色表</p>
+	 * @return
+	 * @author lkd
+	 */
+	public void addRole(SysRoles role);
+	/**
+	 * <p>添加角色资源关联表</p>
+	 * @return
+	 * @author lkd
+	 */
+	public void addRoleResRelation(@Param("roleId")String roleId, @Param("resId")String resId);
 }

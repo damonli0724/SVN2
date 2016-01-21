@@ -17,7 +17,7 @@
 	WHERE users.USER_ID = #{value}
     </select>
     
-    
+    <!-- 查询所有角色 -->
     <select id="queryAllRoles" resultType="com.saltedfish.entity.security.SysRoles">
 	    SELECT 
 			roles.ROLE_ID roleId,
@@ -27,5 +27,20 @@
 			roles.ROLE_KEY roleKey
 		FROM SYS_ROLES roles	
     </select>
+    
+    <!-- 添加角色 -->
+    <insert id="addRole" parameterType="com.saltedfish.entity.security.SysRoles">
+   	 	<selectKey resultType="java.lang.String" order="AFTER"
+			keyProperty="roleId">
+			SELECT LAST_INSERT_ID() AS roleId
+		</selectKey>
+    	INSERT INTO  SYS_ROLES(ROLE_NAME,ROLE_DESC,ENABLE) VALUES(#{roleName},#{roleDesc},#{enable})
+    </insert>
+    
+    <!-- 添加角色资源关联表数据 -->
+    <insert id="addRoleResRelation" parameterType="map">
+    INSERT INTO SYS_ROLES_RESOURCES (RES_ID,ROLE_ID)  VALUES  (#{resId},#{roleId})
+   
+</insert>
     
 </mapper> 

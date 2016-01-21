@@ -11,17 +11,17 @@
 
 <body>
 <div class="pd-20">
-	<form action="" method="post" class="form form-horizontal" id="form-user-character-add">
+	<form action="" method="post" class="form form-horizontal" id="addForm">
 		<div class="row cl">
 			<label class="form-label col-2"><span class="c-red">*</span>角色名称：</label>
 			<div class="formControls col-10">
-				<input type="text" class="input-text" value="" placeholder="" id="user-name" name="user-name" datatype="*4-16" nullmsg="用户账户不能为空">
+				<input type="text" class="input-text" value="" placeholder="" id="roleName" name="roleName" datatype="*4-16" nullmsg="用户账户不能为空">
 			</div>
 		</div>
 		<div class="row cl">
-			<label class="form-label col-2">备注：</label>
+			<label class="form-label col-2">描述：</label>
 			<div class="formControls col-10">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="">
+				<input type="text" class="input-text" value="" placeholder="" id="roleDesc" name="roleDesc">
 			</div>
 		</div>
 		<div class="row cl">
@@ -41,5 +41,6 @@
 <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
 <script type="text/javascript" src="${libBasePath}/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script> 
 <script type="text/javascript" src="${scriptBasePath}/base/tree.dataLoad.js?r=<%=new Date()%>"></script> 
+<script type="text/javascript" src="${scriptBasePath}/role/role-add.js?r=<%=new Date()%>"></script> 
 </body>
 </html>

@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.saltedfish.cmd.admin.RoleAddCmd;
 import com.saltedfish.entity.security.SysRoles;
@@ -30,6 +33,7 @@ public class RoleService {
 	 * @param cmd
 	 * @author lkd
 	 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
 	public void addRole(RoleAddCmd cmd) {
 
 		// 1.插入角色表
@@ -37,7 +41,12 @@ public class RoleService {
 		role.setEnable(true);
 		role.setRoleDesc(cmd.getRoleDesc());
 		role.setRoleName(cmd.getRoleName());
-		// roleMapper.addRole(role);
+		roleMapper.addRole(role);
+		// 插入角色资源关联表
+		String [] recources = cmd.getResources().split(",");
+		for (String r : recources) {
+			roleMapper.addRoleResRelation(role.getRoleId(),r);
+		}
 	}
 
 }
