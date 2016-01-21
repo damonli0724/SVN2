@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.saltedfish.cmd.admin.ResListQueryCmd;
 import com.saltedfish.cmd.admin.RoleAddCmd;
 import com.saltedfish.constants.Constants;
 import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.dto.security.ResourceJsonDTO;
+import com.saltedfish.entity.security.SysResources;
 import com.saltedfish.service.security.ResourceService;
 import com.saltedfish.service.security.RoleService;
 
@@ -29,15 +31,6 @@ public class ResourceController {
 
 	@Autowired
 	private RoleService roleService;
-
-	/**
-	 * 管理员添加页面
-	 * @return
-	 */
-	@RequestMapping(value = Url.RESOURCE_ADD_PAGE, method = RequestMethod.GET)
-	public String turnToAdminAddPage() {
-		return View.ADMIN_ADD_VIEW;
-	}
 
 	/**
 	* 根据角色加载权限树
@@ -92,6 +85,51 @@ public class ResourceController {
 		} catch (Exception e) {
 			logger.debug("-------->添加角色异常 :" + e.getMessage());
 			result.setResult(Constants.R_STATUS_FAILTURE);
+		}
+		return result;
+	}
+
+	// ***********************************************************************************************
+	/**
+	 * 权限添加页面
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_ADD_PAGE, method = RequestMethod.GET)
+	public String turnToResAddPage() {
+		return View.ADMIN_ADD_VIEW;
+	}
+
+	/**
+	 * 权限列表页面
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_LIST_PAGE, method = RequestMethod.GET)
+	public String turnToResListPage() {
+		return View.RESOURCE_LIST_VIEW;
+	}
+
+	/**
+	 * 资源列表数据加载
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_LIST_DATA, method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResultDTO<List<SysResources>> resourceDataLoad(ResListQueryCmd cmd) {
+		logger.debug("-------->resourceDataLoad 参数为:" + cmd.toString());
+
+		BaseResultDTO<List<SysResources>> result = new BaseResultDTO<List<SysResources>>();
+		try {
+
+			List<SysResources> res = resourceService.queryResources(cmd);
+
+			Integer count = resourceService.queryResourcesCount(cmd);
+			result.setResult(res);
+			result.setCount(count);
+			result.setStatus(Constants.R_STATUS_SUCCESS);
+			result.setMessage("query success!");
+		} catch (Exception e) {
+			logger.error("-------->resourceDataLoad 异常:" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
 		return result;
 	}

@@ -2,6 +2,7 @@ package com.saltedfish.mapper.security;
 
 import java.util.List;
 
+import com.saltedfish.cmd.admin.ResListQueryCmd;
 import com.saltedfish.dto.security.ResourceJsonDTO;
 import com.saltedfish.entity.security.SysResources;
 
@@ -30,5 +31,23 @@ public interface ResourcesMapper {
 	 * @author lkd
 	 */
 	public List<ResourceJsonDTO> loadTreeDataAll();
+
+	/**
+	 * <p>查询权限列表数据</p>
+	 * @param resName
+	 * @param startPage
+	 * @param pageSize
+	 * @return
+	 * @author lkd
+	 */
+	public List<SysResources> queryResources(ResListQueryCmd cmd);
+
+	/**
+	 * <p>查询资源总数</p>
+	 * @param resName
+	 * @return
+	 * @author LKD
+	 */
+	public Integer queryResourcesCount(ResListQueryCmd cmd);
 
 }

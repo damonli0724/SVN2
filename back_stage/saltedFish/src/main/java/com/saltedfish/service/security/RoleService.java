@@ -37,7 +37,7 @@ public class RoleService {
 		role.setEnable(true);
 		role.setRoleDesc(cmd.getRoleDesc());
 		role.setRoleName(cmd.getRoleName());
-		roleMapper.addRole(role);
+		// roleMapper.addRole(role);
 	}
 
 }
