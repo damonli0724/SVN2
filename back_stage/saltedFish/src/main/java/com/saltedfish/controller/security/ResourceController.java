@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.saltedfish.cmd.admin.ResAddCmd;
 import com.saltedfish.cmd.admin.ResListQueryCmd;
-import com.saltedfish.cmd.admin.RoleAddCmd;
 import com.saltedfish.constants.Constants;
 import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.dto.security.ResourceJsonDTO;
-import com.saltedfish.entity.security.SysResources;
+import com.saltedfish.dto.security.ResourceListDTO;
+import com.saltedfish.dto.security.ResourceQueryByParentIdDTO;
 import com.saltedfish.service.security.ResourceService;
 import com.saltedfish.service.security.RoleService;
 
@@ -33,7 +34,7 @@ public class ResourceController {
 	private RoleService roleService;
 
 	/**
-	* 根据角色加载权限树
+	* 根据角色加载资源树
 	* @return
 	*/
 	@RequestMapping(value = Url.RESOURCE_TREE_DATA, method = RequestMethod.GET)
@@ -42,7 +43,7 @@ public class ResourceController {
 		BaseResultDTO<List<ResourceJsonDTO>> result = new BaseResultDTO<List<ResourceJsonDTO>>();
 		try {
 
-			List<ResourceJsonDTO> allResource = resourceService.loadTreeDataAll(); // 查询所有的资源权限
+			List<ResourceJsonDTO> allResource = resourceService.loadTreeDataAll(); // 查询所有的资源资源
 
 			if (roleId == null) { // 如果不传入角色Id 则默认查询所有
 				result.setResult(allResource);
@@ -67,25 +68,43 @@ public class ResourceController {
 			result.setResult(allResource);
 			result.setStatus(Constants.R_STATUS_SUCCESS);
 		} catch (Exception e) {
-			logger.debug("-------->加载权限树数据异常 :" + e.getMessage());
+			logger.debug("-------->加载资源树数据异常 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
 		return result;
 	}
 
-	
-	// ***********************************************************************************************
 	/**
-	 * 权限添加页面
+	 * 资源添加页面
 	 * @return
 	 */
 	@RequestMapping(value = Url.RESOURCE_ADD_PAGE, method = RequestMethod.GET)
 	public String turnToResAddPage() {
-		return View.ADMIN_ADD_VIEW;
+		return View.RESOURCE_ADD_VIEW;
 	}
 
 	/**
-	 * 权限列表页面
+	 * 资源添加
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_ADD_DATA, method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResultDTO<String> resourceDataAdd(ResAddCmd cmd) {
+		logger.debug("-------->resourceDataAdd 参数为:" + cmd.toString());
+
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
+		try {
+			resourceService.addResource(cmd);
+			result.setStatus(Constants.R_STATUS_SUCCESS);
+		} catch (Exception e) {
+			logger.error("-------->resourceDataAdd 异常:" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		return result;
+	}
+
+	/**
+	 * 资源列表页面
 	 * @return
 	 */
 	@RequestMapping(value = Url.RESOURCE_LIST_PAGE, method = RequestMethod.GET)
@@ -99,13 +118,12 @@ public class ResourceController {
 	 */
 	@RequestMapping(value = Url.RESOURCE_LIST_DATA, method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResultDTO<List<SysResources>> resourceDataLoad(ResListQueryCmd cmd) {
+	public BaseResultDTO<List<ResourceListDTO>> resourceDataLoad(ResListQueryCmd cmd) {
 		logger.debug("-------->resourceDataLoad 参数为:" + cmd.toString());
 
-		BaseResultDTO<List<SysResources>> result = new BaseResultDTO<List<SysResources>>();
+		BaseResultDTO<List<ResourceListDTO>> result = new BaseResultDTO<List<ResourceListDTO>>();
 		try {
-
-			List<SysResources> res = resourceService.queryResources(cmd);
+			List<ResourceListDTO> res = resourceService.queryResources(cmd);
 
 			Integer count = resourceService.queryResourcesCount(cmd);
 			result.setResult(res);
@@ -114,6 +132,31 @@ public class ResourceController {
 			result.setMessage("query success!");
 		} catch (Exception e) {
 			logger.error("-------->resourceDataLoad 异常:" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		return result;
+	}
+
+	/**
+	 * 
+	 * <p>根据父Id 加载菜单，子菜单，按钮资源</p>
+	 * @param parentId
+	 * @return
+	 * @author LKD
+	 */
+	@RequestMapping(value = Url.RESOURCE_LOAD_BY_PARENTID, method = RequestMethod.GET)
+	@ResponseBody
+	public BaseResultDTO<List<ResourceQueryByParentIdDTO>> loadResByParentId(Integer parentId) {
+		logger.debug("-------->loadResByParentId 参数为:" + parentId.toString());
+		BaseResultDTO<List<ResourceQueryByParentIdDTO>> result = new BaseResultDTO<List<ResourceQueryByParentIdDTO>>();
+		try {
+			List<ResourceQueryByParentIdDTO> res = resourceService.queryResourcesByParent(parentId);
+
+			result.setResult(res);
+			result.setCount(res.size());
+			result.setStatus(Constants.R_STATUS_SUCCESS);
+		} catch (Exception e) {
+			logger.error("-------->loadResByParentId 异常:" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
 		}
 		return result;
