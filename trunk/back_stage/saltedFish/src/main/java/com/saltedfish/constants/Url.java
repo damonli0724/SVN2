@@ -32,10 +32,11 @@ public interface Url {
 	public static final String ROLE_ADD_DATA = "background/role/add/data";  // 角色添加
 
 	// 资源管理
-	public static final String RESOURCE_ADD_PAGE = "background/resource/add/page";
-	public static final String RESOURCE_TREE_DATA = "background/resource/tree/data";
-
+	public static final String RESOURCE_ADD_PAGE = "background/resource/add/page";// 资源添加页面
+	public static final String RESOURCE_TREE_DATA = "background/resource/tree/data"; // 加载tree资源
 	public static final String RESOURCE_LIST_PAGE = "background/resource/list/page"; // 资源列表页面
 	public static final String RESOURCE_LIST_DATA = "background/resource/list/page/data";// 资源列表页面数据
+	public static final String RESOURCE_ADD_DATA = "background/resource/add/data";   // 资源添加
+	public static final String RESOURCE_LOAD_BY_PARENTID = "background/resource/query/parentId"; // 根据parentId查询加载资源
 
 }

@@ -53,6 +53,7 @@
 			res.RES_PARENT_ID parentId,
 			res.RES_KEY  resKey,
 			res.RES_URL resUrl,
+			res.RES_TYPE type,
 			res.RES_LEVEL level,
 			res.RES_DES  description, 
 			ress.RES_NAME pName
@@ -64,7 +65,7 @@
 			</if>
 			limit #{startPage},#{pageSize}
 	</select>
-	
+	<!-- 查询资源总数 -->
 	<select id="queryResourcesCount"  resultType="int"  parameterType="com.saltedfish.cmd.admin.ResListQueryCmd">
 		SELECT 
 			COUNT(res.RES_ID)
@@ -76,4 +77,22 @@
 			</if>
 	</select>
 	
+	<!-- 添加资源 -->
+	<insert id="addResource" parameterType="com.saltedfish.entity.security.SysResources">
+		INSERT INTO SYS_RESOURCES 
+			(RES_NAME,RES_PARENT_ID,RES_KEY,RES_TYPE,RES_URL,RES_LEVEL,RES_DES) 	
+		VALUES
+			(#{name},#{parentId},#{resKey},#{type},#{resUrl},#{level},#{description})			 
+	</insert>
+	
+	
+	<!-- 根据父Id 查询子资源 -->
+	<select id="queryResourcesByParent" parameterType="int" resultType="com.saltedfish.dto.security.ResourceQueryByParentIdDTO">
+		SELECT 
+			res.RES_ID resId,
+			res.RES_NAME resName,
+			res.RES_PARENT_ID parentId
+		FROM SYS_RESOURCES res 
+			WHERE res.RES_PARENT_ID=#{value}
+	</select>
 </mapper> 

@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.saltedfish.cmd.admin.ResListQueryCmd;
 import com.saltedfish.dto.security.ResourceJsonDTO;
+import com.saltedfish.dto.security.ResourceListDTO;
+import com.saltedfish.dto.security.ResourceQueryByParentIdDTO;
 import com.saltedfish.entity.security.SysResources;
 
 
@@ -40,7 +42,7 @@ public interface ResourcesMapper {
 	 * @return
 	 * @author lkd
 	 */
-	public List<SysResources> queryResources(ResListQueryCmd cmd);
+	public List<ResourceListDTO> queryResources(ResListQueryCmd cmd);
 
 	/**
 	 * <p>查询资源总数</p>
@@ -49,5 +51,20 @@ public interface ResourcesMapper {
 	 * @author LKD
 	 */
 	public Integer queryResourcesCount(ResListQueryCmd cmd);
+
+	/**
+	 * <p>添加资源</p>
+	 * @param res
+	 * @author LKD
+	 */
+	public void addResource(SysResources res);
+
+	/**
+	 * <p>根据父Id 加载菜单，子菜单，按钮资源</p>
+	 * @param parentId
+	 * @return
+	 * @author LKD
+	 */
+	public List<ResourceQueryByParentIdDTO> queryResourcesByParent(Integer parentId);
 
 }
