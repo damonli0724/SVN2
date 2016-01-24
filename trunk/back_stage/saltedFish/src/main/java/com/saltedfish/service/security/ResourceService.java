@@ -15,6 +15,7 @@ import com.saltedfish.cmd.admin.ResListQueryCmd;
 import com.saltedfish.dto.security.ResourceJsonDTO;
 import com.saltedfish.dto.security.ResourceListDTO;
 import com.saltedfish.dto.security.ResourceQueryByParentIdDTO;
+import com.saltedfish.dto.security.ResourceUpdateDTO;
 import com.saltedfish.entity.security.SysResources;
 import com.saltedfish.mapper.security.ResourcesMapper;
 
@@ -100,5 +101,54 @@ public class ResourceService {
 	public List<ResourceQueryByParentIdDTO> queryResourcesByParent(Integer parentId) {
 		return resourcesMapper.queryResourcesByParent(parentId);
 	}
+
+	
+	/**
+	 * <p>根据资源Id删除资源</p>
+	 * 删除资源-->1.资源表删除2.角色资源表中这条数据都得删除
+	 * @param resId
+	 * @return
+	 * @author LKD
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
+	public void deleteResourceByResId(Integer resId) {
+		resourcesMapper.deleteResourceByResId(resId); //删除资源表数据
+		resourcesMapper.deleteRoleResourceRelation(resId); //删除角色资源关联关系
+	}
+
+	/**
+	 * 
+	 * <p>修改页面返回的DTO</p>
+	 * 	@param resId
+	 * 	@return
+	 * @author LKD
+	 */
+	public ResourceUpdateDTO queryResourceForUpdate(Integer resId) {
+		return resourcesMapper.queryResourceForUpdate(resId);
+	}
+
+	/**
+	 * 
+	 * <p>资源修改</p>
+	 * 	@param ResAddCmd cmd
+	 * 	@return
+	 * @author LKD
+	 */
+	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED, timeout = 3)
+	public void updateResource(ResAddCmd cmd) {
+		SysResources res = new SysResources();
+		res.setDescription(cmd.getResDes());
+		res.setLevel(cmd.getResLevel());
+		res.setName(cmd.getResName());
+		res.setParentId(cmd.getResParentId());
+		res.setResKey(cmd.getResKey());
+		res.setResUrl(cmd.getResUrl());
+		res.setType(String.valueOf(cmd.getResType()));
+		res.setId(cmd.getResId());
+		
+		resourcesMapper.updateResource(res);
+	}
+
+	
 
 }

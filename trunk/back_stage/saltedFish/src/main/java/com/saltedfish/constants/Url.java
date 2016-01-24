@@ -28,15 +28,22 @@ public interface Url {
 
 	// 角色管理
 	public static final String ROLE_ADD_PAGE = "background/role/add/page";  // 角色添加页面
-	public static final String ROLE_LIST_PAGE = "background/role/list/page"; // 角色列表页面
 	public static final String ROLE_ADD_DATA = "background/role/add/data";  // 角色添加
+	public static final String ROLE_LIST_PAGE = "background/role/list/page"; // 角色列表页面
+	public static final String ROLE_UPDATE_PAGE = "background/role/update/page"; //角色添加页面
+	public static final String ROLE_UPDATE_DATA="background/role/update/data"; //角色修改
+	public static final String ROLE_DELETE_DATA="background/role/delete/data"; //角色删除
 
 	// 资源管理
 	public static final String RESOURCE_ADD_PAGE = "background/resource/add/page";// 资源添加页面
+	public static final String RESOURCE_UPDATE_PAGE = "background/resource/update/page";// 资源添加页面
 	public static final String RESOURCE_TREE_DATA = "background/resource/tree/data"; // 加载tree资源
 	public static final String RESOURCE_LIST_PAGE = "background/resource/list/page"; // 资源列表页面
 	public static final String RESOURCE_LIST_DATA = "background/resource/list/page/data";// 资源列表页面数据
 	public static final String RESOURCE_ADD_DATA = "background/resource/add/data";   // 资源添加
 	public static final String RESOURCE_LOAD_BY_PARENTID = "background/resource/query/parentId"; // 根据parentId查询加载资源
-
+	public static final String RESOURCE_DELETE="background/resource/delete"; //删除资源
+	public static final String RESOURCE_UPDATE_DATA = "background/resource/update/data";//修改资源
+	
+	
 }

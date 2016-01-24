@@ -40,7 +40,48 @@
     <!-- 添加角色资源关联表数据 -->
     <insert id="addRoleResRelation" parameterType="map">
     INSERT INTO SYS_ROLES_RESOURCES (RES_ID,ROLE_ID)  VALUES  (#{resId},#{roleId})
-   
-</insert>
+	</insert>
+	
+	<!-- 根据Id查询角色信息 -->
+	<select id="queryRoleById" parameterType="int" resultType="com.saltedfish.entity.security.SysRoles">
+		SELECT 
+			roles.ROLE_ID roleId,
+			roles.ROLE_NAME roleName,
+			roles.ROLE_DESC roleDesc,
+			roles.ENABLE enable,
+			roles.ROLE_KEY roleKey
+		FROM SYS_ROLES roles
+			WHERE 	ROLE_ID=#{value}
+	</select>
+    
+    <!-- 根据RoleId删除角色资源关联关系 -->
+    <delete id="deleteRoleResourceRelation" parameterType="int">
+    	DELETE FROM SYS_ROLES_RESOURCES WHERE ROLE_ID=#{value}
+    </delete>
+    
+    <!-- 删除角色 -->
+    <delete id="deleteRoelById" parameterType="int">
+    	DELETE FROM SYS_ROLES WHERE ROLE_ID=#{value}
+    </delete>
+    
+    <!-- 删除用户角色关联关系 -->
+    <delete id="deleteUserRoleRelation" parameterType="int">
+    	DELETE FROM SYS_USERS_ROLES WHERE ROLE_ID=#{value}
+    </delete>
+    <!-- 修改用户状态根据角色Id -->
+	<update id="updateUserEnabledByRoleId" parameterType="int">
+		UPDATE SYS_USERS  
+		SET  ENABLED = 0 
+		WHERE USER_ID IN 
+		(SELECT USER_ID FROM SYS_USERS_ROLES WHERE ROLE_ID = #{value})
+	</update>
+    
+    <!-- 修改角色信息 -->
+    <update id="updateRole" parameterType="com.saltedfish.entity.security.SysRoles">
+    	UPDATE 
+    	SYS_ROLES 
+    	SET ROLE_NAME=#{roleName},ROLE_DESC=#{roleDesc},ENABLE=#{enable} 
+    	WHERE ROLE_ID=#{roleId}
+    </update>
     
 </mapper> 

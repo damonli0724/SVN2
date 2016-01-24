@@ -95,4 +95,45 @@
 		FROM SYS_RESOURCES res 
 			WHERE res.RES_PARENT_ID=#{value}
 	</select>
+	
+	<!-- 删除资源 -->
+	<delete id="deleteResourceByResId" parameterType="int" >
+		DELETE FROM SYS_RESOURCES WHERE RES_ID=#{value}
+	</delete>
+	
+	<!-- 删除角色资源关联关系根据资源ID -->
+	<delete id="deleteRoleResourceRelation" parameterType="int" >
+		DELETE FROM SYS_ROLES_RESOURCES WHERE RES_ID=#{value}
+	</delete>
+	
+	<!-- 查询资源修改的页面数据DTO -->
+	<select id="queryResourceForUpdate" parameterType="int" resultType="com.saltedfish.dto.security.ResourceUpdateDTO">
+		SELECT 
+			res.RES_ID resId,
+			res.RES_NAME resName,
+			res.RES_PARENT_ID resParentId,
+			ress.RES_PARENT_ID resParentParentId,
+			res.RES_KEY  resKey,
+			res.RES_URL resUrl,
+			res.RES_TYPE resType,
+			res.RES_LEVEL resLevel,
+			res.RES_DES  resDes
+		FROM SYS_RESOURCES res 
+			LEFT JOIN SYS_RESOURCES ress ON res.RES_PARENT_ID  =ress.RES_ID
+			WHERE  1=1 AND res.RES_ID=#{value}
+	</select>
+	
+	<update id="updateResource"  parameterType="com.saltedfish.entity.security.SysResources">
+		UPDATE 	SYS_RESOURCES SET 
+			RES_NAME=#{name},
+			RES_PARENT_ID=#{parentId},
+			RES_KEY=#{resKey},
+			RES_TYPE=#{type},
+			RES_URL=#{resUrl},
+			RES_LEVEL=#{level},
+			RES_DES=#{description}
+		WHERE RES_ID=#{id}	
+			
+	</update>
+	
 </mapper> 

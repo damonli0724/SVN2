@@ -15,6 +15,7 @@ function addData(){
 	data.resources=selectNodeIds ; //从公用tree.dataLoad.js 里面获取被选中的值
 	data.roleDesc = $("#roleDesc").val();
 	data.roleName=$("#roleName").val();
+	data.roleId=$("#roleId").val();
 	
 		$.ajax({
 	  		url: addUrl,
