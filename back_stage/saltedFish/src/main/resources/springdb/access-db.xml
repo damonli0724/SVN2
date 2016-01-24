@@ -12,6 +12,10 @@
 	">
 	
 	<context:property-placeholder location="classpath:system-config.properties"/>
+    
+    <!-- 开启事务注解驱动 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+	
 	<!-- 数据源  -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${driver}"></property>

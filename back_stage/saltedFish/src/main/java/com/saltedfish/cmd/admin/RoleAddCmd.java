@@ -15,10 +15,19 @@ import java.util.Arrays;
  * @author lkd
  */
 public class RoleAddCmd {
-
+	private Integer roleId;
 	private String roleName; // 角色名称
 	private String roleDesc; // 角色描述
 	private String resources; // 权限集合 以逗号分隔
+	
+
+	public Integer getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
+	}
 
 	public String getRoleName() {
 		return roleName;

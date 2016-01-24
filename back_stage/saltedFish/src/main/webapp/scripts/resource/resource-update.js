@@ -2,7 +2,7 @@
 var context= $('#globe_context_id').val();
 var form =$("#addForm");
 var loadResUrl = context+"/background/resource/query/parentId"  //根据父Id加载主菜单，子菜单或者按钮数据
-var addUrl = context+"/background/resource/add/data"; //添加Url
+var updateUrl = context+"/background/resource/update/data"; //添加Url
 var mainMenuParentId=0; //主菜单的父Id为0;
 
 
@@ -19,18 +19,41 @@ $(function(){
 	//绑定子菜单监听事件
 	$("#mainMenu").bind("change",loadChildMenuData);
 	
-	
+	updateInit();
 	//根据单选框选中的值做不同的校验
   	jQuery.validator.addMethod("checkMainMenu",checkMainMenu, "主菜单不能为空");  
 	jQuery.validator.addMethod("checkChildMenu",checkChildMenu, "子菜单不能为空");  
 });
+
+function updateInit(){
+	var type =$("input[name='type']:checked").val();
+	changeUI();//修改功能时,改变UI
+	
+	if(type=='1'){ //如果是添加子菜单时,所属主菜单选中
+		var	mainMenuSelectedId = $("#resParentId").val();
+		$("#mainMenu").find("option[value="+mainMenuSelectedId+"]").attr("selected",true);
+	}
+	
+	
+	if(type=='2'){ //如果是添加按钮时,所属主菜单选中，所属子菜单选中
+		var	childMenuSelectedId = $("#resParentId").val();
+		var mainMenuSelectedId=$("#resParentParentId").val();
+		
+		$("#mainMenu").find("option[value="+mainMenuSelectedId+"]").attr("selected",true);
+		
+		loadChildMenuData(); //根据父Id加载子菜单
+		$("#childMenu").find("option[value="+childMenuSelectedId+"]").attr("selected",true);
+	}
+	
+	
+}
 
 
 /**
  * 根据不同的type类型显示不同的页面
  */
 function changeUI(){
-	var type = $(this).val(); 
+	var type =$("input[name='type']:checked").val();
 	if(type=='0'){//隐藏所属主菜单，子菜单
 		$("#mainMenuDiv").hide();
 		$("#childMenuDiv").hide();
@@ -122,11 +145,12 @@ function addAdmin(){
 			$("#resParentId").val(parentId);
 			
 		$.ajax({
-	  		url: addUrl,
+	  		url: updateUrl,
 	  		type:"POST",
 	  		data: form.serialize(),
 	  		success:function(res){
 	  			if(res.status==1){
+	  				layer.msg('修改成功!',{icon: 1,time:1000});
 	  				closeWindow();  
 	  			}else{
 	  			  layer.msg('网络异常!',{icon: 5,time:1000});

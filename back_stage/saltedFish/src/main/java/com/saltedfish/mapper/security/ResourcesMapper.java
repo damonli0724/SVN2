@@ -2,10 +2,12 @@ package com.saltedfish.mapper.security;
 
 import java.util.List;
 
+import com.saltedfish.cmd.admin.ResAddCmd;
 import com.saltedfish.cmd.admin.ResListQueryCmd;
 import com.saltedfish.dto.security.ResourceJsonDTO;
 import com.saltedfish.dto.security.ResourceListDTO;
 import com.saltedfish.dto.security.ResourceQueryByParentIdDTO;
+import com.saltedfish.dto.security.ResourceUpdateDTO;
 import com.saltedfish.entity.security.SysResources;
 
 
@@ -66,5 +68,30 @@ public interface ResourcesMapper {
 	 * @author LKD
 	 */
 	public List<ResourceQueryByParentIdDTO> queryResourcesByParent(Integer parentId);
+
+	/**
+	 *  删除资源表
+	 * @param resId
+	 */
+	public void deleteResourceByResId(Integer resId);
+
+	/**
+	 * 	删除角色资源关联关系
+	 * @param resId
+	 */
+	public void deleteRoleResourceRelation(Integer resId);
+
+	/**
+	 *  修改页面返回的DTO
+	 * @param resId
+	 * @return
+	 */
+	public ResourceUpdateDTO queryResourceForUpdate(Integer resId);
+
+	/**
+	 * 修改资源
+	 */
+	public void updateResource(SysResources res);
+
 
 }

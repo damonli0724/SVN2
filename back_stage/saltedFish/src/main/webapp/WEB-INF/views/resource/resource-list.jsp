@@ -67,10 +67,10 @@
 				<td>{{level}}</td>
 				<td>{{pName}}</td>
 				<td class="td-manage">
-					<a title="编辑" href="javascript:;" onclick="admin_edit('资源编辑','${contextPath}/background/admin/update/page?userId={{userId}}','1','800','500')" class="ml-5" style="text-decoration:none">
+					<a title="编辑" href="javascript:;" onclick="data_edit('资源编辑','${contextPath}/background/resource/update/page?resId={{id}}','1','800','500')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a> 
-					<a title="删除" href="javascript:;" onclick="admin_del(this,{{userId}})" class="ml-5" style="text-decoration:none">
+					<a title="删除" href="javascript:;" onclick="data_del(this,{{id}})" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
 				</td>

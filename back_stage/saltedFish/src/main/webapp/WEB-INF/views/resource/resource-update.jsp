@@ -11,13 +11,15 @@
 <body>
 <div class="pd-20">
 	<form action="${contextPath}/background/admin/add/page/data" method="post" class="form form-horizontal" id="addForm">
-		<input type="hidden" name="resParentId" id="resParentId" value=""><!-- 资源父Id -->
-		<input type="hidden" name="resType" id="resType" value="0"><!--添加的资源类型  -->
+		<input type="hidden" name="resParentId" id="resParentId" value="${res.resParentId}"><!-- 资源父Id -->
+		<input type="hidden" name="resParentIdParentId" id="resParentParentId" value="${res.resParentParentId}"><!-- 资源父Id的父Id -->
+		<input type="hidden" name="resType" id="resType" value="${res.resType }"><!--添加的资源类型  -->
+		<input type="hidden" name="resId" id="resId" value="${res.resId}"><!--修改Id  -->
 		
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span> 资源名称 ：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text"  placeholder="资源名称" id="resName" name="resName" >
+				<input type="text" class="input-text"  placeholder="资源名称" id="resName" name="resName"  value="${res.resName}">
 			</div>
 		</div>
 		
@@ -25,7 +27,9 @@
 			<label class="form-label col-3">资源类型：</label>
 			<div class="formControls col-5"> 
 				<span class="select-box" style="width:307px;">
-					<input type="radio" name="type" value="0" checked="checked"/> 主菜单 &nbsp;&nbsp;<input type="radio" name="type" value="1" /> 子菜单&nbsp;&nbsp;<input type="radio" name="type" value="2"/> 按钮
+					<input type="radio" name="type" value="0" <c:choose><c:when test="${res.resType=='0'}">checked </c:when></c:choose>  disabled="disabled"/> 主菜单 &nbsp;&nbsp;
+					<input type="radio" name="type" value="1" <c:choose><c:when test="${res.resType=='1'}">checked</c:when></c:choose>  disabled="disabled"/> 子菜单&nbsp;&nbsp;
+					<input type="radio" name="type" value="2" <c:choose><c:when test="${res.resType=='2'}">checked</c:when></c:choose>  disabled="disabled"/> 按钮
 				</span>
 			</div>
 		</div>
@@ -49,28 +53,28 @@
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span> 资源key ：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text"  placeholder="资源key" id="resKey" name="resKey" >
+				<input type="text" class="input-text"  placeholder="资源key" id="resKey" name="resKey" value="${res.resKey}">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span> Url ：</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text"  placeholder="Url" id="resUrl" name="resUrl" >
+				<input type="text" class="input-text"  placeholder="Url" id="resUrl" name="resUrl"  value="${res.resUrl}">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-3"><span class="c-red">*</span> 排序</label>
 			<div class="formControls col-5">
-				<input type="text" class="input-text" placeholder="排序"  id="resLevel" name="resLevel" >
+				<input type="text" class="input-text" placeholder="排序"  id="resLevel" name="resLevel" value="${res.resLevel}">
 			</div>
 		</div>
 		
 		<div class="row cl">
 			<label class="form-label col-3">描述：</label>
 			<div class="formControls col-5">
-				<textarea name="resDes" id="resDes" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" onKeyUp="textarealength(this,100)"></textarea>
+				<textarea name="resDes" id="resDes" cols="" rows="" class="textarea"  placeholder="说点什么...100个字符以内" onKeyUp="textarealength(this,100)">${res.resDes}</textarea>
 				<p class="textarea-numberbar"><em class="textarea-length">0</em>/100</p>
 			</div>
 		</div>
@@ -88,6 +92,6 @@
 <script type="text/javascript" src="${libBasePath}/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/H-ui.js"></script> 
 <script type="text/javascript" src="${scriptBasePath}/base/validate.expand.js"></script> 
-<script type="text/javascript" src="${scriptBasePath}/resource/resource-add.js?r=<%=new Date()%>"></script> 
+<script type="text/javascript" src="${scriptBasePath}/resource/resource-update.js?r=<%=new Date()%>"></script> 
 </body>
 </html>

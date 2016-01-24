@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,6 +19,7 @@ import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.dto.security.ResourceJsonDTO;
 import com.saltedfish.dto.security.ResourceListDTO;
 import com.saltedfish.dto.security.ResourceQueryByParentIdDTO;
+import com.saltedfish.dto.security.ResourceUpdateDTO;
 import com.saltedfish.service.security.ResourceService;
 import com.saltedfish.service.security.RoleService;
 
@@ -32,7 +34,87 @@ public class ResourceController {
 
 	@Autowired
 	private RoleService roleService;
+//=================================================增===========================================================
+	/**
+	 * 资源添加页面
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_ADD_PAGE, method = RequestMethod.GET)
+	public String turnToResAddPage() {
+		return View.RESOURCE_ADD_VIEW;
+	}
 
+	/**
+	 * 资源添加
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_ADD_DATA, method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResultDTO<String> resourceDataAdd(ResAddCmd cmd) {
+		logger.debug("-------->resourceDataAdd 参数为:" + cmd.toString());
+
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
+		try {
+			resourceService.addResource(cmd);
+			result.setStatus(Constants.R_STATUS_SUCCESS);
+		} catch (Exception e) {
+			logger.error("-------->resourceDataAdd 异常:" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		return result;
+	}
+//=================================================删===========================================================
+	/**
+	 * 资源删除
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_DELETE, method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResultDTO<String> resourceDatadelete(Integer resId) {
+		logger.debug("-------->resourceDatadelete 参数为:" + resId.toString());
+
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
+		try {
+			resourceService.deleteResourceByResId(resId);
+			result.setStatus(Constants.R_STATUS_SUCCESS);
+		} catch (Exception e) {
+			logger.error("-------->resourceDatadelete 异常:" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		return result;
+	}
+//=================================================改===========================================================
+	/**
+	 * 资源修改页面
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_UPDATE_PAGE, method = RequestMethod.GET)
+	public String turnToResUpdatePage(Integer resId,ModelMap map) {
+	 ResourceUpdateDTO dto=	resourceService.queryResourceForUpdate(resId);
+	 map.addAttribute("res", dto);
+		return View.RESOURCE_UPDATE_VIEW;
+	}
+	
+	/**
+	 * 资源修改
+	 * @return
+	 */
+	@RequestMapping(value = Url.RESOURCE_UPDATE_DATA, method = RequestMethod.POST)
+	@ResponseBody
+	public BaseResultDTO<String> resourceDataUpdate(ResAddCmd cmd) {
+		logger.debug("-------->resourceDataUpdate 参数为:" + cmd.toString());
+
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
+		try {
+			resourceService.updateResource(cmd);
+			result.setStatus(Constants.R_STATUS_SUCCESS);
+		} catch (Exception e) {
+			logger.error("-------->resourceDataUpdate 异常:" + e.getMessage());
+			result.setStatus(Constants.R_STATUS_FAILTURE);
+		}
+		return result;
+	}
+//=================================================查===========================================================
 	/**
 	* 根据角色加载资源树
 	* @return
@@ -54,16 +136,18 @@ public class ResourceController {
 			List<ResourceJsonDTO> roleResource = resourceService.loadTreeDataByRoleId(roleId);  // 根据角色Id
 
 			for (ResourceJsonDTO r : allResource) {
+				if (r.getId().equals(Constants.RESOURCE_TREE_ROOT_ID)) {
+					r.setChecked(true); 
+					continue;
+				}
 				for (ResourceJsonDTO rr : roleResource) {
-
-					if (rr.getId() != null && r.getId() != null && (rr.getId() == r.getId())) {  // 设置为选中
+					if ((rr.getId() != null && r.getId() != null && (rr.getId().equals(r.getId())))) {  // 设置为选中
 						r.setChecked(true);
 					}
 					if (rr.getType() != null && rr.getType() == Constants.RESOURCE_MENU) { // 如果是主菜单，则展开
 						r.setOpen(true);
 					}
 				}
-
 			}
 			result.setResult(allResource);
 			result.setStatus(Constants.R_STATUS_SUCCESS);
@@ -74,34 +158,7 @@ public class ResourceController {
 		return result;
 	}
 
-	/**
-	 * 资源添加页面
-	 * @return
-	 */
-	@RequestMapping(value = Url.RESOURCE_ADD_PAGE, method = RequestMethod.GET)
-	public String turnToResAddPage() {
-		return View.RESOURCE_ADD_VIEW;
-	}
-
-	/**
-	 * 资源添加
-	 * @return
-	 */
-	@RequestMapping(value = Url.RESOURCE_ADD_DATA, method = RequestMethod.GET)
-	@ResponseBody
-	public BaseResultDTO<String> resourceDataAdd(ResAddCmd cmd) {
-		logger.debug("-------->resourceDataAdd 参数为:" + cmd.toString());
-
-		BaseResultDTO<String> result = new BaseResultDTO<String>();
-		try {
-			resourceService.addResource(cmd);
-			result.setStatus(Constants.R_STATUS_SUCCESS);
-		} catch (Exception e) {
-			logger.error("-------->resourceDataAdd 异常:" + e.getMessage());
-			result.setStatus(Constants.R_STATUS_FAILTURE);
-		}
-		return result;
-	}
+	
 
 	/**
 	 * 资源列表页面
@@ -161,5 +218,8 @@ public class ResourceController {
 		}
 		return result;
 	}
+	
+//=================================================END===========================================================	
+	
 
 }

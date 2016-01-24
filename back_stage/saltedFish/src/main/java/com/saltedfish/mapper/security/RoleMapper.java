@@ -35,4 +35,37 @@ public interface RoleMapper {
 	 * @author lkd
 	 */
 	public void addRoleResRelation(@Param("roleId")String roleId, @Param("resId")String resId);
+
+	/**
+	 * <p>查询角色信息</p>
+	 * @param roleId
+	 * @return
+	 */
+	public SysRoles queryRoleById(Integer roleId);
+
+	/**
+	 * @param role
+	 */
+	public void updateRole(SysRoles role);
+
+	/**
+	 * 根据角色Id 删除角色资源关联关系
+	 * @param roleId
+	 */
+	public void deleteRoleResourceRelation(Integer roleId);
+
+	/**
+	 * @param roleId
+	 */
+	public void deleteRoelById(Integer roleId);
+
+	/**
+	 * @param roleId 
+	 */
+	public void updateUserEnabledByRoleId(Integer roleId);
+
+	/**
+	 * @param roleId
+	 */
+	public void deleteUserRoleRelation(Integer roleId); 
 }
