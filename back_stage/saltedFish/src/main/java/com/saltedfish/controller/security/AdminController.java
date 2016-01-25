@@ -19,7 +19,6 @@ import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysRoles;
-import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.service.security.RoleService;
 import com.saltedfish.service.security.UserService;
 
@@ -87,13 +86,13 @@ public class AdminController extends BaseController {
 				result.setMessage("原始密码和初始密码不正确!");
 				return result;
 			}
-			
-			if (cmd.getUserId()==null) {//添加用户信息
+
+			if (cmd.getUserId() == null) {// 添加用户信息
 				userService.addAdminUser(cmd);
-			}else{   //修改用户信息
+			} else {   // 修改用户信息
 				userService.updateAdminUser(cmd);
 			}
-			
+
 		} catch (Exception e) {
 			logger.debug("============》添加或修改管理员失败 :" + e.getMessage());
 			result.setStatus(Constants.R_STATUS_FAILTURE);
@@ -119,8 +118,7 @@ public class AdminController extends BaseController {
 		result.setStatus(Constants.R_STATUS_SUCCESS);
 		return result;
 	}
-	
-	
+
 	/**
 	 * 判断用户唯一(添加用户时)
 	 * @return
@@ -132,9 +130,9 @@ public class AdminController extends BaseController {
 		try {
 			AdminListQueryCmd cmd = new AdminListQueryCmd();
 			cmd.setLoginName(loginName);
-			
-			Integer  count = userService.queryUsersCount(cmd);
-			
+
+			Integer count = userService.queryUsersCount(cmd);
+
 			result.setResult(count);
 			result.setStatus(Constants.R_STATUS_SUCCESS);
 		} catch (Exception e) {
@@ -143,21 +141,19 @@ public class AdminController extends BaseController {
 		}
 		return result;
 	}
-	
-	
+
 	/**
 	 * 管理员修改页面
 	 * @return
 	 */
 	@RequestMapping(value = Url.ADMIN_UPDATE_PAGE, method = RequestMethod.GET)
-	public String turnToAdminUpdatePage(Integer userId,ModelMap map) {
+	public String turnToAdminUpdatePage(Integer userId, ModelMap map) {
 		List<SysRoles> roles = roleService.queryAllRoles();
 		map.put("roles", roles);
-		UserListDTO user=userService.queryUsersById(userId);
+		UserListDTO user = userService.queryUsersById(userId);
 		map.put("user", user);
 		return View.ADMIN_UPDATE_VIEW;
 	}
-	
 
 	/**
 	 * 删除管理员
@@ -175,6 +171,18 @@ public class AdminController extends BaseController {
 		}
 		result.setStatus(Constants.R_STATUS_SUCCESS);
 		return result;
+	}
+
+	/**
+	 * 查看该用户拥有的角色
+	 * @return
+	 */
+	@RequestMapping(value = Url.ADMIN_RES_SHOW, method = RequestMethod.GET)
+	public String turnToRoleUpdatePage(Integer roleId, ModelMap map) {
+		SysRoles role = roleService.queryRoleById(roleId);
+		map.addAttribute("roleId", roleId);
+		map.addAttribute("role", role);
+		return View.AMDIN_RES_VIEW;
 	}
 
 }

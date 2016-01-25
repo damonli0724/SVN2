@@ -34,7 +34,7 @@ function load(curPageNo, pageSize) {
 		var queryUrl =$("#globe_context_id").val()+"/background/resource/list/page/data"; // 查询数据url
 		queryUrl = queryUrl + '?' + 'startPage=' + curPageNo + '&pageSize=' + pageSize;
 		$.ajax(queryUrl, {
-			type : 'GET',
+			type : 'POST',
 			dataType : 'json',
 			data : searchCondition 
 		}).done(function(response) {

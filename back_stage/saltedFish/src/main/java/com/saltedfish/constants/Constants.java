@@ -17,9 +17,11 @@ public interface Constants {
 	public static final String R_STATUS_SUCCESS = "1"; // 状态 成功
 	public static final String R_STATUS_FAILTURE = "0"; // 状态失败
 
+	public static final String PASSWORD_KEY = "XLlWePlTYe2l3vpPuQJMUGvUtJJwjqYQ";  // 密码加密用到的key
+
 	public static final Integer RESOURCE_MENU = 0;  // 主菜单
 	public static final Integer RESOURCE_CHID_MENU = 1; // 子菜单
 	public static final Integer RESOURCE_CHILD_BTN = 2; // 子菜单中的按钮
-	public static final Integer RESOURCE_TREE_ROOT_ID = 0;//权限树根节点ID
+	public static final Integer RESOURCE_TREE_ROOT_ID = 0;// 权限树根节点ID
 
 }

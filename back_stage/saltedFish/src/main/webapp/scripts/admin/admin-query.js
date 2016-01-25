@@ -99,6 +99,11 @@ function admin_del(obj,id){
 function admin_edit(title,url,id,w,h){
 	layer_show(title,url,800,600);
 }
+
+/*管理员-角色-查看*/
+function admin_role_show(title,url,id,w,h){
+	layer_show(title,url,w,h);
+}
 /*管理员-停用*/
 function admin_stop(obj,id){
 	layer.confirm('确认要停用吗？',function(index){

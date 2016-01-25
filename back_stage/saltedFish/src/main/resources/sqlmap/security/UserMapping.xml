@@ -64,7 +64,8 @@
 		u.MOBILE mobile,
 		u.EMAIL email,
 		u.SEX sex,
-		r.ROLE_NAME roleName
+		r.ROLE_NAME roleName,
+		r.ROLE_ID  roleId
 		FROM SYS_USERS u
 		LEFT JOIN SYS_USERS_ROLES ur ON ur.USER_ID = u.USER_ID
 		LEFT JOIN SYS_ROLES r ON ur.ROLE_ID = r.ROLE_ID

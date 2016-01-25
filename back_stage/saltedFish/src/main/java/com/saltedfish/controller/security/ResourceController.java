@@ -34,7 +34,8 @@ public class ResourceController {
 
 	@Autowired
 	private RoleService roleService;
-//=================================================增===========================================================
+
+	// =================================================增===========================================================
 	/**
 	 * 资源添加页面
 	 * @return
@@ -63,7 +64,8 @@ public class ResourceController {
 		}
 		return result;
 	}
-//=================================================删===========================================================
+
+	// =================================================删===========================================================
 	/**
 	 * 资源删除
 	 * @return
@@ -83,18 +85,19 @@ public class ResourceController {
 		}
 		return result;
 	}
-//=================================================改===========================================================
+
+	// =================================================改===========================================================
 	/**
 	 * 资源修改页面
 	 * @return
 	 */
 	@RequestMapping(value = Url.RESOURCE_UPDATE_PAGE, method = RequestMethod.GET)
-	public String turnToResUpdatePage(Integer resId,ModelMap map) {
-	 ResourceUpdateDTO dto=	resourceService.queryResourceForUpdate(resId);
-	 map.addAttribute("res", dto);
+	public String turnToResUpdatePage(Integer resId, ModelMap map) {
+		ResourceUpdateDTO dto = resourceService.queryResourceForUpdate(resId);
+		map.addAttribute("res", dto);
 		return View.RESOURCE_UPDATE_VIEW;
 	}
-	
+
 	/**
 	 * 资源修改
 	 * @return
@@ -114,7 +117,8 @@ public class ResourceController {
 		}
 		return result;
 	}
-//=================================================查===========================================================
+
+	// =================================================查===========================================================
 	/**
 	* 根据角色加载资源树
 	* @return
@@ -137,7 +141,7 @@ public class ResourceController {
 
 			for (ResourceJsonDTO r : allResource) {
 				if (r.getId().equals(Constants.RESOURCE_TREE_ROOT_ID)) {
-					r.setChecked(true); 
+					r.setChecked(true);
 					continue;
 				}
 				for (ResourceJsonDTO rr : roleResource) {
@@ -158,8 +162,6 @@ public class ResourceController {
 		return result;
 	}
 
-	
-
 	/**
 	 * 资源列表页面
 	 * @return
@@ -173,7 +175,7 @@ public class ResourceController {
 	 * 资源列表数据加载
 	 * @return
 	 */
-	@RequestMapping(value = Url.RESOURCE_LIST_DATA, method = RequestMethod.GET)
+	@RequestMapping(value = Url.RESOURCE_LIST_DATA, method = RequestMethod.POST)
 	@ResponseBody
 	public BaseResultDTO<List<ResourceListDTO>> resourceDataLoad(ResListQueryCmd cmd) {
 		logger.debug("-------->resourceDataLoad 参数为:" + cmd.toString());
@@ -218,8 +220,7 @@ public class ResourceController {
 		}
 		return result;
 	}
-	
-//=================================================END===========================================================	
-	
+
+	// =================================================END===========================================================
 
 }

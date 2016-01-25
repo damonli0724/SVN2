@@ -92,6 +92,10 @@
 					<a title="删除" href="javascript:;" onclick="admin_del(this,{{userId}})" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
+
+					<a title="用户权限" href="javascript:;" onclick="admin_role_show('用户权限','${contextPath}/background/admin/res/page?roleId={{roleId}}','1')">
+						<i class="Hui-iconfont">&#xe665;</i>
+					</a>
 				</td>
 			</tr>
         {{/result}}
