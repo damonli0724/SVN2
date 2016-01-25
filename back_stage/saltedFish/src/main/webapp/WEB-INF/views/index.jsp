@@ -124,9 +124,17 @@
 			<dt><i class="Hui-iconfont">&#xe62d;</i> 管理员管理<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<li><a _href="${contextPath}/background/admin/list/page" href="javascript:void(0)">管理员列表</a></li>
-					<li><a _href="${contextPath}/background/role/list/page" href="javascript:void(0)">角色管理</a></li>
-					<li><a _href="${contextPath}/background/resource/list/page" href="javascript:void(0)">权限管理</a></li>
+					<sec:authorize ifAnyGranted="ROLE_sys_user_list">
+						<li><a _href="${contextPath}/background/admin/list/page" href="javascript:void(0)">管理员列表</a></li>
+					</sec:authorize>
+					
+					<sec:authorize ifAnyGranted="ROLE_sys_role_list">
+						<li><a _href="${contextPath}/background/role/list/page" href="javascript:void(0)">角色管理</a></li>
+					</sec:authorize>
+					
+					<sec:authorize  ifAnyGranted="ROLE_sys_res_list">
+						<li><a _href="${contextPath}/background/resource/list/page" href="javascript:void(0)">权限管理</a></li>
+					</sec:authorize>
 				</ul>
 			</dd>
 		</dl>

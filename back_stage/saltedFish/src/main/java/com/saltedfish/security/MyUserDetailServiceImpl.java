@@ -76,8 +76,9 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
 		List<SysResources> resources = resourcesMapper.getResourcesByUserId(userId);
 		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
 		for (SysResources res : resources) {
-			if (res==null)continue;
-			authSet.add(new SimpleGrantedAuthority("ROLE"+res.getResKey()));
+			if (res == null)
+				continue;
+			authSet.add(new SimpleGrantedAuthority("ROLE_" + res.getResKey()));
 		}
 		return authSet;
 	}
