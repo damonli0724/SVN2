@@ -22,13 +22,18 @@
 	</div>
 	</form>
 	
-	<div class="cl pd-5 bg-1 bk-gray mt-20"> <span class="l"> <a href="javascript:;" onclick="data_add('添加资源','${contextPath}/background/resource/add/page','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加资源</a></span> 
-	<span class="r">共有数据：<strong id="count"></strong> 条</span> </div>
-
-		  <div  class="hide" id="J_DataList"></div>
-		  <div class="nodata hide" id="J_NoDataMsg">
-		            <div class="prompt"> 暂无数据 </div>
-		  </div>
+	<div class="cl pd-5 bg-1 bk-gray mt-20">
+		<sec:authorize ifAnyGranted="ROLE_sys_res_add">
+		 	<span class="l"> 
+		 		<a href="javascript:;" onclick="data_add('添加资源','${contextPath}/background/resource/add/page','800','500')" class="btn btn-primary radius"><i class="Hui-iconfont">&#xe600;</i> 添加资源</a>
+		 	</span> 
+		</sec:authorize>
+			
+			<span class="r">共有数据：<strong id="count"></strong> 条</span> </div>
+			  <div  class="hide" id="J_DataList"></div>
+			  <div class="nodata hide" id="J_NoDataMsg">
+			            <div class="prompt"> 暂无数据 </div>
+			  </div>
 </div>
 <script type="text/javascript" src="${libBasePath}/laypage/1.2/laypage.js"></script> 
 <script type="text/javascript" src="${libBasePath}/My97DatePicker/WdatePicker.js"></script> 
@@ -67,12 +72,18 @@
 				<td>{{level}}</td>
 				<td>{{pName}}</td>
 				<td class="td-manage">
+
+				<sec:authorize ifAnyGranted="ROLE_sys_res_update">
 					<a title="编辑" href="javascript:;" onclick="data_edit('资源编辑','${contextPath}/background/resource/update/page?resId={{id}}','1','800','500')" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6df;</i>
 					</a> 
+				</sec:authorize>
+
+				<sec:authorize ifAnyGranted="ROLE_sys_res_delete">
 					<a title="删除" href="javascript:;" onclick="data_del(this,{{id}})" class="ml-5" style="text-decoration:none">
 						<i class="Hui-iconfont">&#xe6e2;</i>
 					</a>
+				</sec:authorize>
 				</td>
 			</tr>
         {{/result}}

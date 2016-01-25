@@ -24,8 +24,8 @@
 		<!-- 定义没有权限访问页面 -->
 		<access-denied-handler error-page="/background/403" />
 
-		<!-- 访问url需要的权限 isAuthenticated() -->
-		<intercept-url pattern="/background/**" access="permitAll" />
+		<!-- 访问url需要的权限 isAuthenticated() permitAll -->
+		<intercept-url pattern="/background/**" access="isAuthenticated()" />
 
 		<!-- 设置验证码登录过滤器 -->
 		<!-- <custom-filter before="FORM_LOGIN_FILTER" ref="validateCodeAuthenticationFilter" /> -->

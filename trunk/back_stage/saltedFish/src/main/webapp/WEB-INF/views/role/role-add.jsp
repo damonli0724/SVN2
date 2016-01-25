@@ -40,6 +40,7 @@
 </div>
 <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
 <script type="text/javascript" src="${libBasePath}/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script> 
+<script type="text/javascript" src="${libBasePath}/layer/1.9.3/layer.js"></script> 
 <script type="text/javascript" src="${scriptBasePath}/base/tree.dataLoad.js?r=<%=new Date()%>"></script> 
 <script type="text/javascript" src="${scriptBasePath}/role/role-add.js?r=<%=new Date()%>"></script> 
 </body>

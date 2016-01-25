@@ -17,6 +17,20 @@ function addData(){
 	data.roleName=$("#roleName").val();
 	data.roleId=$("#roleId").val();
 	
+	if(data.roleDesc==''){
+		  layer.msg('请填写角色描述!',{icon: 5,time:1000});
+			return;
+	}
+	
+	if(data.roleName==''){
+		layer.msg('请选择角色名称!',{icon: 5,time:1000});
+		return;
+	}
+	
+	if (selectNodeIds==''||selectNodeIds==null) {
+		  layer.msg('请勾选权限!',{icon: 5,time:1000});
+		return;
+	}
 		$.ajax({
 	  		url: addUrl,
 	  		type:"POST",

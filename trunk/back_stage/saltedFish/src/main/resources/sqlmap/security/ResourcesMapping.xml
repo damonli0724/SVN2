@@ -45,7 +45,7 @@
 	</select>
 	
 	
-	<!-- 查询资源列表顺序 -->
+	<!-- 查询资源列表 -->
 	<select id="queryResources" resultType="com.saltedfish.dto.security.ResourceListDTO" parameterType="com.saltedfish.cmd.admin.ResListQueryCmd">
 		SELECT 
 			res.RES_ID id,
@@ -63,6 +63,7 @@
 			<if test="resName !=null and resName !=''">
 				AND res.RES_NAME like '%${resName}%'
 			</if>
+			ORDER BY res.RES_LEVEL
 			limit #{startPage},#{pageSize}
 	</select>
 	<!-- 查询资源总数 -->
