@@ -4,11 +4,13 @@ var loadDataUrl =$("#globe_context_id").val()+"/background/resource/tree/data"; 
 var selectNodeIds=null;
 var setting = {   //Ztree  setting;
 		check: {
-			enable: true
+			enable: true,
+			chkStyle:"checkbox", // 添加生效
+			chkboxType: { "Y": "ps", "N": "s" }     //子节点取消钩中，不影响父节点
 		},
 		data: {
 			simpleData: {
-				enable: true
+				enable: true,
 			}
 		},
 		callback :{

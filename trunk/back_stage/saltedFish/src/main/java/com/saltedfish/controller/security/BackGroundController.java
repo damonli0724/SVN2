@@ -26,7 +26,7 @@ import com.saltedfish.constants.View;
 import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.service.security.UserService;
 import com.saltedfish.utils.CommonUtils;
-import com.saltedfish.utils.MD5Util;
+import com.saltedfish.utils.PasswordEncodeUtils;
 import com.saltedfish.utils.VerifyCodeUtils;
 
 
@@ -59,10 +59,11 @@ public class BackGroundController {
 	public String index(HttpServletRequest request, ModelMap map) {
 
 		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
-//		// 登录名
-//		System.out.println("登陆名-->:" + securityContextImpl.getAuthentication().getName());
-//		// 登录密码，未加密的
-//		System.out.println("登录密码，未加密的-->" + securityContextImpl.getAuthentication().getCredentials());
+		// // 登录名
+		// System.out.println("登陆名-->:" + securityContextImpl.getAuthentication().getName());
+		// // 登录密码，未加密的
+		// System.out.println("登录密码，未加密的-->" +
+		// securityContextImpl.getAuthentication().getCredentials());
 
 		//
 		// WebAuthenticationDetails details = (WebAuthenticationDetails)
@@ -117,14 +118,15 @@ public class BackGroundController {
 
 			SysUsers user = userService.selectSysUserByName(username);
 
-			if (user == null || !user.getPassword().equals(MD5Util.MD5(password))) {
+			if (user == null || !user.getPassword().trim().equals(PasswordEncodeUtils.encode(password, username, Constants.PASSWORD_KEY))) {
 				throw new AuthenticationServiceException("用户名或者密码不正确");
 			}
 
 			// 判断用户是否已经登录
 			// System.err.println(sessionRegistry.getAllPrincipals() + "=================");
 
-			Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, MD5Util.MD5(password)));
+			Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, PasswordEncodeUtils.encode(
+					password, username, Constants.PASSWORD_KEY.trim())));
 			SecurityContext securityContext = SecurityContextHolder.getContext();
 			securityContext.setAuthentication(authentication);
 			HttpSession session = request.getSession(true);

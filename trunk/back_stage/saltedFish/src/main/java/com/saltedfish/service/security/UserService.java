@@ -11,10 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saltedfish.cmd.admin.AdminAddCmd;
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
+import com.saltedfish.constants.Constants;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.mapper.security.UserMapper;
 import com.saltedfish.utils.MD5Util;
+import com.saltedfish.utils.PasswordEncodeUtils;
 
 
 @Service
@@ -22,7 +24,6 @@ public class UserService {
 
 	@Autowired
 	private UserMapper userMapper;
-	
 
 	/**
 	 * <p>查询用户总数</p>
@@ -63,15 +64,15 @@ public class UserService {
 		sysUser.setDtCreate(new Date());
 		sysUser.setName(cmd.getName());
 		sysUser.setUsername(cmd.getUserName());
-		sysUser.setPassword(MD5Util.MD5(cmd.getConfirmPassword()));
+		sysUser.setPassword(PasswordEncodeUtils.encode(cmd.getConfirmPassword(), cmd.getName(), Constants.PASSWORD_KEY));// 密码加密
 		sysUser.setEmail(cmd.getEmail());
 		sysUser.setMobile(cmd.getMobile());
 		sysUser.setDescription(cmd.getDescription());
 		sysUser.setSex(cmd.getSex());
-		//添加用户
+		// 添加用户
 		userMapper.addAdminUser(sysUser);
-		//添加用户拥有的角色
- 		userMapper.addUserRoleRelation(sysUser.getUserId(),cmd.getRoleId());
+		// 添加用户拥有的角色
+		userMapper.addUserRoleRelation(sysUser.getUserId(), cmd.getRoleId());
 	}
 
 	/**
@@ -119,11 +120,11 @@ public class UserService {
 		sysUser.setDescription(cmd.getDescription());
 		sysUser.setSex(cmd.getSex());
 		sysUser.setUserId(String.valueOf(cmd.getUserId()));
-		//修改信息
+		// 修改信息
 		userMapper.updateAdminUser(sysUser);
-		//修改用户拥有的角色
- 		userMapper.updateUserRoleRelation(sysUser.getUserId(),cmd.getRoleId());
-		
+		// 修改用户拥有的角色
+		userMapper.updateUserRoleRelation(sysUser.getUserId(), cmd.getRoleId());
+
 	}
 
 }
