@@ -9,7 +9,7 @@
 	<http security="none" pattern="/background/403" />
 	<http security="none" pattern="/background/timeout" />
 	<http security="none" pattern="/background/login" />
-	<http security="none" pattern="/background/check" />
+	<!-- <http security="none" pattern="/background/check" /> -->
 
 
 	<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
@@ -20,140 +20,84 @@
 	<http pattern="/**/**/*.js" security="none" />
 
 	
-	<http auto-config="false" use-expressions="true" entry-point-ref="myAuthenticationEntryPoint">
+	<http  use-expressions="true" entry-point-ref="loginEntryPoint">
+		
+		<!-- 替换默认的LogoutFilter -->
+		<!-- <custom-filter ref="customLogoutFilter" position="LOGOUT_FILTER" /> -->
+		
+		<!-- 替换默认的LoginFilter -->
+		<custom-filter ref="customLoginFilter" position="FORM_LOGIN_FILTER" />
+	
 		<!-- 定义没有权限访问页面 -->
-		<access-denied-handler error-page="/background/403" />
+		<!-- <access-denied-handler error-page="/background/403" /> -->
 
 		<!-- 访问url需要的权限 isAuthenticated() permitAll -->
 		<intercept-url pattern="/background/**" access="isAuthenticated()" />
 
-		<!-- 设置验证码登录过滤器 -->
-		<!-- <custom-filter before="FORM_LOGIN_FILTER" ref="validateCodeAuthenticationFilter" /> -->
-
-		<!-- 表单登陆 -->
-		<!-- <form-login login-page="/login" default-target-url="/index" always-use-default-target="true" /> -->
-
 
 		<!-- 退出登陆 清除缓存 -->
-		<logout logout-url="/background/loginout" logout-success-url="/background/login" invalidate-session="true"
-			delete-cookies="JSESSIONID" />
+		<!-- <logout logout-url="/background/loginout" logout-success-url="/background/login" invalidate-session="true"
+			delete-cookies="JSESSIONID" /> -->
 
 		<!-- 记住我 -->
-		<remember-me data-source-ref="dataSource" />
+		<!-- <remember-me data-source-ref="dataSource" user-service-ref=""/> -->
 		<!-- <csrf /> -->
 
 		<!-- session管理 过期跳转页面 -->
-		<session-management invalid-session-url="/background/timeout" session-fixation-protection="none"> 
+		<!-- <session-management invalid-session-url="/background/timeout" session-fixation-protection="none"> 
 		<concurrency-control    max-sessions="1" error-if-maximum-exceeded="true" session-registry-alias="sessionRegistry"/> 
-		</session-management>
+		</session-management> -->
 		
-		
-		<!-- <session-management session-authentication-strategy-ref="currentControllerStrategy" />
-		<custom-filter position="CONCURRENT_SESSION_FILTER" ref="concurrentSessionFilter" />
-
-		<beans:bean id="concurrentSessionFilter" class="org.springframework.security.web.session.ConcurrentSessionFilter">
-			<beans:property name="sessionRegistry" ref="sessionRegistry" />
-		</beans:bean>
-
-		<beans:bean id="sessionRegistry" class="com.saltedfish.security.SmartSessionRegistry=" />
-
-		<beans:bean id="currentControllerStrategy" class="com.saltedfish.security.SmartConcurrentSessionControlStrategy">
-			<beans:constructor-arg ref="sessionRegistry" />
-			<beans:property name="exceptionIfMaximumExceeded" value="true" />
-		</beans:bean>
- -->
 	</http>
 
+
+	<!-- 认证管理 -->	
+	<authentication-manager alias="authenticationManager">
+		<!-- 加入开发人员自定义的Provider -->
+		<authentication-provider ref="customProvider" />
+	</authentication-manager>
+	
+
+    <!-- *************************************************JAVA**BEAN********************************************************* -->
 
 	<!-- 定义返回异常错误信息 -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<beans:property name="basename" value="classpath:security/error-mesaage" />
 	</beans:bean>
 
-	<!-- 未登录的切入点(将验证方式换成自己的表单提交) -->
-	<beans:bean id="myAuthenticationEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+	<!-- 登录切入点 -->
+	<beans:bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
 		<beans:property name="loginFormUrl" value="/background/login"></beans:property>
 	</beans:bean>
 
 
+	<!-- 自定义authenticationProvider -->
+	<beans:bean id="customProvider" class="com.saltedfish.security.custom.CustomAuthenticationProvider" />
 
-	<!-- 实现了UserDetailsService的Bean 用户拥有的权限：登录后取得用户所保有的权限信息 -->
-	<authentication-manager alias="myAuthenticationManager">
-		<authentication-provider user-service-ref="myUserDetailServiceImpl" />
-	</authentication-manager>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<!-- 自定义user-service -->
-	<!-- <beans:bean id="userDetailService" class="com.saltedfish.service.security.UserDetailService"></beans:bean> -->
-
-	<!-- 自定义权限管理，使用自己的user-service -->
-	<!-- <authentication-manager erase-credentials="false" alias="authenticationManager"> <authentication-provider user-service-ref="userDetailService"> 
-		<password-encoder hash="md5" /> </authentication-provider> </authentication-manager> -->
-
-	<!-- CSRF protection. Here we only include the CsrfFilter instead of all of Spring Security. See http://docs.spring.io/spring-security/site/docs/3.2.x/reference/htmlsingle/#csrf 
-		for more information on Spring Security's CSRF protection -->
-	<!-- <beans:bean id="csrfFilter" class="org.springframework.security.web.csrf.CsrfFilter"> <beans:constructor-arg> <beans:bean 
-		class="org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository" /> </beans:constructor-arg> </beans:bean> -->
-	<!-- Provides automatic CSRF token inclusion when using Spring MVC Form tags or Thymeleaf. -->
-	<!-- <beans:bean id="requestDataValueProcessor" class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor" 
-		/> -->
-
-
-	<!-- 验证码过滤器 -->
-	<!-- <beans:bean id="validateCodeAuthenticationFilter" class="com.saltedfish.security.ValidateCodeUsernamePasswordAuthenticationFilter"> 
-		<beans:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"></beans:property> <beans:property 
-		name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"></beans:property> <beans:property name="authenticationManager" 
-		ref="authenticationManager"></beans:property> </beans:bean> -->
-
-
-	<!-- 登录成功 -->
-	<!-- <beans:bean id="loginLogAuthenticationSuccessHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler"> 
-		<beans:property name="defaultTargetUrl" value="/index"></beans:property> </beans:bean> -->
-
-
-	<!-- 登录失败 -->
-	<!-- <beans:bean id="simpleUrlAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler"> 
-		<beans:property name="defaultFailureUrl" value="/login"></beans:property> </beans:bean> -->
+	<!-- 自定义 UsernamePasswordAuthenticationFilter -->
+	<beans:bean id="customLoginFilter" class="com.saltedfish.security.custom.CustomLoginFilter">
+		<!-- 校验登录是否有效的虚拟url -->
+		<beans:property name="filterProcessesUrl" value="/background/check" />
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="usernameParameter" value="username" />
+		<beans:property name="passwordParameter" value="password" />
+		
+		<beans:property name="authenticationSuccessHandler">
+			<!-- 自定义登录成功后的处理handler -->
+			<beans:bean class="com.saltedfish.security.custom.CustomLoginHandler">
+				<!-- 登录成功后的默认url -->
+				<beans:property name="defaultTargetUrl" value="/background/index" />
+			</beans:bean>
+		</beans:property>
+		
+		<beans:property name="authenticationFailureHandler">
+			<beans:bean
+				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<!-- 登录失败后的默认Url -->
+				<beans:property name="defaultFailureUrl" value="/background/login" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
 
 
 </beans:beans> 
