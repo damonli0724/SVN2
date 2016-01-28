@@ -6,27 +6,16 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.context.SecurityContextImpl;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.saltedfish.constants.Constants;
 import com.saltedfish.constants.Url;
 import com.saltedfish.constants.View;
-import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.service.security.UserService;
-import com.saltedfish.utils.CommonUtils;
-import com.saltedfish.utils.PasswordEncodeUtils;
 import com.saltedfish.utils.VerifyCodeUtils;
 
 
@@ -44,10 +33,12 @@ public class BackGroundController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private AuthenticationManager myAuthenticationManager;
-	@Autowired
-	private SessionRegistry sessionRegistry;
+	/*
+	 * @Autowired private AuthenticationManager authenticationManager;
+	 */
+	/*
+	 * @Autowired private SessionRegistry sessionRegistry;
+	 */
 
 	/**
 	 * 跳转首页
@@ -111,40 +102,24 @@ public class BackGroundController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = Url.LOGIN_CHECK, method = RequestMethod.POST)
-	public String loginCheck(HttpServletRequest request, String username, String password) {
-		try {
-			// 账号密码验证码 校验
-			checkUserNameAndPasswordAndCode(request, username, password);
-			// 验证用户账号与密码是否正确
-
-			SysUsers user = userService.selectSysUserByName(username);
-
-			if (user == null || !user.getPassword().trim().equals(PasswordEncodeUtils.encode(password, username, Constants.PASSWORD_KEY))) {
-				throw new AuthenticationServiceException("用户名或者密码不正确");
-			}
-
-			// 判断用户是否已经登录
-			// System.err.println(sessionRegistry.getAllPrincipals() + "=================");
-
-			Authentication authentication = myAuthenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, PasswordEncodeUtils.encode(
-					password, username, Constants.PASSWORD_KEY.trim())));
-			SecurityContext securityContext = SecurityContextHolder.getContext();
-			securityContext.setAuthentication(authentication);
-			HttpSession session = request.getSession(true);
-			session.setAttribute(Constants.SPRING_SECURITY_CONTEXT, securityContext);
-			// 当验证都通过后，把用户信息放在session里
-			request.getSession().setAttribute("userSession", user);
-
-			// 每次用户登录 都会创建一个session,
-
-		} catch (Exception e) {
-			request.setAttribute("message", e.getMessage());
-			return View.LOGIN;
-		}
-
-		return View.INDEX;
-	}
+	/*
+	 * @RequestMapping(value = Url.LOGIN_CHECK, method = RequestMethod.POST) public String
+	 * loginCheck(HttpServletRequest request, String username, String password) { try { // 账号密码验证码
+	 * 校验 checkUserNameAndPasswordAndCode(request, username, password); // 验证用户账号与密码是否正确 SysUsers
+	 * user = userService.selectSysUserByName(username); if (user == null ||
+	 * !user.getPassword().trim().equals(PasswordEncodeUtils.encode(password, username,
+	 * Constants.PASSWORD_KEY))) { throw new AuthenticationServiceException("用户名或者密码不正确"); } //
+	 * 判断用户是否已经登录 // System.err.println(sessionRegistry.getAllPrincipals() + "=================");
+	 * // 认证.... Authentication authentication = myAuthenticationManager.authenticate(new
+	 * UsernamePasswordAuthenticationToken(username, PasswordEncodeUtils.encode( password, username,
+	 * Constants.PASSWORD_KEY.trim()))); SecurityContext securityContext =
+	 * SecurityContextHolder.getContext(); securityContext.setAuthentication(authentication);
+	 * HttpSession session = request.getSession(true);
+	 * session.setAttribute(Constants.SPRING_SECURITY_CONTEXT, securityContext); //
+	 * 当验证都通过后，把用户信息放在session里 request.getSession().setAttribute("userSession", user); // 每次用户登录
+	 * 都会创建一个session, } catch (Exception e) { request.setAttribute("message", e.getMessage());
+	 * return View.LOGIN; } return View.INDEX; }
+	 */
 
 	/**
 	 * 校验用户名，密码，验证码
@@ -152,27 +127,18 @@ public class BackGroundController {
 	 * @param username
 	 * @param password
 	 */
-	private void checkUserNameAndPasswordAndCode(HttpServletRequest request, String username, String password) {
-
-		String requestCaptcha = request.getParameter("code");
-		String sessionCaptcha = (String) request.getSession().getAttribute("randomStr");
-
-		if (!request.getMethod().equals("POST")) {  // 如果不是post请求，默认跳转到登录页面
-			throw new AuthenticationServiceException("请重新登录");
-		}
-
-		if (CommonUtils.isEmpty(username) || CommonUtils.isEmpty(password)) {
-			throw new AuthenticationServiceException("用户名或者密码不能为空");
-		}
-
-		if (StringUtils.isEmpty(requestCaptcha) || StringUtils.isEmpty(sessionCaptcha)) {
-			throw new AuthenticationServiceException("验证码不能为空");
-		}
-
-		if (!sessionCaptcha.equalsIgnoreCase(requestCaptcha)) {
-			throw new AuthenticationServiceException("验证码不正确");
-		}
-	}
+	/*
+	 * private void checkUserNameAndPasswordAndCode(HttpServletRequest request, String username,
+	 * String password) { String requestCaptcha = request.getParameter("code"); String
+	 * sessionCaptcha = (String) request.getSession().getAttribute("randomStr"); if
+	 * (!request.getMethod().equals("POST")) { // 如果不是post请求，默认跳转到登录页面 throw new
+	 * AuthenticationServiceException("请重新登录"); } if (CommonUtils.isEmpty(username) ||
+	 * CommonUtils.isEmpty(password)) { throw new AuthenticationServiceException("用户名或者密码不能为空"); }
+	 * if (StringUtils.isEmpty(requestCaptcha) || StringUtils.isEmpty(sessionCaptcha)) { throw new
+	 * AuthenticationServiceException("验证码不能为空"); } if
+	 * (!sessionCaptcha.equalsIgnoreCase(requestCaptcha)) { throw new
+	 * AuthenticationServiceException("验证码不正确"); } }
+	 */
 
 	/**
 	 * 
