@@ -9,7 +9,7 @@
 	<http security="none" pattern="/background/403" />
 	<http security="none" pattern="/background/timeout" />
 	<http security="none" pattern="/background/login" />
-	<!-- <http security="none" pattern="/background/check" /> -->
+	<!-- <http security="none" pattern="/background/check" /> --> <!--将url 放到这里就会失效 -->
 
 
 	<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
