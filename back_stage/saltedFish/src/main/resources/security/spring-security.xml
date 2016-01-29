@@ -54,7 +54,7 @@
 	<!-- 认证管理 -->	
 	<authentication-manager alias="authenticationManager">
 		<!-- 加入开发人员自定义的Provider -->
-		<authentication-provider ref="customProvider" />
+		<authentication-provider ref="customProvider"/>
 	</authentication-manager>
 	
 
@@ -62,7 +62,7 @@
 
 	<!-- 定义返回异常错误信息 -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<beans:property name="basename" value="classpath:security/error-mesaage" />
+		<beans:property name="basename" value="classpath:security/messages" />
 	</beans:bean>
 
 	<!-- 登录切入点 -->
@@ -94,7 +94,7 @@
 			<beans:bean
 				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
 				<!-- 登录失败后的默认Url -->
-				<beans:property name="defaultFailureUrl" value="/background/login" />
+				<beans:property name="defaultFailureUrl" value="/background/login?error" />
 			</beans:bean>
 		</beans:property>
 	</beans:bean>

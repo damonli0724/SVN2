@@ -1,7 +1,5 @@
 package com.saltedfish.security.custom;
 
-import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,14 +12,7 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
 
-		// 解决中文诗句的post乱码问题
-		try {
-			request.setCharacterEncoding("UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-
-		String username = obtainUsername(request).toUpperCase().trim();
+		String username = obtainUsername(request);
 		String password = obtainPassword(request);
 
 		String requestCaptcha = obtainRequestCaptcha(request);
@@ -36,11 +27,11 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 	}
 
 	protected String obtainRequestCaptcha(HttpServletRequest request) {
-		return request.getParameter(requestCaptchaParameter);
+		return request.getParameter(getRequestCaptchaParameter());
 	}
 
 	protected String obtainSessionCaptcha(HttpServletRequest request) {
-		return (String) request.getSession().getAttribute(requestCaptchaParameter);
+		return (String) request.getSession().getAttribute(getSessionCaptchaParameter());
 	}
 
 	String requestCaptchaParameter = "code";   // 页面输入的验证码
