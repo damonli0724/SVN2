@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.saltedfish.constants.Constants;
 import com.saltedfish.constants.Url;
@@ -88,12 +89,19 @@ public class BackGroundController {
 	 * @return
 	 */
 	@RequestMapping(value = Url.LOGIN, method = RequestMethod.GET)
-	public String login(HttpServletRequest request) {
+	public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout,
+			HttpServletRequest request, ModelMap map) {
 		// 重新登录时销毁该用户的Session
+
 		Object o = request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
 		if (null != o) {
 			request.getSession().removeAttribute(Constants.SPRING_SECURITY_CONTEXT);
 		}
+
+		if (logout != null) {
+			map.addAttribute("msg", "You've been logged out successfully.");
+		}
+
 		return View.LOGIN;
 	}
 

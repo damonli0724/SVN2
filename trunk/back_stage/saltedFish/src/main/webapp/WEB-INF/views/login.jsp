@@ -23,7 +23,12 @@
 <div class="loginWraper">
   <div id="loginform" class="loginBox">
     <form class="form form-horizontal" action="${contextPath}/background/check" method="POST">
-    	<div style="text-align:center"><c:out value="${message}" /></div>
+    	<div style="text-align:center">
+			<c:if test="${not empty msg}">
+				<div class="msg">${msg}</div>
+			</c:if>
+			  ${sessionScope['SPRING_SECURITY_LAST_EXCEPTION'].message} 
+		</div>
       <div class="row cl">
         <label class="form-label col-3"></label>
         <div class="formControls col-8">
