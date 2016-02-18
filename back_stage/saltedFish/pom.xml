@@ -213,6 +213,7 @@
 				</configuration>
 			</plugin>
 			
+		<!-- 配置mybatis自动生成工具 -->	
             <plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
