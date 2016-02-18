@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.saltedfish.cmd.admin.AdminAddCmd;
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysUsers;

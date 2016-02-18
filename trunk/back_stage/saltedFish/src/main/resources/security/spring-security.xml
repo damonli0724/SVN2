@@ -19,7 +19,7 @@
 	<http pattern="/**/**/*.css" security="none" />
 	<http pattern="/**/**/*.js" security="none" />
 
-	
+	<debug/>	
 	<http  use-expressions="true" entry-point-ref="loginEntryPoint">
 		
 		<!-- 替换默认的LogoutFilter -->
@@ -62,7 +62,7 @@
 
 	<!-- 定义返回异常错误信息 -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<beans:property name="basename" value="classpath:security/messages" />
+		<beans:property name="basename" value="classpath:security/messages_custom" />
 	</beans:bean>
 
 	<!-- 登录切入点 -->

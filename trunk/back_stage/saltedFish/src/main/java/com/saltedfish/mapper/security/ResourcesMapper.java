@@ -2,7 +2,6 @@ package com.saltedfish.mapper.security;
 
 import java.util.List;
 
-import com.saltedfish.cmd.admin.ResAddCmd;
 import com.saltedfish.cmd.admin.ResListQueryCmd;
 import com.saltedfish.dto.security.ResourceJsonDTO;
 import com.saltedfish.dto.security.ResourceListDTO;
