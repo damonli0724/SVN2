@@ -1,6 +1,5 @@
 package com.saltedfish.mapper.security;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
