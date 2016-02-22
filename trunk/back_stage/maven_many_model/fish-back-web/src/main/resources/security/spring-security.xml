@@ -1,0 +1,103 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security.xsd">
+	<!-- 登录界面不使用权限过滤 和403页面 -->
+	<http security="none" pattern="/background/randomCode" />
+	<http security="none" pattern="/background/403" />
+	<http security="none" pattern="/background/timeout" />
+	<http security="none" pattern="/background/login" />
+	<!-- <http security="none" pattern="/background/check" /> --> <!--将url 放到这里就会失效 -->
+
+
+	<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
+	<http pattern="/**/**/*.jpg" security="none" />
+	<http pattern="/**/**/*.png" security="none" />
+	<http pattern="/**/**/*.gif" security="none" />
+	<http pattern="/**/**/*.css" security="none" />
+	<http pattern="/**/**/*.js" security="none" />
+
+	<debug/>	
+	<http  use-expressions="true" entry-point-ref="loginEntryPoint">
+		
+		<!-- 替换默认的LogoutFilter -->
+		<!-- <custom-filter ref="customLogoutFilter" position="LOGOUT_FILTER" /> -->
+		
+		<!-- 替换默认的LoginFilter -->
+		<custom-filter ref="customLoginFilter" position="FORM_LOGIN_FILTER" />
+	
+		<!-- 定义没有权限访问页面 -->
+		<!-- <access-denied-handler error-page="/background/403" /> -->
+
+		<!-- 访问url需要的权限 isAuthenticated() permitAll -->
+		<intercept-url pattern="/background/**" access="isAuthenticated()" />
+
+
+		<!-- 退出登陆 清除缓存 -->
+		<!-- <logout logout-url="/background/loginout" logout-success-url="/background/login" invalidate-session="true"
+			delete-cookies="JSESSIONID" /> -->
+
+		<!-- 记住我 -->
+		<!-- <remember-me data-source-ref="dataSource" user-service-ref=""/> -->
+		<!-- <csrf /> -->
+
+		<!-- session管理 过期跳转页面 -->
+		<!-- <session-management invalid-session-url="/background/timeout" session-fixation-protection="none"> 
+		<concurrency-control    max-sessions="1" error-if-maximum-exceeded="true" session-registry-alias="sessionRegistry"/> 
+		</session-management> -->
+		
+	</http>
+
+
+	<!-- 认证管理 -->	
+	<authentication-manager alias="authenticationManager">
+		<!-- 加入开发人员自定义的Provider -->
+		<authentication-provider ref="customProvider"/>
+	</authentication-manager>
+	
+
+    <!-- *************************************************JAVA**BEAN********************************************************* -->
+
+	<!-- 定义返回异常错误信息 -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:security/messages_custom" />
+	</beans:bean>
+
+	<!-- 登录切入点 -->
+	<beans:bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/background/login"></beans:property>
+	</beans:bean>
+
+
+	<!-- 自定义authenticationProvider -->
+	<beans:bean id="customProvider" class="com.saltedfish.security.custom.CustomAuthenticationProvider" />
+
+	<!-- 自定义 UsernamePasswordAuthenticationFilter -->
+	<beans:bean id="customLoginFilter" class="com.saltedfish.security.custom.CustomLoginFilter">
+		<!-- 校验登录是否有效的虚拟url -->
+		<beans:property name="filterProcessesUrl" value="/background/check" />
+		<beans:property name="authenticationManager" ref="authenticationManager" />
+		<beans:property name="usernameParameter" value="username" />
+		<beans:property name="passwordParameter" value="password" />
+		
+		<beans:property name="authenticationSuccessHandler">
+			<!-- 自定义登录成功后的处理handler -->
+			<beans:bean class="com.saltedfish.security.custom.CustomLoginHandler">
+				<!-- 登录成功后的默认url -->
+				<beans:property name="defaultTargetUrl" value="/background/index" />
+			</beans:bean>
+		</beans:property>
+		
+		<beans:property name="authenticationFailureHandler">
+			<beans:bean
+				class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+				<!-- 登录失败后的默认Url -->
+				<beans:property name="defaultFailureUrl" value="/background/login?error" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+
+</beans:beans> 
