@@ -88,7 +88,7 @@ public class BackGroundController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value = Url.LOGIN, method = RequestMethod.GET)
+	@RequestMapping(value = {Url.LOGIN,Url.ROOT}, method = RequestMethod.GET)
 	public String login(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "logout", required = false) String logout,
 			HttpServletRequest request, ModelMap map) {
 		// 重新登录时销毁该用户的Session

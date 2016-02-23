@@ -8,6 +8,7 @@ package com.saltedfish.controller.constants;
 public interface Url {
 	// 登陆注册权限相关
 	public static final String INDEX = "background/index"; // 首页
+	public static final String ROOT="/"; 
 	public static final String _403 = "background/403";// 没有权限跳转页面
 	public static final String LOGIN = "background/login"; // 登陆页面
 	public static final String LOGIN_CHECK = "background/check";// 账户登录校验
@@ -45,5 +46,6 @@ public interface Url {
 	public static final String RESOURCE_LOAD_BY_PARENTID = "background/resource/query/parentId"; // 根据parentId查询加载资源
 	public static final String RESOURCE_DELETE = "background/resource/delete"; // 删除资源
 	public static final String RESOURCE_UPDATE_DATA = "background/resource/update/data";// 修改资源
+	
 
 }
