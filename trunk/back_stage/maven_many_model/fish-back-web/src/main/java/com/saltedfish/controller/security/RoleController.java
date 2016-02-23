@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.saltedfish.cmd.admin.RoleAddCmd;
 import com.saltedfish.constants.Constants;
-import com.saltedfish.constants.Url;
-import com.saltedfish.constants.View;
+import com.saltedfish.controller.constants.Url;
+import com.saltedfish.controller.constants.View;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.entity.security.SysRoles;
 import com.saltedfish.service.security.RoleService;
-import com.saltedfish.service.security.UserService;
 
 
 @Controller

@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.saltedfish.constants.Constants;
-import com.saltedfish.constants.Url;
-import com.saltedfish.constants.View;
+import com.saltedfish.controller.constants.Url;
+import com.saltedfish.controller.constants.View;
 import com.saltedfish.service.security.UserService;
 import com.saltedfish.utils.VerifyCodeUtils;
-
+	
 
 /**
  * 该跳转层功能:
