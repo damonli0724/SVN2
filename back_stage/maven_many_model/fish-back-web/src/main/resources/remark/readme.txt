@@ -22,13 +22,20 @@
 	sqlmap		数据库映射文件
 	
 //------------------------------------------------
-删除资源-->删除资源表数据，删除 角色资源表关联数据
-删除角色-->删除该角色表数据，删除角色资源关联表数据，修改拥有该角色的用户 状态为失效（这种只针对于1对1关联关系）
-删除用户-->删除用户数据
+maven 分模块 开发
+
+fish-data       数据
+fish-back-web  	后台跳转层
+fish-dao 		数据访问层
+fish-service    服务层
+fish-utils		工具层
+fish-parent     父层(用来做聚合和依赖管理)	
 	
-	
-分模块开发--> 
-	
-	
-	
+
+fish-data       数据
+fish-app-web  	APP接口跳转层
+fish-dao 		数据访问层
+fish-service    服务层
+fish-utils		工具层
+fish-parent     父层(用来做聚合和依赖管理)		
 	
