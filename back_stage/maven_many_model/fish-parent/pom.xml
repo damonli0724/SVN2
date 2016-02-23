@@ -5,12 +5,14 @@
     <version>0.0.1-SNAPSHOT</version>
   	<packaging>pom</packaging>
   	
+  	<!--聚合多个模块  -->
   	<modules>
   		<module>../fish-data</module>
   		<module>../fish-dao</module>
   		<module>../fish-service</module>
   		<module>../fish-utils</module>
   		<module>../fish-back-web</module>
+  		<module>../fish-app-web</module>
   	</modules>
   	
   	<properties>
@@ -209,7 +211,48 @@
 					<artifactId>commons-io</artifactId>
 					<version>2.0.1</version>
 				</dependency>
+				
+				<!-- 极光推送 -->
+					<dependency>
+						<groupId>cn.jpush.api</groupId>
+						<artifactId>jpush-client</artifactId>
+						<version>3.1.3</version>
+					</dependency>
+					
+					<dependency>
+			            <groupId>com.google.code.gson</groupId>
+			            <artifactId>gson</artifactId>
+			            <version>2.2.4</version>
+			        </dependency>
+			        <dependency>
+			            <groupId>com.google.guava</groupId>
+			            <artifactId>guava</artifactId>
+			            <version>18.0</version>
+			        </dependency>
+			        <dependency>
+			            <groupId>com.squareup.okhttp</groupId>
+			            <artifactId>mockwebserver</artifactId>
+			            <version>1.5.4</version>
+			            <scope>test</scope>
+			        </dependency>
+			       <!--  <dependency>
+			            <groupId>org.slf4j</groupId>
+			            <artifactId>slf4j-api</artifactId>
+			            <version>1.7.5</version>
+			        </dependency>
+			        <dependency>
+			            <groupId>org.slf4j</groupId>
+			            <artifactId>slf4j-log4j12</artifactId>
+			            <version>1.7.5</version>
+			        </dependency>
+			        <dependency>
+			            <groupId>log4j</groupId>
+			            <artifactId>log4j</artifactId>
+			            <version>1.2.16</version>
+			        </dependency> -->
+			        <!-- 极光推送 -->
 	  		</dependencies>
+	  		
   	</dependencyManagement>
   	
   	<build>
@@ -220,8 +263,9 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.0.2</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>1.7</source>
+						<target>1.7</target>
+						<encoding>utf8</encoding>
 					</configuration>
 				</plugin>
   			</plugins>
