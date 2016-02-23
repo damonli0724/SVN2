@@ -45,5 +45,8 @@ public interface Url {
 	public static final String RESOURCE_LOAD_BY_PARENTID = "background/resource/query/parentId"; // 根据parentId查询加载资源
 	public static final String RESOURCE_DELETE = "background/resource/delete"; // 删除资源
 	public static final String RESOURCE_UPDATE_DATA = "background/resource/update/data";// 修改资源
+	
+	//极光推送
+	public static final String JPUSH_PUSH_MESSAGE ="jpush/pushMessage";
 
 }
