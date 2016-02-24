@@ -1,6 +1,8 @@
 package com.saltedfish.utils;
 
 import java.security.MessageDigest;
+
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 /**
  * 
   * <P> MD5加密算法 </P>
@@ -38,7 +40,15 @@ public class MD5Util {
         }
     }
     
+    public static String MD5(String submitPass, String salt) {
+    	return MD5Util.MD5(submitPass+salt);
+    }
+    
+    
     public static void main(String[] args) {  
         System.out.print(MD5Util.MD5("admin"));  
-    }  
+    }
+
+    
+    
 }  
