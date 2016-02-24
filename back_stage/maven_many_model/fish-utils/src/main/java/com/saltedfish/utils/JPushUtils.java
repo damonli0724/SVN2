@@ -82,9 +82,6 @@ public class JPushUtils {
 	 */
 	public static void sendMessageToALL(String title, String content, String id) {
 		try {
-//			PushPayload payLoad = PushPayload.newBuilder().setPlatform(Platform.all()).setAudience(Audience.registrationId(id))
-//					.setNotification(Notification.alert(content)).setOptions(Options.newBuilder().setApnsProduction(false).build()).build();
-//			JPushUtils.getJpushClient().sendPush(payLoad);
 			PushPayload payLoad =	PushPayload.newBuilder()
             .setPlatform(Platform.all())
             .setAudience(Audience.registrationId(id))
