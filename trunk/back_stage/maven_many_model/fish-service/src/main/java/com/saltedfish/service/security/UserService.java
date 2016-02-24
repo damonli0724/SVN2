@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
@@ -11,12 +12,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saltedfish.cmd.admin.AdminAddCmd;
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
-import com.saltedfish.constants.Constants;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.mapper.security.UserMapper;
 import com.saltedfish.utils.MD5Util;
-import com.saltedfish.utils.PasswordEncodeUtils;
 
 
 @Service
@@ -25,6 +24,8 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 
+	@Autowired
+	private Md5PasswordEncoder md5PasswordEncoder;
 	/**
 	 * <p>查询用户总数</p>
 	 * @return
@@ -64,7 +65,7 @@ public class UserService {
 		sysUser.setDtCreate(new Date());
 		sysUser.setName(cmd.getName());
 		sysUser.setUsername(cmd.getUserName());
-		sysUser.setPassword(PasswordEncodeUtils.encode(cmd.getConfirmPassword(), cmd.getName(), Constants.PASSWORD_KEY));// 密码加密
+		sysUser.setPassword(md5PasswordEncoder.encodePassword(cmd.getConfirmPassword(), cmd.getName()));// 密码加密
 		sysUser.setEmail(cmd.getEmail());
 		sysUser.setMobile(cmd.getMobile());
 		sysUser.setDescription(cmd.getDescription());
