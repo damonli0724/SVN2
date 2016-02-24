@@ -6,6 +6,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.util.StringUtils;
+
+import com.saltedfish.exception.CustomAuthenticationException;
 
 
 public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
@@ -18,8 +21,12 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 		String requestCaptcha = obtainRequestCaptcha(request);
 		String sessionCaptcha = obtainSessionCaptcha(request);
 
+		
+		//验证码检测，如果验证码不同过，就不要进行下面操作了
+		checkCaptcha(requestCaptcha, sessionCaptcha);
+		
 		// 这里将原来的UsernamePasswordAuthenticationToken换成我们自定义的CustomAuthenticationToken
-		CustomAuthenticationToken authRequest = new CustomAuthenticationToken(username, password, requestCaptcha, sessionCaptcha);
+		CustomAuthenticationToken authRequest = new CustomAuthenticationToken(username, password);
 
 		// 这里就将token传到后续验证环节了
 		setDetails(request, authRequest);
@@ -53,4 +60,15 @@ public class CustomLoginFilter extends UsernamePasswordAuthenticationFilter {
 		this.sessionCaptchaParameter = sessionCaptchaParameter;
 	}
 
+	protected void checkCaptcha(String requestCaptcha,String sessionCaptcha) {
+		if (StringUtils.isEmpty(requestCaptcha) || StringUtils.isEmpty(sessionCaptcha)) {
+			throw new CustomAuthenticationException("验证码不能为空");
+		}
+
+		if (!sessionCaptcha.equalsIgnoreCase(requestCaptcha)) {
+			throw new CustomAuthenticationException("验证码不正确");
+		}
+	}
+	
+	
 }
