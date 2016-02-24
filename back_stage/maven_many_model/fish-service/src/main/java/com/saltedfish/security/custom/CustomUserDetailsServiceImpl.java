@@ -1,4 +1,4 @@
-package com.saltedfish.security;
+package com.saltedfish.security.custom;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -13,7 +13,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 import com.saltedfish.dto.UserDTO;
 import com.saltedfish.entity.security.SysResources;
@@ -23,14 +22,7 @@ import com.saltedfish.mapper.security.RoleMapper;
 import com.saltedfish.mapper.security.UserMapper;
 import com.saltedfish.utils.BeanCopierUtils;
 
-
-/**
- * spring-security 核心登陆功能
- * @author lkd
- *
- */
-@Service
-public class MyUserDetailServiceImpl implements UserDetailsService {
+public class CustomUserDetailsServiceImpl implements UserDetailsService{
 
 	protected final Log logger = LogFactory.getLog(getClass());
 
@@ -43,26 +35,22 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
 	@Autowired
 	private ResourcesMapper resourcesMapper;
 
-	public MyUserDetailServiceImpl() {
-		// TODO Auto-generated constructor stub
-	}
 
-	/**
-	 * 根据userName 查询用户,并且加载该用户的所有角色
-	 */
-	public UserDetails loadUserByUsername(String userName) {
+	@Override
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
 
-		SysUsers user = userMapper.selectSysUserByName(userName);
+		SysUsers user = userMapper.selectSysUserByName(username);
 
 		// 用户名或者密码错误
 		if (user == null)
-			throw new UsernameNotFoundException("AbstractAccessDecisionManager.accessDenied");
+			throw new UsernameNotFoundException("该用户不存在！");
 
 		UserDTO userDTO = new UserDTO();
 		BeanCopierUtils.copyProperties(user, userDTO);
-		userDTO.setLoginName(userName);
+		userDTO.setLoginName(username);
 
-		logger.info("======================" + userName + "==========================");
+		logger.info("======================" + username + "==========================");
 
 		Collection<GrantedAuthority> authorities = loadUserAuthorities(user.getUserId());
 
@@ -70,17 +58,17 @@ public class MyUserDetailServiceImpl implements UserDetailsService {
 
 		return userDTO;
 	}
-
+	
 	// 加载角色
-	private Collection<GrantedAuthority> loadUserAuthorities(String userId) {
-		List<SysResources> resources = resourcesMapper.getResourcesByUserId(userId);
-		Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
-		for (SysResources res : resources) {
-			if (res == null)
-				continue;
-			authSet.add(new SimpleGrantedAuthority("ROLE_" + res.getResKey()));
+		private Collection<GrantedAuthority> loadUserAuthorities(String userId) {
+			List<SysResources> resources = resourcesMapper.getResourcesByUserId(userId);
+			Set<GrantedAuthority> authSet = new HashSet<GrantedAuthority>();
+			for (SysResources res : resources) {
+				if (res == null)
+					continue;
+				authSet.add(new SimpleGrantedAuthority("ROLE_" + res.getResKey()));
+			}
+			return authSet;
 		}
-		return authSet;
-	}
 
 }
