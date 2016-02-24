@@ -5,12 +5,22 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 
 /**
  * 
- * <P>自定义CustomAuthenticationToken,添加验证码校验功能</P>
+ * <P>自定义CustomAuthenticationToken  可以添加自定义属性，到后面CustomAuthenticationProvider.additionalAuthenticationChecks 可以进行校验</P>
  * @author LKD
  */
 public class CustomAuthenticationToken extends UsernamePasswordAuthenticationToken {
 
-	private static final long serialVersionUID = 5414106440823275021L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	public CustomAuthenticationToken(Object principal, Object credentials) {
+		super(principal, credentials);
+		// TODO Auto-generated constructor stub
+	}
+
+	/*private static final long serialVersionUID = 5414106440823275021L;
 
 	public CustomAuthenticationToken(String principal, String credentials, String requestCaptcha, String sessionCaptcha) {
 		super(principal, credentials);
@@ -35,6 +45,6 @@ public class CustomAuthenticationToken extends UsernamePasswordAuthenticationTok
 
 	public void setSessionCaptcha(String sessionCaptcha) {
 		this.sessionCaptcha = sessionCaptcha;
-	}
+	}*/
 
 }
