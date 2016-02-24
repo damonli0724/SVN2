@@ -19,8 +19,8 @@
 	<http pattern="/**/**/*.css" security="none" />
 	<http pattern="/**/**/*.js" security="none" />
 
-	<debug/>	
-	<http  use-expressions="true" entry-point-ref="loginEntryPoint">
+	<!-- <debug/> -->	
+	<http  use-expressions="true" entry-point-ref="loginEntryPoint" >
 		
 		<!-- 替换默认的LogoutFilter -->
 		<!-- <custom-filter ref="customLogoutFilter" position="LOGOUT_FILTER" /> -->
@@ -50,15 +50,41 @@
 		
 	</http>
 
-
+	
+	<!-- ********************************认证管理器********************************************************************************************************** -->
 	<!-- 认证管理 -->	
 	<authentication-manager alias="authenticationManager">
 		<!-- 加入开发人员自定义的Provider -->
 		<authentication-provider ref="customProvider"/>
 	</authentication-manager>
 	
-
-    <!-- *************************************************JAVA**BEAN********************************************************* -->
+	
+	<!-- 登录认证处理   作用:密码校验(/盐加密)--> 
+	<beans:bean id="customProvider" class="com.saltedfish.security.custom.CustomAuthenticationProvider" >
+		<!-- 不支持匿名用户登录 -->
+		<beans:property name="hideUserNotFoundExceptions" value="false"/> 
+		<!-- 自定义UserDetailsService -->
+		<beans:property name="userDetailsService" ref="customUserDetailsService"/>
+		<!-- 加密方式 --> 
+		<beans:property name="passwordEncoder" ref="passwordEncoder"/>
+		<!-- 配置加密盐值 -->  
+		<beans:property name="saltSource" ref="saltSource"/>
+	</beans:bean>
+	
+	<!-- 自定义UserdetailsService 作用:查询用户，以及所拥有的权限-->
+	<beans:bean id="customUserDetailsService" class="com.saltedfish.security.custom.CustomUserDetailsServiceImpl"/>
+	
+	 <!-- 加密方式 -->  
+     <beans:bean id="passwordEncoder"  
+         class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />  
+   
+     <!-- 配置加密盐值 -->  
+     <beans:bean id="saltSource"  
+         class="org.springframework.security.authentication.dao.ReflectionSaltSource">  
+         <!-- 加密盐为      MD5(密码{登录名})  -->
+         <beans:property name="userPropertyToUse" value="username" />  
+     </beans:bean>  
+	<!-- ********************************授权管理********************************************************************************************************** -->
 
 	<!-- 定义返回异常错误信息 -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
@@ -71,8 +97,7 @@
 	</beans:bean>
 
 
-	<!-- 自定义authenticationProvider -->
-	<beans:bean id="customProvider" class="com.saltedfish.security.custom.CustomAuthenticationProvider" />
+	
 
 	<!-- 自定义 UsernamePasswordAuthenticationFilter -->
 	<beans:bean id="customLoginFilter" class="com.saltedfish.security.custom.CustomLoginFilter">
@@ -98,6 +123,5 @@
 			</beans:bean>
 		</beans:property>
 	</beans:bean>
-
 
 </beans:beans> 
