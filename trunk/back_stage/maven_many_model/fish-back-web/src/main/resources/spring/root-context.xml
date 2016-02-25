@@ -10,8 +10,13 @@
 	<context:component-scan base-package="com.saltedfish"></context:component-scan>
 
 
+	<!-- mybatis集成 -->
 	<import resource="classpath:springdb/access-db.xml" />
+	<!-- spring security 集成 -->
 	<import resource="classpath:security/spring-security.xml"/>
+	<!-- redis集成 -->	
+	<import resource="classpath:spring-redis/spring-redis.xml" />
+	
 	
 	
 </beans>
