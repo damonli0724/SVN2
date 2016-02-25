@@ -24,7 +24,7 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 
-	@Autowired
+	@Autowired(required = false)
 	private Md5PasswordEncoder md5PasswordEncoder;
 	/**
 	 * <p>查询用户总数</p>
