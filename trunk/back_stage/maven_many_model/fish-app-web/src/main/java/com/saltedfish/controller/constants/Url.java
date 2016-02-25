@@ -48,5 +48,8 @@ public interface Url {
 	
 	//极光推送
 	public static final String JPUSH_PUSH_MESSAGE ="jpush/pushMessage";
+	//短信发送
+	public static final String SMS_SEND_MESSAGE="smm/sendMessage";
+	
 
 }
