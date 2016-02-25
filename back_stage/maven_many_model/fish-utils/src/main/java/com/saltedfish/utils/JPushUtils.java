@@ -110,5 +110,6 @@ public class JPushUtils {
 		// JPushUtils.sendMessageToAll("再来一遍？");
 			
 			JPushUtils.sendMessageToALL("title", "fdsfsdfdsfdsfsdfdsf", "101d85590944c0b4593");
+			
 	}
 }
