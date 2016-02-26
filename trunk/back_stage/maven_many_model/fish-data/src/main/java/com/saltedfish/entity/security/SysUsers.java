@@ -7,6 +7,7 @@
  ******************************************************************************/
 package com.saltedfish.entity.security;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
@@ -14,8 +15,9 @@ import java.util.Date;
  * <P>TODO</P>
  * @author lkd
  */
-public class SysUsers {
+public class SysUsers implements Serializable{
 
+	private static final long serialVersionUID = 1L;
 	private String userId;
 	private String username;
 	private String name;
