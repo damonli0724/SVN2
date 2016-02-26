@@ -7,7 +7,7 @@
   	
   	<!--聚合多个模块  -->
   	<modules>
-  		<module>../fish-data</module>
+  		<module>../fish-data</module> 
   		<module>../fish-dao</module>
   		<module>../fish-service</module>
   		<module>../fish-utils</module>
@@ -255,11 +255,12 @@
 				        <artifactId>spring-data-redis</artifactId>  
 				        <version>1.0.2.RELEASE</version>  
 				    </dependency> 
-					<dependency>
-						<groupId>redis.clients</groupId>
-						<artifactId>jedis</artifactId>
-						<version>2.7.3</version>
-					</dependency>
+				    
+					<dependency>  
+				        <groupId>redis.clients</groupId>  
+				        <artifactId>jedis</artifactId>  
+				        <version>2.1.0</version>  
+				    </dependency>  
 	  		</dependencies>
 	  		
   	</dependencyManagement>
