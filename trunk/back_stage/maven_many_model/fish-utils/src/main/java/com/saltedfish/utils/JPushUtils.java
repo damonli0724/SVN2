@@ -15,6 +15,7 @@ import cn.jpush.api.push.model.Options;
 import cn.jpush.api.push.model.Platform;
 import cn.jpush.api.push.model.PushPayload;
 import cn.jpush.api.push.model.audience.Audience;
+import cn.jpush.api.push.model.notification.AndroidNotification;
 import cn.jpush.api.push.model.notification.IosNotification;
 import cn.jpush.api.push.model.notification.Notification;
 
@@ -25,8 +26,8 @@ import cn.jpush.api.push.model.notification.Notification;
  * @author lkd
  */
 public class JPushUtils {
-	private static final String appKey = "1c18605f35cd334d5cec4df5";
-	private static final String masterSecret = "73d466f60c7392003d660d17";
+	private static final String appKey = "43fd4d2ad1e2c2562aa1ac72";
+	private static final String masterSecret = "03568170972bd082228dd08b";
 	public static final String REGISTRATION_ID = "101d85590944c0b4593";
 	public static final String TAG = "";
 	public static final String HOST_NAME = "https://api.jpush.cn";
@@ -86,9 +87,10 @@ public class JPushUtils {
             .setPlatform(Platform.all())
             .setAudience(Audience.registrationId(id))
             .setNotification(Notification.newBuilder()
+            		.addPlatformNotification(AndroidNotification.newBuilder().setAlert(content).setTitle(title).build())
                     .addPlatformNotification(IosNotification.newBuilder()
                             .setAlert(content)
-                            .setBadge(5)
+                            .setBadge(+1)
                             .setSound("happy.caf")
                             .build())
                     .build())
@@ -102,14 +104,46 @@ public class JPushUtils {
 			logger.error("=============极光推送异常=============:" + e.getMessage());
 		}
 	}
+	
+	
 
+	/**
+	 * 发送至=====Android===== 用户accountId指定发送消息
+	 * <p>TODO</p>
+	 * @param content 内容
+	 * @param title   标题
+	 * @param accountId 用户id
+	 * @throws Exception
+	 * @author lkd
+	 */
+	public static void sendMessageToAndroid(String title, String content, String id) {
+		try {
+			PushPayload payLoad =	PushPayload.newBuilder()
+            .setPlatform(Platform.all())
+            .setAudience(Audience.registrationId(id))
+            .setNotification(Notification.newBuilder()
+                    .addPlatformNotification(AndroidNotification.newBuilder()
+                            .setAlert(content)
+                            .build())
+                    .build())
+             .setOptions(Options.newBuilder()
+                     .setApnsProduction(false)
+                     .build())
+             .build();
+			
+			JPushUtils.getJpushClient().sendPush(payLoad);
+		} catch (Exception e) {
+			logger.error("=============极光推送异常=============:" + e.getMessage());
+		}
+	}
 	
 	public static void main(String[] args) throws Exception {
 		// JPushUtils.sendMessageToAndroidAndIos("标题-----------", "内容------------", 297);
 		// JPushUtils.sendMessageToIos("标题--(个人推送)", "内容--(xxxx)", 304);
 		// JPushUtils.sendMessageToAll("再来一遍？");
 			
-			JPushUtils.sendMessageToALL("title", "fdsfsdfdsfdsfsdfdsf", "101d85590944c0b4593");
+			//JPushUtils.sendMessageToALL("title", "fdsfsdfdsfdsfsdfdsf", "101d85590944c0b4593");
+			JPushUtils.sendMessageToALL("标题", "内容", "101d85590944c0b4593");
 			
 	}
 }
