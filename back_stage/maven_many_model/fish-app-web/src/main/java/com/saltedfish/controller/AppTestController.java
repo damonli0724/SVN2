@@ -14,8 +14,11 @@ import com.saltedfish.constants.Constants;
 import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.controller.constants.Url;
 import com.saltedfish.dto.BaseResultDTO;
+import com.saltedfish.dto.UserDTO;
+import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.exception.SMSException;
 import com.saltedfish.sms.SmsSendService;
+import com.saltedfish.utils.RedisUtil;
 
 
 @Controller
@@ -26,26 +29,32 @@ public class AppTestController extends BaseController {
 	
 	@Autowired
 	private SmsSendService smsSendService;
+	@Autowired
+	private RedisUtil redisUtil;
 
 
 	/**
-	 * 管理员列表数据加载
+	 * redis 测试
+	 * @param cmd
+	 * @param startPage
+	 * @param pageSize
 	 * @return
-	 *//*
+	 */
 	@RequestMapping(value = Url.ADMIN_LIST_DATA, method = RequestMethod.GET)
 	@ResponseBody
-	public BaseResultDTO<List<UserListDTO>> adminDataLoad(AdminListQueryCmd cmd, Integer startPage, Integer pageSize) {
-		logger.info("=====adminDataLoad====" + cmd.toString());
-		BaseResultDTO<List<UserListDTO>> result = new BaseResultDTO<List<UserListDTO>>();
-		List<UserListDTO> user = userService.queryUsers(cmd);
-
-		Integer count = userService.queryUsersCount(cmd);
-		result.setResult(user);
-		result.setCount(count);
+	public BaseResultDTO<String> adminDataLoad() {
+		BaseResultDTO<String> result = new BaseResultDTO<String>();
 		result.setStatus(Constants.R_STATUS_SUCCESS);
+		System.err.println(redisUtil.exists("lkd")+"==============================");
+		SysUsers user = new SysUsers();
+		user.setDepName("=======================================");
+		redisUtil.set("lkd", user);
+		System.err.println(redisUtil.exists("lkd")+"==============================");
+		user = (SysUsers)redisUtil.get("lkd");
+		System.err.println(user.toString()+"===========================");
 		result.setMessage("query success!");
 		return result;
-	}*/
+	}
 
 	/**
 	 * 手机短信发送

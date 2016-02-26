@@ -21,7 +21,7 @@
 	<!-- mybatis集成 -->	
 	<import resource="classpath:springdb/access-db.xml" />
 	 <!-- redis集成 -->
-	 <!--<import resource="classpath:spring-redis/spring-redis.xml" /> -->
+	  <import resource="classpath:spring-redis/spring-redis.xml" /> 
 	
 	
 </beans>
