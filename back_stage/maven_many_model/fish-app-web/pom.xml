@@ -160,6 +160,17 @@
 			<artifactId>servlet-api</artifactId>
 		</dependency>
 		
+		<!--  -->
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		
+		<!-- Hibernate Validator  -->
+		 <dependency>  
+		       <groupId>org.hibernate</groupId>  
+		       <artifactId>hibernate-validator</artifactId>  
+		 </dependency>
 	
 	</dependencies>
 </project>

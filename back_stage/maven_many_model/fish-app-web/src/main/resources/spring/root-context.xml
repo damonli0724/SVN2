@@ -9,7 +9,7 @@
 
 	<context:component-scan base-package="com.saltedfish"/>
 	
-	<!-- 使用注解的方式在家资源文件s -->
+	<!-- 使用注解的方式在家资源文件-->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<array>
