@@ -22,9 +22,15 @@ public interface Constants {
 
 	public static final String PASSWORD_KEY = "XLlWePlTYe2l3vpPuQJMUGvUtJJwjqYQ";  // 密码加密用到的key
 
+	//菜单
 	public static final Integer RESOURCE_MENU = 0;  // 主菜单
 	public static final Integer RESOURCE_CHID_MENU = 1; // 子菜单
 	public static final Integer RESOURCE_CHILD_BTN = 2; // 子菜单中的按钮
 	public static final Integer RESOURCE_TREE_ROOT_ID = 0;// 权限树根节点ID
 
+	//账户是否冻结
+	public static final String ACCOUNT_FREEZE = "freeze";
+	public static final String ACCOUNT_FREEZE_Y = "0";
+	public static final String ACCOUNT_FREEZE_N = "1";
+	
 }

@@ -8,8 +8,11 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
-	<mvc:annotation-driven/>
+	<!-- mvc注解  use hibernate validate-->
+	<mvc:annotation-driven validator="validator"/>
+	
+	<!-- 导入controller配置 -->
+	<beans:import resource="controllers.xml" />
 
 	<!-- 允许访问的静态资源 -->
 	<mvc:resources mapping="/images/**" location="/images/" />
@@ -22,30 +25,27 @@
 	
 	
 	<!-- 请求跳转的页面 前后缀配置 -->
-	<beans:bean
-		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
 
 	<!-- 上传文件配置 -->
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
 
 	<!-- @ResponseBody注解支持-开始 -->
-    <beans:bean id="mappingJacksonHttpMessageConverter"
-        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+    <beans:bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
         <beans:property name="supportedMediaTypes">
             <beans:list>
                 <beans:value>application/json;charset=UTF-8</beans:value>
             </beans:list>
         </beans:property>
     </beans:bean>
-    <beans:bean
-        class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
-    <beans:bean
-        class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+    
+    <beans:bean  class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+    
+    <beans:bean  class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <beans:property name="messageConverters">
             <beans:list>
                 <beans:bean id="utf8StringHttpMessageConverter" class="com.saltedfish.utils.UTF8StringHttpMessageConverter" />
@@ -55,8 +55,29 @@
     </beans:bean>
     <!-- @ResponseBody注解支持-结束 -->
 	
-	<beans:import resource="controllers.xml" />
-
+	<!-- task定时任务注解 -->
 	<task:annotation-driven />
+	
+    <!-- 以下 validator  ConversionService 在使用 mvc:annotation-driven 会 自动注册-->  
+    <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">  
+        <beans:property name="providerClass" value="org.hibernate.validator.HibernateValidator"/>  
+        <!-- 如果不加默认到 使用classpath下的 ValidationMessages.properties -->  
+        <beans:property name="validationMessageSource" ref="messageSource"/>  
+    </beans:bean>  
+       
+    <!-- 国际化的消息资源文件（本系统中主要用于显示/错误消息定制） -->  
+    <beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">  
+        <beans:property name="basenames">  
+            <beans:list>  
+                <!-- 在web环境中一定要定位到classpath 否则默认到当前web应用下找  -->  
+                <beans:value>classpath:validationMessages/validation</beans:value>  
+            </beans:list>  
+        </beans:property>  
+        <beans:property name="useCodeAsDefaultMessage" value="false"/>  
+        <beans:property name="defaultEncoding" value="UTF-8"/>  
+        <beans:property name="cacheSeconds" value="60"/>  
+    </beans:bean>
+	
+	
 
 </beans:beans>
