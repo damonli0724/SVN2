@@ -47,5 +47,10 @@ public interface Url {
 	public static final String RESOURCE_DELETE = "background/resource/delete"; // 删除资源
 	public static final String RESOURCE_UPDATE_DATA = "background/resource/update/data";// 修改资源
 	
+	//excel导入功能
+	public static final String EXCEL_ADD_PAGE="excel/add/page"; //excel添加功能页面
+	public static final String EXCEL_ADD_DATA = "excel/add/page/data"; //excel添加数据
+	
+	
 
 }

@@ -111,7 +111,6 @@
 				<groupId>cn.jpush.api</groupId>
 				<artifactId>jpush-client</artifactId>
 			</dependency>
-			
 			<dependency>
 	            <groupId>com.google.code.gson</groupId>
 	            <artifactId>gson</artifactId>
@@ -136,5 +135,12 @@
 				<groupId>redis.clients</groupId>
 				<artifactId>jedis</artifactId>
 			</dependency>
+			
+			<!-- Poi -->
+		    <dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+			</dependency>
+			
   </dependencies>
 </project>

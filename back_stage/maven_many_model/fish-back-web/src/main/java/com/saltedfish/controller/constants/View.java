@@ -31,5 +31,8 @@ public interface View {
 	public static final String RESOURCE_LIST_VIEW = "/resource/resource-list";
 	public static final String RESOURCE_ADD_VIEW = "/resource/resource-add";
 	public static final String RESOURCE_UPDATE_VIEW = "/resource/resource-update";
+	
+	// =============================资源管理===================================
+	public static final String EXCEL_ADD_VIEW = "/excel/excel-add";
 
 }

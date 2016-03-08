@@ -275,6 +275,26 @@
 					       <version>5.0.2.Final</version>  
 					 </dependency>
 				    
+				    <!-- Poi -->
+				    <dependency>
+						<groupId>org.apache.poi</groupId>
+						<artifactId>poi</artifactId>
+						<version>3.9</version>
+					</dependency>
+					<!-- fastJson -->
+					<dependency>
+						<groupId>com.alibaba</groupId>
+						<artifactId>fastjson</artifactId>
+						<version>1.1.15</version>
+					</dependency>
+					
+					<!--ExcelToEntity -->
+					<dependency>
+				        <groupId>cc.aicode.java.e2e</groupId>
+				        <artifactId>ExcelToEntity</artifactId>
+				        <version>1.0.0.3</version>
+			   		 </dependency>
+				    
 	  		</dependencies>
 	  		
   	</dependencyManagement>
