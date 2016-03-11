@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 3.0//EN" "http://getahead.org/dwr/dwr30.dtd">  
+<dwr>  
+  <allow>  
+    <create creator="new" javascript="service" scope="application">  
+        <param name="class" value="com.saltedfish.service.dwr.DwrTestService"></param>  
+    </create>  
+    
+    <!-- DWR实时推送 -->
+    <create creator="new" javascript="MessagePush" scope="application">  
+        <param name="class" value="com.saltedfish.service.dwr.MessagePush"></param>  
+    </create>  
+    <create creator="new" javascript="TestPush" scope="application">  
+        <param name="class" value="com.saltedfish.service.dwr.Test"></param>  
+    </create>  
+    
+    
+  </allow>  
+</dwr>  

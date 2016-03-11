@@ -53,6 +53,11 @@
   <listener>
     <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
   </listener>
+  <session-config>
+    <session-timeout>30</session-timeout>
+  </session-config>
+  
+  <!-- 配置springmvc -->
   <servlet>
     <servlet-name>appServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -67,7 +72,60 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  <session-config>
-    <session-timeout>30</session-timeout>
-  </session-config>
+  
+  <!-- 配置DWR -->
+   <servlet>  
+     <servlet-name>dwr-invoker</servlet-name>  
+        <servlet-class>  
+            org.directwebremoting.servlet.DwrServlet  
+        </servlet-class>  
+        
+        <init-param>  
+            <param-name>crossDomainSessionSecurity</param-name>  
+               <param-value>false</param-value>  
+        </init-param>  
+            
+        <init-param>  
+          <param-name>allowScriptTagRemoting</param-name>  
+          <param-value>true</param-value>  
+        </init-param>  
+  
+        <init-param>  
+          <param-name>classes</param-name>  
+          <param-value>java.lang.Object</param-value>  
+        </init-param>  
+  
+        <init-param>  
+            <param-name>activeReverseAjaxEnabled</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+  
+        <init-param>  
+           <param-name>initApplicationScopeCreatorsAtStartup</param-name>  
+           <param-value>true</param-value>  
+        </init-param>  
+  
+        <init-param>  
+            <param-name>maxWaitAfterWrite</param-name>  
+            <param-value>3000</param-value>  
+        </init-param>  
+  
+        <init-param>  
+            <param-name>debug</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+  
+        <init-param>  
+            <param-name>logLevel</param-name>  
+            <param-value>WARN</param-value>  
+        </init-param>  
+  </servlet>  
+  
+  <servlet-mapping>  
+    <servlet-name>dwr-invoker</servlet-name>  
+    <url-pattern>/dwr/*</url-pattern>  
+  </servlet-mapping>  
+  
+  
+  
 </web-app>

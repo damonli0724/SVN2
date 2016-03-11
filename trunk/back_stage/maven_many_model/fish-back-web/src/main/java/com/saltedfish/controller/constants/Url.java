@@ -4,6 +4,7 @@ package com.saltedfish.controller.constants;
  * <p>=====请求=====</p>
  * @author lkd
  *
+ *注意:凡是加了background的，都会经过spring security进行权限过滤
  */
 public interface Url {
 	// 登陆注册权限相关
@@ -50,6 +51,11 @@ public interface Url {
 	//excel导入功能
 	public static final String EXCEL_ADD_PAGE="excel/add/page"; //excel添加功能页面
 	public static final String EXCEL_ADD_DATA = "excel/add/page/data"; //excel添加数据
+	
+	//dwr测试页面
+	public static final String DWR_TEST_PAGE = "dwrr/test/page";//dwr测试页面 
+	public static final String  DWR_SEND_PAGE = "dwrr/send/page"; //消息发送页面
+	public static final String DWR_RECIVE_PAGE ="dwrr/recive/page";//消息接受页面
 	
 	
 
