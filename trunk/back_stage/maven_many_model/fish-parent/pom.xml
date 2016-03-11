@@ -295,6 +295,13 @@
 				        <version>1.0.0.3</version>
 			   		 </dependency>
 				    
+				    <!-- DWR -->
+				    <dependency>
+						<groupId>org.directwebremoting</groupId>
+						<artifactId>dwr</artifactId>
+						<version>3.0.1-RELEASE</version>
+					</dependency>
+				    
 	  		</dependencies>
 	  		
   	</dependencyManagement>
