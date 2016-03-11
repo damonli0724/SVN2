@@ -34,5 +34,9 @@ public interface View {
 	
 	// =============================资源管理===================================
 	public static final String EXCEL_ADD_VIEW = "/excel/excel-add";
+	// =============================DWR测试===================================
+	public static final String DWR_TEST_VIEW = "/dwr/dwr-test";
+	public static final String DWR_SEND_VIEW = "/dwr/dwr-send";
+	public static final String DWR_REVICE_VIEW = "/dwr/dwr-revice";
 
 }

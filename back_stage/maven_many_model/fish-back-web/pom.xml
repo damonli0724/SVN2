@@ -1,54 +1,54 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-		<parent>
+	<parent>
 		<groupId>com.saltedfish</groupId>
 		<artifactId>fish-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../fish-parent/pom.xml</relativePath>
-		</parent>
+	</parent>
 
-  <artifactId>fish-back-web</artifactId>
-  <packaging>war</packaging>
+	<artifactId>fish-back-web</artifactId>
+	<packaging>war</packaging>
 
-  <name>fish-back-web</name>
-  <url>http://maven.apache.org</url>
+	<name>fish-back-web</name>
+	<url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 
-  <dependencies>
-  		<!-- 加入dao层依赖 -->
-  	<dependency>
-  		<artifactId>fish-dao</artifactId>
- 		<groupId>${project.groupId}</groupId>
- 		<version>${project.version}</version>
-  	</dependency>
-  
-  <!-- 加入数据层依赖 -->
-  <dependency>
-  		<artifactId>fish-data</artifactId>
- 		<groupId>${project.groupId}</groupId>
- 		<version>${project.version}</version>
- 	</dependency>
- 	
- 	<!-- 加入utils依赖 -->
- 	<dependency>
-  		<artifactId>fish-utils</artifactId>
- 		<groupId>${project.groupId}</groupId>
- 		<version>${project.version}</version>
- 	</dependency>
- 	
- 	<!-- 加入service依赖 -->
- 	<dependency>
-  		<artifactId>fish-service</artifactId>
- 		<groupId>${project.groupId}</groupId>
- 		<version>${project.version}</version>
- 	</dependency>
-  	
-    <!-- Spring -->
+	<dependencies>
+		<!-- 加入dao层依赖 -->
+		<dependency>
+			<artifactId>fish-dao</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- 加入数据层依赖 -->
+		<dependency>
+			<artifactId>fish-data</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- 加入utils依赖 -->
+		<dependency>
+			<artifactId>fish-utils</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- 加入service依赖 -->
+		<dependency>
+			<artifactId>fish-service</artifactId>
+			<groupId>${project.groupId}</groupId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
@@ -148,35 +148,35 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 		</dependency>
-		
+
 		<!-- @ResponseBody配置 -->
 		<dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-core</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-lgpl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-asl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-core-asl</artifactId>
-        </dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-lgpl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
 
-		<!-- 添加servlet 依赖 --> 
+		<!-- 添加servlet 依赖 -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 		</dependency>
-		
+
 		<!-- Redis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
@@ -187,16 +187,19 @@
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 		</dependency>
-		
+
 		<!--ExcelToEntity -->
 		<dependency>
-	        <groupId>cc.aicode.java.e2e</groupId>
-	        <artifactId>ExcelToEntity</artifactId>
-   		 </dependency>
-   		 <!-- commons-lang -->
-   		 <dependency>
+			<groupId>cc.aicode.java.e2e</groupId>
+			<artifactId>ExcelToEntity</artifactId>
+		</dependency>
+		<!-- commons-lang -->
+		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
-</dependency>
-  </dependencies>
+		</dependency>
+
+
+
+	</dependencies>
 </project>
