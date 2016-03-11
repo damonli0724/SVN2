@@ -152,7 +152,11 @@
 				<groupId>org.apache.poi</groupId>
 				<artifactId>poi</artifactId>
 			</dependency>
-				
-			
+		  <!-- DWR -->
+		    <dependency>
+				<groupId>org.directwebremoting</groupId>
+				<artifactId>dwr</artifactId>
+			</dependency>
+		
   </dependencies>
 </project>
