@@ -1,12 +1,17 @@
 package com.saltedfish.controller.security;
 
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.saltedfish.constants.Constants;
 import com.saltedfish.controller.constants.Url;
 import com.saltedfish.controller.constants.View;
+import com.saltedfish.dto.security.UserListDTO;
+import com.saltedfish.entity.security.SysUsers;
+import com.saltedfish.service.security.RoleService;
 import com.saltedfish.service.security.UserService;
 import com.saltedfish.utils.VerifyCodeUtils;
 	
@@ -33,6 +41,9 @@ public class BackGroundController {
 
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private RoleService roleService;
 
 	/*
 	 * @Autowired private AuthenticationManager authenticationManager;
@@ -49,37 +60,18 @@ public class BackGroundController {
 	 */
 	@RequestMapping(value = Url.INDEX, method = RequestMethod.GET)
 	public String index(HttpServletRequest request, ModelMap map) {
-
-		SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
-
-		// 访问首页的话，则看看是否记住我，如果是记住我的话，则可以直接访问...
-		// // 登录名
-		// System.out.println("登陆名-->:" + securityContextImpl.getAuthentication().getName());
-		// // 登录密码，未加密的
-		// System.out.println("登录密码，未加密的-->" +
-		// securityContextImpl.getAuthentication().getCredentials());
-
-		//
-		// WebAuthenticationDetails details = (WebAuthenticationDetails)
-		// securityContextImpl.getAuthentication().getDetails();
-		// // 获得访问地址
-		// System.out.println("RemoteAddress" + details.getRemoteAddress());
-		// // 获得sessionid
-		// System.out.println("SessionId-->" + details.getSessionId());
-		// // 获得当前用户所拥有的权限
-		// List<GrantedAuthority> authorities = (List<GrantedAuthority>)
-		// securityContextImpl.getAuthentication().getAuthorities();
-		//
-		// String ip = request.getLocalAddr();
-		//
-		// for (GrantedAuthority grantedAuthority : authorities) {
-		// System.out.println("Authority-->" + grantedAuthority.getAuthority());
-		// }
-		//
-		// map.addAttribute("ip", ip);
-		//
-		// logger.info("=======================log日志登陆首页=============================");
-
+		 HttpSession session  = request.getSession(false);
+		 SecurityContextImpl securityContextImpl = (SecurityContextImpl) request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
+		 
+		 String loginName  =  securityContextImpl.getAuthentication().getName();
+		 SysUsers sysUser =userService.selectSysUserByName(loginName);
+		 
+		 /**
+		  * 可以从session中获取用户信息和角色信息
+		  */
+		 UserListDTO  user =userService.queryUsersById(Integer.valueOf(sysUser.getUserId()));
+		 session.setAttribute("user", user);
+		 
 		return View.INDEX;
 	}
 

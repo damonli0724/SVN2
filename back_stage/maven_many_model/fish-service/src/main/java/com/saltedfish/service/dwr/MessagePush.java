@@ -16,12 +16,8 @@ public class MessagePush {
 	  
 	       DwrScriptSessionManagerUtil dwrScriptSessionManagerUtil = new DwrScriptSessionManagerUtil();  
 	       try {  
-	  
 	              dwrScriptSessionManagerUtil.init();  
-	              System.out.println("cacaca");  
-	  
 	       } catch (ServletException e) {  
-	  
 	              e.printStackTrace();  
 	  
 	       }  

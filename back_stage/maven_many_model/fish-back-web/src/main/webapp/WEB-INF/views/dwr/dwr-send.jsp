@@ -3,6 +3,7 @@
 String path = request.getContextPath();  
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";  
 %>  
+<%@ include file="/WEB-INF/views/base/base.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">  
 <html>  
   <head>  
@@ -13,26 +14,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="expires" content="0">      
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">  
     <meta http-equiv="description" content="This is my page">  
+     <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
     <script type='text/javascript' src='<%=basePath%>dwr/engine.js'></script>  
     <script type='text/javascript' src='<%=basePath%>dwr/util.js'></script>  
     <script type='text/javascript' src='<%=basePath%>dwr/interface/TestPush.js'></script>  
-      
+   
     <script type="text/javascript">  
-    //推送信息 xxxx 
-    function showMessage(autoMessage){  
-   }  
+    //推送信息 
+    
+   	function showMessage(message){
+    	$("#contentId").append("<li>"+message+"</li>");
+    }
     function test() {  
         var msg = document.getElementById("msgId").value;  
-        //msg = {msgId: '1', context: $("#msgContext").val()};  
-        TestPush.sendMessageAuto(msg,"哈哈哈");  
+        TestPush.sendMessageAuto(msg,$("#sendId").val());  
     }  
     </script>  
   </head>  
     
   <body>  
-    id&nbsp;&nbsp;&nbsp;&nbsp;: <input type="text" name="msgId" id="msgId" /> <br />  
+    <input type="hidden" name="msgId" id="msgId" /> <br />  
+    	<ul id="contentId">
+		  <li>Coffee</li>
+		</ul>
      
-    <input type="button" value="Send" onclick="test()"  />  
-      
+      发送的内容:
+   <input type="text"  id ="sendId">  <input type="button"  value="Send" onclick="test()"  />
   </body>  
 </html>  
