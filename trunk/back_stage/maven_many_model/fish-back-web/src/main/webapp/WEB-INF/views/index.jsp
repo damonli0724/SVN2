@@ -28,15 +28,15 @@
 		</ul>
 	</nav>
 	<ul class="Hui-userbar">
-		<li>超级管理员</li>
-		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">admin <i class="Hui-iconfont">&#xe6d5;</i></a>
+		<li>${user.roleName}</li>
+		<li class="dropDown dropDown_hover"><a href="#" class="dropDown_A">${user.name}(${user.username})<i class="Hui-iconfont">&#xe6d5;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="#">个人信息</a></li>
 				<li><a href="${contextPath}/background/loginout">切换账户</a></li>
 				<li><a href="${contextPath}/background/loginout">退出</a></li>
 			</ul>
 		</li>
-		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">1</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">2</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
 		<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
@@ -138,6 +138,23 @@
 				</ul>
 			</dd>
 		</dl>
+		
+		<dl id="menu-admin">
+			<dt><i class="Hui-iconfont">&#xe62d;</i> DWR测试<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+					<sec:authorize ifAnyGranted="ROLE_sys_user_list">
+						<li><a _href="${contextPath}/dwrr/send/page" href="javascript:void(0)">推送页面</a></li>
+					</sec:authorize>
+					
+					<sec:authorize ifAnyGranted="ROLE_sys_role_list">
+						<li><a _href="${contextPath}/dwrr/recive/page" href="javascript:void(0)">接受页面</a></li>
+					</sec:authorize>
+				</ul>
+			</dd>
+		</dl>
+		
+		
 		<dl id="menu-tongji">
 			<dt><i class="Hui-iconfont">&#xe61a;</i> 系统统计<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
@@ -231,5 +248,16 @@ var _hmt = _hmt || [];
 var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
 </script>
+<!-- 加入DWR 接收通知 -->
+  <script type='text/javascript' src='${contextPath}/dwr/engine.js'></script>  
+  <script type='text/javascript' src='${contextPath}/dwr/util.js'></script>  
+  <script type="text/javascript" src="${contextPath}/dwr/interface/MessagePush.js"></script>  
+<script type="text/javascript">
+	function  showMessage(x){
+		alert(x);
+	}
+	
+</script> 
+
 </body>
 </html>
