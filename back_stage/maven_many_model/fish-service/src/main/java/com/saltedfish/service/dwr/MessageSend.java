@@ -8,14 +8,17 @@ import org.directwebremoting.Browser;
 import org.directwebremoting.ScriptBuffer;
 import org.directwebremoting.ScriptSession;
 import org.directwebremoting.ScriptSessionFilter;
-
-public class Test {
+/**
+ * dwr 推送消息发送
+ * @author lkd
+ *
+ */
+public class MessageSend {
 	
 	//根据UserId 发送message
 	public void sendMessageAuto(String userid, String message){  
         final String userId = userid;   
         final String autoMessage = message;  
-        
         //1.ScriptSessionFilter  ScriptSession过滤器 //可根据需求指定你要过滤的东西
         ScriptSessionFilter    filter  = new ScriptSessionFilter() {
 			@Override //这里根据 根据用户的Id 执行指定发送消息

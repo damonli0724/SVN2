@@ -6,8 +6,12 @@ import org.directwebremoting.ScriptSession;
 import org.directwebremoting.WebContextFactory;
 
 import com.saltedfish.service.utils.DwrScriptSessionManagerUtil;
-
-public class MessagePush {
+/**
+ * dwr 页面加载时候 初始化工具类，设置信息
+ * @author 
+ *
+ */
+public class MessageLoad {
 	  public void onPageLoad(String userId) {  
 		  
 	       ScriptSession scriptSession = WebContextFactory.get().getScriptSession();  
