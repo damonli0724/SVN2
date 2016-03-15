@@ -23,9 +23,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     //推送信息 
     
    	function showMessage(message){
-    	$("#contentId").append("<li>"+message+"</li>");
+    	//$("#contentId").append("<li>"+message+"</li>");
     }
-    function test() {  
+    function test(){  
         var msg = document.getElementById("msgId").value;  
         TestPush.sendMessageAuto(msg,$("#sendId").val());  
     }  
@@ -34,11 +34,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
   <body>  
     <input type="hidden" name="msgId" id="msgId" /> <br />  
-    	<ul id="contentId">
-		  <li>Coffee</li>
-		</ul>
      
-      发送的内容:
-   <input type="text"  id ="sendId">  <input type="button"  value="Send" onclick="test()"  />
+   发给所有人:<input type="text"  id ="sendId">  <input type="button"  value="Send" onclick="test()"  /></br>
+	<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=2)" width="100%" color=#987cb9 SIZE=10>
+发给指定用户:<c:forEach items="${loginedUser}" var="user">
+			<input  type="checkbox" value="${user.userId}">	${user.username},			
+		</c:forEach>
+ 
+   
   </body>  
 </html>  

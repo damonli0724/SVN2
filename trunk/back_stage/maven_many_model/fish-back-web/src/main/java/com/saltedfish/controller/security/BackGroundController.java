@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextImpl;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -48,9 +49,9 @@ public class BackGroundController {
 	/*
 	 * @Autowired private AuthenticationManager authenticationManager;
 	 */
-	/*
-	 * @Autowired private SessionRegistry sessionRegistry;
-	 */
+	
+	  @Autowired private SessionRegistry sessionRegistry;
+	 
 
 	/**
 	 * 跳转首页
@@ -149,6 +150,20 @@ public class BackGroundController {
 	 */
 	@RequestMapping(value = Url.LOING_OUT, method = RequestMethod.GET)
 	public String loginOut(HttpServletRequest request) {
+		Object o =request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
+		
+		
+		if (o!=null) {
+			SecurityContextImpl  su=(SecurityContextImpl) o;
+			WebAuthenticationDetails details =(WebAuthenticationDetails) su.getAuthentication().getDetails();
+			sessionRegistry.removeSessionInformation(details.getSessionId());
+			request.getSession().removeAttribute(Constants.SPRING_SECURITY_CONTEXT);
+		}
+		
+		
+		
+//		sessionRegistry.removeSessionInformation(sessionId);
+		
 		return View.LOGIN;
 	};
 

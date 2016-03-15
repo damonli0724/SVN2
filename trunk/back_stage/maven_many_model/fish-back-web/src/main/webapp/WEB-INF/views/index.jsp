@@ -13,7 +13,7 @@
 <link href="${cssBasePath}/style.css" rel="stylesheet" type="text/css" />
 <title>H-ui.admin v2.3</title>
 </head>
-<body>
+  <body onload="onPageLoad();dwr.engine.setActiveReverseAjax(true);dwr.engine.setNotifyServerOnPageUnload(true);;"> 
 <header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="/">H-ui.admin</a> <a class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
 	<nav class="mainnav cl" id="Hui-nav">
 		<ul>
@@ -36,7 +36,12 @@
 				<li><a href="${contextPath}/background/loginout">退出</a></li>
 			</ul>
 		</li>
-		<li id="Hui-msg"> <a href="#" title="消息"><span class="badge badge-danger">2</span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+		<li id="Hui-msg"> <a href="#" title="消息" id="message"><span class="badge badge-danger" id="messageSpan"></span><i class="Hui-iconfont" style="font-size:18px">&#xe68a;</i></a> </li>
+
+				
+		
+		
+		
 		<li id="Hui-skin" class="dropDown right dropDown_hover"><a href="javascript:;" title="换肤"><i class="Hui-iconfont" style="font-size:18px">&#xe62a;</i></a>
 			<ul class="dropDown-menu radius box-shadow">
 				<li><a href="javascript:;" data-val="default" title="默认（黑色）">默认（黑色）</a></li>
@@ -253,11 +258,24 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
   <script type='text/javascript' src='${contextPath}/dwr/util.js'></script>  
   <script type="text/javascript" src="${contextPath}/dwr/interface/MessagePush.js"></script>  
 <script type="text/javascript">
-	function  showMessage(x){
-		alert(x);
+	//展示信息
+	function  showMessage(message){
+		alert(message);
+		var num =$("#messageSpan").text();
+		if(num=="")num=0;
+		num =parseInt(num)+1;	
+		$("#messageSpan").text(num+"");
+		$("#messages").append("<li>"+message+"</li>")
 	}
-	
+	//页面加载
+	function onPageLoad(){  
+        var userId = '2'; //${user.userId}  
+        MessagePush.onPageLoad(userId);  
+      } 
 </script> 
+
+
+
 
 </body>
 </html>
