@@ -13,8 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -40,23 +43,30 @@ import com.saltedfish.entity.security.SysUsers;
 public class DwrController extends BaseController {
 
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
+	
+	@Autowired
+	private SessionRegistry sessionRegistry;
 
 	/**
-	 * 跳转到dwr测试页面
+	 * 跳转到dwr推送页面
 	 * @return
 	 */
 	@RequestMapping(value = Url.DWR_SEND_PAGE, method = RequestMethod.GET)
-	public String turnToWelcomPage(HttpServletRequest request) {
+	public String turnToWelcomPage(HttpServletRequest request,ModelMap map) {
 		//设置发送者的userId为1
-		SysUsers  user  =  new SysUsers();
-		user.setUserId("1");
-		HttpSession  session = request.getSession();
-		session.setAttribute("userId", 1);
+//		SysUsers  user  =  new SysUsers();
+//		user.setUserId("1");
+//		HttpSession  session = request.getSession();
+//		session.setAttribute("userId", 1);
+		
+		//获取所有已登录用户
+		List<Object> slist =sessionRegistry.getAllPrincipals();  
+		map.put("loginedUser", slist);
 		return View.DWR_SEND_VIEW;
 	}
 
 	/**
-	 * 跳转到dwr测试页面
+	 * 跳转到dwr接收页面
 	 * @return
 	 */
 	@RequestMapping(value = Url.DWR_RECIVE_PAGE, method = RequestMethod.GET)

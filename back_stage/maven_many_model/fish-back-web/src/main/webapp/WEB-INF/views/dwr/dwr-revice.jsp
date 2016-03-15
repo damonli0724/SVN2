@@ -21,9 +21,9 @@
             MessagePush.onPageLoad(userId);  
           }  
          //推送信息  
-         function showMessage(autoMessage){ 
+      /*    function showMessage(autoMessage){ 
 			$("#DemoDiv").append(autoMessage+"<br/>");                  
-        }  
+        }   */
   </script>  
   <body onload="onPageLoad();dwr.engine.setActiveReverseAjax(true);dwr.engine.setNotifyServerOnPageUnload(true);;">   
     This is my DWR DEOM page. <hr>  

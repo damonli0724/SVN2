@@ -101,6 +101,8 @@
 
 	<!-- 自定义 UsernamePasswordAuthenticationFilter -->
 	<beans:bean id="customLoginFilter" class="com.saltedfish.security.custom.CustomLoginFilter">
+		<!--此配置可实现获取所有登录用户信息 -->  
+		<beans:property name="sessionAuthenticationStrategy" ref="sas"/>
 		<!-- 校验登录是否有效的虚拟url -->
 		<beans:property name="filterProcessesUrl" value="/background/check" />
 		<beans:property name="authenticationManager" ref="authenticationManager" />
@@ -123,5 +125,16 @@
 			</beans:bean>
 		</beans:property>
 	</beans:bean>
+
+<!-- ********************************Session管理********************************************************************************************************** -->
+	<!-- session策略 -->
+	<beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" /> 
+	
+	<beans:bean id="sas" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">  
+		  <beans:constructor-arg name="sessionRegistry" ref="sessionRegistry" />  
+		  <beans:property name="maximumSessions" value="1" />  
+		  <beans:property name="exceptionIfMaximumExceeded" value="true" />  
+ 	</beans:bean>  
+
 
 </beans:beans> 
