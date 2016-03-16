@@ -10,8 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.saltedfish.entity.security.SysUsers;
 
 /**
- * 用户登录DTO
- * @author Administrator
+ * 认证后从数据库返回的DTO
+ * @author LKD
  *
  */
 public class UserDTO extends SysUsers   implements UserDetails, CredentialsContainer{
@@ -69,6 +69,47 @@ public class UserDTO extends SysUsers   implements UserDetails, CredentialsConta
 	public void setAuthorities(Collection<GrantedAuthority> authorities) {
 		this.authorities = authorities;
 	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((authorities == null) ? 0 : authorities.hashCode());
+		result = prime * result
+				+ ((loginName == null) ? 0 : loginName.hashCode());
+		return result;
+	}
+
+	/* (non-Javadoc)
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		UserDTO other = (UserDTO) obj;
+		if (authorities == null) {
+			if (other.authorities != null)
+				return false;
+		} else if (!authorities.equals(other.authorities))
+			return false;
+		if (loginName == null) {
+			if (other.loginName != null)
+				return false;
+		} else if (!loginName.equals(other.loginName))
+			return false;
+		return true;
+	}
+	
+	
 	
 
 	
