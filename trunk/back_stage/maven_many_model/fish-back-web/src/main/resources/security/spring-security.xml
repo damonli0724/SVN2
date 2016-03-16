@@ -128,9 +128,9 @@
 
 <!-- ********************************Session管理********************************************************************************************************** -->
 	<!-- session策略 -->
-	<beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" /> 
+	<beans:bean id="sessionRegistry" class="com.saltedfish.security.custom.session.CustomSessionRegistryImpl" /> 
 	
-	<beans:bean id="sas" class="org.springframework.security.web.authentication.session.ConcurrentSessionControlStrategy">  
+	<beans:bean id="sas" class="com.saltedfish.security.custom.session.CustomConcurrentSessionControlStrategy">  
 		  <beans:constructor-arg name="sessionRegistry" ref="sessionRegistry" />  
 		  <beans:property name="maximumSessions" value="1" />  
 		  <beans:property name="exceptionIfMaximumExceeded" value="true" />  
