@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    发给所有人:<input type="text"  id ="sendId">  <input type="button"  value="Send" onclick="test()"  /></br>
 	<HR style="FILTER: alpha(opacity=100,finishopacity=0,style=2)" width="100%" color=#987cb9 SIZE=10>
 发给指定用户:<c:forEach items="${loginedUser}" var="user">
-			<input  type="checkbox" value="${user.userId}">	${user.username},			
+			用户/ip:<input  type="checkbox" value="${user.principal.userId}">	${user.principal.username}/${user.ip},			
 		</c:forEach>
  
    

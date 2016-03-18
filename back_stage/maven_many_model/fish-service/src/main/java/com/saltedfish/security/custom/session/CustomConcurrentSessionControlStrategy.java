@@ -17,6 +17,8 @@ import org.springframework.security.web.authentication.session.SessionAuthentica
 import org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy;
 import org.springframework.util.Assert;
 
+import com.saltedfish.dto.UserDTO;
+
 /**
  * @description 自定义并发session控制策略
  * @author aokunsang
@@ -62,6 +64,7 @@ public class CustomConcurrentSessionControlStrategy extends
         
         //定义一个带IP的实体，并且注入session保存[下面会用到]
         CustomPrincipal pmcPrincipal = new CustomPrincipal(authentication);
+        
         sessionRegistry.registerNewSession(request.getSession().getId(),pmcPrincipal);
     }
 
