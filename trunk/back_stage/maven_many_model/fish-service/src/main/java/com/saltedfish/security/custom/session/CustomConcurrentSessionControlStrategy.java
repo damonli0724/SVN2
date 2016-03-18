@@ -30,7 +30,7 @@ public class CustomConcurrentSessionControlStrategy extends
 	protected MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
     private final SessionRegistry sessionRegistry;
     /*
-     *若当前maximumSessions=1时，
+     *		若当前maximumSessions=1时，
      *   当设置为true，同一账户登录会抛出SessionAuthenticationException异常，异常信息为：Maximum sessions of {0} for this principal exceeded；
   	 *	   当设置为false，不会报错，则会让同一账户最先认证的session过期。
      */
