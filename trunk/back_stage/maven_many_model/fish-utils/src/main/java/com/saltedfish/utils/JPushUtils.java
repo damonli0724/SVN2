@@ -91,7 +91,7 @@ public class JPushUtils {
                     .addPlatformNotification(IosNotification.newBuilder()
                             .setAlert(content)
                             .setBadge(+1)
-                            .setSound("happy.caf")
+                            .setSound("happy.caf") 
                             .build())
                     .build())
              .setOptions(Options.newBuilder()
