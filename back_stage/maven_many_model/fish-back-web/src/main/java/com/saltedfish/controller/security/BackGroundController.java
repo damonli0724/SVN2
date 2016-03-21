@@ -86,15 +86,19 @@ public class BackGroundController {
 			HttpServletRequest request, ModelMap map) {
 		// 重新登录时销毁该用户的Session
 
-		Object o = request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
-		if (null != o) {
-			request.getSession().removeAttribute(Constants.SPRING_SECURITY_CONTEXT);
-		}
+		HttpSession  session   =  request.getSession();
+		
+		if (session!=null) {
+			Object o = request.getSession().getAttribute(Constants.SPRING_SECURITY_CONTEXT);
+			if (null != o) {
+				request.getSession().removeAttribute(Constants.SPRING_SECURITY_CONTEXT);
+			}
 
-		if (logout != null) {
-			map.addAttribute("msg", "You've been logged out successfully.");
+			if (logout != null) {
+				map.addAttribute("msg", "You've been logged out successfully.");
+			}
 		}
-
+		
 		return View.LOGIN;
 	}
 

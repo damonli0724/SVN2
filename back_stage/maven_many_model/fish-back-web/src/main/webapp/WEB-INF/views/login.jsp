@@ -49,7 +49,7 @@
       <div class="row">
         <div class="formControls col-8 col-offset-3">
           <label for="online">
-            <input type="checkbox" name="_spring_security_remember_me" id="_spring_security_remember_me" value="false">
+            <input type="checkbox" name="rememberMe" id="rememberMe" value="true">
             使我保持登录状态</label>
         </div>
       </div>

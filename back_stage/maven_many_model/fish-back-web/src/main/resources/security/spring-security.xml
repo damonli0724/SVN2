@@ -21,12 +21,13 @@
 
 	<debug/> 	
 	<http  use-expressions="true" entry-point-ref="loginEntryPoint" >
-		<!-- 替换默认的LogoutFilter 原来的为:<logout logout-url="/background/loginout" logout-success-url="/background/login" invalidate-session="true" delete-cookies="JSESSIONID" /> -->
+		<!-- 替换默认的LogoutFilter -->
 		 <custom-filter ref="logoutFilter" position="LOGOUT_FILTER" />  
 		
 		<!-- 替换LoginFilter -->
 		<custom-filter ref="customLoginFilter" position="FORM_LOGIN_FILTER" />
 	
+		<custom-filter ref="rememberMeAuthenticationFilter" position="REMEMBER_ME_FILTER"/> 
 		<!-- 定义没有权限访问页面 -->
 		<!-- <access-denied-handler error-page="/background/403" /> -->
 
@@ -34,8 +35,6 @@
 		<intercept-url pattern="/background/**" access="isAuthenticated()" />
 
 
-		<!-- 记住我 -->
-		<!-- <remember-me data-source-ref="dataSource" user-service-ref=""/> -->
 		<!-- <csrf /> -->
 
 		<!-- session管理 过期跳转页面 -->
@@ -45,20 +44,29 @@
 		
 	</http>
 
+<!-- ===========================================================自定义登录切点========================================================================== -->	
+	<!-- 登录切点,用来跳转登录页面 -->				
+	<beans:bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:property name="loginFormUrl" value="/background/login"></beans:property>
+	</beans:bean>
+<!-- ============================================================================================================================================================== -->
+	
 	
 <!-- ===========================================================自定义AuthenticationManager========================================================================== -->
 						 <!-- 
 						 authentication-manager:认证管理器
 						 authentication-provider:可以设定多个provider
 						 customProvider:自定义provider,一般用的是DaoAuthenticationProvider
+						 rememberMeAuthenticationProvider：可用rememberme进行身份验证
 						 -->
-<!-- ============================================================================================================================================================== -->
+
 	<authentication-manager alias="authenticationManager">
-		<authentication-provider ref="customProvider"/>
+		<authentication-provider ref="customAuthenticationProvider"/>
+		<authentication-provider ref="rememberMeAuthenticationProvider"/>
 	</authentication-manager>
 	
 	<!-- 登录认证处理   作用:密码校验(/盐加密)--> 
-	<beans:bean id="customProvider" class="com.saltedfish.security.custom.CustomAuthenticationProvider" >
+	<beans:bean id="customAuthenticationProvider" class="com.saltedfish.security.custom.CustomAuthenticationProvider" >
 		<!-- 不支持匿名用户登录 -->
 		<beans:property name="hideUserNotFoundExceptions" value="true"/> 
 		<!-- 自定义UserDetailsService -->
@@ -82,6 +90,10 @@
          <!-- 加密盐为      MD5(密码{登录名})  -->
          <beans:property name="userPropertyToUse" value="username" />  
      </beans:bean>  
+ <!-- ============================================================================================================================================================== -->    
+     
+     
+     
 <!-- ===========================================================自定义UsernamePasswordAuthenticationFilter========================================================================== -->
 					<!-- 
 					customLoginFilter:自定义的UsernamePasswordAuthenticationFilter.
@@ -93,26 +105,27 @@
 					authenticationSuccessHandler:认证成功跳转的Url
 					authenticationFailureHandler:认证失败跳转的Url
 				 	-->
-<!-- ============================================================================================================================================================================= -->
+
 	<beans:bean id="customLoginFilter" class="com.saltedfish.security.custom.CustomLoginFilter">
 		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>
 		<beans:property name="filterProcessesUrl" value="/background/check" />
+		<!-- 加入rememberMeservice -->
+		<beans:property name="rememberMeServices" ref="rememberMeServices"/>
 		<beans:property name="authenticationManager" ref="authenticationManager" />
 		<beans:property name="usernameParameter" value="username" />
 		<beans:property name="passwordParameter" value="password" />
-		
-		<beans:property name="authenticationSuccessHandler">
-			<beans:bean class="com.saltedfish.security.custom.CustomLoginHandler">
-				<beans:property name="defaultTargetUrl" value="/background/index" />
-			</beans:bean>
-		</beans:property>
-		
-		<beans:property name="authenticationFailureHandler">
-			<beans:bean class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
-				<beans:property name="defaultFailureUrl" value="/background/login?error" />
-			</beans:bean>
-		</beans:property>
+		<beans:property name="authenticationSuccessHandler" ref="customLoginHandler"/>
+		<beans:property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"/>
 	</beans:bean>
+	
+	<beans:bean id="customLoginHandler" class="com.saltedfish.security.custom.CustomLoginHandler">
+		<beans:property name="defaultTargetUrl" value="/background/index" />
+	</beans:bean>
+	<beans:bean id="simpleUrlAuthenticationFailureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<beans:property name="defaultFailureUrl" value="/background/login?error" />
+	</beans:bean>	
+<!-- ============================================================================================================================================================================= -->
+
 
 <!-- ===========================================================自定义LogoutFilter========================================================================== -->
 				 <!-- 
@@ -123,7 +136,7 @@
 				 PersistentTokenBasedRememberMeServices：配置了持久化属性时的handler.1.清除cookie；2.从持久化中清除remember me数据  
 				 TokenBasedRememberMeServices :未配置持久化属性的handler。仅仅清除cookie 
 				 -->
-<!-- ===================================================================================================================================================== -->	
+
 	<beans:bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter ">
 			<beans:property name="filterProcessesUrl" value="/background/loginout"/>
 			<beans:constructor-arg index="0" type="java.lang.String" value="/background/login?error" />			
@@ -145,7 +158,36 @@
 	</beans:bean>
 	<!-- 退出认证对象处理者 -->
 	<beans:bean id="securityContextLogoutHandler" class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
+<!-- ===================================================================================================================================================== -->	
 
+
+<!-- ===========================================================自定义RememberMeAuthenticationFilter========================================================================== -->
+	
+	<beans:bean id="rememberMeAuthenticationFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
+		<beans:constructor-arg index="0" ref="authenticationManager"/>
+		<beans:constructor-arg index="1" ref="rememberMeServices"/>
+		<beans:property name="authenticationSuccessHandler" ref="customLoginHandler"></beans:property>
+	</beans:bean>
+	
+	
+	<beans:bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
+	 	<beans:constructor-arg index="0" value="aaaaaaaaa"/>
+		<beans:constructor-arg index="1" ref="customUserDetailsService"/>
+		<beans:constructor-arg index="2">
+			<beans:bean class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
+	            <beans:property name="dataSource" ref="dataSource"/>
+	            <beans:property name="createTableOnStartup" value="false"/>
+			</beans:bean>
+		</beans:constructor-arg>
+		<!-- 页面rememberMe name属性 -->
+		<beans:property name="parameter" value="rememberMe"/>
+		
+	</beans:bean>
+	
+	
+	<beans:bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+		<beans:property name="key" value="aaaaaaaaa"/>
+	</beans:bean>
 <!-- ================================================================自定义sessionManageMentFilter================================================================================ -->
 					<!-- 
 					sessionManagementFilter: SESSION固化保护,以及并发控制
@@ -154,7 +196,7 @@
 					maximumSessions:允许的最大session个数
 					exceptionIfMaximumExceeded:是否抛出异常
 					-->
-<!-- ============================================================================================================================================================================ -->
+
 	<beans:bean id="sessionManagementFilter" class="org.springframework.security.web.session.SessionManagementFilter">
 		<beans:constructor-arg name="securityContextRepository" ref="securityContextRepository"/>
 		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>
@@ -168,6 +210,7 @@
         <beans:property name="allowSessionCreation" value="true" />  
         <beans:property name="disableUrlRewriting" value="false" />  
     </beans:bean>  
+<!-- ============================================================================================================================================================================ -->
 
 <!-- ================================================================自定义concurrentSessionFilter(session并发过滤器)=================================================================== -->
 				<!-- 
@@ -179,7 +222,7 @@
 	        	             当设置为true，同一账户登录会抛出SessionAuthenticationException异常，异常信息为：Maximum sessions of {0} for this principal exceeded；
 	  	                                     当设置为false，不会报错，则会让同一账户最先认证的session过期。
 				-->
-<!-- ======================================================================================================================================================== -->	
+	
 	<beans:bean id="concurrentSessionFilter"  class="org.springframework.security.web.session.ConcurrentSessionFilter">  
 	    <beans:property name="sessionRegistry" ref="sessionRegistry" />  
 	    <beans:property name="expiredUrl" value="/background/timeout" />  
@@ -197,4 +240,13 @@
 		  <beans:property name="maximumSessions" value="1" />  
 		  <beans:property name="exceptionIfMaximumExceeded" value="true" />  
  	</beans:bean>  
+<!-- ======================================================================================================================================================== -->
+
+ <!-- =============================================================================其他配置=========================================================================== -->	
+	<!-- 自定义异常信息 -->
+	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<beans:property name="basename" value="classpath:security/messages_custom" />
+	</beans:bean> 	
+ 	
+ 	
 </beans:beans> 
