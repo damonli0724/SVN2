@@ -47,11 +47,11 @@
 
 	
 <!-- ===========================================================自定义AuthenticationManager========================================================================== -->
-					 <!-- 
-					 authentication-manager:认证管理器
-					 authentication-provider:可以设定多个provider
-					 customProvider:自定义provider,一般用的是DaoAuthenticationProvider
-					 -->
+						 <!-- 
+						 authentication-manager:认证管理器
+						 authentication-provider:可以设定多个provider
+						 customProvider:自定义provider,一般用的是DaoAuthenticationProvider
+						 -->
 <!-- ============================================================================================================================================================== -->
 	<authentication-manager alias="authenticationManager">
 		<authentication-provider ref="customProvider"/>
@@ -83,16 +83,16 @@
          <beans:property name="userPropertyToUse" value="username" />  
      </beans:bean>  
 <!-- ===========================================================自定义UsernamePasswordAuthenticationFilter========================================================================== -->
-				<!-- 
-				customLoginFilter:自定义的UsernamePasswordAuthenticationFilter.
-				sessionAuthenticationStrategy:session认证策略(账号登陆(可以在相同IP登录多次,如果已经登录,则不同IP登录则不行))
-				filterProcessesUrl:过滤器拦截的Url(表单提交的Url)
-				authenticationManager:认证管理器(认证操作)
-				usernameParameter:表单 登录账号 name属性为 username
-				passwordParameter:表单登录密码 name属性为password
-				authenticationSuccessHandler:认证成功跳转的Url
-				authenticationFailureHandler:认证失败跳转的Url
-			 	-->
+					<!-- 
+					customLoginFilter:自定义的UsernamePasswordAuthenticationFilter.
+					sessionAuthenticationStrategy:session认证策略(账号登陆(可以在相同IP登录多次,如果已经登录,则不同IP登录则不行))
+					filterProcessesUrl:过滤器拦截的Url(表单提交的Url)
+					authenticationManager:认证管理器(认证操作)
+					usernameParameter:表单 登录账号 name属性为 username
+					passwordParameter:表单登录密码 name属性为password
+					authenticationSuccessHandler:认证成功跳转的Url
+					authenticationFailureHandler:认证失败跳转的Url
+				 	-->
 <!-- ============================================================================================================================================================================= -->
 	<beans:bean id="customLoginFilter" class="com.saltedfish.security.custom.CustomLoginFilter">
 		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>
@@ -146,15 +146,15 @@
 	<!-- 退出认证对象处理者 -->
 	<beans:bean id="securityContextLogoutHandler" class="org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler"/>
 
-<!-- ================================================================自定义sessionManageMentFilter=================================================================== -->
-				<!-- 
-				sessionManagementFilter: SESSION固化保护,以及并发控制
-				securityContextRepository:生成HttpSessionSecurityContextRepository
-				sessionAuthenticationStrategy:SESSION并发配置
-				maximumSessions:允许的最大session个数
-				exceptionIfMaximumExceeded:是否抛出异常
-				-->
-<!-- ======================================================================================================================================================== -->
+<!-- ================================================================自定义sessionManageMentFilter================================================================================ -->
+					<!-- 
+					sessionManagementFilter: SESSION固化保护,以及并发控制
+					securityContextRepository:生成HttpSessionSecurityContextRepository
+					sessionAuthenticationStrategy:SESSION并发配置
+					maximumSessions:允许的最大session个数
+					exceptionIfMaximumExceeded:是否抛出异常
+					-->
+<!-- ============================================================================================================================================================================ -->
 	<beans:bean id="sessionManagementFilter" class="org.springframework.security.web.session.SessionManagementFilter">
 		<beans:constructor-arg name="securityContextRepository" ref="securityContextRepository"/>
 		<beans:property name="sessionAuthenticationStrategy" ref="sessionAuthenticationStrategy"/>
