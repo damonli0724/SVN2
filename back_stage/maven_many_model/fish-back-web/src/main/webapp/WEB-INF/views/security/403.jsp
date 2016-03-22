@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>我日你哥，你没权限啊。。。</title>
+<title>404</title>
 </head>
 <body>
-		<H1>我日你哥，你没权限啊。。。</H1>
+		<H1>这个页面已丢失</H1>
 </body>
 </html>

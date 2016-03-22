@@ -54,7 +54,7 @@
     <listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
   </listener>
   <session-config>
-    <session-timeout>30</session-timeout>
+    <session-timeout>3000</session-timeout>
   </session-config>
   
   <!-- 配置springmvc -->
@@ -125,7 +125,5 @@
     <servlet-name>dwr-invoker</servlet-name>  
     <url-pattern>/dwr/*</url-pattern>  
   </servlet-mapping>  
-  
-  
   
 </web-app>
