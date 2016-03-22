@@ -10,7 +10,7 @@
 	<http security="none" pattern="/background/timeout" />
 	<http security="none" pattern="/background/login" />
 
-	<debug/> 	
+	<!-- <debug/>  -->	
 	<http  use-expressions="true" entry-point-ref="loginEntryPoint" >
 		<custom-filter ref="concurrentSessionFilter" position="CONCURRENT_SESSION_FILTER"/>
 		
