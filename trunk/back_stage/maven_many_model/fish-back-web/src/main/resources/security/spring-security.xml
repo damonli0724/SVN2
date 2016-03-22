@@ -9,18 +9,11 @@
 	<http security="none" pattern="/background/403" />
 	<http security="none" pattern="/background/timeout" />
 	<http security="none" pattern="/background/login" />
-	<!-- <http security="none" pattern="/background/check" /> --> <!--将url 放到这里就会失效 -->
-
-
-	<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
-	<http pattern="/**/**/*.jpg" security="none" />
-	<http pattern="/**/**/*.png" security="none" />
-	<http pattern="/**/**/*.gif" security="none" />
-	<http pattern="/**/**/*.css" security="none" />
-	<http pattern="/**/**/*.js" security="none" />
 
 	<debug/> 	
 	<http  use-expressions="true" entry-point-ref="loginEntryPoint" >
+		<custom-filter ref="concurrentSessionFilter" position="CONCURRENT_SESSION_FILTER"/>
+		
 		<!-- 替换默认的LogoutFilter -->
 		 <custom-filter ref="logoutFilter" position="LOGOUT_FILTER" />  
 		
@@ -31,6 +24,7 @@
 		<!-- 定义没有权限访问页面 -->
 		<!-- <access-denied-handler error-page="/background/403" /> -->
 
+	
 		<!-- 访问url需要的权限 isAuthenticated() permitAll -->
 		<intercept-url pattern="/background/**" access="isAuthenticated()" />
 
@@ -135,6 +129,7 @@
 				 Remeber Me 的 Handler 
 				 PersistentTokenBasedRememberMeServices：配置了持久化属性时的handler.1.清除cookie；2.从持久化中清除remember me数据  
 				 TokenBasedRememberMeServices :未配置持久化属性的handler。仅仅清除cookie 
+				 其实主要调用logout方法
 				 -->
 
 	<beans:bean id="logoutFilter" class="org.springframework.security.web.authentication.logout.LogoutFilter ">
@@ -144,6 +139,7 @@
 				<beans:array>
 					<beans:ref bean="cookieClearingLogoutHandler"/>
 					<beans:ref bean="securityContextLogoutHandler"/>
+					<beans:ref bean="rememberMeServices"/>
 				</beans:array>
 			</beans:constructor-arg>
 	</beans:bean>
@@ -162,16 +158,24 @@
 
 
 <!-- ===========================================================自定义RememberMeAuthenticationFilter========================================================================== -->
-	
+					<!-- 
+					rememberMeAuthenticationFilter:过滤器
+					authenticationManager: 如果cookie有效，则根据userName 调用loadByUserName 返回认证对象
+					rememberMeServices:持久化rememberMe
+					A9RXpzkXRerpuVonTKaa+Q：必须和remeberMeAuthenticationProvider 的key相等（可替换）
+					JdbcTokenRepositoryImpl:使用默认的jdbc操作数据库
+					createTableOnStartup：如果没有这张表是否创建	
+					rememberMeAuthenticationProvider:可以通过这个提供认证实体				
+					-->
 	<beans:bean id="rememberMeAuthenticationFilter" class="org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationFilter">
 		<beans:constructor-arg index="0" ref="authenticationManager"/>
 		<beans:constructor-arg index="1" ref="rememberMeServices"/>
-		<beans:property name="authenticationSuccessHandler" ref="customLoginHandler"></beans:property>
+		<beans:property name="authenticationSuccessHandler" ref="customLoginHandler"/>
 	</beans:bean>
 	
 	
 	<beans:bean id="rememberMeServices" class="org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices">
-	 	<beans:constructor-arg index="0" value="aaaaaaaaa"/>
+	 	<beans:constructor-arg index="0" value="A9RXpzkXRerpuVonTKaa+Q"/>
 		<beans:constructor-arg index="1" ref="customUserDetailsService"/>
 		<beans:constructor-arg index="2">
 			<beans:bean class="org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl">
@@ -186,7 +190,7 @@
 	
 	
 	<beans:bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
-		<beans:property name="key" value="aaaaaaaaa"/>
+		<beans:property name="key" value="A9RXpzkXRerpuVonTKaa+Q"/>
 	</beans:bean>
 <!-- ================================================================自定义sessionManageMentFilter================================================================================ -->
 					<!-- 
