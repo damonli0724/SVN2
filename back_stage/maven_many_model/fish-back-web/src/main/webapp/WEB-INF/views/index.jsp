@@ -13,7 +13,9 @@
 <link href="${cssBasePath}/style.css" rel="stylesheet" type="text/css" />
 <title>H-ui.admin v2.3</title>
 </head>
-  <body onload="onPageLoad();dwr.engine.setActiveReverseAjax(true);dwr.engine.setNotifyServerOnPageUnload(true);;"> 
+  <!-- <body onload="onPageLoad();dwr.engine.setActiveReverseAjax(true);dwr.engine.setNotifyServerOnPageUnload(true);;">  -->
+  
+  <body>
 <header class="Hui-header cl"> <a class="Hui-logo l" title="H-ui.admin v2.3" href="/">H-ui.admin</a> <a class="Hui-logo-m l" href="/" title="H-ui.admin">H-ui</a> <span class="Hui-subtitle l">V2.3</span>
 	<nav class="mainnav cl" id="Hui-nav">
 		<ul>
@@ -254,7 +256,7 @@ var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " 
 document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F080836300300be57b7f34f4b3e97d911' type='text/javascript'%3E%3C/script%3E"));
 </script>
 <!-- 加入DWR 接收通知 -->
-  <script type='text/javascript' src='${contextPath}/dwr/engine.js'></script>  
+ <%--  <script type='text/javascript' src='${contextPath}/dwr/engine.js'></script>  
   <script type='text/javascript' src='${contextPath}/dwr/util.js'></script>  
   <script type="text/javascript" src="${contextPath}/dwr/interface/MessagePush.js"></script>  
 <script type="text/javascript">
@@ -272,7 +274,7 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
         var userId = '2'; //${user.userId}  
         MessagePush.onPageLoad(userId);  
       } 
-</script> 
+</script>  --%>
 
 
 
