@@ -74,7 +74,7 @@
   </servlet-mapping>
   
   <!-- 配置DWR -->
-   <servlet>  
+   <!-- <servlet>  
      <servlet-name>dwr-invoker</servlet-name>  
         <servlet-class>  
             org.directwebremoting.servlet.DwrServlet  
@@ -124,6 +124,6 @@
   <servlet-mapping>  
     <servlet-name>dwr-invoker</servlet-name>  
     <url-pattern>/dwr/*</url-pattern>  
-  </servlet-mapping>  
+  </servlet-mapping>   -->
   
 </web-app>
