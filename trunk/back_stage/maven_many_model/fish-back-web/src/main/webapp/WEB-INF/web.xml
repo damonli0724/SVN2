@@ -72,7 +72,6 @@
     <servlet-name>appServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
-  
   <!-- 配置DWR -->
    <!-- <servlet>  
      <servlet-name>dwr-invoker</servlet-name>  

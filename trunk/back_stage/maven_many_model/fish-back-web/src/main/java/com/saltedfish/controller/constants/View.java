@@ -38,5 +38,9 @@ public interface View {
 	public static final String DWR_TEST_VIEW = "/dwr/dwr-test";
 	public static final String DWR_SEND_VIEW = "/dwr/dwr-send";
 	public static final String DWR_REVICE_VIEW = "/dwr/dwr-revice";
+	// =============================web-socket测试===================================
+	public static final String WEB_SOCKET_VIEW="/websocket/websocket";
+	
+	
 
 }
