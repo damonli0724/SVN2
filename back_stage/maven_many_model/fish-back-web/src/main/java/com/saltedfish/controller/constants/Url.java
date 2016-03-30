@@ -57,6 +57,9 @@ public interface Url {
 	public static final String  DWR_SEND_PAGE = "dwrr/send/page"; //消息发送页面
 	public static final String DWR_RECIVE_PAGE ="dwrr/recive/page";//消息接受页面
 	
+	//websocket测试页面
+	public static final String WEB_SOCKET_PAGE="websocket/test/page";//测试页面
+	
 	
 
 }

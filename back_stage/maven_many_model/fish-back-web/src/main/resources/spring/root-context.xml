@@ -7,7 +7,7 @@
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
-	<context:component-scan base-package="com.saltedfish"></context:component-scan>
+	<context:component-scan base-package="com.saltedfish"/>
 
 
 	<!-- mybatis集成 -->
@@ -16,7 +16,4 @@
 	<import resource="classpath:security/spring-security.xml"/>
 	<!-- redis集成 -->	
 	<import resource="classpath:spring-redis/spring-redis.xml" />
-	
-	
-	
 </beans>
