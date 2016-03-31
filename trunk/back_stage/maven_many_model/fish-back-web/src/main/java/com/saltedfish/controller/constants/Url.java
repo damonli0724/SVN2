@@ -59,6 +59,8 @@ public interface Url {
 	
 	//websocket测试页面
 	public static final String WEB_SOCKET_PAGE="websocket/test/page";//测试页面
+	public static final String WEB_SOCKET_SEND_TO_ALL = "websocket/send/toAll";//发送给所有人
+	public static final String WEB_SOCKET_INDEX_PAGE ="background/websocket/index/page";  //聊天页面首页
 	
 	
 

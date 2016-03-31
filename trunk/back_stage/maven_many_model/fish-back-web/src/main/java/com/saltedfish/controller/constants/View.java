@@ -40,6 +40,7 @@ public interface View {
 	public static final String DWR_REVICE_VIEW = "/dwr/dwr-revice";
 	// =============================web-socket测试===================================
 	public static final String WEB_SOCKET_VIEW="/websocket/websocket";
+	public static final String WEB_SOCKET_INDEX_VIEW = "/websocket/chat-index"; //聊天首页
 	
 	
 

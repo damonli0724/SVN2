@@ -1,4 +1,4 @@
-package com.saltedfish.controller.websocket;
+package com.saltedfish.controller.websocket.config;
 
 import java.util.Date;
 
