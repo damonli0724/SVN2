@@ -147,19 +147,27 @@
 		</dl>
 		
 		<dl id="menu-admin">
-			<dt><i class="Hui-iconfont">&#xe62d;</i> DWR测试<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dt><i class="Hui-iconfont">&#xe64e;</i> DWR测试<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
 			<dd>
 				<ul>
-					<sec:authorize ifAnyGranted="ROLE_sys_user_list">
 						<li><a _href="${contextPath}/dwrr/send/page" href="javascript:void(0)">推送页面</a></li>
-					</sec:authorize>
-					
-					<sec:authorize ifAnyGranted="ROLE_sys_role_list">
 						<li><a _href="${contextPath}/dwrr/recive/page" href="javascript:void(0)">接受页面</a></li>
-					</sec:authorize>
 				</ul>
 			</dd>
 		</dl>
+		
+		
+		<dl id="menu-websocket">
+			<dt><i class="Hui-iconfont">&#xe64e;</i>web-socket测试<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+						<li><a _href="${contextPath}/background/websocket/index/page" href="javascript:void(0)">聊天屎</a></li>
+				</ul>
+			</dd>
+		</dl>
+		
+		
+		
 		
 		
 		<dl id="menu-tongji">

@@ -23,7 +23,10 @@ public class WebSocketController extends BaseController {
 	public String turnToWelcomPage(HttpServletRequest request,ModelMap map) {
 		return View.WEB_SOCKET_VIEW;
 	}
-
-
+		
+	@RequestMapping(value = Url.WEB_SOCKET_INDEX_PAGE, method = RequestMethod.GET)
+	public String turnToChatPage(HttpServletRequest request,ModelMap map) {
+		return View.WEB_SOCKET_INDEX_VIEW;
+	}
 
 }

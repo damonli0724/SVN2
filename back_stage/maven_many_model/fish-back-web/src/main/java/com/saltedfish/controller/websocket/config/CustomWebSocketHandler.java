@@ -1,4 +1,4 @@
-package com.saltedfish.controller.websocket;
+package com.saltedfish.controller.websocket.config;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -22,15 +22,15 @@ import com.google.gson.GsonBuilder;
 
 /**
  * Socket处理器
- * 
- * @author Goofy
- * @Date 2015年6月11日 下午1:19:50
+ * @author lkd
  */
-@Component
+//@Component
 public class CustomWebSocketHandler implements WebSocketHandler {
 	protected final Logger logger = LoggerFactory.getLogger(getClass());
-	
+	public static final int  All = 0; //所有人的uid为 0
 	public static final Map<String, WebSocketSession> userSocketSessionMap;
+	public static final String dateFormate="yyyy-MM-dd HH:mm:ss";
+	
 
 	static {
 		userSocketSessionMap = new HashMap<String, WebSocketSession>();
@@ -47,6 +47,8 @@ public class CustomWebSocketHandler implements WebSocketHandler {
 		logger.debug("WebSocket:创建连接，uid为{}",uid);
 		if (userSocketSessionMap.get(uid) == null) {
 			userSocketSessionMap.put(uid, session);
+			//提示页面 有用户上线了
+			noticeUserOnLine();
 		}
 	}
 
@@ -58,7 +60,15 @@ public class CustomWebSocketHandler implements WebSocketHandler {
 			Message msg=new Gson().fromJson(message.getPayload().toString(),Message.class);
 			msg.setDate(new Date());
 			logger.debug("接收人的Id为{},内容为{}",msg.getReciveUserId(),msg.getContent());
-			sendMessageToUser(String.valueOf(msg.getReciveUserId()), new TextMessage(new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create().toJson(msg)));
+			
+			
+			//发送给所有人
+			if (msg.getReciveUserId()==All) {
+				broadcast(new TextMessage(new GsonBuilder().setDateFormat(dateFormate).create().toJson(msg)));
+				return;
+			}
+			
+			sendMessageToUser(String.valueOf(msg.getReciveUserId()), new TextMessage(new GsonBuilder().setDateFormat(dateFormate).create().toJson(msg)));
 	}
 
 	/**
@@ -114,7 +124,6 @@ public class CustomWebSocketHandler implements WebSocketHandler {
 	public void broadcast(final TextMessage message) throws IOException {
 		Iterator<Entry<String, WebSocketSession>> it = userSocketSessionMap
 				.entrySet().iterator();
-
 		// 多线程群发
 		while (it.hasNext()) {
 
@@ -155,5 +164,21 @@ public class CustomWebSocketHandler implements WebSocketHandler {
 		}
 	}
 	
+	/**
+	 * 提示用户上线
+	 * @throws IOException
+	 */
+	private void noticeUserOnLine() throws IOException {
+		Message  m = new Message();
+		m.setContent("有用户上线了!");
+		m.setDate(new Date());
+		m.setReciveUserId(All);
+		m.setSendUserId(-1);
+		m.setSendUserName("系统消息");
+		broadcast(new TextMessage(new GsonBuilder().setDateFormat(dateFormate).create().toJson(m)));
+	}
 
+
+	
+	
 }

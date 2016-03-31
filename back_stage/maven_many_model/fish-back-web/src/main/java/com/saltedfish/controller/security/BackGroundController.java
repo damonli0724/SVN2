@@ -72,7 +72,6 @@ public class BackGroundController {
 		  */
 		 UserListDTO  user =userService.queryUsersById(Integer.valueOf(sysUser.getUserId()));
 		 session.setAttribute("user", user);
-		 session.setAttribute("uid", user.getUserId());
 		return View.INDEX;
 	}
 
