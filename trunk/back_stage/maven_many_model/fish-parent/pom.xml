@@ -23,6 +23,7 @@
 		<org.springframework.security-version>3.2.5.RELEASE</org.springframework.security-version>
 		<org.aspectj-version>1.8.1</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
+		<cxf.version>3.1.4</cxf.version>
 	</properties>
 
 	<!-- 依赖管理 -->
@@ -324,6 +325,18 @@
 			</dependency>
 
 
+			<dependency>  
+			    <groupId>org.apache.cxf</groupId>  
+			    <artifactId>cxf-rt-frontend-jaxws</artifactId>  
+			    <version>${cxf.version}</version>  
+			</dependency>  
+		
+			<dependency>  
+			    <groupId>org.apache.cxf</groupId>  
+			    <artifactId>cxf-rt-transports-http</artifactId>  
+			    <version>${cxf.version}</version>  
+			</dependency>   
+ 
 		</dependencies>
 
 	</dependencyManagement>
