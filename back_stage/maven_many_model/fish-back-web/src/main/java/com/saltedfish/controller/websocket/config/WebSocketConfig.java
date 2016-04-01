@@ -11,18 +11,22 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 /**
  * WebScoket配置处理器
  * @author lkd
- * @Date 2015年6月11日 下午1:15:09
+ * @Date 
  */
-//@Component
-//@EnableWebSocket
+@Component
+@EnableWebSocket
 public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
 	@Resource
-	CustomWebSocketHandler handler;
+	WebSocketHandlerImpl handler;
 
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-//		registry.addHandler(handler, "/ws").addInterceptors(new HandShake());
-//		registry.addHandler(handler, "/ws/sockjs").addInterceptors(new HandShake()).withSockJS();
+		registry.addHandler(handler, "/ws").addInterceptors(new HandshakeInterceptorImpl());
+		registry.addHandler(handler, "/ws/sockjs").addInterceptors(new HandshakeInterceptorImpl()).withSockJS();
 	}
 
 }
+
+
+
+
