@@ -1,4 +1,4 @@
-package com.saltedfish.controller.websocket2;
+package com.saltedfish.controller.websocket.config;
 
 import java.util.Map;
 
@@ -49,7 +49,6 @@ public class HandshakeInterceptorImpl implements HandshakeInterceptor{
 	public void afterHandshake(ServerHttpRequest request,
 			ServerHttpResponse response, WebSocketHandler wsHandler,
 			Exception exception) {
-		logger.debug("WS-->握手后:异常为{}"+exception.getMessage());
 	}
 
 }

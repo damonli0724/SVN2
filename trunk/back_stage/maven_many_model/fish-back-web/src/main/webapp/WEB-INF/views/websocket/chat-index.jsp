@@ -23,9 +23,8 @@
 <script>
 	 	var path = window.location.host+$("#globe_context_id").val()+"/";
 		var sendUserId = ${user.userId};  //发送者的Id
-		var sendUserName ='${user.username}';
+		var sendUserName =$("#userName").text();
 		var reciveUserId=0; //默认发给所有人
-		var content="";
 		
 		
 		
@@ -65,8 +64,8 @@
 		}
 		//*******************************************************************************************		
 		function sendMsg(){
-			var v=$("#msg").val();
-			if(v==""){
+			var content=$("#msg").val();
+			if(content==""){
 				return;
 			}else{
 				var data={};
@@ -74,14 +73,11 @@
 				data.sendUserName = sendUserName;
 				data.reciveUserId = reciveUserId;
 				data.content = content;
-				/* data["sendUserId"]=from;
-				data["sendUserName"]=fromName;
-				data["reciveUserId"]=to;
-				data["content"]=v; */
+				console.log(data);
 				websocket.send(JSON.stringify(data));
 				/* if(to!=0) */
 				/* $("#content").append("<div class='tmsg'><label class='name'>我&nbsp;"+new Date().Format("yyyy-MM-dd hh:mm:ss")+"</label><div class='tmsg_text'>"+data.content+"</div></div>"); */
-				/* scrollToBottom(); */
+				 scrollToBottom(); 
 				$("#msg").val("");
 			}
 		}
@@ -91,21 +87,7 @@
 			div.scrollTop = div.scrollHeight;
 		}
 		
-			Date.prototype.Format = function (fmt) { //author: meizz 
-			    var o = {
-			        "M+": this.getMonth() + 1, //月份 
-			        "d+": this.getDate(), //日 
-			        "h+": this.getHours(), //小时 
-			        "m+": this.getMinutes(), //分 
-			        "s+": this.getSeconds(), //秒 
-			        "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-			        "S": this.getMilliseconds() //毫秒 
-			    };
-			    if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-			    for (var k in o)
-			    if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-			    return fmt;
-			}
+			
 			
 		function send(event){
 			var code;
