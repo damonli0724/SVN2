@@ -171,6 +171,13 @@
 		       <groupId>org.hibernate</groupId>  
 		       <artifactId>hibernate-validator</artifactId>  
 		 </dependency>
+
+		<!-- c3p0 -->
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+		</dependency>
+		 
 	
 	</dependencies>
 </project>
