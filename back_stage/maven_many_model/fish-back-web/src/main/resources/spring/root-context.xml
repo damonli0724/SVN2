@@ -16,4 +16,9 @@
 	<import resource="classpath:security/spring-security.xml"/>
 	<!-- redis集成 -->	
 	<import resource="classpath:spring-redis/spring-redis.xml" />
+	<!-- 与webservice服务端集成 -->
+	<import resource="classpath:webservice/spring-webservice-server.xml"/>
+	<!-- 与webservice客户端集成 -->
+	<import resource="classpath:webservice/spring-webservice-client.xml"/>
+	
 </beans>
