@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.saltedfish.mapper.app.CifAccountMapper">
+  <resultMap id="BaseResultMap" type="com.saltedfish.entity.app.CifAccount">
+    <id column="ACCOUNT_ID" jdbcType="INTEGER" property="accountId" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="MEMBER_ID" jdbcType="INTEGER" property="memberId" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ACCOUNT_ID, PASSWORD, MEMBER_ID, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from CIF_ACCOUNT
+    where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from CIF_ACCOUNT
+    where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.saltedfish.entity.app.CifAccount">
+    insert into CIF_ACCOUNT (ACCOUNT_ID, PASSWORD, MEMBER_ID, 
+      CREATE_TIME)
+    values (#{accountId,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saltedfish.entity.app.CifAccount">
+    insert into CIF_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        ACCOUNT_ID,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="accountId != null">
+        #{accountId,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saltedfish.entity.app.CifAccount">
+    update CIF_ACCOUNT
+    <set>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saltedfish.entity.app.CifAccount">
+    update CIF_ACCOUNT
+    set PASSWORD = #{password,jdbcType=VARCHAR},
+      MEMBER_ID = #{memberId,jdbcType=INTEGER},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where ACCOUNT_ID = #{accountId,jdbcType=INTEGER}
+  </update>
+ 
+</mapper>

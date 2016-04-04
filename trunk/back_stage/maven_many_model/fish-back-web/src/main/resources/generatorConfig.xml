@@ -18,27 +18,66 @@
         </javaTypeResolver> 
        
         <!-- 生成的javaBean -->
-        <javaModelGenerator targetPackage="com.saltedfish.entity.security"  targetProject="./src/main/java" >
+        <javaModelGenerator targetPackage="com.saltedfish.entity.app"  targetProject="./src/main/java" >
          	<property name="enableSubPackages" value="true"/>  
             <!-- 从数据库返回的值被清理前后的空格  -->  
             <property name="trimStrings" value="true" />  
         </javaModelGenerator>
         
         <!--对应的mapper.xml文件  --> 
-        <sqlMapGenerator targetPackage="sqlmap.security"  targetProject="./src/main/resources" >
+        <sqlMapGenerator targetPackage="sqlmap.app"  targetProject="./src/main/resources" >
         	 <property name="enableSubPackages"  value="true"/>
         </sqlMapGenerator>
         
         
          <!-- 对应的Mapper接口类文件 -->  
-        <javaClientGenerator targetPackage="com.saltedfish.mapper.security"  targetProject="./src/main/java"  type="XMLMAPPER">
+        <javaClientGenerator targetPackage="com.saltedfish.mapper.app"  targetProject="./src/main/java"  type="XMLMAPPER">
         	 <property name="enableSubPackages" value="true"/>  
-        </javaClientGenerator>
+        </javaClientGenerator> 
         
-        <table schema="CL_DEMO" tableName="persistent_logins" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+        <!-- <table schema="CL_DEMO" tableName="persistent_logins" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+               enableSelectByExample="false" selectByExampleQueryId="false" >  
+            <property name="useActualColumnNames" value="false" />  
+       </table> -->
+       
+       <table schema="CL_DEMO" tableName="CIF_LOGIN" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
                enableSelectByExample="false" selectByExampleQueryId="false" >  
             <property name="useActualColumnNames" value="false" />  
        </table>
+       
+        <table schema="CL_DEMO" tableName="CIF_ACCOUNT" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+               enableSelectByExample="false" selectByExampleQueryId="false" >  
+            <property name="useActualColumnNames" value="false" />  
+       </table>
+       
+        <table schema="CL_DEMO" tableName="CIF_MEMBER" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+               enableSelectByExample="false" selectByExampleQueryId="false" >  
+            <property name="useActualColumnNames" value="false" />  
+       </table>
+       
+       <table schema="CL_DEMO" tableName="COMM_APP_VERSION" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+               enableSelectByExample="false" selectByExampleQueryId="false" >  
+            <property name="useActualColumnNames" value="false" />  
+       </table>
+       
+       
+       
+       <table schema="CL_DEMO" tableName="COMM_AUTH_CODE" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+               enableSelectByExample="false" selectByExampleQueryId="false" >  
+            <property name="useActualColumnNames" value="false" />  
+       </table>
+       
+       
+       <table schema="CL_DEMO" tableName="COMM_LOCATION" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+               enableSelectByExample="false" selectByExampleQueryId="false" >  
+            <property name="useActualColumnNames" value="false" />  
+       </table>
+       
+          <table schema="CL_DEMO" tableName="COMM_MESSAGE_TEMPLATE" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false"  
+               enableSelectByExample="false" selectByExampleQueryId="false" >  
+            <property name="useActualColumnNames" value="false" />  
+       </table>
+       
        
        
     </context>
