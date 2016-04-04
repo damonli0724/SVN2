@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saltedfish.mapper.app.CifMemberMapper" >
+  <resultMap id="BaseResultMap" type="com.saltedfish.entity.app.CifMember" >
+    <id column="MEMBER_ID" property="memberId" jdbcType="INTEGER" />
+    <result column="REAL_NAME" property="realName" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="TEL" property="tel" jdbcType="VARCHAR" />
+    <result column="ADDRESS" property="address" jdbcType="VARCHAR" />
+    <result column="ENABLED" property="enabled" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    MEMBER_ID, REAL_NAME, EMAIL, TEL, ADDRESS, ENABLED, CREATE_TIME
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from CIF_MEMBER
+    where MEMBER_ID = #{memberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from CIF_MEMBER
+    where MEMBER_ID = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.saltedfish.entity.app.CifMember" >
+    insert into CIF_MEMBER (MEMBER_ID, REAL_NAME, EMAIL, 
+      TEL, ADDRESS, ENABLED, 
+      CREATE_TIME)
+    values (#{memberId,jdbcType=INTEGER}, #{realName,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{tel,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{enabled,jdbcType=CHAR}, 
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saltedfish.entity.app.CifMember" >
+    insert into CIF_MEMBER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="realName != null" >
+        REAL_NAME,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+      <if test="tel != null" >
+        TEL,
+      </if>
+      <if test="address != null" >
+        ADDRESS,
+      </if>
+      <if test="enabled != null" >
+        ENABLED,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saltedfish.entity.app.CifMember" >
+    update CIF_MEMBER
+    <set >
+      <if test="realName != null" >
+        REAL_NAME = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null" >
+        TEL = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="enabled != null" >
+        ENABLED = #{enabled,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where MEMBER_ID = #{memberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saltedfish.entity.app.CifMember" >
+    update CIF_MEMBER
+    set REAL_NAME = #{realName,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      TEL = #{tel,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      ENABLED = #{enabled,jdbcType=CHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP}
+    where MEMBER_ID = #{memberId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saltedfish.mapper.app.CommLocationMapper" >
+  <resultMap id="BaseResultMap" type="com.saltedfish.entity.app.CommLocation" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PARENT" property="parent" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="SORT_NUM" property="sortNum" jdbcType="INTEGER" />
+    <result column="IS_DIRECTLY" property="isDirectly" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TYPE, NAME, PARENT, STATUS, SORT_NUM, IS_DIRECTLY
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from COMM_LOCATION
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from COMM_LOCATION
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.saltedfish.entity.app.CommLocation" >
+    insert into COMM_LOCATION (ID, TYPE, NAME, 
+      PARENT, STATUS, SORT_NUM, 
+      IS_DIRECTLY)
+    values (#{id,jdbcType=INTEGER}, #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{parent,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{sortNum,jdbcType=INTEGER}, 
+      #{isDirectly,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saltedfish.entity.app.CommLocation" >
+    insert into COMM_LOCATION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="parent != null" >
+        PARENT,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="sortNum != null" >
+        SORT_NUM,
+      </if>
+      <if test="isDirectly != null" >
+        IS_DIRECTLY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null" >
+        #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sortNum != null" >
+        #{sortNum,jdbcType=INTEGER},
+      </if>
+      <if test="isDirectly != null" >
+        #{isDirectly,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saltedfish.entity.app.CommLocation" >
+    update COMM_LOCATION
+    <set >
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="parent != null" >
+        PARENT = #{parent,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sortNum != null" >
+        SORT_NUM = #{sortNum,jdbcType=INTEGER},
+      </if>
+      <if test="isDirectly != null" >
+        IS_DIRECTLY = #{isDirectly,jdbcType=INTEGER},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saltedfish.entity.app.CommLocation" >
+    update COMM_LOCATION
+    set TYPE = #{type,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      PARENT = #{parent,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      SORT_NUM = #{sortNum,jdbcType=INTEGER},
+      IS_DIRECTLY = #{isDirectly,jdbcType=INTEGER}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

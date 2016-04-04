@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saltedfish.mapper.app.CommAppVersionMapper" >
+  <resultMap id="BaseResultMap" type="com.saltedfish.entity.app.CommAppVersion" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="VERSION" property="version" jdbcType="INTEGER" />
+    <result column="IS_UPDATE" property="isUpdate" jdbcType="INTEGER" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="DETAIL" property="detail" jdbcType="VARCHAR" />
+    <result column="TYPE" property="type" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, VERSION, IS_UPDATE, URL, NAME, DETAIL, TYPE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from COMM_APP_VERSION
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from COMM_APP_VERSION
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.saltedfish.entity.app.CommAppVersion" >
+    insert into COMM_APP_VERSION (ID, VERSION, IS_UPDATE, 
+      URL, NAME, DETAIL, 
+      TYPE)
+    values (#{id,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{isUpdate,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{type,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.saltedfish.entity.app.CommAppVersion" >
+    insert into COMM_APP_VERSION
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="version != null" >
+        VERSION,
+      </if>
+      <if test="isUpdate != null" >
+        IS_UPDATE,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="detail != null" >
+        DETAIL,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="isUpdate != null" >
+        #{isUpdate,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saltedfish.entity.app.CommAppVersion" >
+    update COMM_APP_VERSION
+    <set >
+      <if test="version != null" >
+        VERSION = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="isUpdate != null" >
+        IS_UPDATE = #{isUpdate,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null" >
+        DETAIL = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=CHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saltedfish.entity.app.CommAppVersion" >
+    update COMM_APP_VERSION
+    set VERSION = #{version,jdbcType=INTEGER},
+      IS_UPDATE = #{isUpdate,jdbcType=INTEGER},
+      URL = #{url,jdbcType=VARCHAR},
+      NAME = #{name,jdbcType=VARCHAR},
+      DETAIL = #{detail,jdbcType=VARCHAR},
+      TYPE = #{type,jdbcType=CHAR}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
