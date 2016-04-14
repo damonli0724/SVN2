@@ -62,6 +62,8 @@ public interface Url {
 	public static final String WEB_SOCKET_SEND_TO_ALL = "websocket/send/toAll";//发送给所有人
 	public static final String WEB_SOCKET_INDEX_PAGE ="background/websocket/index/page";  //聊天页面首页
 	
-	
+	//disruptor并发测试
+	public static final String DISCUPTOR_TEST="discuptor/test";
+	public static final String  DISCUPTOR_TEST2 = "discuptor/test2";
 
 }
