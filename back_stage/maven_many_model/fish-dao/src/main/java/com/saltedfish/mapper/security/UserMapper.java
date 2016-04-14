@@ -3,11 +3,11 @@ package com.saltedfish.mapper.security;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import com.saltedfish.cmd.admin.AdminListQueryCmd;
 import com.saltedfish.dto.security.UserListDTO;
 import com.saltedfish.entity.security.SysUsers;
-
 
 public interface UserMapper {
 

@@ -149,7 +149,12 @@
 			    <groupId>org.apache.cxf</groupId>  
 			    <artifactId>cxf-rt-transports-http</artifactId>  
 			</dependency>   
-			
+			<!-- Disruptor并发框架 -->
+			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+			</dependency>
+ 			
 		
 		
   </dependencies>

@@ -336,6 +336,15 @@
 			    <artifactId>cxf-rt-transports-http</artifactId>  
 			    <version>${cxf.version}</version>  
 			</dependency>   
+ 	
+ 			<!-- Disruptor 并发框架  -->
+ 			<dependency>
+				<groupId>com.lmax</groupId>
+				<artifactId>disruptor</artifactId>
+				<version>3.3.0</version>
+			</dependency>
+ 			
+ 
  
 		</dependencies>
 
