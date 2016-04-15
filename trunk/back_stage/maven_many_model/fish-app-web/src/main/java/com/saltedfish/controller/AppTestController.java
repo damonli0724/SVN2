@@ -22,7 +22,7 @@ import com.saltedfish.controller.constants.Url;
 import com.saltedfish.dto.BaseResultDTO;
 import com.saltedfish.entity.security.SysUsers;
 import com.saltedfish.exception.SMSException;
-import com.saltedfish.sms.SmsSendService;
+import com.saltedfish.service.sms.SmsSendService;
 import com.saltedfish.utils.RedisUtil;
 
 
