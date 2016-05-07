@@ -24,7 +24,6 @@
 		<org.aspectj-version>1.8.1</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 		<cxf.version>3.1.4</cxf.version>
-		<package.environment>product</package.environment>  
 	</properties>
 
 	<!-- 依赖管理 -->
@@ -359,8 +358,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.0.2</version>
 					<configuration>
-						<source>1.7</source>
-						<target>1.7</target>
+						<source>1.8</source>
+						<target>1.8</target>
 						<encoding>utf8</encoding>
 					</configuration>
 				</plugin>
