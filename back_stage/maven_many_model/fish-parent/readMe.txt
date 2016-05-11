@@ -1,1 +1,16 @@
-本项目采用 springMVC+spring+MyBatis+SpringSecurity+JS+JSP+JQURY+H-UI
+本项目采用 
+springMVC
+spring
+MyBatis
+SpringSecurity
+JS
+JSP
+JQURY
+H-UI
+disruptor
+webservice
+websocket
+duubo
+zookeeper
+redis
+Jpush
