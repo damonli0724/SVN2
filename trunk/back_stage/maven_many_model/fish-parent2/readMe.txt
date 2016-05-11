@@ -1,0 +1,1 @@
+本项目采用 springMVC+spring+MyBatis+SpringSecurity+JS+JSP+JQURY+H-UI
