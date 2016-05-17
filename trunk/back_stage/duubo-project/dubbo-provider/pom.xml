@@ -44,7 +44,7 @@
   
   
  <build>
- 		<finalName>dwddewwedwe</finalName>
+ 		<finalName>fish-service-test</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
