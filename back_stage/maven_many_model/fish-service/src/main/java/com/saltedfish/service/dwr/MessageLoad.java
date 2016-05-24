@@ -12,6 +12,13 @@ import com.saltedfish.service.utils.DwrScriptSessionManagerUtil;
  *
  */
 public class MessageLoad {
+	/**
+	 * 监听页面初始化.
+	 * 1.获取当前的ScriptSession
+	 * 2.当前ScriptSession 添加属性 当前的userId
+	 * 3.初始化DwrScriptSessionManagerUtil 管理类工具,调用初始化信息
+	 * @param userId
+	 */
 	  public void onPageLoad(String userId) {  
 		  
 	       ScriptSession scriptSession = WebContextFactory.get().getScriptSession();  

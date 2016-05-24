@@ -23,7 +23,12 @@ public class MessageSend {
         ScriptSessionFilter    filter  = new ScriptSessionFilter() {
 			@Override //这里根据 根据用户的Id 执行指定发送消息
 			public boolean match(ScriptSession session) {
-				return true;
+				System.err.println("------------"+session.getAttribute("userId"));
+			     if (session.getAttribute("userId") == null){
+			    	 return false;
+			     }else{
+                     return (session.getAttribute("userId")).equals(userId);
+			     }
 			}
 		};
 		//2.任务
