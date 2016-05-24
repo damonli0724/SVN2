@@ -23,6 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     //推送信息 
     
    	function showMessage(message){
+    	alert(message);
     	//$("#contentId").append("<li>"+message+"</li>");
     }
     function test(){  
