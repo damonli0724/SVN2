@@ -17,18 +17,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
     <script type='text/javascript' src='<%=basePath%>dwr/engine.js'></script>  
     <script type='text/javascript' src='<%=basePath%>dwr/util.js'></script>  
-    <script type='text/javascript' src='<%=basePath%>dwr/interface/TestPush.js'></script>  
+    <script type='text/javascript' src='<%=basePath%>dwr/interface/messageSend.js'></script>  
    
     <script type="text/javascript">  
     //推送信息 
-    
-   	function showMessage(message){
-    	alert(message);
-    	//$("#contentId").append("<li>"+message+"</li>");
-    }
     function test(){  
         var msg = document.getElementById("msgId").value;  
-        TestPush.sendMessageAuto(msg,$("#sendId").val());  
+        messageSend.sendMessageAuto("fdfdffdsfdsfsd","69");  
     }  
     </script>  
   </head>  

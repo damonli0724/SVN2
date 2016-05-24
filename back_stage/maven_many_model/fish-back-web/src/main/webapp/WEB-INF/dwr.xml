@@ -7,10 +7,10 @@
     </create>  
     
     <!-- DWR实时推送 -->
-    <create creator="new" javascript="MessagePush" scope="application">  
+    <create creator="new" javascript="messageLoad" scope="application">  
         <param name="class" value="com.saltedfish.service.dwr.MessageLoad"></param>  
     </create>  
-    <create creator="new" javascript="TestPush" scope="application">  
+    <create creator="new" javascript="messageSend" scope="application">  
         <param name="class" value="com.saltedfish.service.dwr.MessageSend"></param>  
     </create>  
     
