@@ -13,17 +13,17 @@
   <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
   <script type='text/javascript' src='${contextPath}/dwr/engine.js'></script>  
   <script type='text/javascript' src='${contextPath}/dwr/util.js'></script>  
-  <script type="text/javascript" src="${contextPath}/dwr/interface/MessagePush.js"></script>  
+  <script type="text/javascript" src="${contextPath}/dwr/interface/messageLoad.js"></script>  
   
   <script type="text/javascript">  
          function onPageLoad(){  
-            var userId = '2'; //${user.userId}  
-            MessagePush.onPageLoad(userId);  
+            var userId = ${user.userId};
+            messageLoad.onPageLoad(userId);  
           }  
          //推送信息  
-      /*    function showMessage(autoMessage){ 
-			$("#DemoDiv").append(autoMessage+"<br/>");                  
-        }   */
+          function showMessage(autoMessage){ 
+			alert(autoMessage);             
+        	}   
   </script>  
   <body onload="onPageLoad();dwr.engine.setActiveReverseAjax(true);dwr.engine.setNotifyServerOnPageUnload(true);;">   
     This is my DWR DEOM page. <hr>  
