@@ -22,8 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">  
     //推送信息 
     function test(){  
-        var msg = document.getElementById("msgId").value;  
-        messageSend.sendMessageAuto("fdfdffdsfdsfsd","69");  
+        messageSend.sendMessageAuto("69","fewfewfewfwef");  
     }  
     </script>  
   </head>  
