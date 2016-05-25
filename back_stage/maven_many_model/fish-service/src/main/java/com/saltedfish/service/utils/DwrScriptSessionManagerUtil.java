@@ -1,5 +1,7 @@
 package com.saltedfish.service.utils;
 
+import java.util.Iterator;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpSession;
 
@@ -26,6 +28,15 @@ public class DwrScriptSessionManagerUtil extends DwrServlet{
            //对当前的用户创建一个监听器
            ScriptSessionListener listener = new ScriptSessionListener() {  
                   public void sessionCreated(ScriptSessionEvent ev) {  
+                	  System.err.println("----------------------"+ev.getSession().getCreationTime());
+                	  
+                	  System.err.println("----------------------"+ev.getSession().getHttpSessionId());
+                	  
+                	  System.err.println(ev.getSession().getPage());
+                	  Iterator its = ev.getSession().getAttributeNames();
+                	  while (its.hasNext()) {
+						System.err.println(its.next());
+					}
                 	  
                 	  	//获取 javax.servlet.http.HttpSession
                          HttpSession session = WebContextFactory.get().getSession();  
@@ -34,12 +45,15 @@ public class DwrScriptSessionManagerUtil extends DwrServlet{
                          String userId =((SysUsers) session.getAttribute("user")).getUserId()+"";  
                          
                          //ScriptSessionEvent 对这个userId添加相应事件
-                         ev.getSession().setAttribute("userId", userId);  
+                         if (ev.getSession().getAttribute("userId")==null) {
+                        	 ev.getSession().setAttribute("userId", userId);  
+                        	  System.err.println("a ScriptSession is created! userId is "+userId); 
+						}
                          
-                         System.err.println("a ScriptSession is created! userId is "+userId); 
+                       
                   }  
                   public void sessionDestroyed(ScriptSessionEvent ev) {  
-                         System.err.println("a ScriptSession is distroyed");  
+                         System.err.println("a ScriptSession is distroyed! userId is"+ev.getSession().getAttribute("userId"));  
                   }  
            };  
            manager.addScriptSessionListener(listener);  

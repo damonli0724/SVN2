@@ -21,10 +21,9 @@ public class MessageLoad {
 	 */
 	  public void onPageLoad(String userId) {  
 		  
-	       ScriptSession scriptSession = WebContextFactory.get().getScriptSession();  
+	      /* ScriptSession scriptSession = WebContextFactory.get().getScriptSession();  
 	  
-	       scriptSession.setAttribute(userId, userId);  
-	  
+	       scriptSession.setAttribute(userId, userId);  */
 	       DwrScriptSessionManagerUtil dwrScriptSessionManagerUtil = new DwrScriptSessionManagerUtil();  
 	       try {  
 	              dwrScriptSessionManagerUtil.init();  

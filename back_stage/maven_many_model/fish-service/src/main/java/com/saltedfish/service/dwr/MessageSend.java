@@ -8,13 +8,15 @@ import org.directwebremoting.Browser;
 import org.directwebremoting.ScriptBuffer;
 import org.directwebremoting.ScriptSession;
 import org.directwebremoting.ScriptSessionFilter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * dwr 推送消息发送
  * @author lkd
  *
  */
 public class MessageSend {
-	
+	private static final Logger  logger = LoggerFactory.getLogger(MessageSend.class);
 	//根据UserId 发送message
 	public void sendMessageAuto(String userid, String message){  
         final String userId = userid;   
@@ -23,7 +25,10 @@ public class MessageSend {
         ScriptSessionFilter    filter  = new ScriptSessionFilter() {
 			@Override //这里根据 根据用户的Id 执行指定发送消息
 			public boolean match(ScriptSession session) {
-				System.err.println("------------"+session.getAttribute("userId"));
+				
+				
+				
+				logger.debug("----->发送信息:接收者Id为{},当前用户Id为{}", userId,session.getAttribute("userId"));
 			     if (session.getAttribute("userId") == null){
 			    	 return false;
 			     }else{
@@ -36,10 +41,12 @@ public class MessageSend {
 			 private ScriptBuffer script = new ScriptBuffer();  
 			@Override
 			public void run() {
-				//script  添加回掉函数(js中的函数)
+				logger.debug("----->匹配成功，开始回调showMessage函数..");
                 script.appendCall("showMessage", autoMessage);  
                 Collection<ScriptSession> sessions = Browser.getTargetSessions();  
-                for (ScriptSession scriptSession : sessions){  
+                for (ScriptSession scriptSession : sessions){
+                	
+                	
                     scriptSession.addScript(script);  
                 }  
 			}
