@@ -109,7 +109,7 @@
 			</init-param> 
 			<init-param> 
 				<param-name>logLevel</param-name> 
-				<param-value>WARN</param-value> 
+				<param-value>DEBUG</param-value> 
 			</init-param> 
 		</servlet> 
 		<servlet-mapping> 
