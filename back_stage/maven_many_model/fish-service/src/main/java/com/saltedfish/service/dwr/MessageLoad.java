@@ -42,22 +42,11 @@ public class MessageLoad {
        		   		ScriptSession session = ev.getSession();
        		   		
        		   		session.setAttribute("userId", userId);  
-                    
-       		   		Collection<ScriptSession> srcs  = manager.getAllScriptSessions()	;
-       		   		Iterator<ScriptSession> it = srcs.iterator();;
-       		   		System.err.println("----------------------------------------");
-	       		   		while(it.hasNext()){
-	       		   		ScriptSession s  =   it.next();
-	       		   		System.err.println("tttttttttttt"+s);
-	       		   		}
-       		   		System.err.println("----------------------------------------");
        		   		logger.debug("DWR--sessionScript{} has been created....session attribute 'userId' is{} ",session,userId);
             }  
        	  @Override
             public void sessionDestroyed(ScriptSessionEvent ev) {
-       		  		
  		   			logger.debug("DWR--sessionScript{} has been destoryed....session attribute 'userId' is{} ",ev.getSession(), ev.getSession().getAttribute("userId"));
-       		 System.err.println("xxxxxxxxxxxxxxxxxxxxxx"+userId);
             }  
           };
           //3.添加ScriptSessionListener到 manager
