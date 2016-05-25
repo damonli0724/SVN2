@@ -18,35 +18,30 @@ import org.slf4j.LoggerFactory;
 public class MessageSend {
 	private static final Logger  logger = LoggerFactory.getLogger(MessageSend.class);
 	//根据UserId 发送message
-	public void sendMessageAuto(String userid, String message){  
-        final String userId = userid;   
-        final String autoMessage = message;  
-        //1.ScriptSessionFilter  ScriptSession过滤器 //可根据需求指定你要过滤的东西
+	public void sendMessageByUserId(final String userId , final String message){  
         ScriptSessionFilter    filter  = new ScriptSessionFilter() {
-			@Override //这里根据 根据用户的Id 执行指定发送消息
+        	//这里根据 根据用户的Id 执行指定发送消息 //这里会循环 所有的scriptSession,session的userId 和当前的userId作比较
+        	//匹配  对当前页面，回调函数
+			@Override 
 			public boolean match(ScriptSession session) {
-				
-				
-				
-				logger.debug("----->发送信息:接收者Id为{},当前用户Id为{}", userId,session.getAttribute("userId"));
-			     if (session.getAttribute("userId") == null){
+				Object sessionUserId = session.getAttribute("userId");
+				logger.debug("----->发送信息:接收者Id为{},当前用户Id为{}", userId,sessionUserId);
+			     if ( sessionUserId== null){
 			    	 return false;
 			     }else{
-                     return (session.getAttribute("userId")).equals(userId);
+                     return sessionUserId.equals(userId);
 			     }
 			}
 		};
-		//2.任务
+		//2.任务（回调函数）
 		Runnable  task  = new Runnable() {
-			 private ScriptBuffer script = new ScriptBuffer();  
+		  private ScriptBuffer script = new ScriptBuffer();  
 			@Override
-			public void run() {
+			public void run() { 
 				logger.debug("----->匹配成功，开始回调showMessage函数..");
-                script.appendCall("showMessage", autoMessage);  
+                script.appendCall("showMessage", message);  
                 Collection<ScriptSession> sessions = Browser.getTargetSessions();  
                 for (ScriptSession scriptSession : sessions){
-                	
-                	
                     scriptSession.addScript(script);  
                 }  
 			}
