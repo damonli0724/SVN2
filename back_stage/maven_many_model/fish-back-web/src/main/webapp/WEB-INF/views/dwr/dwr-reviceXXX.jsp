@@ -13,19 +13,17 @@
   <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
   <script type='text/javascript' src='${contextPath}/dwr/engine.js'></script>  
   <script type='text/javascript' src='${contextPath}/dwr/util.js'></script>  
-  <script type="text/javascript" src="${contextPath}/dwr/interface/msg.js"></script>  
+  <script type="text/javascript" src="${contextPath}/dwr/interface/messageLoad.js"></script>  
   
-  <script type="text/javascript"> 
-  		 //页面加载时候,设置标签
-         function onPageLoad(){
-        	var reciveTag = "receiverTag";
-            msg.onPageLoad("receiverTag");  
-          } 
-         //展示信息
-         function show(data){
-        	 alert(data);
-         }
-         
+  <script type="text/javascript">  
+         function onPageLoad(){  
+            var userId = ${user.userId};
+            messageLoad.onPageLoad(userId);  
+          }  
+         //推送信息  
+          function showMessage(autoMessage){ 
+			alert(autoMessage);             
+        	}   
   </script>  
   <body onload="onPageLoad();dwr.engine.setActiveReverseAjax(true);dwr.engine.setNotifyServerOnPageUnload(true);;">   
     This is my DWR DEOM page. <hr>  
