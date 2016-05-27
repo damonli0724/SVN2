@@ -14,6 +14,10 @@
         <param name="class" value="com.saltedfish.service.dwr.MessageSend"></param>  
     </create>  
     
+    <!-- 新版及时推送 -->
+    <create creator="new" javascript="msg" scope="application">  
+        <param name="class" value="com.saltedfish.service.dwr.MessageSendAndLoad"></param>  
+    </create>  
     
   </allow>  
 </dwr>  
