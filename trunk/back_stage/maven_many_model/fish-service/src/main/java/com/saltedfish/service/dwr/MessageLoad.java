@@ -3,6 +3,8 @@ package com.saltedfish.service.dwr;
 import java.util.Collection;
 import java.util.Iterator;
 
+import javax.servlet.http.HttpSession;
+
 import org.directwebremoting.Container;
 import org.directwebremoting.ScriptSession;
 import org.directwebremoting.ServerContextFactory;
