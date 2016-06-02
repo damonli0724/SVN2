@@ -1,4 +1,4 @@
-package com.saltedfish.activeMQ.test.producer.queue;
+package com.saltedfish.activeMQ.topic;
 
 import javax.jms.JMSException;
 import javax.jms.Message;
@@ -11,24 +11,31 @@ import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
+/**
+ * 
+ * @author liang
+ * @description   Topic生产者发送消息到Topic
+ * 
+ */
+
 @Service
-public class QueueSender {
+public class TopicSender {
 	
 	@Autowired
-	private JmsTemplate jmsTemplate;//通过@Qualifier修饰符来注入对应的bean
+	private JmsTemplate topicJmsTemplate;
 	
 	/**
 	 * 发送一条消息到指定的队列（目标）
 	 * @param queueName 队列名称
 	 * @param message 消息内容
 	 */
-	public void send(String queueName,final String message){
-			jmsTemplate.send(queueName, new MessageCreator() {
+	public void send(final String message){
+		topicJmsTemplate.send( new MessageCreator() {
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				return session.createTextMessage(message);
 			}
 		});
 	}
-	
+
 }
