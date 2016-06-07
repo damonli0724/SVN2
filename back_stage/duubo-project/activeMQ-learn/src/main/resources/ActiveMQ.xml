@@ -49,7 +49,7 @@
 
 <!-- ***********************************************(订阅模式)**(只要有多个消费者，所有消费者都能接收到信息，点对点是 有人消费了这个信息,则其他人便接收不到)************************************************************* -->
 	<!-- 申明点对点消息队列,队列名称为queueName -->
-	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQQueue">
+	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
 		<constructor-arg index="0" value="topicName"></constructor-arg>
 	</bean>
 
