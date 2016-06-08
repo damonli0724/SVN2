@@ -18,8 +18,7 @@ public class TopicMessageListener2 implements MessageListener {
 	public void onMessage(Message message) {
 		 TextMessage textMessage = (TextMessage) message;
 		try {
-			System.err.println("==================");
-			System.err.println("Topic....2222222222222收到信息。。。。。内容为-->"+textMessage.getText());
+			System.err.println("[订阅模式]Topic监听者2收到信息,内容为:"+textMessage.getText());
 		} catch (JMSException e) { 
 			e.printStackTrace(); 
 		} 

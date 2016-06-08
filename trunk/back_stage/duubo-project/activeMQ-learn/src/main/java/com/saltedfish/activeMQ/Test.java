@@ -3,8 +3,6 @@ package com.saltedfish.activeMQ;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.saltedfish.activeMQ.queue.QueueReciver;
-import com.saltedfish.activeMQ.queue.QueueSender;
 import com.saltedfish.activeMQ.topic.TopicSender;
 
 

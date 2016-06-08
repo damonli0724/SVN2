@@ -15,13 +15,11 @@
 
 	<!-- ActiveMQ 有两种方式,1.点对点(P2P),2.一对多 (订阅模式) -->
 
-
 	<!-- JMS连接池 -->
 	<bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
 		destroy-method="stop">
 		<property name="connectionFactory" ref="connectionFactory" />
 	</bean>
-
 	<!--创建连接工厂 -->
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616"></property>
@@ -59,5 +57,5 @@
 	
 	<bean id="topicMessageListener1" class="com.saltedfish.activeMQ.topic.TopicMessageListener"/>
 	<bean id="topicMessageListener2" class="com.saltedfish.activeMQ.topic.TopicMessageListener2"/>
-
+<!-- **************************************************************************************************************************************** -->
 </beans>  
