@@ -8,9 +8,11 @@ import javax.jms.TextMessage;
 import org.springframework.stereotype.Component;
 
 /**
- * 消息监听者
- * @author lkd
- *
+ * 
+ * @ClassName: TopicMessageListener 
+ * @Description: 订阅监听器
+ * @author: lkd
+ * @date: 2016年6月8日 下午1:43:22
  */
 public class TopicMessageListener implements MessageListener {
 

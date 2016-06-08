@@ -1,34 +1,35 @@
 package com.saltedfish.activeMQ.topic;
 
-import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jms.core.JmsTemplate;
 import org.springframework.jms.core.MessageCreator;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
  * 
- * @author liang
- * @description   Topic生产者发送消息到Topic
- * 
+ * @ClassName: TopicSender 
+ * @Description: 订阅 发送者
+ * @author: lkd
+ * @date: 2016年6月8日 下午12:48:35
  */
-
 @Service
 public class TopicSender {
 	
 	@Autowired
 	private JmsTemplate topicJmsTemplate;
 	
+
 	/**
-	 * 发送一条消息到指定的队列（目标）
-	 * @param queueName 队列名称
+	 * 
+	 * @Title: 发送一条消息到指定的队列（目标） 
+	 * @Description: 根据队列名称，发送信息到指定地点
+	 * @param topicName  队列名称
 	 * @param message 消息内容
+	 * @return: void
 	 */
 	public void send(final String topicName,final String message){
 		topicJmsTemplate.send(topicName,new MessageCreator() {
@@ -39,4 +40,6 @@ public class TopicSender {
 		});
 	}
 
+	
+	
 }
