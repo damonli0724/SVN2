@@ -11,19 +11,27 @@ import org.springframework.jms.core.MessageCreator;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+/**
+ * 
+ * @ClassName: QueueSender 
+ * @Description: 队列发送器
+ * @author: lkd
+ * @date: 2016年6月8日 下午12:50:11
+ */
+@Service 
 public class QueueSender {
 	
-	/**
-	 * 这里的queueJmsTemplate 已经指定了 queue的名字，所以用这个发送 直接发送到指定的地方
-	 */
+	//@Autowired 在spirng高的版本中，根据类型查找，如果有多个，则再根据名字，如果出现多个，或者没有，则异常
 	@Autowired
 	private JmsTemplate queueJmsTemplate;
 	
 	/**
-	 * 发送一条消息到指定的队列（目标）
+	 * 
+	 * @Title: 发送信息到指定队列 
+	 * @Description: 
 	 * @param queueName 队列名称
 	 * @param message 消息内容
+	 * @return: void
 	 */
 	public void send(final String queueName ,final String message){
 		queueJmsTemplate.send(queueName,new MessageCreator() {
