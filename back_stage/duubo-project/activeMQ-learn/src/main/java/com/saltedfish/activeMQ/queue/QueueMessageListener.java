@@ -18,8 +18,7 @@ public class QueueMessageListener implements MessageListener {
 	public void onMessage(Message message) {
 		 TextMessage textMessage = (TextMessage) message;
 		try {
-			System.err.println("==================");
-			System.err.println("11111111111111111111收到信息。。。。。内容为-->"+textMessage.getText());
+			System.err.println("[点对点模式]Queue监听者1收到信息,内容为:"+textMessage.getText());
 		} catch (JMSException e) { 
 			e.printStackTrace(); 
 		} 

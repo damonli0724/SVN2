@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 public class TopicSender {
 	
 	@Autowired
-	@Qualifier("topicJmsTemplate")
 	private JmsTemplate topicJmsTemplate;
 	
 	/**
