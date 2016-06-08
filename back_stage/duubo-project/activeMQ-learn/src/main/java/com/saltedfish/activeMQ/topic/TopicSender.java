@@ -1,5 +1,6 @@
 package com.saltedfish.activeMQ.topic;
 
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
@@ -30,8 +31,8 @@ public class TopicSender {
 	 * @param queueName 队列名称
 	 * @param message 消息内容
 	 */
-	public void send(final String message){
-		topicJmsTemplate.send( new MessageCreator() {
+	public void send(final String topicName,final String message){
+		topicJmsTemplate.send(topicName,new MessageCreator() {
 			@Override
 			public Message createMessage(Session session) throws JMSException {
 				return session.createTextMessage(message);

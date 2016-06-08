@@ -25,9 +25,9 @@ public class QueueSender {
 	 * @param queueName 队列名称
 	 * @param message 消息内容
 	 */
-	public void send(final String message){
-		queueJmsTemplate.send( new MessageCreator() {
-			@Override
+	public void send(final String queueName ,final String message){
+		queueJmsTemplate.send(queueName,new MessageCreator() {
+			@Override 
 			public Message createMessage(Session session) throws JMSException {
 				return session.createTextMessage(message);
 			}

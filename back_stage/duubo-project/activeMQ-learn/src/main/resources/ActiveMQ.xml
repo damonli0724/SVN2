@@ -15,6 +15,7 @@
 
 	<!-- ActiveMQ 有两种方式,1.点对点(P2P),2.一对多 (订阅模式) -->
 
+
 	<!-- JMS连接池 -->
 	<bean id="jmsFactory" class="org.apache.activemq.pool.PooledConnectionFactory"
 		destroy-method="stop">
@@ -26,44 +27,32 @@
 		<property name="brokerURL" value="tcp://localhost:61616"></property>
 	</bean>
 <!-- ***********************************************(点对点模式)**(如果存在多个消费者,则谁有空谁接受，发送一个信息，只要有一个消费了就结束了)************************************************************* -->
-	<!-- 申明点对点消息队列,队列名称为queueName -->
-	<bean id="queueDestination" class="org.apache.activemq.command.ActiveMQQueue">
-		<constructor-arg index="0" value="queueName"></constructor-arg>
-	</bean>
 
 	<!-- 点对点 消息模板，设定连接工厂，目的地，接受超时，模式(订阅or点对点) -->
 	<bean id="queueJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory"></property>
-		<property name="defaultDestination" ref="queueDestination"></property>
-		<property name="receiveTimeout" value="600"></property>
 		<!-- 区别它采用的模式为false是p2p为true是订阅 -->
 		<property name="pubSubDomain" value="false" />
 	</bean>
 	
 	<!-- 消息监听,根据队列名称进行监听 -->
-	<jms:listener-container container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
+	<jms:listener-container destination-type="queue"  container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
 	    <jms:listener destination="queueName" ref="queueMessageListener"  method="onMessage" />
 	</jms:listener-container>
 	
 	<bean id="queueMessageListener" class="com.saltedfish.activeMQ.queue.QueueMessageListener"/>
 
 <!-- ***********************************************(订阅模式)**(只要有多个消费者，所有消费者都能接收到信息，点对点是 有人消费了这个信息,则其他人便接收不到)************************************************************* -->
-	<!-- 申明点对点消息队列,队列名称为queueName -->
-	<bean id="topicDestination" class="org.apache.activemq.command.ActiveMQTopic">
-		<constructor-arg index="0" value="topicName"></constructor-arg>
-	</bean>
 
 	<!-- 点对点 消息模板，设定连接工厂，目的地，接受超时，模式(订阅or点对点) -->
 	<bean id="topicJmsTemplate" class="org.springframework.jms.core.JmsTemplate">
 		<property name="connectionFactory" ref="connectionFactory"></property>
-		<property name="defaultDestination" ref="topicDestination"></property>
-		<property name="receiveTimeout" value="666"></property>
 		<!-- 区别它采用的模式为false是p2p为true是订阅 -->
 		<property name="pubSubDomain" value="true" />
 	</bean>
 
 	<!-- 消息监听,根据队列名称进行监听 -->
-	<jms:listener-container container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
+	<jms:listener-container  destination-type="topic" container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
 	    <jms:listener destination="topicName" ref="topicMessageListener1"  method="onMessage" />
 	    <jms:listener destination="topicName" ref="topicMessageListener2"  method="onMessage" />
 	</jms:listener-container>
