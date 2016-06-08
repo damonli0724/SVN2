@@ -12,13 +12,13 @@ public class Test {
 	
 	public static void main(String[] args) {
 		ApplicationContext ctx =  new ClassPathXmlApplicationContext("spring-root.xml");
-		QueueSender   queueSender = (QueueSender) ctx.getBean("queueSender");
+//		QueueSender   queueSender = (QueueSender) ctx.getBean("queueSender");
 //		QueueReciver   queueReciver  = (QueueReciver) ctx.getBean("queueReciver");
-//		queueSender.send("Hello activeMq queue...");    
+//      	queueSender.send("queueName","Hello activeMq queue...");    
 			
 	TopicSender  topicSender =(TopicSender) ctx.getBean("topicSender");
-	topicSender.send("Hello activeMq topic...");
-			
+	topicSender.send("topicName","Hello activeMq topic...");
+			 
 	}
 
 }
