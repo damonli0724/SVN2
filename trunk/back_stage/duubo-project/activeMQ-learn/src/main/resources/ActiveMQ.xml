@@ -24,6 +24,11 @@
 	<bean id="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616"></property>
 	</bean>
+	<!-- activemq事务 -->
+	<bean id="jmsTransactionManager" class="org.springframework.jms.connection.JmsTransactionManager">  
+    	<property name="connectionFactory" ref="connectionFactory" />  
+	</bean>  
+	
 <!-- ***********************************************(点对点模式)**(如果存在多个消费者,则谁有空谁接受，发送一个信息，只要有一个消费了就结束了)************************************************************* -->
 
 	<!-- 点对点 消息模板，设定连接工厂，目的地，接受超时，模式(订阅or点对点) -->
@@ -34,7 +39,7 @@
 	</bean>
 	
 	<!-- 消息监听,根据队列名称进行监听  destination-type="queue"-->
-	<jms:listener-container destination-type="queue"  container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
+	<jms:listener-container destination-type="queue" transaction-manager="jmsTransactionManager" container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
 	    <jms:listener destination="queueName" ref="queueMessageListener"  method="onMessage" />
 	</jms:listener-container>
 	

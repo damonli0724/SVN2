@@ -20,7 +20,10 @@ public class QueueMessageListener implements MessageListener {
 	public void onMessage(Message message) {
 		 TextMessage textMessage = (TextMessage) message;
 		try {
+			
+			int a = 1/0;
 			System.err.println("[点对点模式]Queue监听者1收到信息,内容为:"+textMessage.getText());
+			
 		} catch (JMSException e) { 
 			e.printStackTrace(); 
 		} 

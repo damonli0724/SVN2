@@ -14,10 +14,11 @@ public class Test {
 		
 		QueueSender   queueSender = (QueueSender) ctx.getBean("queueSender");
       	queueSender.send("queueName","Hello activeMq queue...");    
-			
-		TopicSender  topicSender =(TopicSender) ctx.getBean("topicSender");
-		topicSender.send("topicName","Hello activeMq topic...");
 			 
+//		TopicSender  topicSender =(TopicSender) ctx.getBean("topicSender");
+//		topicSender.send("topicName","Hello activeMq topic...");
+		
+		
 	}
 
 }
