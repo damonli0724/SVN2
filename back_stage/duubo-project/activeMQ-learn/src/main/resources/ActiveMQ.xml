@@ -33,7 +33,7 @@
 		<property name="pubSubDomain" value="false" />
 	</bean>
 	
-	<!-- 消息监听,根据队列名称进行监听 -->
+	<!-- 消息监听,根据队列名称进行监听  destination-type="queue"-->
 	<jms:listener-container destination-type="queue"  container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
 	    <jms:listener destination="queueName" ref="queueMessageListener"  method="onMessage" />
 	</jms:listener-container>
@@ -49,7 +49,7 @@
 		<property name="pubSubDomain" value="true" />
 	</bean>
 
-	<!-- 消息监听,根据队列名称进行监听 -->
+	<!-- 消息监听,根据队列名称进行监听  destination-type="topic"-->
 	<jms:listener-container  destination-type="topic" container-type="default"   connection-factory="connectionFactory" acknowledge="auto">
 	    <jms:listener destination="topicName" ref="topicMessageListener1"  method="onMessage" />
 	    <jms:listener destination="topicName" ref="topicMessageListener2"  method="onMessage" />
