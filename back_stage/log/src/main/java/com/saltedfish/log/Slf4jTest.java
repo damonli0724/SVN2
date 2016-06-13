@@ -14,12 +14,8 @@ package com.saltedfish.log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** 
- * @ClassName: Test 
- * @Description: TODO
- * @author: lkd
- * @date: 2016年6月12日 上午9:38:11  
- */
+import com.mysql.jdbc.Driver;
+
 /**
  * 
  * @ClassName: Test 
@@ -32,8 +28,13 @@ public class Slf4jTest {
 
     public static void main(String[] args) {  
     	
-    		logger.debug("slf4j测试debug[{}],[{}]", 1,1);
-    		logger.error("slf4j测试error[{}],[{}]", 2,2);
+    	
+    	logger.debug("开始进入测试...");
+    	try {
+			int a = 1/0; 
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+		}
         
     }   
 
