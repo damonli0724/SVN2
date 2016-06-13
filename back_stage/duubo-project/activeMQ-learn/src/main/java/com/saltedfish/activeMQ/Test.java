@@ -13,7 +13,7 @@ public class Test {
 		ApplicationContext ctx =  new ClassPathXmlApplicationContext("spring-root.xml");
 		
 		QueueSender   queueSender = (QueueSender) ctx.getBean("queueSender");
-      	queueSender.send("queueName","Hello activeMq queue...");    
+      	queueSender.send("queueName","Hello activeMq queue..方法烦烦烦.");    
 			 
 //		TopicSender  topicSender =(TopicSender) ctx.getBean("topicSender");
 //		topicSender.send("topicName","Hello activeMq topic...");
