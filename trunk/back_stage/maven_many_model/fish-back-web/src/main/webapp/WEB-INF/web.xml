@@ -76,7 +76,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	<!-- 配置DWR -->
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>dwr-invoker</servlet-name>
 		<servlet-class>org.directwebremoting.servlet.DwrServlet</servlet-class>
 		<init-param>
@@ -111,17 +111,17 @@
 			<param-name>logLevel</param-name>
 			<param-value>DEBUG</param-value>
 		</init-param>
-		<!-- 初始化scritpSessionManager -->
+		初始化scritpSessionManager
 		<init-param>
 			<param-name>org.directwebremoting.extend.ScriptSessionManager</param-name>
 			<param-value>com.saltedfish.service.dwr.DWRScriptSessionManager </param-value>
 		</init-param>
 
-	</servlet>
-	<servlet-mapping>
+	</servlet> --> 
+	<!-- <servlet-mapping>
 		<servlet-name>dwr-invoker</servlet-name>
 		<url-pattern>/dwr/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 
 	<!-- 配置CXF监听器 -->
 	<servlet>
