@@ -20,7 +20,7 @@ public class FastDFSTest {
 	 * @throws Exception
 	 */
 	public static void upload() throws Exception {
-		String filePath = "E:/WorkSpaceSpr10.6/edu-demo-fdfs/TestFile/DubboVideo.jpg";
+		String filePath = "C:\\Users\\Administrator\\Desktop\\test.jpg";
 		File file = new File(filePath);
 		String fileId = FastDFSClient.uploadFile(file, filePath);
 		System.out.println("Upload local file " + filePath + " ok, fileid=" + fileId);
@@ -33,9 +33,9 @@ public class FastDFSTest {
 	 * @throws Exception
 	 */
 	public static void download() throws Exception {
-		String fileId = "group1/M00/00/00/wKgEfVUYPieAd6a0AAP3btxj__E335.jpg";
+		String fileId = "group1/M00/00/00/wKgBaFdfy2uARAliAACzN4QAEv8753.jpg";
 		InputStream inputStream = FastDFSClient.downloadFile(fileId);
-		File destFile = new File("E:/WorkSpaceSpr10.6/edu-demo-fdfs/TestFile/DownloadTest.jpg");
+		File destFile = new File("C:\\Users\\Administrator\\Desktop\\download2.jpg");
 		FileUtils.copyInputStreamToFile(inputStream, destFile);
 	}
 
@@ -44,7 +44,7 @@ public class FastDFSTest {
 	 * @throws Exception
 	 */
 	public static void delete() throws Exception {
-		String fileId = "group1/M00/00/00/wKgEfVUYPieAd6a0AAP3btxj__E335.jpg";
+		String fileId = "group1/M00/00/00/wKgBaFdfy2uARAliAACzN4QAEv8753.jpg";
 		int result = FastDFSClient.deleteFile(fileId);
 		System.out.println(result == 0 ? "删除成功" : "删除失败:" + result);
 	}
@@ -57,8 +57,8 @@ public class FastDFSTest {
 	 */
 	public static void main(String[] args) throws Exception {
 		//upload();
-		//download();
-		delete();
+		download(); 
+		//delete();
 
 	}
 
