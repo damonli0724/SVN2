@@ -21,9 +21,13 @@ import cn.jpush.api.push.model.notification.Notification;
 
 
 /**
- * 极光推送工具类
- * <P>TODO</P>
- * @author lkd
+ * 1.可以根据tag，alias，registrationId 对不同平台的用户发送信息
+ * 2.setAudience(Audience.registrationId(xx))这里设置别名，注册Id，标签
+ * 3..setApnsProduction(false) 当放入生产的时候,改成true
+ * @ClassName: JPushUtils 
+ * @Description: 极光推送工具类
+ * @author: lkd
+ * @date: 2016年6月17日 下午2:16:02
  */
 public class JPushUtils {
 	private static final String appKey = "43fd4d2ad1e2c2562aa1ac72";
@@ -35,10 +39,10 @@ public class JPushUtils {
 	protected  final static Logger logger = Logger.getLogger(JPushUtils.class);
 
 	/**
-	 * 获得jpushClient 核心对象
-	 * <p>TODO</p>
-	 * @return
-	 * @author lkd
+	 * @Title: getJpushClient 
+	 * @Description: 获得jpushClient 核心对象
+	 * @return c
+	 * @return: JPushClient
 	 */
 	public static JPushClient getJpushClient() {
 		JPushClient jpushClient = new JPushClient(masterSecret, appKey);
@@ -46,13 +50,14 @@ public class JPushUtils {
 	}
 
 	/**
-	 * 根据android 用户accountId指定发送消息
-	 * <p>TODO</p>
-	 * @param content 内容
-	 * @param title   标题
-	 * @param accountId 用户id
+	 * 
+	 * @Title: sendMessageToAndroid 
+	 * @Description: 根据android 用户accountId指定发送消息
+	 * @param content
+	 * @param title
+	 * @param accountId
 	 * @throws Exception
-	 * @author lkd
+	 * @return: void
 	 */
 	public static void sendMessageToAndroid(String content, String title, Integer accountId) throws Exception {
 		PushPayload payLoad = PushPayload.newBuilder().setPlatform(Platform.all()).setAudience(Audience.alias(String.valueOf(accountId)))
@@ -61,11 +66,11 @@ public class JPushUtils {
 	}
 
 	/**
-	 * 给所有平台 所有用户 发通知
-	 * <p>TODO</p>
-	 * @param content 内容
+	 * @Title: sendMessageToAll 
+	 * @Description: 给所有平台 所有用户 发通知
+	 * @param content
 	 * @throws Exception
-	 * @author lkd
+	 * @return: void
 	 */
 	public static void sendMessageToAll(String content) throws Exception {
 		PushPayload payLoad = PushPayload.alertAll(content);
@@ -73,13 +78,13 @@ public class JPushUtils {
 	}
 
 	/**
-	 * 发送至=====所有平台===== 用户accountId指定发送消息
-	 * <p>TODO</p>
-	 * @param content 内容
-	 * @param title   标题
-	 * @param accountId 用户id
-	 * @throws Exception
-	 * @author lkd
+	 * 
+	 * @Title: sendMessageToALL 
+	 * @Description: 根据注册Id发送到所有平台
+	 * @param title
+	 * @param content
+	 * @param id
+	 * @return: void
 	 */
 	public static void sendMessageToALL(String title, String content, String id) {
 		try {
@@ -108,13 +113,12 @@ public class JPushUtils {
 	
 
 	/**
-	 * 发送至=====Android===== 用户accountId指定发送消息
-	 * <p>TODO</p>
-	 * @param content 内容
-	 * @param title   标题
-	 * @param accountId 用户id
-	 * @throws Exception
-	 * @author lkd
+	 * @Title: sendMessageToAndroid 
+	 * @Description: 根据别名发送到android平台
+	 * @param title
+	 * @param content
+	 * @param id
+	 * @return: void
 	 */
 	public static void sendMessageToAndroid(String title, String content, String id) {
 		try {
