@@ -7,12 +7,17 @@ import java.util.concurrent.TimeUnit;
 
 
 
+
+
+
 import org.apache.log4j.Logger; 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate; 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations; 
+
+import redis.clients.jedis.Transaction;
  
 /** 
 * redis cache 工具类 
@@ -119,11 +124,47 @@ public boolean set(final String key, Object value, Long expireTime) {
   } 
   return result; 
 } 
- 
+
+
+
+
+
+
 public void setRedisTemplate( 
    RedisTemplate<Serializable, Object> redisTemplate) { 
   this.redisTemplate = redisTemplate; 
+}
+
+/** 
+ * @Title: watch 
+ * @Description: redis乐观锁
+ * @param string
+ * @return
+ * @return: Object
+ */
+public void watch(String key) {
+	redisTemplate.watch(key);
+}
+
+/** 
+ * @Title: sismember 
+ * @Description: 判断集合是否有这个值
+ * @param coll
+ * @param val
+ * @return
+ * @return: Boolean
+ */
+public Boolean sismember(String coll, String val) {
+	return redisTemplate.boundSetOps(coll).isMember(val); 
+}
+
+/**
+ * @return the redisTemplate
+ */
+public RedisTemplate<Serializable, Object> getRedisTemplate() {
+	return redisTemplate;
 } 
+
 
 
 } 
