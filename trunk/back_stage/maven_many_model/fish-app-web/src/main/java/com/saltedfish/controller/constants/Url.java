@@ -18,6 +18,8 @@ public interface Url {
 	public static final String  SECURED_TEST = "test/test";
 	//全局异常 和 验证测试
 	public static final String  EXCEPTION_VALIDATE_TEST = "unsecured/validate/exception/test";
+	//redis 秒杀测试
+	public static final String SEC_KILL_TEST="unsecured/secKill";
 	
 
 }
