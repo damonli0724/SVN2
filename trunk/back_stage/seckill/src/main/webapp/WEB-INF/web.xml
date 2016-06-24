@@ -1,26 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns="http://java.sun.com/xml/ns/javaee"
-	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
-	version="3.0">
-	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
-	</welcome-file-list>
-	
-	<servlet>
-		<servlet-name>bid</servlet-name>
-		<servlet-class>com.saltedfis.seckill.controller.ReidsMatchServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>bid</servlet-name>
-		<url-pattern>/bid</url-pattern>
-	</servlet-mapping>
-	<servlet>
-		<servlet-name>list</servlet-name>
-		<servlet-class>com.saltedfis.seckill.controller.ReidsMatchListServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>list</servlet-name>
-		<url-pattern>/list</url-pattern>
-	</servlet-mapping>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>bid</servlet-name>
+    <servlet-class>com.saltedfis.seckill.controller.ReidsMatchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>bid</servlet-name>
+    <url-pattern>/bid</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>list</servlet-name>
+    <servlet-class>com.saltedfis.seckill.controller.ReidsMatchListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>list</servlet-name>
+    <url-pattern>/list</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+    <servlet-name>count</servlet-name>
+    <servlet-class>com.saltedfis.seckill.controller.Counter</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>count</servlet-name>
+    <url-pattern>/count</url-pattern>
+  </servlet-mapping>
+  
+  
 </web-app>

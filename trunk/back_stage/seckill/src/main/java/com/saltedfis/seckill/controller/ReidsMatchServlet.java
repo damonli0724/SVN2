@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -18,6 +20,8 @@ import redis.clients.jedis.Transaction;
 import com.saltedfis.seckill.utils.RedisAPI;
 
 public class ReidsMatchServlet extends HttpServlet {
+	
+	private static Logger logger = LoggerFactory.getLogger(ReidsMatchServlet.class);  
 	public static JedisPool pool = RedisAPI.getPool();
 
 	// RedisAPI.set("accountBalance", "999999999");// 标还剩999999999块钱
@@ -46,10 +50,10 @@ public class ReidsMatchServlet extends HttpServlet {
 		} else if (flag == 0) {
 			response.getWriter().write("bid is zero ,you can not buy");
 		}else{
-			response.getWriter().write("fail buy");
+			response.getWriter().write("fail buy,left money is empty");
 		}
 		long end = System.currentTimeMillis();
-		System.out.println("--------------------------------------------请求耗时：" + (end - start) + "毫秒");
+		logger.info("请求耗时[{}]毫秒",(end-start));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -60,15 +64,20 @@ public class ReidsMatchServlet extends HttpServlet {
 	private int bid(HttpServletRequest request, HttpServletResponse response, Jedis jedis) throws Exception {
 		int flag = 0;// 1,成功,2已经购买，3已经没钱了，其他異常
 		// 每个请求对应一个userId
-		int userId = new Random().nextInt(999999);
+		int userId = 99999; 
 		
-		// 观察 总标值，每人抢购一元
-		while ("OK".equals(jedis.watch("accountBalance"))) {
+		// 观察 总标值，每人抢购一元 
+		/**
+		 * 当accountBalance加了乐观锁，则会获取当前acc的版本号，然后开启事务，执行事务，然后 set(accountBalance,'xx')。 
+		 * 如果有并发线程，先一步执行了 set(accountBalance,'xx')。则会修改版本号，然后 在watch里面的事务则不会执行，因为版本号变了
+		 * 
+		 */
+		while ("OK".equals(jedis.watch("accountBalance"))&&"OK".equals(jedis.watch("userIdSet"))) {
         		// 判断是否购买过
         		Boolean isBuy = RedisAPI.sismember("userIdSet", userId + "");
         		if (isBuy) {
         			flag = 2;
-        			return flag;
+        			return flag; 
         		}
         		//投资额
 			int r = 1;// new Random().nextInt(2);
@@ -83,17 +92,20 @@ public class ReidsMatchServlet extends HttpServlet {
 			}
 			Transaction tx = jedis.multi();
 			tx.set("accountBalance", lastAccount + "");
+			tx.set(Thread.currentThread().getName(), r+"");
+			tx.sadd("userIdSet", userId + "");
+			
 			List<Object> result = tx.exec();
 			if (result == null || result.isEmpty()) {
-				jedis.unwatch();
+				jedis.unwatch(); 
 			} else {
-				System.out.println("恭喜您，" + userId + "已经中标" + r + "元，标余额" + lastAccount + "元");
-				RedisAPI.set(Thread.currentThread().getName(), r + "");
-				RedisAPI.sadd("userIdSet", userId + "");
+				logger.error("恭喜您，" + userId + "已经中标" + r + "元，标余额" + lastAccount + "元");
+//				RedisAPI.set(Thread.currentThread().getName(), r + "");
+//				RedisAPI.sadd("userIdSet", userId + "");
 				flag = 1;
 				break;
 			}
-		}
+	}
 		return flag;
 	}
 }
