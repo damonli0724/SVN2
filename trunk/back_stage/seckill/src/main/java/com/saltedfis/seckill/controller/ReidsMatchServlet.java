@@ -63,8 +63,8 @@ public class ReidsMatchServlet extends HttpServlet {
 
 	private int bid(HttpServletRequest request, HttpServletResponse response, Jedis jedis) throws Exception {
 		int flag = 0;// 1,成功,2已经购买，3已经没钱了，其他異常
-		// 每个请求对应一个userId
-		int userId = 99999; 
+		// 每个请求对应一个userId  (模拟100块，100个人抢)
+		int userId =  new Random().nextInt(100000)+1; 
 		
 		// 观察 总标值，每人抢购一元 
 		/**
@@ -72,9 +72,9 @@ public class ReidsMatchServlet extends HttpServlet {
 		 * 如果有并发线程，先一步执行了 set(accountBalance,'xx')。则会修改版本号，然后 在watch里面的事务则不会执行，因为版本号变了
 		 * 
 		 */
-		while ("OK".equals(jedis.watch("accountBalance"))&&"OK".equals(jedis.watch("userIdSet"))) {
+		while ("OK".equals(jedis.watch("accountBalance","userIdSet3"))) {
         		// 判断是否购买过
-        		Boolean isBuy = RedisAPI.sismember("userIdSet", userId + "");
+        		Boolean isBuy = RedisAPI.sismember("userIdSet3", userId + "");
         		if (isBuy) {
         			flag = 2;
         			return flag; 
@@ -93,7 +93,7 @@ public class ReidsMatchServlet extends HttpServlet {
 			Transaction tx = jedis.multi();
 			tx.set("accountBalance", lastAccount + "");
 			tx.set(Thread.currentThread().getName(), r+"");
-			tx.sadd("userIdSet", userId + "");
+			tx.sadd("userIdSet3", userId + "");
 			
 			List<Object> result = tx.exec();
 			if (result == null || result.isEmpty()) {
@@ -101,11 +101,21 @@ public class ReidsMatchServlet extends HttpServlet {
 			} else {
 				logger.error("恭喜您，" + userId + "已经中标" + r + "元，标余额" + lastAccount + "元");
 //				RedisAPI.set(Thread.currentThread().getName(), r + "");
-//				RedisAPI.sadd("userIdSet", userId + "");
+//				RedisAPI.sadd("userIdSet3", userId + "");
 				flag = 1;
 				break;
 			}
 	}
 		return flag;
+	}
+	
+	
+	public static void main(String[] args) {
+		while(true){
+			
+//			int i =  new Random().nextInt(1)+1;
+			int i =new Random().nextInt(5);
+			System.err.println(i);
+		}
 	}
 }
