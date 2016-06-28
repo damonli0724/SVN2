@@ -52,10 +52,9 @@ public class RedisAPI {
 			config.setMaxWait(Long.valueOf(bundle.getString("redis.pool.maxWait")));
 			config.setTestOnBorrow(Boolean.valueOf(bundle.getString("redis.pool.testOnBorrow")));
 			config.setTestOnReturn(Boolean.valueOf(bundle.getString("redis.pool.testOnReturn")));
-			pool = new JedisPool(config, bundle.getString("redis.ip"), Integer.valueOf(bundle.getString("redis.port")), 1000, String.valueOf(bundle.getString("redis.pass")));
+			pool = new JedisPool(config, bundle.getString("redis.ip"), Integer.valueOf(bundle.getString("redis.port")), 100000, String.valueOf(bundle.getString("redis.pass")));
 			pool.getResource().set("accountBalance", "100"); 
 			pool.getResource().set("count", "0");
-			
 		} 
 		return pool;
 	}
