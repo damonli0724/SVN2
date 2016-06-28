@@ -17,7 +17,7 @@ import redis.clients.jedis.JedisPool;
 import com.saltedfis.seckill.utils.RedisAPI;
 
 public class ReidsMatchListServlet extends HttpServlet {
-	public static JedisPool pool= RedisAPI.getPool();;
+	public static JedisPool pool= RedisAPI.getConnection();
 	public static Jedis jedis;
 	static {
 		jedis = pool.getResource();
