@@ -26,7 +26,22 @@ import redis.clients.jedis.Transaction;
 public final class RedisUtil { 
 private Logger logger = Logger.getLogger(RedisUtil.class); 
 private RedisTemplate<Serializable, Object> redisTemplate; 
+
  
+/**
+ * @return the redisTemplate
+ */
+public RedisTemplate<Serializable, Object> getRedisTemplate() {
+	return redisTemplate;
+}
+
+/**
+ * @param redisTemplate the redisTemplate to set
+ */
+public void setRedisTemplate(RedisTemplate<Serializable, Object> redisTemplate) {
+	this.redisTemplate = redisTemplate;
+}
+
 /** 
   * 批量删除对应的value 
   * 
@@ -124,47 +139,5 @@ public boolean set(final String key, Object value, Long expireTime) {
   } 
   return result; 
 } 
-
-
-
-
-
-
-public void setRedisTemplate( 
-   RedisTemplate<Serializable, Object> redisTemplate) { 
-  this.redisTemplate = redisTemplate; 
-}
-
-/** 
- * @Title: watch 
- * @Description: redis乐观锁
- * @param string
- * @return
- * @return: Object
- */
-public void watch(String key) {
-	redisTemplate.watch(key);
-}
-
-/** 
- * @Title: sismember 
- * @Description: 判断集合是否有这个值
- * @param coll
- * @param val
- * @return
- * @return: Boolean
- */
-public Boolean sismember(String coll, String val) {
-	return redisTemplate.boundSetOps(coll).isMember(val); 
-}
-
-/**
- * @return the redisTemplate
- */
-public RedisTemplate<Serializable, Object> getRedisTemplate() {
-	return redisTemplate;
-} 
-
-
 
 } 

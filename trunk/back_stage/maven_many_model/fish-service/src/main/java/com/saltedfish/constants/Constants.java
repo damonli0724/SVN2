@@ -33,4 +33,9 @@ public interface Constants {
 	public static final String ACCOUNT_FREEZE_Y = "0";
 	public static final String ACCOUNT_FREEZE_N = "1";
 	
+	//秒杀常量
+	public static final String SEC_ALL_MONEY_ACCOUNT="redis:watch:seckill:account";//竞标总金额
+	public static final String SEC_BID_USERS="redis:watch:seckill:bidUsers3";//中标人员集合
+	
+	
 }
