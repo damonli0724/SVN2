@@ -24,6 +24,7 @@
 		<org.aspectj-version>1.8.1</org.aspectj-version>
 		<org.slf4j-version>1.6.1</org.slf4j-version>
 		<cxf.version>3.1.4</cxf.version>
+		<activemq_version>5.7.0</activemq_version>
 	</properties>
 
 	<!-- 依赖管理 -->
@@ -344,8 +345,23 @@
 				<version>3.3.0</version>
 			</dependency>
  			
- 
- 
+ 			<!-- ActiveMq消息隊列，异步处理 -->
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-core</artifactId>
+				<version>${activemq_version}</version>
+			</dependency>
+	
+			<dependency>
+				<groupId>org.apache.activemq</groupId>
+				<artifactId>activemq-pool</artifactId>
+				<version>${activemq_version}</version>
+			</dependency>
+			<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jms</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		</dependencies>
 
 	</dependencyManagement>
@@ -358,8 +374,8 @@
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.0.2</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<source>1.7</source>
+						<target>1.7</target>
 						<encoding>utf8</encoding>
 					</configuration>
 				</plugin>

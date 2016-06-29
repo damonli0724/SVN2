@@ -27,13 +27,12 @@ public final class RedisUtil {
 private Logger logger = Logger.getLogger(RedisUtil.class); 
 private RedisTemplate<Serializable, Object> redisTemplate; 
 
- 
 /**
  * @return the redisTemplate
  */
 public RedisTemplate<Serializable, Object> getRedisTemplate() {
 	return redisTemplate;
-}
+} 
 
 /**
  * @param redisTemplate the redisTemplate to set

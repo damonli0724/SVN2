@@ -17,14 +17,14 @@
 		<property name="testOnBorrow" value="${redis.testOnBorrow}" />
 	</bean>
 	
-	<bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+	<bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
 		p:host-name="${redis.host}" 
 		p:port="${redis.port}" 
 		p:password="${redis.pass}"  
 		p:pool-config-ref="poolConfig"/>
 	
 	<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-		<property name="connectionFactory" 	ref="connectionFactory" />
+		<property name="connectionFactory" 	ref="redisConnectionFactory" />
 		  <property name="keySerializer" > 
               <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" /> 
           </property> 
