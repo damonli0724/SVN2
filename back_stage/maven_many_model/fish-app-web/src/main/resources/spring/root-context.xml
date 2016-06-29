@@ -9,19 +9,18 @@
 
 	<context:component-scan base-package="com.saltedfish"/>
 	
-	<!-- 使用注解的方式在家资源文件-->
+	<!-- 使用注解的方式加载资源文件-->
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<array>
 				<value>classpath:system-config.properties</value>
 			</array>
 		</property>
-	</bean>
+	</bean> 
 
-	<!-- mybatis集成 -->	
-	<import resource="classpath:springdb/access-db.xml" />
-	 <!-- redis集成 -->
-	  <import resource="classpath:spring-redis/spring-redis.xml" /> 
-	
+	  <!-- mybatis集成 -->	
+	  <import resource="classpath:springdb/access-db.xml" />
+	  <!-- redis集成 -->
+	  <import resource="classpath:spring-redis/spring-redis.xml"/> 
 	
 </beans>
