@@ -27,16 +27,28 @@ public class BlobController extends Controller{
 	
 	public void index() {
 //		setAttr("blogPage", Blog.me.paginate(getParaToInt(0, 1), 10));
-		Page<Blog> page = Blog.me.paginate(1/*getParaToInt(0, 1)*/, 10);
-		
-//		list.getList()
+		Page<Blog> page = Blog.me.paginate(getParaToInt(0, 1), 10);
+//		list.getList() 
 //		list.getTotalRow()
-		
-		
-		setAttr("page", page);
-		
-		render("/blob_list.jsp"); 
+		setAttr("blogPage", page);
+//		render("/blob_list.jsp"); 
+		render("blog.html");
 	}
+	 
+	public void add(){
+		render("add.html");
+	}
+	
+	public void save(){
+		getModel(Blog.class).save();
+		redirect("/blog");
+	}
+	
+	 
+	public void edit(){ 
+//		setAttr("blog", Blog.me.findById(getParaToInt()));  
+	}
+	
 	
 	
 	
