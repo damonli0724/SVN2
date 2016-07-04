@@ -1,4 +1,4 @@
-package com.saltedfish.controller;
+package com.saltedfish.controller.blog;
 /**   
  * Copyright © 2016 公司名. All rights reserved.
  * 
@@ -12,6 +12,7 @@ package com.saltedfish.controller;
  */
 
 
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 import com.jfinal.plugin.activerecord.Page;
 import com.saltedfish.common.model.Blog;
@@ -26,12 +27,8 @@ public class BlobController extends Controller{
 	
 	
 	public void index() {
-//		setAttr("blogPage", Blog.me.paginate(getParaToInt(0, 1), 10));
 		Page<Blog> page = Blog.me.paginate(getParaToInt(0, 1), 10);
-//		list.getList() 
-//		list.getTotalRow()
 		setAttr("blogPage", page);
-//		render("/blob_list.jsp"); 
 		render("blog.html");
 	}
 	 
@@ -39,16 +36,27 @@ public class BlobController extends Controller{
 		render("add.html");
 	}
 	
+	@Before(BlogValidator.class)
 	public void save(){
 		getModel(Blog.class).save();
 		redirect("/blog");
 	}
 	
 	 
-	public void edit(){ 
-//		setAttr("blog", Blog.me.findById(getParaToInt()));  
+	public void edit(){  
+		setAttr("blog", Blog.me.findById(getPara("id")));  
 	}
 	
+	@Before(BlogValidator.class)
+	public void update(){
+		getModel(Blog.class).update(); 
+		redirect("/blog");
+	}
+	
+	public void delete(){
+		Blog.me.deleteById(getParaToInt());
+		redirect("/blog");
+	}
 	
 	
 	
