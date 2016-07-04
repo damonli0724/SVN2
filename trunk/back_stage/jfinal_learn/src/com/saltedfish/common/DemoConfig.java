@@ -22,10 +22,10 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.c3p0.C3p0Plugin;
 import com.jfinal.render.ViewType;
 import com.saltedfish.common.model._MappingKit;
-import com.saltedfish.controller.BlobController;
 import com.saltedfish.controller.HelloController;
 import com.saltedfish.controller.IndexController;
 import com.saltedfish.controller.UserController;
+import com.saltedfish.controller.blog.BlobController;
 
 /**
  * @ClassName: DemoConfig
@@ -38,7 +38,7 @@ public class DemoConfig extends JFinalConfig {
 	// 此方法用来配置 JFinal 常量值，如开发模式常量 devMode 的配置，默认视图类型 ViewType.
 	public void configConstant(Constants me) { 
 //     	me.setViewType(ViewType.JSP);
-     	//me.setViewType(ViewType.FREE_MARKER);   
+     	//me.setViewType(ViewType.FREE_MARKER); 
      	PropKit.use("a_little_config.txt");
 		me.setDevMode(PropKit.getBoolean("devMode", false));
 		// 加载配置文件
