@@ -65,7 +65,7 @@ public class RedisAPI {
 	 * @return
 	 * @return: JedisPool
 	 */
-	public static JedisPool getConnection() {
+	public static JedisPool getConnection() { 
 		//①如果本地线程变量没有pool，重新获取线程池，并且设置到本地线程变量
 		if (poolThreadLocal.get()==null) {
 			JedisPool pool =getPool();
