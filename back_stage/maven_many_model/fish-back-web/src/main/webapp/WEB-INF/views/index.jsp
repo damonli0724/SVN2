@@ -166,6 +166,15 @@
 			</dd>
 		</dl>
 		
+		<dl id="menu-websocket">
+			<dt><i class="Hui-iconfont">&#xe64e;</i>文件上传测试<i class="Hui-iconfont menu_dropdown-arrow">&#xe6d5;</i></dt>
+			<dd>
+				<ul>
+						<li><a _href="${contextPath}/upload/file/test/page" href="javascript:void(0)">上传</a></li>
+				</ul>
+			</dd>
+		</dl>
+		
 		
 		
 		

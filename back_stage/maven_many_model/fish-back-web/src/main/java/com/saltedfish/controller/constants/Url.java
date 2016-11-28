@@ -65,5 +65,10 @@ public interface Url {
 	//disruptor并发测试
 	public static final String DISCUPTOR_TEST="discuptor/test";
 	public static final String  DISCUPTOR_TEST2 = "discuptor/test2";
+	
+	//文件上传功能
+	public static final String FILE_UPLOAD_TEST_PAGE="upload/file/test/page";
+	
+	
 
 }
