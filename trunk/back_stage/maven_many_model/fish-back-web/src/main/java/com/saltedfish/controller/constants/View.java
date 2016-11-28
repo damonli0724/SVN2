@@ -42,6 +42,9 @@ public interface View {
 	public static final String WEB_SOCKET_VIEW="/websocket/websocket";
 	public static final String WEB_SOCKET_INDEX_VIEW = "/websocket/chat-index"; //聊天首页
 	
+	// =============================文件上传测试===================================
+	public static final String UPLOAD_TEST_VIEW = "/upload/file-add";
+	
 	
 
 }
