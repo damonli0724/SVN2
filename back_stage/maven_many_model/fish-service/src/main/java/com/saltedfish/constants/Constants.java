@@ -33,9 +33,12 @@ public interface Constants {
 	public static final String ACCOUNT_FREEZE_Y = "0";
 	public static final String ACCOUNT_FREEZE_N = "1";
 	
-	//秒杀常量
+	 //秒杀常量
 	public static final String SEC_ALL_MONEY_ACCOUNT="redis:watch:seckill:account";//竞标总金额
 	public static final String SEC_BID_USERS="redis:watch:seckill:bidUsers3";//中标人员集合
+	
+	//上传图片大小
+	public static final int PROFILE_PHOTO_MAX_SIZE = 10000000;// 相册图片最大大小10M
 	
 	
 }

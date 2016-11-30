@@ -146,6 +146,14 @@
 					<artifactId>commons-io</artifactId>
 				</dependency>
 				
+				<!-- commons-lang  -->
+				<dependency>
+	    			<groupId>commons-lang</groupId>
+	    			<artifactId>commons-lang</artifactId>
+				</dependency>
+				
+				
+				
 				
 			<!-- Poi -->
 		    <dependency>

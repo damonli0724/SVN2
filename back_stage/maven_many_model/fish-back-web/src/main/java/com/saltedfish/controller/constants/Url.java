@@ -68,6 +68,7 @@ public interface Url {
 	
 	//文件上传功能
 	public static final String FILE_UPLOAD_TEST_PAGE="upload/file/test/page";
+	public static final String FILE_UPLOAD_TEST = "upload/file/test";
 	
 	
 

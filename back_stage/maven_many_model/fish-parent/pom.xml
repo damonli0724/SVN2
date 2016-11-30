@@ -12,7 +12,7 @@
 		<module>../fish-dao</module>
 		<module>../fish-service</module>
 		<module>../fish-utils</module>
-		<module>../fish-back-web</module>
+		<module>../fish-back-web</module>    
 		<module>../fish-app-web</module>
 	</modules>
 
@@ -277,6 +277,14 @@
 				<artifactId>hibernate-validator</artifactId>
 				<version>5.0.2.Final</version>
 			</dependency>
+			
+			<!-- commons-lang  -->
+			<dependency>
+    			<groupId>commons-lang</groupId>
+    			<artifactId>commons-lang</artifactId>
+    			<version>2.6</version>
+			</dependency>
+			
 
 			<!-- Poi -->
 			<dependency>
