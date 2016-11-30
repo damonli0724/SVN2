@@ -10,9 +10,13 @@ package com.saltedfish.controller.base;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
+
+import com.saltedfish.controller.fileUpload.UploadFileCtroller;
 
 
 /**
@@ -20,6 +24,8 @@ import org.springframework.web.bind.annotation.InitBinder;
  * @author lkd
  */
 public class BaseController {
+	
+	protected  final  Logger logger =LoggerFactory.getLogger(this.getClass());
 
 	/**
 	 * 
