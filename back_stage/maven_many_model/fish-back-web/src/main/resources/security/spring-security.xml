@@ -249,7 +249,12 @@
  <!-- =============================================================================其他配置=========================================================================== -->	
 	<!-- 自定义异常信息 -->
 	<beans:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-		<beans:property name="basename" value="classpath:security/messages_custom" />
+		<beans:property name="basenames" >
+			<beans:array>
+				<beans:value>classpath:security/messages_custom</beans:value>
+			</beans:array>
+		</beans:property>
+		<beans:property name="useCodeAsDefaultMessage" value="true"/>
 	</beans:bean> 	
  	
  	
