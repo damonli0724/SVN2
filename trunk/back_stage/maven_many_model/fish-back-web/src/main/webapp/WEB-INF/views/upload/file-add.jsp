@@ -63,9 +63,10 @@ function ajaxFileUpload() {
             dataType: 'json', //返回值类型 一般设置为json
             success: function (data, status)  //服务器成功响应处理函数
             {
-                alert(data);
-                $("#img1").attr("src", data.imgPath1);
-                alert("你请求的Id是" + data.Id + "     " + "你请求的名字是:" + data.name);
+            	
+            	console.log(data+"-----"+status);
+            	
+                alert("你请求的Id是" + data.id + "     " + "你请求的名字是:" + data.name);
                 if (typeof (data.error) != 'undefined') {
                     if (data.error != '') {
                         alert(data.error);

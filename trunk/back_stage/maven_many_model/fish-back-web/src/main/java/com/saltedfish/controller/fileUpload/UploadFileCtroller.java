@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,10 +29,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.saltedfish.constants.Constants;
+import com.saltedfish.constants.ExceptionCode;
 import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.controller.constants.Url;
 import com.saltedfish.controller.constants.View;
 import com.saltedfish.dto.BaseResultDTO;
+import com.saltedfish.exception.SystemException;
 import com.saltedfish.service.UploadTestService;
 import com.saltedfish.utils.FileUtil;
 
@@ -77,10 +80,15 @@ public class UploadFileCtroller extends BaseController{
 	
 		logger.debug("使用ajaxfileUpload 前端传递的参数为id[{}],name[{}],file[{}]",new String[]{id,name,file.toString()});
 		
+		
+		
 		try {
-			service.uploadFileProcess(file);
-			res.setMessage("上传图片成功!");
-			res.setResult(Constants.R_STATUS_SUCCESS);
+			/*throw new SystemException(ExceptionCode.FILE_FAILED_TO_SAVE);*/
+			
+			
+//			service.uploadFileProcess(file);
+//			res.setMessage("上传图片成功!");
+//			res.setResult(Constants.R_STATUS_SUCCESS);
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());
 			res.setResult(Constants.R_STATUS_FAILTURE);
