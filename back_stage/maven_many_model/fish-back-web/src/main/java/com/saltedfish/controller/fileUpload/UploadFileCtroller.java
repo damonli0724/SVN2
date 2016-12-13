@@ -83,12 +83,11 @@ public class UploadFileCtroller extends BaseController{
 		
 		
 		try {
-			/*throw new SystemException(ExceptionCode.FILE_FAILED_TO_SAVE);*/
 			
 			
-//			service.uploadFileProcess(file);
-//			res.setMessage("上传图片成功!");
-//			res.setResult(Constants.R_STATUS_SUCCESS);
+			service.uploadFileProcess(file);
+			res.setMessage("上传图片成功!");
+			res.setResult(Constants.R_STATUS_SUCCESS);
 		} catch (Exception e) {
 			res.setMessage(e.getMessage());
 			res.setResult(Constants.R_STATUS_FAILTURE);
