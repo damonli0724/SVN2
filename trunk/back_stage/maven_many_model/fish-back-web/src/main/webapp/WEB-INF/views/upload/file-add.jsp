@@ -22,11 +22,18 @@
 				<button type="button" class="btn btn-success radius" id="addBtn" name="addBtn"><i class="icon-ok"></i> 确定</button>
 			</div>
 		</div>
-		
+				
+		<div class="row cl">
+			<div class="col-10 col-offset-2">
+				<img id="pic"  src=""  width="500px" height="500px"  style="background:blue"/> 
+			</div> 
+		</div>
 		
 		
 	</form>
 </div>
+
+		
 <script type="text/javascript" src="${jsBasePath}/jquery.min.js"></script> 
 <script type="text/javascript" src="${jsBasePath}/ajaxfileupload.js"></script> 
 <script type="text/javascript" src="${libBasePath}/zTree/v3/js/jquery.ztree.all-3.5.min.js"></script> 
@@ -52,35 +59,23 @@ $(function(){
 
 
 function ajaxFileUpload() {
-    $.ajaxFileUpload
-    (
-        {
-            url: addUrl, //用于文件上传的服务器端请求地址
-            type: 'post',
-            data: { id: '123', name: 'lunis' }, //此参数非常严谨，写错一个引号都不行
-            secureuri: false, //一般设置为false
-            fileElementId: 'file1', //文件上传空间的id属性  <input type="file" id="file" name="file" />
-            dataType: 'json', //返回值类型 一般设置为json
-            success: function (data, status)  //服务器成功响应处理函数
-            {
-            	
-            	console.log(data+"-----"+status);
-            	
-                alert("你请求的Id是" + data.id + "     " + "你请求的名字是:" + data.name);
-                if (typeof (data.error) != 'undefined') {
-                    if (data.error != '') {
-                        alert(data.error);
-                    } else {
-                        alert(data.msg);
-                    }
-                }
-            },
-            error: function (data, status, e)//服务器响应失败处理函数
-            {
-                alert(e);
-            }
-        }
-    )
+	$.ajaxFileUpload({
+		url : addUrl,
+		fileElementId : 'file1',
+		type : 'POST',
+		dataType : 'text',
+		data : {},
+		success : function(data) {
+			alert(data.message);
+			if (data.status == 1) {	
+				console.log(data.picPath);
+				$("#pic").attr("src",data.picPath);
+			}
+		},
+		error : function(XMLHttpRequest, textStatus,errorThrown) {
+			alert("服务异常，请稍后尝试");
+		}
+	});
     return false;
 }
 
