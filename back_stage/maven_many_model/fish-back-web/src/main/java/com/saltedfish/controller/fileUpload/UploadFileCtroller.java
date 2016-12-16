@@ -11,16 +11,14 @@
  */
 package com.saltedfish.controller.fileUpload;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,15 +26,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.saltedfish.constants.Constants;
-import com.saltedfish.constants.ExceptionCode;
 import com.saltedfish.controller.base.BaseController;
 import com.saltedfish.controller.constants.Url;
 import com.saltedfish.controller.constants.View;
 import com.saltedfish.dto.BaseResultDTO;
-import com.saltedfish.exception.SystemException;
 import com.saltedfish.service.UploadTestService;
-import com.saltedfish.utils.FileUtil;
 
 /** 
  * @ClassName: uploadFile 
@@ -66,36 +62,49 @@ public class UploadFileCtroller extends BaseController{
 	}
 	
 	
-	
 	@RequestMapping(value = Url.FILE_UPLOAD_TEST, method = RequestMethod.POST)
-	@ResponseBody
-	public BaseResultDTO<String> uploadFile(MultipartFile  file ,HttpServletRequest request){
-		
-		BaseResultDTO<String>  res = new BaseResultDTO<String>();
-		
-		
-		//ajaxfileUpload 携带的参数
-		String id = request.getParameter("id");
-		String name = request.getParameter("name");
-	
-		logger.debug("使用ajaxfileUpload 前端传递的参数为id[{}],name[{}],file[{}]",new String[]{id,name,file.toString()});
-		
-		
+	public void uploadPic( MultipartFile file, ModelMap model, HttpServletResponse response) {
+		// 图片非空验证
+		if (file == null || file.getSize() == 0) {
+			model.addAttribute("message", "请上传图片");
+			model.addAttribute("status", 0);
+			printOut(model, response);
+			return;
+		}
+		String fileName = file.getOriginalFilename().toLowerCase();
+		if (!fileName.endsWith("jpg") && !fileName.endsWith("png") && !fileName.endsWith("jpeg") && !fileName.endsWith("gif")) {
+			model.put("status", 0);
+			model.put("message", "上传文件不是jpg,png,jpeg,gif文件");
+			printOut(model, response);
+			return;
+		}
+		String picPath = "";
 		
 		try {
-			
-			
-			service.uploadFileProcess(file);
-			res.setMessage("上传图片成功!");
-			res.setResult(Constants.R_STATUS_SUCCESS);
-		} catch (Exception e) {
-			res.setMessage(e.getMessage());
-			res.setResult(Constants.R_STATUS_FAILTURE);
-			e.printStackTrace();
+			picPath = service.uploadFileProcess(file);
+			model.addAttribute("message", "上传图片成功");
+			model.addAttribute("status", 1);
+			model.addAttribute("picPath", picPath);
+		} catch (IOException e) {
+			model.addAttribute("message", "上传图片失败，请稍后再试！");
+			model.addAttribute("status", 0);
 		}
-		return res;
+		printOut(model, response);
 	}
-	
-	
+
+	@SuppressWarnings("all")
+	private void printOut(Map modelMap, HttpServletResponse response) {
+		PrintWriter out;
+		try {
+			response.setContentType("text/html;charset=UTF-8");
+			out = response.getWriter();
+			out.print(JSON.toJSONString(modelMap));
+		} catch (IOException e) {
+			e.printStackTrace();
+			// logger.error("输出到客户端出现异常：{}", modelMap);
+			modelMap.put("message", e.getCause().getMessage());
+			return;
+		}
+	}
 	
 }
