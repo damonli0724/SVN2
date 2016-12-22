@@ -79,9 +79,9 @@ document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3
 <script type="text/javascript">
 $(function(){
 	 var $context = $("#globe_context_id").val();
-	$("#codeImg,#code").bind("click",changeImg);
+	$("#codeImg,#code").bind("click",changeImg); 
 	function changeImg(){
-		 $("#codeImg").attr("src",$context+"/background/randomCode");
+		  $("#codeImg").attr("src",$context+"/background/randomCode?r="+Math.random());  
 	}
 });
 </script>
