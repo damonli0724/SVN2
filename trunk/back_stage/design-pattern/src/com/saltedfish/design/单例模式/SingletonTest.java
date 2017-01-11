@@ -37,8 +37,6 @@ public class SingletonTest{
 				threads[i].start();
 			}
 		}
-    
-	
 }
 
 
@@ -78,7 +76,7 @@ class Singleton{
 //		return instance;
 //	}
 	
-	//Double Check Locking 双检查锁机制（推荐） ，即可保证线程安全性-->这样写还是有时候会出现问题，内存模型允许所谓的“无序写入”。。，所以推荐使用饥汉模式
+	//Double Check Locking 双检查锁机制（推荐） ，即可保证线程安全性-->这样写还是有时候会出现问题，内存模型允许所谓的“无序写入”。。，（具体请看 java内存模型，把instance 加入volitate 就变成了线程安全）
 	public  static Singleton getInstance(){
 		if(instance ==null ){
 			synchronized (Singleton.class) {
@@ -88,6 +86,17 @@ class Singleton{
 			}
 		}
 		return instance;
+	}
+	
+	
+	
+	//使用 静态内部类的方式 ,, 这样就可以避免线程安全问题，当要使用到 这个单利的时候，才会去加载静态内部类，而且所有线程都在外面等待，单例对象new出来
+	public static Singleton getInstance2(){
+		return  InnerClass.instance;
+	}
+	
+    static class InnerClass{
+		private  static  Singleton  instance =  new Singleton();
 	}
 	
 	
