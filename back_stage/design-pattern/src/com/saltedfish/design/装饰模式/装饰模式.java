@@ -20,7 +20,7 @@ package com.saltedfish.design.装饰模式;
  * 2、动态的为一个对象增加功能，而且还能动态撤销。（继承不能做到这一点，继承的功能是静态的，不能动态增删。）
  *
  *
- * @author: mjy
+ * @author: lkd
  * @date: 2017年1月13日 下午4:37:59  
  */
 public class 装饰模式 {
