@@ -28,8 +28,8 @@ public class Test {
 	 * 适配器模式分三个角色
 	 * 
 	 *　●　　目标(Target)角色：这就是所期待得到的接口。注意：由于这里讨论的是类适配器模式，因此目标不可以是类。
-　           *　●　　源(Adapee)角色：现在需要适配的接口。
-　           *　●　　适配器(Adaper)角色：适配器类是本模式的核心。适配器把源接口转换成目标接口。显然，这一角色不可以是接口，而必须是具体类。
+　          *　●　　源(Adapet)角色：现在需要适配的接口。
+　          *　●　　适配器(Adaper)角色：适配器类是本模式的核心。适配器把源接口转换成目标接口。显然，这一角色不可以是接口，而必须是具体类。
 	 * 
 	 * Targetable  这个类就是 所期待得到的接口
 	 * Source  这个类 是源来的角色， 比如他只有method1 功能，现在 我想要 method2功能，而且不想改动原来的代码
@@ -40,8 +40,9 @@ public class Test {
 	 */
 	public static void main(String[] args) {
 		 Targetable target = new Adapter();  
-	        target.method1();  
-	        target.method2();  
+	        target.method2(); 
+	        //target.method1();
+	        
 	}
 
 }
