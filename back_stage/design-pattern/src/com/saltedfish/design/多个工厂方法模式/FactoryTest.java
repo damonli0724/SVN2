@@ -21,7 +21,7 @@ package com.saltedfish.design.多个工厂方法模式;
  * *****************************************************************************
  * 
  * 
- * @author: mjy
+ * @author: lkd
  * @date: 2017年1月9日 上午10:38:31  
  */
 public class FactoryTest {
