@@ -40,7 +40,6 @@ dependencies {
     compile 'com.google.code.gson:gson:2.8.0'
      
      
-     
     compile group: 'org.apache.shiro', name: 'shiro-core', version: '1.4.0-RC2'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-stream', version: '1.2.0.RELEASE'
     compile group: 'org.springframework.cloud', name: 'spring-cloud-commons', version: '1.2.0.RELEASE'
@@ -48,6 +47,13 @@ dependencies {
     runtime group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.6.1'
     runtime group: 'org.slf4j', name: 'slf4j-log4j12', version:'1.6.1'
     runtime group: 'log4j', name: 'log4j', version:'1.2.16'
+    
+    
+    //spring boot
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '1.5.3.RELEASE'
+    
+    
+    
 }
 
 
